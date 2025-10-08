@@ -61,7 +61,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
       <div className="h-20"></div>
 
       <section className="py-16 bg-white pt-32">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{project.title}</h1>
             <div className="flex items-center gap-2 mb-4">

@@ -34,7 +34,7 @@ export default function PortfolioPage() {
 
       {/* Hero Section */}
       <section className="relative bg-white py-16 mt-16 pt-36 pb-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Our Portfolio</h1>
             <p className="text-xl text-gray-600 leading-relaxed">
@@ -46,7 +46,7 @@ export default function PortfolioPage() {
 
       {/* Portfolio Grid */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           {projectsData.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-600 text-lg">Loading portfolio projects...</p>
