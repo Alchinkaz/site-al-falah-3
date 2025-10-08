@@ -55,6 +55,16 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
+            {/* Centered logo text shown only in white navbar state */}
+            <div
+              className={`${shouldShowScrolled ? "block" : "hidden"} pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
+            >
+              <img
+                src="/al-falah-logo-black-text.svg"
+                alt="Al Falah Partners"
+                className="h-5 md:h-6 lg:h-7 xl:h-8 w-auto"
+              />
+            </div>
             <Link href="/" className="flex items-center shrink-0">
               <img
                 src={
