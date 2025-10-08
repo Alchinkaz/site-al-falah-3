@@ -25,12 +25,14 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       if (typeof window !== "undefined") {
         const heroHeight = window.innerHeight
         const currentScrollY = window.scrollY
-        setIsScrolled(currentScrollY >= heroHeight)
+        setIsScrolled(currentScrollY > 10)
       }
     }
 
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", controlNavbar)
+      // Call controlNavbar immediately to set the initial state
+      controlNavbar(); 
       return () => window.removeEventListener("scroll", controlNavbar)
     }
   }, [forceScrolled])
@@ -50,9 +52,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
     <>
       <header
         className={`fixed left-0 right-0 z-50 transition-all duration-300 ease-in-out
-          ${mobileMenuOpen ? "top-0 translate-y-0 bg-transparent" :
-            shouldShowScrolled ? "top-0 translate-y-0 bg-white shadow-md" :
-            "top-0 -translate-y-full bg-transparent"
+          ${shouldShowTransparent || (!isScrolled && !mobileMenuOpen && !forceScrolled)
+            ? "top-0 translate-y-0 bg-transparent"
+            : "top-0 translate-y-0 bg-white shadow-md"
           }
         }`}
       >
@@ -61,11 +63,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
             <Link href="/" className="flex items-center shrink-0">
               <img
                 src={
-                  shouldShowTransparent
+                  shouldShowTransparent || (!isScrolled && !mobileMenuOpen && !forceScrolled)
                     ? "/al-falah-logo-white-img.svg"
-                    : shouldShowScrolled
-                    ? "/al-falah-logo-black-img.svg"
-                    : "/al-falah-logo-white-img.svg"
+                    : "/al-falah-logo-black-img.svg"
                 }
                 alt="Al Falah Partners"
                 className="block h-10 md:h-10 lg:h-12 xl:h-12 2xl:h-12 w-auto shrink-0 object-contain"
@@ -85,7 +85,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
             {/* Centered logo text shown only in white navbar state (when not transparent and not mobile menu open) */}
             <div
-              className={`${shouldShowScrolled && !mobileMenuOpen ? "block" : "hidden"} pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
+              className={`${isScrolled && !mobileMenuOpen ? "block" : "hidden"} pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
             >
               <img
                 src="/al-falah-logo-black-text.svg"
