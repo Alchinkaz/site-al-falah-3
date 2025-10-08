@@ -131,7 +131,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
       {/* White header that slides in on scroll */}
       <header
-        className={`fixed left-0 right-0 z-50 transition-all duration-300 ease-in-out
+        className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out
           ${mobileMenuOpen ? "top-0 translate-y-0 bg-transparent" :
             shouldShowScrolled || forceScrolled ? "top-0 translate-y-0 bg-white border-b border-gray-200" :
             "top-0 -translate-y-full bg-transparent"

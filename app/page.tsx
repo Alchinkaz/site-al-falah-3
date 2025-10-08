@@ -100,7 +100,7 @@ export default function Home() {
                 <img
                   src="/images/design-mode/al-falah-logo-white-text.svg"
                   alt="Al Falah Partners"
-                  className="mb-3.5 h-[72px] sm:h-[84px] md:h-[96px] lg:h-[108px] xl:h-[112px] 2xl:h-[120px]"
+                  className="mb-3.5 h-[80px] sm:h-[88px] md:h-[96px] lg:h-[108px] xl:h-[112px] 2xl:h-[120px]"
                 />
 
                 <h1
