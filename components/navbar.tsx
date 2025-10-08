@@ -220,7 +220,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       </header>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-60 bg-[#1e1a61]">
+        <div className="fixed inset-0 z-[60] bg-[#1e1a61]">
           <div className="flex flex-col h-full pt-24">
             <nav className="flex-1">
               <div className="max-w-[22rem] sm:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
