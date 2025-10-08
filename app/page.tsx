@@ -134,7 +134,7 @@ export default function Home() {
 
       {/* Portfolio Section */}
       <section className="relative z-20 bg-white pt-24 pb-8" id="portfolio">
-        <div className="max-w-sm sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-[20rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-center md:text-left">
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Portfolio</h2>
