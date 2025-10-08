@@ -42,12 +42,8 @@ export default function Navbar() {
           isScrolled ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
-        <div className={`${isScrolled ? "max-w-full" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12"}`}>
-          <div
-            className={`relative w-full flex items-center py-3 md:py-4 ${
-              isScrolled ? "pr-4 sm:pr-6 lg:pr-8 xl:pr-10 2xl:pr-12 pl-4 sm:pl-6 lg:pl-8 xl:pl-10 2xl:pl-12" : "px-0"
-            }`}
-          >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+          <div className="relative w-full flex items-center py-3 md:py-4 px-0">
             <Link href="/" className="flex items-center -ml-4 sm:-ml-6 lg:-ml-8 xl:-ml-10 2xl:-ml-12">
               <img
                 src={
