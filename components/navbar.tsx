@@ -51,7 +51,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   return (
     <>
       {/* Transparent header on hero (visible before scroll, or when mobile menu open) */}
-      {(!forceScrolled && (!isScrolled || mobileMenuOpen)) && (
+      {(mobileMenuOpen || (!forceScrolled && !isScrolled)) && (
         <header
           className={`fixed left-0 right-0 top-0 ${mobileMenuOpen ? "z-[70]" : "z-10"} transition-all duration-300 ease-in-out bg-transparent`}
         >
