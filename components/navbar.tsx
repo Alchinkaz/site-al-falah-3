@@ -53,7 +53,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           shouldShowTransparent ? "bg-transparent" : shouldShowScrolled ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-[22rem] sm:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
             <Link href="/" className="flex items-center shrink-0">
               <img
@@ -159,7 +159,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
         <div className="fixed inset-0 z-40 bg-[#1e1a61]">
           <div className="flex flex-col h-full pt-24">
             <nav className="flex-1">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+              <div className="max-w-[22rem] sm:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
                 <ul className="space-y-0">
                   {navItems.map(({ href, label }, index) => (
                     <li key={href}>
