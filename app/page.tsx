@@ -100,16 +100,28 @@ export default function Home() {
                 <img
                   src="/images/design-mode/al-falah-logo-white-text.svg"
                   alt="Al Falah Partners"
-                  className="md:h-[100px] md:mb-3.5 h-[100px] mb-3.5"
+                  className="mb-3.5 h-[72px] sm:h-[84px] md:h-[96px] lg:h-[108px] xl:h-[112px] 2xl:h-[120px]"
                 />
 
-                <h1 className="text-xl font-normal leading-relaxed mb-6 text-white lg:text-xl md:mb-8 md:text-xl">
+                <h1
+                  className="text-white font-normal mb-6 md:mb-8"
+                  style={{
+                    fontSize: "clamp(18px, 2.2vw, 24px)",
+                    lineHeight: 1.4,
+                    wordBreak: "keep-all",
+                    overflowWrap: "normal",
+                    whiteSpace: "normal",
+                  }}
+                >
                   Capitalizing on Emerging Opportunities
                 </h1>
 
                 <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                   <Link href="/portfolio">
-                    <button className="bg-white hover:bg-gray-100 text-black px-6 xl:px-8 2xl:px-10 h-12 text-sm md:text-base font-semibold rounded-xl w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                    <button
+                      className="bg-white hover:bg-gray-100 text-black font-semibold rounded-xl w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                      style={{ height: "clamp(44px, 6.2vw, 48px)", paddingInline: "clamp(20px, 4.5vw, 40px)", fontSize: "clamp(14px, 1.6vw, 16px)" }}
+                    >
                       View Portfolio
                     </button>
                   </Link>
