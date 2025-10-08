@@ -62,7 +62,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
               <img
                 src="/al-falah-logo-black-text.svg"
                 alt="Al Falah Partners"
-                className="h-5 md:h-6 lg:h-7 xl:h-8 w-auto"
+                className="h-8 md:h-9 lg:h-10 xl:h-11 w-auto"
               />
             </div>
             <Link href="/" className="flex items-center shrink-0">
