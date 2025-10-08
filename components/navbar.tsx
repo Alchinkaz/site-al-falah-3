@@ -65,8 +65,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                     : "/al-falah-logo-white-img.svg"
                 }
                 alt="Al Falah Partners"
-                className="block h-12 md:h-12 lg:h-14 xl:h-14 2xl:h-14 shrink-0"
-                style={{ width: "160px", height: "48px" }}
+                className="block h-auto w-[130px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[170px] shrink-0"
               />
             </Link>
 
