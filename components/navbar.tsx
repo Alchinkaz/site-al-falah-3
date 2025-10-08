@@ -25,7 +25,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       if (typeof window !== "undefined") {
         const heroHeight = window.innerHeight
         const currentScrollY = window.scrollY
-        setIsScrolled(currentScrollY > 10)
+        setIsScrolled(currentScrollY >= heroHeight)
       }
     }
 
