@@ -54,8 +54,8 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="relative w-full flex items-center justify-start py-3 md:py-4 px-0">
-            <Link href="/" className="flex items-center justify-start">
+          <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
+            <Link href="/" className="flex items-center justify-start mr-auto">
               <img
                 src={
                   shouldShowTransparent
@@ -65,7 +65,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                     : "/al-falah-logo-white-img.svg"
                 }
                 alt="Al Falah Partners"
-                className="h-12 md:h-12 lg:h-14 xl:h-14 2xl:h-14 w-auto"
+                className="block h-12 md:h-12 lg:h-14 xl:h-14 2xl:h-14 w-auto object-left"
                 style={{ maxWidth: "220px", width: "160px" }}
               />
             </Link>
