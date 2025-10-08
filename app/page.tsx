@@ -94,7 +94,7 @@ export default function Home() {
         <AnimatedBackground />
 
         <div className="flex-1 flex items-center justify-center relative z-10">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
             <div className="flex items-center justify-center py-8">
               <div className="max-w-4xl lg:max-w-3xl xl:max-w-4xl text-left">
                 <img
@@ -134,7 +134,7 @@ export default function Home() {
 
       {/* Portfolio Section */}
       <section className="relative z-20 bg-white pt-24 pb-8" id="portfolio">
-        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-center md:text-left">
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Portfolio</h2>
@@ -340,7 +340,7 @@ export default function Home() {
 
       {/* About Section with company info and statistics */}
       <section id="about" className="relative z-20 bg-white py-5" aria-labelledby="about-heading">
-        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-16 items-start">
             <div className="order-2 xl:order-1">
               <h2 className="text-4xl font-bold text-gray-900 mb-6 xl:mt-0">{homepageData.aboutText}</h2>
@@ -369,7 +369,7 @@ export default function Home() {
 
       {/* Statistics Section */}
       <section className="relative z-20 py-12 bg-white pb-24">
-        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
             <div className="p-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
