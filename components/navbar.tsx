@@ -3,13 +3,16 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { X, Globe, Menu } from "lucide-react"
 
-export default function Navbar() {
+export default function Navbar({ forceScrolled = false }: { forceScrolled?: boolean } = {}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const [language, setLanguage] = useState<"kz" | "ru" | "en">("ru")
   const [isScrolled, setIsScrolled] = useState(false)
+  const shouldShowScrolled = forceScrolled || isScrolled
 
   useEffect(() => {
+    if (forceScrolled) return // Don't listen to scroll if forced
+    
     const controlNavbar = () => {
       if (typeof window !== "undefined") {
         const heroHeight = window.innerHeight
@@ -22,7 +25,7 @@ export default function Navbar() {
       window.addEventListener("scroll", controlNavbar)
       return () => window.removeEventListener("scroll", controlNavbar)
     }
-  }, [])
+  }, [forceScrolled])
 
   const handleLanguageChange = (lang: "kz" | "ru" | "en") => {
     setLanguage(lang)
@@ -39,7 +42,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-          isScrolled ? "bg-white shadow-md" : "bg-transparent"
+          shouldShowScrolled ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
@@ -47,7 +50,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center -ml-4 sm:-ml-6 lg:-ml-8 xl:-ml-10 2xl:-ml-12">
               <img
                 src={
-                  isScrolled
+                  shouldShowScrolled
                     ? "/al-falah-logo-black-img.svg"
                     : "/al-falah-logo-white-img.svg"
                 }
@@ -62,7 +65,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
                   className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
-                    isScrolled
+                    shouldShowScrolled
                       ? "bg-gray-100 hover:bg-gray-200 text-gray-700"
                       : "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white"
                   }`}
@@ -104,7 +107,7 @@ export default function Navbar() {
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={`rounded-lg p-2 transition-colors ${
-                  isScrolled
+                  shouldShowScrolled
                     ? "bg-gray-100 hover:bg-gray-200 text-gray-700"
                     : "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white"
                 }`}

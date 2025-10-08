@@ -22,7 +22,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
+        <Navbar forceScrolled={true} />
         <div className="h-20"></div>
         <div className="flex items-center justify-center py-24">
           <div className="text-center">
@@ -36,7 +36,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
   if (!project) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
+        <Navbar forceScrolled={true} />
         <div className="h-20"></div>
         <div className="flex items-center justify-center py-24">
           <div className="text-center">

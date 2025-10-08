@@ -30,7 +30,7 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar forceScrolled={true} />
 
       {/* Hero Section */}
       <section className="relative bg-white py-16 mt-16 pt-36 pb-5">
