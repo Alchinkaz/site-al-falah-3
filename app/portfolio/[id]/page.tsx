@@ -56,7 +56,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar forceScrolled={true} />
 
       <div className="h-20"></div>
 
