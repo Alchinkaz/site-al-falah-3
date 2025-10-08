@@ -10,6 +10,13 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const [isScrolled, setIsScrolled] = useState(false)
   const shouldShowScrolled = forceScrolled || isScrolled
 
+  // Initialize scrolled state if forceScrolled is true
+  useEffect(() => {
+    if (forceScrolled) {
+      setIsScrolled(true)
+    }
+  }, [forceScrolled])
+
   useEffect(() => {
     if (forceScrolled) return // Don't listen to scroll if forced
     
