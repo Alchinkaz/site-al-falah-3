@@ -89,13 +89,13 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="sticky top-0 min-h-screen w-full flex flex-col relative pt-20 overflow-hidden z-0">
+      <section className="lg:sticky lg:top-0 min-h-screen w-full flex flex-col relative pt-20 overflow-hidden z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 to-transparent z-[1]" />
         <AnimatedBackground />
 
         <div className="flex-1 flex items-center justify-center relative z-10">
           <div className="max-w-7xl mx-auto relative z-10 w-full">
-            <div className="flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 py-8">
+            <div className="flex items-center justify-center px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 py-8">
               <div className="max-w-4xl lg:max-w-3xl xl:max-w-4xl text-left">
                 <img
                   src="/images/design-mode/al-falah-logo-white-text.svg"

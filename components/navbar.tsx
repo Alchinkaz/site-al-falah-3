@@ -53,7 +53,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           shouldShowTransparent ? "bg-transparent" : shouldShowScrolled ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
             <Link href="/" className="flex items-center shrink-0">
               <img
