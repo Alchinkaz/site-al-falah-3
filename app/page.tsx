@@ -327,7 +327,7 @@ export default function Home() {
       </section>
 
       {/* About Section with company info and statistics */}
-      <section id="about" className="relative z-20 bg-white my-10 py-5" aria-labelledby="about-heading">
+      <section id="about" className="relative z-20 bg-white py-5" aria-labelledby="about-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-16 items-start">
             <div className="order-2 xl:order-1">

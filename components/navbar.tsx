@@ -9,6 +9,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const [language, setLanguage] = useState<"kz" | "ru" | "en">("ru")
   const [isScrolled, setIsScrolled] = useState(false)
   const shouldShowScrolled = forceScrolled || isScrolled
+  const shouldShowTransparent = mobileMenuOpen && !forceScrolled
 
   // Initialize scrolled state if forceScrolled is true
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-          shouldShowScrolled ? "bg-white shadow-md" : "bg-transparent"
+          shouldShowTransparent ? "bg-transparent" : shouldShowScrolled ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
@@ -57,7 +58,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
             <Link href="/" className="flex items-center -ml-4 sm:-ml-6 lg:-ml-8 xl:-ml-10 2xl:-ml-12">
               <img
                 src={
-                  shouldShowScrolled
+                  shouldShowTransparent
+                    ? "/al-falah-logo-white-img.svg"
+                    : shouldShowScrolled
                     ? "/al-falah-logo-black-img.svg"
                     : "/al-falah-logo-white-img.svg"
                 }
@@ -72,7 +75,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                 <button
                   onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
                   className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
-                    shouldShowScrolled
+                    shouldShowTransparent
+                      ? "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white"
+                      : shouldShowScrolled
                       ? "bg-gray-100 hover:bg-gray-200 text-gray-700"
                       : "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white"
                   }`}
@@ -114,7 +119,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={`rounded-lg p-2 transition-colors ${
-                  shouldShowScrolled
+                  shouldShowTransparent
+                    ? "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white"
+                    : shouldShowScrolled
                     ? "bg-gray-100 hover:bg-gray-200 text-gray-700"
                     : "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white"
                 }`}
