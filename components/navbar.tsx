@@ -70,7 +70,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
             </Link>
 
             <div className="ml-auto flex items-center space-x-3 md:space-x-4 flex-shrink-0">
-              <div className="relative">
+              <div className="relative hidden md:block">
                 <button
                   onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
                   className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
@@ -153,35 +153,8 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                   ))}
                 </ul>
 
-                <div className="pt-6 border-t border-white/20 mt-0 lg:hidden">
-                  <div className="flex items-center justify-center space-x-6">
-                    <button
-                      onClick={() => setLanguage("kz")}
-                      className={`text-lg font-medium transition-colors hover:text-[#54C6CF] ${
-                        language === "kz" ? "text-[#54C6CF] font-semibold" : "text-white"
-                      }`}
-                    >
-                      Қаз
-                    </button>
-                    <div className="w-px h-6 bg-white/30"></div>
-                    <button
-                      onClick={() => setLanguage("ru")}
-                      className={`text-lg font-medium transition-colors hover:text-[#54C6CF] ${
-                        language === "ru" ? "text-[#54C6CF] font-semibold" : "text-white"
-                      }`}
-                    >
-                      Рус
-                    </button>
-                    <div className="w-px h-6 bg-white/30"></div>
-                    <button
-                      onClick={() => setLanguage("en")}
-                      className={`text-lg font-medium transition-colors hover:text-[#54C6CF] ${
-                        language === "en" ? "text-[#54C6CF] font-semibold" : "text-white"
-                      }`}
-                    >
-                      Eng
-                    </button>
-                  </div>
+                <div className="hidden">
+                  {/* Language selector hidden on mobile menu as requested */}
                 </div>
               </div>
             </nav>
