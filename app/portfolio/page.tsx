@@ -67,12 +67,12 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="mt-4 flex flex-col h-32">
+                      <div className="mt-4 flex flex-col h-40">
                         <div className="flex gap-2 mb-3">
                           <span className="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">News</span>
                           <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                         </div>
-                        <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">
+                        <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
                             {item.title}
                           </Link>
@@ -98,12 +98,12 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="mt-3 flex flex-col h-28">
+                      <div className="mt-3 flex flex-col h-36">
                         <div className="flex gap-2 mb-2">
                           <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
                           <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                         </div>
-                        <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">
+                        <h3 className="text-black font-semibold text-xl md:text-2xl mb-1 leading-tight line-clamp-2 flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
                             {item.title}
                           </Link>
@@ -129,12 +129,12 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="mt-3 flex flex-col h-28">
+                      <div className="mt-3 flex flex-col h-36">
                         <div className="flex gap-2 mb-2">
                           <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
                           <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                         </div>
-                        <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">
+                        <h3 className="text-black font-semibold text-xl md:text-2xl mb-1 leading-tight line-clamp-2 flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
                             {item.title}
                           </Link>
