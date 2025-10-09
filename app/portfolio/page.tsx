@@ -53,15 +53,74 @@ export default function PortfolioPage() {
             </div>
           ) : (
             <>
+              {/* Large screens - 3 columns */}
+              <div className="hidden lg:block">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                  {projectsData.map((item, index) => (
+                    <div key={item.id} className="lg:col-span-1">
+                      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                        <Image
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="mt-4 flex flex-col h-32">
+                        <div className="flex gap-2 mb-3">
+                          <span className="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">News</span>
+                          <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
+                        </div>
+                        <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">
+                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
+                            {item.title}
+                          </Link>
+                        </h3>
+                        <p className="text-gray-500 text-sm mt-auto hidden md:block">{item.date}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Medium screens - 2 columns */}
+              <div className="hidden md:block lg:hidden">
+                <div className="grid grid-cols-2 gap-6 mb-12">
+                  {projectsData.map((item) => (
+                    <div key={item.id} className="aspect-square">
+                      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                        <Image
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="mt-3 flex flex-col h-28">
+                        <div className="flex gap-2 mb-2">
+                          <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
+                          <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+                        </div>
+                        <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">
+                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
+                            {item.title}
+                          </Link>
+                        </h3>
+                        <p className="text-gray-500 text-xs mt-auto hidden md:block">{item.date}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Mobile - 1 column */}
-              <div className="grid grid-cols-1 md:hidden gap-6">
-                {projectsData.map((item) => (
-                  <Card
-                    key={item.id}
-                    className="hover:shadow-lg transition-all duration-300 bg-white border-gray-200 h-full flex flex-col"
-                  >
-                    <CardHeader>
-                      <div className="w-full aspect-video mb-4 rounded-lg overflow-hidden">
+              <div className="md:hidden mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {projectsData.map((item) => (
+                    <div key={item.id} className="aspect-square">
+                      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
                         <Image
                           src={item.image || "/placeholder.svg"}
                           alt={item.title}
@@ -70,122 +129,21 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="flex flex-col h-24">
-                        <CardTitle className="text-lg leading-tight text-gray-900 mb-3 line-clamp-2 flex-grow">
+                      <div className="mt-3 flex flex-col h-28">
+                        <div className="flex gap-2 mb-2">
+                          <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
+                          <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+                        </div>
+                        <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
                             {item.title}
                           </Link>
-                        </CardTitle>
-                        <div className="flex items-center gap-2 pt-2.5 mt-auto">
-                          <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                            {item.sector}
-                          </span>
-                          <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
-                            {item.investmentStage}
-                          </span>
-                        </div>
+                        </h3>
+                        <p className="text-gray-500 text-xs mt-auto hidden md:block">{item.date}</p>
                       </div>
-                    </CardHeader>
-                    <CardContent className="flex flex-col flex-grow">
-                      <CardDescription className="text-gray-600 leading-relaxed flex-grow mb-4 line-clamp-3">
-                        {item.description}
-                      </CardDescription>
-                      <Link href={`/portfolio/${item.id}`}>
-                        <Button className="bg-[#1e1a61] text-white hover:bg-[#16124a] w-full">View Details</Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Tablet - 2 columns */}
-              <div className="hidden md:grid xl:hidden grid-cols-2 gap-6">
-                {projectsData.map((item) => (
-                  <Card
-                    key={item.id}
-                    className="hover:shadow-lg transition-all duration-300 bg-white border-gray-200 h-full flex flex-col"
-                  >
-                    <CardHeader>
-                      <div className="w-full aspect-video mb-4 rounded-lg overflow-hidden">
-                        <Image
-                          src={item.image || "/placeholder.svg"}
-                          alt={item.title}
-                          width={600}
-                          height={400}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex flex-col h-24">
-                        <CardTitle className="text-lg leading-tight text-gray-900 mb-3 line-clamp-2 flex-grow">
-                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
-                            {item.title}
-                          </Link>
-                        </CardTitle>
-                        <div className="flex items-center gap-2 pt-3 mt-auto">
-                          <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                            {item.sector}
-                          </span>
-                          <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
-                            {item.investmentStage}
-                          </span>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex flex-col flex-grow">
-                      <CardDescription className="text-gray-600 leading-relaxed flex-grow mb-4 line-clamp-3">
-                        {item.description}
-                      </CardDescription>
-                      <Link href={`/portfolio/${item.id}`}>
-                        <Button className="bg-[#1e1a61] text-white hover:bg-[#16124a] w-full">View Details</Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Desktop - 3 columns */}
-              <div className="hidden xl:grid grid-cols-3 gap-6">
-                {projectsData.map((item) => (
-                  <Card
-                    key={item.id}
-                    className="hover:shadow-lg transition-all duration-300 bg-white border-gray-200 h-full flex flex-col"
-                  >
-                    <CardHeader>
-                      <div className="w-full aspect-video mb-4 rounded-lg overflow-hidden">
-                        <Image
-                          src={item.image || "/placeholder.svg"}
-                          alt={item.title}
-                          width={600}
-                          height={400}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex flex-col h-24">
-                        <CardTitle className="text-lg leading-tight text-gray-900 mb-3 line-clamp-2 flex-grow">
-                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
-                            {item.title}
-                          </Link>
-                        </CardTitle>
-                        <div className="flex items-center gap-2 pt-3 mt-auto">
-                          <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                            {item.sector}
-                          </span>
-                          <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
-                            {item.investmentStage}
-                          </span>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex flex-col flex-grow">
-                      <CardDescription className="text-gray-600 leading-relaxed flex-grow mb-4 line-clamp-3">
-                        {item.description}
-                      </CardDescription>
-                      <Link href={`/portfolio/${item.id}`}>
-                        <Button className="bg-[#1e1a61] text-white hover:bg-[#16124a] w-full">View Details</Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
+                    </div>
+                  ))}
+                </div>
               </div>
             </>
           )}
