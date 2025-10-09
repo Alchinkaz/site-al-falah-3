@@ -155,62 +155,110 @@ export default function Home() {
           <div className="hidden lg:block">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
               <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80 relative">
                   <img
                     src="/placeholder.svg"
                     alt="FinTech Startup"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Новости</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-sm mb-1">Американский венчурный фонд инвестировал в стартап Finflow</h3>
+                    <p className="text-gray-500 text-xs">04.08.2025</p>
+                  </div>
                 </div>
               </div>
 
               <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80 relative">
                   <img
                     src="/placeholder.svg"
                     alt="Healthcare Platform"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Здоровье</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-sm mb-1">Платформа здравоохранения получила раунд финансирования</h3>
+                    <p className="text-gray-500 text-xs">02.08.2025</p>
+                  </div>
                 </div>
               </div>
 
               <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80 relative">
                   <img
                     src="/placeholder.svg"
                     alt="AI Analytics"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">ИИ</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-sm mb-1">Искусственный интеллект для аналитики данных</h3>
+                    <p className="text-gray-500 text-xs">01.08.2025</p>
+                  </div>
                 </div>
               </div>
 
               <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80 relative">
                   <img
                     src="/placeholder.svg"
                     alt="E-commerce Solution"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">E-commerce</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-sm mb-1">Решения для электронной коммерции</h3>
+                    <p className="text-gray-500 text-xs">30.07.2025</p>
+                  </div>
                 </div>
               </div>
 
               <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80 relative">
                   <img
                     src="/placeholder.svg"
                     alt="SaaS Platform"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">SaaS</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-sm mb-1">SaaS платформа для управления бизнесом</h3>
+                    <p className="text-gray-500 text-xs">28.07.2025</p>
+                  </div>
                 </div>
               </div>
 
               <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80 relative">
                   <img
                     src="/placeholder.svg"
                     alt="Tech Startup"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Технологии</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-sm mb-1">Технологический стартап нового поколения</h3>
+                    <p className="text-gray-500 text-xs">26.07.2025</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -219,57 +267,105 @@ export default function Home() {
           <div className="hidden md:block lg:hidden">
             <div className="grid grid-cols-2 gap-6 mb-12">
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="FinTech Startup"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Новости</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Американский венчурный фонд инвестировал в стартап Finflow</h3>
+                    <p className="text-gray-500 text-xs">04.08.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="Healthcare Platform"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Здоровье</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Платформа здравоохранения получила раунд финансирования</h3>
+                    <p className="text-gray-500 text-xs">02.08.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="AI Analytics"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">ИИ</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Искусственный интеллект для аналитики данных</h3>
+                    <p className="text-gray-500 text-xs">01.08.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="E-commerce Solution"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">E-commerce</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Решения для электронной коммерции</h3>
+                    <p className="text-gray-500 text-xs">30.07.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="SaaS Platform"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">SaaS</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">SaaS платформа для управления бизнесом</h3>
+                    <p className="text-gray-500 text-xs">28.07.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="Tech Startup"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Технологии</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Технологический стартап нового поколения</h3>
+                    <p className="text-gray-500 text-xs">26.07.2025</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -278,48 +374,88 @@ export default function Home() {
           <div className="md:hidden mb-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="FinTech Startup"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Новости</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Американский венчурный фонд инвестировал в стартап Finflow</h3>
+                    <p className="text-gray-500 text-xs">04.08.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="Healthcare Platform"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Здоровье</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Платформа здравоохранения получила раунд финансирования</h3>
+                    <p className="text-gray-500 text-xs">02.08.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="AI Analytics"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">ИИ</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Искусственный интеллект для аналитики данных</h3>
+                    <p className="text-gray-500 text-xs">01.08.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="E-commerce Solution"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">E-commerce</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">Решения для электронной коммерции</h3>
+                    <p className="text-gray-500 text-xs">30.07.2025</p>
+                  </div>
                 </div>
               </div>
               <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full relative">
                   <img
                     src="/placeholder.svg"
                     alt="SaaS Platform"
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white p-3">
+                    <div className="flex gap-1 mb-2">
+                      <span className="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">SaaS</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Инвестиции</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-xs mb-1">SaaS платформа для управления бизнесом</h3>
+                    <p className="text-gray-500 text-xs">28.07.2025</p>
+                  </div>
                 </div>
               </div>
             </div>
