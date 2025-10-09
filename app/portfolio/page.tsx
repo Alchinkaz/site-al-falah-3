@@ -103,7 +103,7 @@ export default function PortfolioPage() {
                           <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
                           <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                         </div>
-                        <h3 className="text-black font-semibold text-2xl md:text-3xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                        <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                             {item.title}
                           </Link>
@@ -134,7 +134,7 @@ export default function PortfolioPage() {
                           <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
                           <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                         </div>
-                        <h3 className="text-black font-semibold text-2xl md:text-3xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                        <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                             {item.title}
                           </Link>

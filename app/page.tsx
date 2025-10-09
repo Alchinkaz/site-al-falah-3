@@ -324,7 +324,7 @@ export default function Home() {
                     <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">Healthcare</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-3xl mb-1 leading-tight line-clamp-2 flex-grow">
+                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                     <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors">
                       Telemedicine platform secures new funding
                     </Link>
@@ -345,7 +345,7 @@ export default function Home() {
                     <span className="bg-orange-100 text-orange-800 text-sm px-2 py-1 rounded-full">AI</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-3xl mb-1 leading-tight line-clamp-2 flex-grow">
+                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                     <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors">
                       AI‑driven analytics powering smarter decisions
                     </Link>
@@ -366,7 +366,7 @@ export default function Home() {
                     <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full">E-commerce</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-3xl mb-1 leading-tight line-clamp-2 flex-grow">
+                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                     <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors">
                       Modern e‑commerce solutions for digital growth
                     </Link>
@@ -387,7 +387,7 @@ export default function Home() {
                     <span className="bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded-full">SaaS</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-xl md:text-2xl mb-1 leading-tight line-clamp-2 flex-grow">
+                  <h3 className="text-black font-semibold text-xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                     <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors">
                       SaaS platform for streamlined operations
                     </Link>
@@ -408,7 +408,7 @@ export default function Home() {
                     <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">Technology</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-3xl mb-1 leading-tight line-clamp-2 flex-grow">
+                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                     <Link href="/portfolio/logistics-tech-platform" className="hover:text-blue-600 transition-colors">
                       Next‑generation technology startup innovating at scale
                     </Link>
