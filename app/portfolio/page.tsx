@@ -70,18 +70,20 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <CardTitle className="text-lg leading-tight text-gray-900 mb-3">
-                        <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
-                          {item.title}
-                        </Link>
-                      </CardTitle>
-                      <div className="flex items-center gap-2 pt-2.5">
-                        <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                          {item.sector}
-                        </span>
-                        <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
-                          {item.investmentStage}
-                        </span>
+                      <div className="flex flex-col h-24">
+                        <CardTitle className="text-lg leading-tight text-gray-900 mb-3 line-clamp-2 flex-grow">
+                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
+                            {item.title}
+                          </Link>
+                        </CardTitle>
+                        <div className="flex items-center gap-2 pt-2.5 mt-auto">
+                          <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
+                            {item.sector}
+                          </span>
+                          <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
+                            {item.investmentStage}
+                          </span>
+                        </div>
                       </div>
                     </CardHeader>
                     <CardContent className="flex flex-col flex-grow">
@@ -113,18 +115,20 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <CardTitle className="text-lg leading-tight text-gray-900 mb-3">
-                        <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
-                          {item.title}
-                        </Link>
-                      </CardTitle>
-                      <div className="flex items-center gap-2 pt-3">
-                        <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                          {item.sector}
-                        </span>
-                        <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
-                          {item.investmentStage}
-                        </span>
+                      <div className="flex flex-col h-24">
+                        <CardTitle className="text-lg leading-tight text-gray-900 mb-3 line-clamp-2 flex-grow">
+                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
+                            {item.title}
+                          </Link>
+                        </CardTitle>
+                        <div className="flex items-center gap-2 pt-3 mt-auto">
+                          <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
+                            {item.sector}
+                          </span>
+                          <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
+                            {item.investmentStage}
+                          </span>
+                        </div>
                       </div>
                     </CardHeader>
                     <CardContent className="flex flex-col flex-grow">
@@ -156,18 +160,20 @@ export default function PortfolioPage() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <CardTitle className="text-lg leading-tight text-gray-900 mb-3">
-                        <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
-                          {item.title}
-                        </Link>
-                      </CardTitle>
-                      <div className="flex items-center gap-2 pt-3">
-                        <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                          {item.sector}
-                        </span>
-                        <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
-                          {item.investmentStage}
-                        </span>
+                      <div className="flex flex-col h-24">
+                        <CardTitle className="text-lg leading-tight text-gray-900 mb-3 line-clamp-2 flex-grow">
+                          <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
+                            {item.title}
+                          </Link>
+                        </CardTitle>
+                        <div className="flex items-center gap-2 pt-3 mt-auto">
+                          <span className="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
+                            {item.sector}
+                          </span>
+                          <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 rounded">
+                            {item.investmentStage}
+                          </span>
+                        </div>
                       </div>
                     </CardHeader>
                     <CardContent className="flex flex-col flex-grow">

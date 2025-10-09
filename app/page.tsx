@@ -221,7 +221,7 @@ export default function Home() {
                     <span className="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">E-commerce</span>
                     <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">Решения для электронной коммерции</h3>
+                  <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">Инновационные решения для электронной коммерции и цифровых продаж</h3>
                   <p className="text-gray-500 text-sm mt-auto">30.07.2025</p>
                 </div>
               </div>
@@ -239,7 +239,7 @@ export default function Home() {
                     <span className="bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full">SaaS</span>
                     <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">SaaS платформа для управления бизнесом</h3>
+                  <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">Современная SaaS платформа для эффективного управления бизнес-процессами</h3>
                   <p className="text-gray-500 text-sm mt-auto">28.07.2025</p>
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function Home() {
                     <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">Технологии</span>
                     <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">Технологический стартап нового поколения</h3>
+                  <h3 className="text-black font-semibold text-lg mb-2 leading-tight line-clamp-2 flex-grow">Передовой технологический стартап нового поколения с инновационными решениями</h3>
                   <p className="text-gray-500 text-sm mt-auto">26.07.2025</p>
                 </div>
               </div>
@@ -280,7 +280,7 @@ export default function Home() {
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
                   <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Американский венчурный фонд инвестировал в стартап Finflow</h3>
-                  <p className="text-gray-500 text-xs mt-auto">04.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">04.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -297,7 +297,7 @@ export default function Home() {
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
                   <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Платформа здравоохранения получила раунд финансирования</h3>
-                  <p className="text-gray-500 text-xs mt-auto">02.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">02.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -314,7 +314,7 @@ export default function Home() {
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
                   <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Искусственный интеллект для аналитики данных</h3>
-                  <p className="text-gray-500 text-xs mt-auto">01.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">01.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -330,8 +330,8 @@ export default function Home() {
                     <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full">E-commerce</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Решения для электронной коммерции</h3>
-                  <p className="text-gray-500 text-xs mt-auto">30.07.2025</p>
+                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Инновационные решения для электронной коммерции и цифровых продаж</h3>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">30.07.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -347,8 +347,8 @@ export default function Home() {
                     <span className="bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded-full">SaaS</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">SaaS платформа для управления бизнесом</h3>
-                  <p className="text-gray-500 text-xs mt-auto">28.07.2025</p>
+                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Современная SaaS платформа для эффективного управления бизнес-процессами</h3>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">28.07.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -364,8 +364,8 @@ export default function Home() {
                     <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">Технологии</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Технологический стартап нового поколения</h3>
-                  <p className="text-gray-500 text-xs mt-auto">26.07.2025</p>
+                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Передовой технологический стартап нового поколения с инновационными решениями</h3>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">26.07.2025</p>
                 </div>
               </div>
             </div>
@@ -387,7 +387,7 @@ export default function Home() {
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
                   <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Американский венчурный фонд инвестировал в стартап Finflow</h3>
-                  <p className="text-gray-500 text-xs mt-auto">04.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">04.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -404,7 +404,7 @@ export default function Home() {
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
                   <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Платформа здравоохранения получила раунд финансирования</h3>
-                  <p className="text-gray-500 text-xs mt-auto">02.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">02.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -421,7 +421,7 @@ export default function Home() {
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
                   <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Искусственный интеллект для аналитики данных</h3>
-                  <p className="text-gray-500 text-xs mt-auto">01.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">01.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -437,8 +437,8 @@ export default function Home() {
                     <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full">E-commerce</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Решения для электронной коммерции</h3>
-                  <p className="text-gray-500 text-xs mt-auto">30.07.2025</p>
+                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Инновационные решения для электронной коммерции и цифровых продаж</h3>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">30.07.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -454,8 +454,8 @@ export default function Home() {
                     <span className="bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded-full">SaaS</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Инвестиции</span>
                   </div>
-                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">SaaS платформа для управления бизнесом</h3>
-                  <p className="text-gray-500 text-xs mt-auto">28.07.2025</p>
+                  <h3 className="text-black font-semibold text-base mb-1 leading-tight line-clamp-2 flex-grow">Современная SaaS платформа для эффективного управления бизнес-процессами</h3>
+                  <p className="text-gray-500 text-xs mt-auto hidden md:block">28.07.2025</p>
                 </div>
               </div>
             </div>
