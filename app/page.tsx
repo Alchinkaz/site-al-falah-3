@@ -167,8 +167,8 @@ export default function Home() {
                       <span className="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">News</span>
                       <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-3xl mb-2 leading-tight line-clamp-2 flex-grow">
-                    <Link href="/portfolio/fintech-platform" className="hover:text-blue-600 transition-colors">
+                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/fintech-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                       Global fund backs next‑gen payments platform
                     </Link>
                   </h3>
@@ -189,8 +189,8 @@ export default function Home() {
                       <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Healthcare</span>
                       <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-3xl mb-2 leading-tight line-clamp-2 flex-grow">
-                    <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors">
+                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                       Telemedicine platform secures new funding
                     </Link>
                   </h3>
@@ -211,8 +211,8 @@ export default function Home() {
                       <span className="bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">AI</span>
                       <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-3xl mb-2 leading-tight line-clamp-2 flex-grow">
-                    <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors">
+                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                       AI‑driven analytics powering smarter decisions
                     </Link>
                   </h3>
@@ -233,8 +233,8 @@ export default function Home() {
                       <span className="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">E-commerce</span>
                       <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-3xl mb-2 leading-tight line-clamp-2 flex-grow">
-                    <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors">
+                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                       Modern e‑commerce solutions for digital growth
                     </Link>
                   </h3>
@@ -255,8 +255,8 @@ export default function Home() {
                       <span className="bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full">SaaS</span>
                       <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-3xl mb-2 leading-tight line-clamp-2 flex-grow">
-                    <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors">
+                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                       SaaS platform for streamlined operations
                     </Link>
                   </h3>
