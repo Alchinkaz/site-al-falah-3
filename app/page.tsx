@@ -277,8 +277,8 @@ export default function Home() {
                       <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">Technology</span>
                       <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-3xl mb-2 leading-tight line-clamp-2 flex-grow">
-                    <Link href="/portfolio/logistics-tech-platform" className="hover:text-blue-600 transition-colors">
+                  <h3 className="text-black font-semibold text-3xl md:text-3xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/logistics-tech-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                       Next‑generation technology startup innovating at scale
                     </Link>
                   </h3>
@@ -434,7 +434,11 @@ export default function Home() {
                     <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-xl mb-1 leading-tight line-clamp-2 flex-grow">American venture fund invested in Finflow startup</h3>
+                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/fintech-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                      Global fund backs next‑gen payments platform
+                    </Link>
+                  </h3>
                   <p className="text-gray-500 text-xs mt-auto hidden md:block">04.08.2025</p>
                 </div>
               </div>
@@ -451,7 +455,11 @@ export default function Home() {
                     <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">Healthcare</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-xl mb-1 leading-tight line-clamp-2 flex-grow">Healthcare platform received funding round</h3>
+                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                      Telemedicine platform secures new funding
+                    </Link>
+                  </h3>
                   <p className="text-gray-500 text-xs mt-auto hidden md:block">02.08.2025</p>
                 </div>
               </div>
@@ -468,7 +476,11 @@ export default function Home() {
                     <span className="bg-orange-100 text-orange-800 text-sm px-2 py-1 rounded-full">AI</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-xl mb-1 leading-tight line-clamp-2 flex-grow">Artificial intelligence for data analytics</h3>
+                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                      AI‑driven analytics powering smarter decisions
+                    </Link>
+                  </h3>
                   <p className="text-gray-500 text-xs mt-auto hidden md:block">01.08.2025</p>
                 </div>
               </div>
@@ -485,7 +497,11 @@ export default function Home() {
                     <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full">E-commerce</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-xl mb-1 leading-tight line-clamp-2 flex-grow">E-commerce solutions</h3>
+                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                      Modern e‑commerce solutions for digital growth
+                    </Link>
+                  </h3>
                   <p className="text-gray-500 text-xs mt-auto hidden md:block">30.07.2025</p>
                 </div>
               </div>
@@ -502,7 +518,11 @@ export default function Home() {
                     <span className="bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded-full">SaaS</span>
                     <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
                   </div>
-                  <h3 className="text-black font-semibold text-xl mb-1 leading-tight line-clamp-2 flex-grow">SaaS platform for business management</h3>
+                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                    <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                      SaaS platform for streamlined operations
+                    </Link>
+                  </h3>
                   <p className="text-gray-500 text-xs mt-auto hidden md:block">28.07.2025</p>
                 </div>
               </div>
