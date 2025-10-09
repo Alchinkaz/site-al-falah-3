@@ -18,7 +18,7 @@ export interface PortfolioProject {
 const portfolioProjects: PortfolioProject[] = [
   {
     id: "fintech-platform",
-    title: "American venture fund invested in Finflow startup",
+    title: "Global fund backs next‑gen payments platform",
     description: "Revolutionary digital payment solution transforming financial transactions across Central Asia",
     sector: "News",
     investmentStage: "Investment",
@@ -44,7 +44,7 @@ const portfolioProjects: PortfolioProject[] = [
   },
   {
     id: "healthtech-telemedicine",
-    title: "Healthcare platform received funding round",
+    title: "Telemedicine platform secures new funding",
     description: "AI-powered telemedicine platform connecting patients with healthcare professionals",
     sector: "Healthcare",
     investmentStage: "Investment",
@@ -70,7 +70,7 @@ const portfolioProjects: PortfolioProject[] = [
   },
   {
     id: "edtech-learning-platform",
-    title: "Artificial intelligence for data analytics",
+    title: "AI‑driven analytics powering smarter decisions",
     description: "Personalized online education platform using adaptive learning technology",
     sector: "AI",
     investmentStage: "Investment",
@@ -96,7 +96,7 @@ const portfolioProjects: PortfolioProject[] = [
   },
   {
     id: "agritech-supply-chain",
-    title: "E-commerce solutions",
+    title: "Modern e‑commerce solutions for digital growth",
     description: "Blockchain-based platform optimizing agricultural supply chain management",
     sector: "E-commerce",
     investmentStage: "Investment",
@@ -122,7 +122,7 @@ const portfolioProjects: PortfolioProject[] = [
   },
   {
     id: "cleantech-renewable-energy",
-    title: "SaaS platform for business management",
+    title: "SaaS platform for streamlined operations",
     description: "Solar energy solutions for commercial and residential applications",
     sector: "SaaS",
     investmentStage: "Investment",
@@ -148,7 +148,7 @@ const portfolioProjects: PortfolioProject[] = [
   },
   {
     id: "logistics-tech-platform",
-    title: "Next-generation technology startup",
+    title: "Next‑generation technology startup innovating at scale",
     description: "AI-driven logistics optimization platform for last-mile delivery",
     sector: "Technology",
     investmentStage: "Investment",
