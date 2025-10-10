@@ -8,6 +8,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar forceScrolled={true} />
+      <div className="h-16 sm:h-16 md:h-16 lg:h-20"></div>
 
       {/* Removed hero heading & subtitle per request */}
 
