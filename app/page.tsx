@@ -422,7 +422,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="md:hidden mb-12">
+          <div className="md:hidden mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="aspect-square">
                 <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
