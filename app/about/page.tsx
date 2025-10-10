@@ -13,7 +13,7 @@ export default function AboutPage() {
       <div className="h-16 sm:h-16 md:h-16 lg:h-20"></div>
 
       {/* Top hero image block within site max-width, with extra top spacing */}
-      <section className="bg-white mt-6 sm:mt-8">
+      <section className="bg-white mt-8 sm:mt-10 lg:mt-12">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: "16/9" }}>
             <img
@@ -32,7 +32,7 @@ export default function AboutPage() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-12">
             <div className="space-y-5 text-gray-700 text-lg leading-relaxed">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">About Us</h3>
+              <h3 className="text-3xl font-semibold text-gray-900 mb-2">About Us</h3>
               <p>
                 We make investments in companies across different industries such as energy,
                 mining, agriculture, food production, high‑tech, healthcare and others.
@@ -100,13 +100,37 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Homepage-style About section */}
+      <section id="about" className="relative bg-white py-5" aria-labelledby="about-heading">
+        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+          <div className="grid xl:grid-cols-2 gap-16 items-start">
+            <div className="order-2 xl:order-1">
+              <h2 id="about-heading" className="text-3xl font-bold text-gray-900 mb-6 xl:mt-0">Our vision</h2>
+              <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                <p>We partner with exceptional teams to build enduring companies and long-term value across Central Asia.</p>
+                <p>With deep domain expertise and an operator mindset, we support our portfolio from early growth through scale.</p>
+              </div>
+            </div>
+            <div className="order-1 xl:order-2">
+              <div className="relative w-full rounded-lg overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                <img
+                  src="/placeholder.svg"
+                  alt="About section visual"
+                  className="object-cover rounded-lg w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Team */}
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-left">
-              <h3 className="font-bold text-gray-900" style={{ fontSize: "48px", lineHeight: 1.1 }}>Meet the team</h3>
+              <h3 className="font-bold text-gray-900 text-3xl md:text-[48px] md:leading-[1.1]">Meet the team</h3>
             </div>
             <Link href="/#cta">
               <Button
