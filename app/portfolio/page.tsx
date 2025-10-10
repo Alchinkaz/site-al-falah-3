@@ -18,7 +18,7 @@ export default function PortfolioPage() {
     const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     const formattedProjects = sorted.map((project) => ({
       id: project.id,
-      title: `${project.title} — ${project.sector} – ${project.investmentStage}, ${project.investmentYear}`,
+      title: `${project.title} ${project.sector} – ${project.investmentStage}`,
       description: project.description,
       sector: project.sector,
       investmentStage: project.investmentStage,
