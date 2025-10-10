@@ -66,8 +66,8 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
   return (
     <>
-      {/* Transparent header on hero (visible before scroll, NOT when mobile menu open) */}
-      {(!mobileMenuOpen && (!forceScrolled && !isScrolled)) && (
+      {/* Transparent header on hero (visible before scroll, or when mobile menu open) */}
+      {(mobileMenuOpen || (!forceScrolled && !isScrolled)) && (
       <header
           className={`fixed left-0 right-0 top-0 ${mobileMenuOpen ? "z-[70]" : "z-10"} transition-all duration-300 ease-in-out bg-transparent`}
         >
@@ -230,16 +230,16 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
         <div className={`fixed inset-0 z-[60] bg-[#1e1a61] transition-all duration-500 ease-in-out transform ${
           mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
         }`}>
-          {/* Navigation links - aligned to navbar width */}
+          {/* Navigation links - aligned to navbar width, left aligned */}
           <div className="flex flex-col h-full justify-center">
             <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-              <nav className="space-y-8">
+              <nav className="space-y-8 text-left">
                 {navItems.map(({ href, label }) => (
                   <a
                     key={href}
                     href={href}
                     onClick={handleMobileMenuToggle}
-                    className="block text-white text-4xl md:text-5xl font-normal hover:underline transition-all duration-200 font-inter"
+                    className="block text-white text-4xl md:text-5xl font-normal hover:underline transition-all duration-200 font-inter text-left"
                   >
                     {label}
                   </a>
