@@ -8,7 +8,6 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileMenuAnimating, setMobileMenuAnimating] = useState(false)
-  const [transparentReentry, setTransparentReentry] = useState(false)
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const [language, setLanguage] = useState<"kz" | "ru" | "en">("ru")
   const [isScrolled, setIsScrolled] = useState(false)
@@ -55,14 +54,8 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       }, 10)
     } else {
       setMobileMenuAnimating(false)
-      // Prepare smooth re-entry animation for transparent navbar on hero
-      if (!forceScrolled) {
-        setTransparentReentry(true)
-      }
       setTimeout(() => {
         setMobileMenuOpen(false)
-        // End re-entry state after animation completes
-        setTimeout(() => setTransparentReentry(false), 500)
       }, 500)
     }
   }
@@ -79,10 +72,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       {(mobileMenuOpen || !shouldShowScrolled) && (
       <header
           className={`fixed left-0 right-0 top-0 ${mobileMenuOpen ? "z-[70]" : "z-10"} bg-transparent transition-transform transition-opacity duration-500 ease-in-out 
-            ${mobileMenuOpen 
-              ? "translate-y-0 opacity-100" 
-              : (transparentReentry ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0")
-            }
+            ${(mobileMenuOpen || !shouldShowScrolled) ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
           `}
         >
           <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
