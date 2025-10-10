@@ -9,31 +9,14 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white">
       <Navbar forceScrolled={true} />
 
-      {/* Hero */}
-      <section className="relative bg-white py-12 mt-12 pt-28 pb-8">
-        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">About Us</h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Al Falah Capital Partners is a private asset manager and investment firm
-              specializing in private equity, venture capital, partnership opportunities and
-              special situations in Central Asia with a primary focus on Kazakhstan.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Removed hero heading & subtitle per request */}
 
       {/* Company Intro */}
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-12">
             <div className="space-y-5 text-gray-700 text-lg leading-relaxed">
-              <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">Falah Growth Fund</h3>
-                <div className="rounded-lg border border-gray-200 p-6 bg-gray-50">
-                  <div className="text-3xl font-semibold text-gray-900">450+ deals reviewed</div>
-                </div>
-              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">About Us</h3>
               <p>
                 We make investments in companies across different industries such as energy,
                 mining, agriculture, food production, high‑tech, healthcare and others.
