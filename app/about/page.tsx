@@ -122,18 +122,22 @@ export default function AboutPage() {
               },
             ].map((m) => (
               <div key={`${m.firstName}-${m.lastName}`} className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt={`${m.firstName} ${m.lastName}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-32">
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl leading-tight line-clamp-2 overflow-hidden">
-                    {m.firstName} {m.lastName}
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-1">{m.role}</p>
+                <div className="rounded-xl overflow-hidden border border-gray-200">
+                  <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+                    <img
+                      src="/placeholder.svg"
+                      alt={`${m.firstName} ${m.lastName}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-x-0 bottom-0">
+                      <div className="bg-white/95 backdrop-blur-sm px-5 py-4 border-t border-gray-200 rounded-t-xl">
+                        <h3 className="text-gray-900 font-semibold text-2xl md:text-2xl leading-tight">
+                          {m.firstName} {m.lastName}
+                        </h3>
+                        <p className="text-gray-500 text-sm mt-1">{m.role}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
