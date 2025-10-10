@@ -5,8 +5,34 @@ import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import { getHomepageData, type HomepageData } from "@/lib/homepage-data"
+import { useCounterAnimation } from "@/hooks/use-counter-animation"
 
 export default function AboutPage() {
+  const [homepageData, setHomepageData] = useState<HomepageData | null>(null)
+
+  const stat1Counter = useCounterAnimation({
+    end: homepageData ? Number.parseInt(homepageData.stat1Title?.replace(/[^\d]/g, "") || "0") : 0,
+  })
+  const stat2Counter = useCounterAnimation({
+    end: homepageData ? Number.parseInt(homepageData.stat2Title?.replace(/[^\d]/g, "") || "0") : 0,
+  })
+  const stat3Counter = useCounterAnimation({
+    end: homepageData ? Number.parseInt(homepageData.stat3Title?.replace(/[^\d]/g, "") || "0") : 0,
+  })
+
+  useEffect(() => {
+    const data = getHomepageData()
+    setHomepageData(data)
+
+    const handleDataUpdate = (event: CustomEvent) => {
+      setHomepageData(event.detail)
+    }
+
+    window.addEventListener("homepage-data-updated", handleDataUpdate as EventListener)
+    return () => window.removeEventListener("homepage-data-updated", handleDataUpdate as EventListener)
+  }, [])
   return (
     <div className="min-h-screen bg-white">
       <Navbar forceScrolled={true} />
@@ -100,26 +126,45 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Homepage-style About section */}
-      <section id="about" className="relative bg-white py-5" aria-labelledby="about-heading">
+      {/* Statistics Section (animated) */}
+      <section className="relative py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="grid xl:grid-cols-2 gap-16 items-start">
-            <div className="order-2 xl:order-1">
-              <h2 id="about-heading" className="text-3xl font-bold text-gray-900 mb-6 xl:mt-0">Our vision</h2>
-              <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
-                <p>We partner with exceptional teams to build enduring companies and long-term value across Central Asia.</p>
-                <p>With deep domain expertise and an operator mindset, we support our portfolio from early growth through scale.</p>
+          <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+            <div className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+                <div className="text-left relative">
+                  <div className="px-4 py-6">
+                    <h3 ref={stat1Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
+                      {homepageData?.stat1Title?.replace(/\d+/, stat1Counter.count.toString())}
+                    </h3>
+                    <p className="text-gray-600">{homepageData?.stat1Subtitle}</p>
+                  </div>
+                  <div className="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                  <div className="md:hidden w-full h-px bg-gray-300"></div>
+                </div>
+
+                <div className="text-left relative">
+                  <div className="px-4 py-6">
+                    <h3 ref={stat2Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
+                      {homepageData?.stat2Title?.replace(/\d+/, stat2Counter.count.toString())}
+                    </h3>
+                    <p className="text-gray-600">{homepageData?.stat2Subtitle}</p>
+                  </div>
+                  <div className="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                  <div className="md:hidden w-full h-px bg-gray-300"></div>
+                </div>
+
+                <div className="text-left relative">
+                  <div className="px-4 py-6">
+                    <h3 ref={stat3Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
+                      {homepageData?.stat3Title?.replace(/\d+/, stat3Counter.count.toString())}
+                    </h3>
+                    <p className="text-gray-600">{homepageData?.stat3Subtitle}</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="order-1 xl:order-2">
-              <div className="relative w-full rounded-lg overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                <img
-                  src="/placeholder.svg"
-                  alt="About section visual"
-                  className="object-cover rounded-lg w-full h-full"
-                />
-              </div>
-            </div>
+            <div className="h-2 bg-[rgba(30,26,97,1)]"></div>
           </div>
         </div>
       </section>
