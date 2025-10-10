@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   keywords:
     "venture capital, startup investment, Al Falah Partners, VC firm, early stage investing, growth capital, technology investment, startup funding",
   generator: "Al Falah Partners",
+  icons: {
+    icon: [
+      { url: "/al-falah-favicon.svg", type: "image/svg+xml" },
+      { url: "/al-falah-favicon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/al-falah-favicon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Al Falah Partners - Venture Capital Investment",
     description: "Leading venture capital firm investing in innovative startups and emerging technologies.",
