@@ -1,9 +1,11 @@
 "use client"
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { X, Globe, Menu } from "lucide-react"
 
 export default function Navbar({ forceScrolled = false }: { forceScrolled?: boolean } = {}) {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileMenuAnimating, setMobileMenuAnimating] = useState(false)
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
@@ -233,17 +235,25 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           {/* Navigation links - aligned to navbar width, left aligned */}
           <div className="flex flex-col h-full justify-center">
             <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-              <nav className="space-y-8 text-left">
-                {navItems.map(({ href, label }) => (
-                  <a
-                    key={href}
-                    href={href}
-                    onClick={handleMobileMenuToggle}
-                    className="block text-white text-4xl md:text-5xl font-normal hover:underline transition-all duration-200 font-inter text-left"
-                  >
-                    {label}
-                  </a>
-                ))}
+              <nav className="space-y-8">
+                {navItems.map(({ href, label }) => {
+                  const isActive = (href === "/" && pathname === "/") || 
+                                  (href !== "/" && pathname.startsWith(href))
+                  return (
+                    <a
+                      key={href}
+                      href={href}
+                      onClick={handleMobileMenuToggle}
+                      className={`block text-white text-4xl md:text-5xl font-normal transition-all duration-200 font-inter ${
+                        isActive 
+                          ? 'underline decoration-1 underline-offset-4' 
+                          : 'hover:underline decoration-1 underline-offset-4'
+                      }`}
+                    >
+                      {label}
+                    </a>
+                  )
+                })}
               </nav>
             </div>
           </div>
