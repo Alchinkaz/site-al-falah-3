@@ -46,12 +46,15 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const handleMobileMenuToggle = () => {
     if (!mobileMenuOpen) {
       setMobileMenuOpen(true)
-      setMobileMenuAnimating(true)
+      // Small delay to ensure the element is rendered before animation
+      setTimeout(() => {
+        setMobileMenuAnimating(true)
+      }, 10)
     } else {
       setMobileMenuAnimating(false)
       setTimeout(() => {
         setMobileMenuOpen(false)
-      }, 300)
+      }, 500)
     }
   }
 
@@ -63,8 +66,8 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
   return (
     <>
-      {/* Transparent header on hero (visible before scroll, or when mobile menu open) */}
-      {(mobileMenuOpen || (!forceScrolled && !isScrolled)) && (
+      {/* Transparent header on hero (visible before scroll, NOT when mobile menu open) */}
+      {(!mobileMenuOpen && (!forceScrolled && !isScrolled)) && (
       <header
           className={`fixed left-0 right-0 top-0 ${mobileMenuOpen ? "z-[70]" : "z-10"} transition-all duration-300 ease-in-out bg-transparent`}
         >
@@ -78,16 +81,6 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                 />
               </Link>
 
-              {/* Centered white text logo when mobile menu is open */}
-              <div
-                className={`${mobileMenuOpen ? "block" : "hidden"} pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
-              >
-                <img
-                  src="/al-falah-logo-white-text.svg"
-                  alt="Al Falah Partners"
-                  className="h-8 md:h-9 lg:h-10 xl:h-11 w-auto"
-                />
-              </div>
 
               <div className="ml-auto flex items-center space-x-3 md:space-x-4 flex-shrink-0">
                 <div className="relative hidden md:block">
@@ -237,31 +230,22 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
         <div className={`fixed inset-0 z-[60] bg-[#1e1a61] transition-all duration-500 ease-in-out transform ${
           mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
         }`}>
-          {/* Close button - top right */}
-          <div className="absolute top-6 right-6 z-10">
-            <button
-              onClick={handleMobileMenuToggle}
-              className="text-white text-lg font-medium hover:underline transition-all duration-200"
-              aria-label="Close menu"
-            >
-              CLOSE
-            </button>
-          </div>
-
-          {/* Navigation links - left side */}
-          <div className="flex flex-col h-full justify-center pl-8">
-            <nav className="space-y-8">
-              {navItems.map(({ href, label }) => (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={handleMobileMenuToggle}
-                  className="block text-white text-4xl md:text-5xl font-medium hover:underline transition-all duration-200 font-inter"
-                >
-                  {label}
-                </a>
-              ))}
-            </nav>
+          {/* Navigation links - aligned to navbar width */}
+          <div className="flex flex-col h-full justify-center">
+            <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+              <nav className="space-y-8">
+                {navItems.map(({ href, label }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    onClick={handleMobileMenuToggle}
+                    className="block text-white text-4xl md:text-5xl font-normal hover:underline transition-all duration-200 font-inter"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
       )}
