@@ -532,16 +532,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-16 text-center md:hidden">
-            <Link href="/portfolio">
-              <Button
-                variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white px-8"
-              >
-                View All
-              </Button>
-            </Link>
-          </div>
+          {/* Mobile "View All" button removed as requested */}
         </div>
       </section>
 
