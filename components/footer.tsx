@@ -22,11 +22,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom-right logo */}
+        {/* Bottom-right logo aligned to container edges */}
         <img
           src="/al-falah-logo-white-img.svg"
           alt="Al Falah Partners"
-          className="absolute right-2 bottom-3 md:right-4 md:bottom-4 h-10 w-auto object-contain"
+          className="absolute right-0 bottom-0 h-10 w-auto object-contain"
         />
       </div>
     </footer>
