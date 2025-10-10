@@ -117,16 +117,18 @@ export default function AboutPage() {
                   "Ms. Azhar Babayeva is Reporting Manager and joined the company in October 2013. Prior to joining the team, she gained a 5-year experience as an auditor at Ernst and Young Kazakhstan. She completed her bachelor's and master's degrees from Kazakhstan Institute of Management, Economics and Strategic Research (KIMEP) and is currently enrolled in the ACCA qualification program.",
               },
             ].map((m) => (
-              <div key={m.name} className="rounded-lg border border-gray-200 p-6 h-full flex flex-col md:flex-row gap-5">
-                <img
-                  src="/placeholder.svg?height=600&width=600"
-                  alt={m.name}
-                  className="w-full h-48 md:w-40 md:h-40 rounded-md object-cover bg-gray-200"
-                />
-                <div className="flex-1">
-                  <div className="text-xl font-semibold text-gray-900">{m.name}</div>
-                  <div className="text-gray-600 mb-2">{m.role}</div>
-                  <p className="text-gray-700 leading-relaxed text-sm md:text-base">{m.desc}</p>
+              <div key={m.name} className="h-full">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 aspect-square w-full">
+                  <img
+                    src="/placeholder.svg?height=800&width=800"
+                    alt={m.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight">{m.name}</h3>
+                  <p className="text-gray-600 text-base mb-2">{m.role}</p>
+                  <p className="text-gray-700 text-sm md:text-base leading-relaxed">{m.desc}</p>
                 </div>
               </div>
             ))}
