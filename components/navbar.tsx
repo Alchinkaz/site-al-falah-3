@@ -5,6 +5,7 @@ import { X, Globe, Menu } from "lucide-react"
 
 export default function Navbar({ forceScrolled = false }: { forceScrolled?: boolean } = {}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuAnimating, setMobileMenuAnimating] = useState(false)
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const [language, setLanguage] = useState<"kz" | "ru" | "en">("ru")
   const [isScrolled, setIsScrolled] = useState(false)
@@ -42,10 +43,22 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
     setLanguageDropdownOpen(false)
   }
 
+  const handleMobileMenuToggle = () => {
+    if (!mobileMenuOpen) {
+      setMobileMenuOpen(true)
+      setMobileMenuAnimating(true)
+    } else {
+      setMobileMenuAnimating(false)
+      setTimeout(() => {
+        setMobileMenuOpen(false)
+      }, 300)
+    }
+  }
+
   const navItems = [
-    { href: "#about", label: "About us" },
+    { href: "/", label: "Home" },
+    { href: "#about", label: "About Us" },
     { href: "/portfolio", label: "Portfolio" },
-    { href: "#contacts", label: "Contacts" },
   ]
 
   return (
@@ -117,7 +130,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                 </div>
 
                 <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  onClick={handleMobileMenuToggle}
                   className={`rounded-lg p-2 transition-colors bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white`}
                   aria-label="Menu"
                 >
@@ -204,7 +217,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
               </div>
 
               <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={handleMobileMenuToggle}
                 className={`rounded-lg p-2 transition-colors ${
                     shouldShowScrolled || forceScrolled
                     ? "bg-gray-100 hover:bg-gray-200 text-gray-700"
@@ -221,29 +234,33 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       )}
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-[#1e1a61]">
-          <div className="flex flex-col h-full pt-24">
-            <nav className="flex-1">
-              <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-                <ul className="space-y-0">
-                  {navItems.map(({ href, label }, index) => (
-                    <li key={href}>
-                      <a
-                        href={href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-4 text-lg font-medium text-white transition-colors hover:text-[#54C6CF] font-inter"
-                      >
-                        {label}
-                      </a>
-                      {index < navItems.length - 1 && <div className="h-px bg-white/20"></div>}
-                    </li>
-                  ))}
-                </ul>
+        <div className={`fixed inset-0 z-[60] bg-[#1e1a61] transition-all duration-500 ease-in-out transform ${
+          mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
+        }`}>
+          {/* Close button - top right */}
+          <div className="absolute top-6 right-6 z-10">
+            <button
+              onClick={handleMobileMenuToggle}
+              className="text-white text-lg font-medium hover:underline transition-all duration-200"
+              aria-label="Close menu"
+            >
+              CLOSE
+            </button>
+          </div>
 
-                <div className="hidden">
-                  {/* Language selector hidden on mobile menu as requested */}
-                </div>
-              </div>
+          {/* Navigation links - left side */}
+          <div className="flex flex-col h-full justify-center pl-8">
+            <nav className="space-y-8">
+              {navItems.map(({ href, label }) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={handleMobileMenuToggle}
+                  className="block text-white text-4xl md:text-5xl font-medium hover:underline transition-all duration-200 font-inter"
+                >
+                  {label}
+                </a>
+              ))}
             </nav>
           </div>
         </div>
