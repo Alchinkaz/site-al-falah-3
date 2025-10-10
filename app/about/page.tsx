@@ -48,7 +48,7 @@ export default function AboutPage() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4">Key terms</h3>
-                <ul className="space-y-2 text-gray-700">
+                <ul className="text-gray-700 divide-y divide-gray-200 border-t border-b border-gray-200">
                   {[
                     ["Size", "USD200m"],
                     ["GP commitment", "2%"],
@@ -58,7 +58,7 @@ export default function AboutPage() {
                     ["Management fee", "up to 2%"],
                     ["Carry", "20% with clawback"],
                   ].map(([k, v]) => (
-                    <li key={k} className="flex justify-between gap-4"><span className="text-gray-500">{k}:</span><span className="text-gray-900 font-medium">{v}</span></li>
+                    <li key={k} className="flex justify-between gap-4 py-3"><span className="text-gray-500">{k}:</span><span className="text-gray-900 font-medium">{v}</span></li>
                   ))}
                 </ul>
               </div>
@@ -90,58 +90,44 @@ export default function AboutPage() {
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-8">Our team</h3>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="space-y-8">
             {[
               {
                 name: "Mr. Nurlan Kussainov",
-                role: "Founder / Managing Partner",
-                bullets: [
-                  "Stanford MBA",
-                  "Board Member at AIX (Nasdaq subsidiary) and Beeline Kazakhstan",
-                  "Former Chairman of the BoD Alfa Bank Kazakhstan",
-                  "Former CEO of AIFC and Development Bank of Kazakhstan",
-                  "Former Deputy Governor of Kazakhstan Central Bank",
-                ],
+                role: "Managing Partner",
+                desc:
+                  "Mr. Nurlan Kussainov has over 20 years of extensive work experience as executive in financial and governmental organizations incl.: Astana International Financial Centre Authority, National Bank of Kazakhstan, Development Bank of Kazakhstan, Center of Marketing and Analytical Research under the Government of Kazakhstan, CNRG Capital, Ministry of Economic Affairs and Budget Planning, etc. Mr. Kussainov holds an MSM degree from the Stanford Graduate School of Business.",
               },
               {
                 name: "Mr. Diyar Medeubekov",
                 role: "Chief Investment Officer",
-                bullets: [
-                  "Vanderbilt University, MA",
-                  "Founder of fintech ventures in Uzbekistan and Kazakhstan",
-                  "Former CEO of Alsad.kz (agricultural holding)",
-                  "Founder of AI software company",
-                  "Former executive roles at IsDB and DBK",
-                ],
+                desc:
+                  "Mr. Medeubekov used to manage portfolio companies of the fund. He has extensive experience in mining, agriculture and finance. Prior to joining the fund Mr. Medeubekov served as Director of Project Finance at Development Bank of Kazakhstan. Mr. Medeubekov holds Vanderbilt University Master’s degree in Economics.",
               },
               {
                 name: "Mr. Altay Mamanbayev",
-                role: "Chief Operating Officer / Director",
-                bullets: [
-                  "FCCA, certified Auditor",
-                  "20+ years in finance, governance, taxation, audit, compliance",
-                  "Leadership roles at Al Falah Group, Panalpina World Transport",
-                ],
+                role: "Chief Operating Officer",
+                desc:
+                  "Mr. Mamanbayev manages the operations of the fund since November 2008. Previously, he was financial consultant for Eurasia Financial Management Consulting Ltd., an investment company. He held various managerial positions at Panalpina World Transport LLP in Kazakhstan, one of the world’s leading freight-forwarding international corporations. Mr. Mamanbayev is the ACCA member (the Association of Chartered Certified Accountants).",
               },
               {
                 name: "Ms. Azhar Babayeva",
-                role: "Reporting / Compliance Manager",
-                bullets: [
-                  "KIMEP, MSc",
-                  "15+ years in finance, audit, reporting, fund administration",
-                  "Former auditor at EY",
-                  "Enrolled in ACCA program",
-                ],
+                role: "Reporting Manager",
+                desc:
+                  "Ms. Azhar Babayeva is Reporting Manager and joined the company in October 2013. Prior to joining the team, she gained a 5-year experience as an auditor at Ernst and Young Kazakhstan. She completed her bachelor's and master's degrees from Kazakhstan Institute of Management, Economics and Strategic Research (KIMEP) and is currently enrolled in the ACCA qualification program.",
               },
             ].map((m) => (
-              <div key={m.name} className="rounded-lg border border-gray-200 p-6">
-                <div className="text-xl font-semibold text-gray-900">{m.name}</div>
-                <div className="text-gray-600 mb-3">{m.role}</div>
-                <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                  {m.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
+              <div key={m.name} className="flex items-start gap-4">
+                <img
+                  src="/placeholder.svg?height=200&width=200"
+                  alt={m.name}
+                  className="h-24 w-24 md:h-28 md:w-28 rounded-md object-cover bg-gray-200"
+                />
+                <div>
+                  <div className="text-xl font-semibold text-gray-900">{m.name}</div>
+                  <div className="text-gray-600 mb-2">{m.role}</div>
+                  <p className="text-gray-700 leading-relaxed text-sm md:text-base">{m.desc}</p>
+                </div>
               </div>
             ))}
           </div>
