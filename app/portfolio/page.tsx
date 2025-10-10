@@ -74,10 +74,10 @@ export default function PortfolioPage() {
                         </div>
                         <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                            {item.title}
-                          </Link>
+                          {item.title}
+                        </Link>
                         </h3>
-                        <p className="text-gray-500 text-sm mt-auto hidden md:block">{item.date}</p>
+                        <p className="text-gray-500 text-sm mt-1 md:mt-auto">{item.date}</p>
                       </div>
                     </div>
                   ))}
@@ -87,7 +87,7 @@ export default function PortfolioPage() {
               {/* Medium screens - 2 columns */}
               <div className="hidden md:block lg:hidden">
                 <div className="grid grid-cols-2 gap-6 mb-12">
-                  {projectsData.map((item) => (
+                {projectsData.map((item) => (
                     <div key={item.id} className="aspect-square">
                       <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
                         <Image
@@ -105,10 +105,10 @@ export default function PortfolioPage() {
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                            {item.title}
-                          </Link>
+                          {item.title}
+                        </Link>
                         </h3>
-                        <p className="text-gray-500 text-xs mt-auto hidden md:block">{item.date}</p>
+                        <p className="text-gray-500 text-xs mt-1 md:mt-auto">{item.date}</p>
                       </div>
                     </div>
                   ))}
@@ -118,7 +118,7 @@ export default function PortfolioPage() {
               {/* Mobile - 1 column */}
               <div className="md:hidden mb-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {projectsData.map((item) => (
+                {projectsData.map((item) => (
                     <div key={item.id} className="aspect-square">
                       <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
                         <Image
@@ -136,10 +136,10 @@ export default function PortfolioPage() {
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                            {item.title}
-                          </Link>
+                          {item.title}
+                        </Link>
                         </h3>
-                        <p className="text-gray-500 text-xs mt-auto hidden md:block">{item.date}</p>
+                        <p className="text-gray-500 text-xs mt-1 md:mt-auto">{item.date}</p>
                       </div>
                     </div>
                   ))}
