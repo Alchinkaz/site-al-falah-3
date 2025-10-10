@@ -11,6 +11,7 @@ import { useCounterAnimation } from "@/hooks/use-counter-animation"
 import AnimatedBackground from "@/components/animated-background"
 import Link from "next/link"
 import { getPublishedProjects, formatProjectDate } from "@/lib/portfolio-data"
+import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
 
 export default function Home() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -184,8 +185,8 @@ export default function Home() {
                   </div>
                   <div className="mt-4 flex flex-col h-40">
                     <div className="flex gap-2 mb-3">
-                      <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">{item.sector}</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">{item.investmentStage}</span>
+                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-3 py-1 rounded-full`}>{item.sector}</span>
+                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-3 py-1 rounded-full`}>{item.investmentStage}</span>
                     </div>
                     <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
@@ -212,8 +213,8 @@ export default function Home() {
                   </div>
                   <div className="mt-3 flex flex-col h-40">
                     <div className="flex gap-2 mb-2">
-                      <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">{item.sector}</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">{item.investmentStage}</span>
+                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
+                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
                     </div>
                     <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
@@ -240,8 +241,8 @@ export default function Home() {
                   </div>
                   <div className="mt-3 flex flex-col h-36">
                     <div className="flex gap-2 mb-2">
-                      <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">{item.sector}</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">{item.investmentStage}</span>
+                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
+                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
                     </div>
                     <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
