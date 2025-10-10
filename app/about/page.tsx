@@ -12,6 +12,19 @@ export default function AboutPage() {
       <Navbar forceScrolled={true} />
       <div className="h-16 sm:h-16 md:h-16 lg:h-20"></div>
 
+      {/* Full-width hero image block */}
+      <section className="bg-white">
+        <div className="w-full mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+          <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: "16/9" }}>
+            <img
+              src="/placeholder.svg"
+              alt="About cover"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Removed hero heading & subtitle per request */}
 
       {/* Company Intro */}
