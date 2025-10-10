@@ -90,7 +90,7 @@ export default function AboutPage() {
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-8">Our team</h3>
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 firstName: "Nurlan",
@@ -121,72 +121,19 @@ export default function AboutPage() {
                   "Ms. Azhar Babayeva is Reporting Manager and joined the company in October 2013. Prior to joining the team, she gained a 5-year experience as an auditor at Ernst and Young Kazakhstan. She completed her bachelor's and master's degrees from Kazakhstan Institute of Management, Economics and Strategic Research (KIMEP) and is currently enrolled in the ACCA qualification program.",
               },
             ].map((m) => (
-              <div key={`${m.firstName}-${m.lastName}`} className="">
-                {/* Desktop layout following homepage portfolio style */}
-                <div className="hidden lg:block">
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-2">
-                    <div className="lg:col-span-1">
-                      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                        <img
-                          src="/placeholder.svg"
-                          alt={`${m.firstName} ${m.lastName}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="mt-4 flex flex-col h-32">
-                        <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                          {m.firstName} {m.lastName}
-                        </h3>
-                        <p className="text-gray-500 text-sm mt-auto">{m.role}</p>
-                      </div>
-                    </div>
-                    {/* Empty spacers to maintain 3-col structure visually similar to homepage */}
-                    <div className="lg:col-span-1"></div>
-                    <div className="lg:col-span-1"></div>
-                  </div>
+              <div key={`${m.firstName}-${m.lastName}`} className="lg:col-span-1">
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                  <img
+                    src="/placeholder.svg"
+                    alt={`${m.firstName} ${m.lastName}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
-                {/* Tablet layout (2 columns) */}
-                <div className="hidden md:block lg:hidden">
-                  <div className="grid grid-cols-2 gap-6 mb-2">
-                    <div className="aspect-square">
-                      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                        <img
-                          src="/placeholder.svg"
-                          alt={`${m.firstName} ${m.lastName}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="mt-3 flex flex-col h-32">
-                        <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                          {m.firstName} {m.lastName}
-                        </h3>
-                        <p className="text-gray-500 text-xs mt-auto">{m.role}</p>
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
-
-                {/* Mobile layout (1 column) */}
-                <div className="md:hidden mb-6">
-                  <div className="grid grid-cols-1 gap-6">
-                    <div className="aspect-square">
-                      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                        <img
-                          src="/placeholder.svg"
-                          alt={`${m.firstName} ${m.lastName}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="mt-3 flex flex-col h-28">
-                        <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                          {m.firstName} {m.lastName}
-                        </h3>
-                        <p className="text-gray-500 text-xs mt-auto">{m.role}</p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="mt-4 flex flex-col h-32">
+                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl leading-tight line-clamp-2 overflow-hidden">
+                    {m.firstName} {m.lastName}
+                  </h3>
+                  <p className="text-gray-500 text-sm mt-1">{m.role}</p>
                 </div>
               </div>
             ))}
