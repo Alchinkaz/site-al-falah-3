@@ -26,7 +26,7 @@ export default function Footer() {
         <img
           src="/al-falah-logo-white-img.svg"
           alt="Al Falah Partners"
-          className="absolute h-10 w-auto object-contain right-2 sm:right-6 lg:right-8 xl:right-10 2xl:right-12 bottom-2 sm:bottom-4"
+          className="absolute h-10 w-auto object-contain right-2 sm:right-6 lg:right-8 xl:right-10 2xl:right-12 bottom-0"
         />
       </div>
     </footer>
