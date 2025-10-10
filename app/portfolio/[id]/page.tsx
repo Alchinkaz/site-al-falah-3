@@ -58,9 +58,9 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
     <div className="min-h-screen bg-white">
       <Navbar forceScrolled={true} />
 
-      <div className="h-20"></div>
+      <div className="h-14"></div>
 
-      <section className="py-16 bg-white pt-32">
+      <section className="py-12 bg-white pt-24">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{project.title}</h1>

@@ -33,7 +33,7 @@ export default function PortfolioPage() {
       <Navbar forceScrolled={true} />
 
       {/* Hero Section */}
-      <section className="relative bg-white py-16 mt-16 pt-36 pb-5">
+      <section className="relative bg-white py-12 mt-12 pt-28 pb-5">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Our Portfolio</h1>
