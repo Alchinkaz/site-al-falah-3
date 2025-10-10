@@ -94,7 +94,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                     <Globe className="w-5 h-5" />
                   </button>
 
-                  {languageDropdownOpen && (
+                  {languageDropdownOpen && !shouldShowScrolled && (
                     <div className="absolute top-12 right-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[80px] z-50">
                       <button
                         onClick={() => handleLanguageChange("kz")}
@@ -181,7 +181,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                   <Globe className="w-5 h-5" />
                 </button>
 
-                {languageDropdownOpen && (
+                {languageDropdownOpen && shouldShowScrolled && (
                   <div className="absolute top-12 right-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[80px] z-50">
                     <button
                       onClick={() => handleLanguageChange("kz")}
