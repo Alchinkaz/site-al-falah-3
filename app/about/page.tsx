@@ -90,7 +90,7 @@ export default function AboutPage() {
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-8">Our team</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {[
               {
                 name: "Mr. Nurlan Kussainov",
@@ -117,11 +117,11 @@ export default function AboutPage() {
                   "Ms. Azhar Babayeva is Reporting Manager and joined the company in October 2013. Prior to joining the team, she gained a 5-year experience as an auditor at Ernst and Young Kazakhstan. She completed her bachelor's and master's degrees from Kazakhstan Institute of Management, Economics and Strategic Research (KIMEP) and is currently enrolled in the ACCA qualification program.",
               },
             ].map((m) => (
-              <div key={m.name} className="rounded-lg border border-gray-200 p-6 h-full flex flex-col">
+              <div key={m.name} className="rounded-lg border border-gray-200 p-6 h-full flex flex-col md:flex-row gap-5">
                 <img
-                  src="/placeholder.svg?height=400&width=400"
+                  src="/placeholder.svg?height=600&width=600"
                   alt={m.name}
-                  className="w-24 h-24 md:w-28 md:h-28 rounded-md object-cover bg-gray-200 mb-4 self-start"
+                  className="w-full h-48 md:w-40 md:h-40 rounded-md object-cover bg-gray-200"
                 />
                 <div className="flex-1">
                   <div className="text-xl font-semibold text-gray-900">{m.name}</div>
