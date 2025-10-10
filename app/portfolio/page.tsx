@@ -18,7 +18,7 @@ export default function PortfolioPage() {
     const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     const formattedProjects = sorted.map((project) => ({
       id: project.id,
-      title: `${project.title} (${project.sector}, ${project.investmentStage})`,
+      title: project.title,
       description: project.description,
       sector: project.sector,
       investmentStage: project.investmentStage,
@@ -70,8 +70,8 @@ export default function PortfolioPage() {
                       </div>
                       <div className="mt-4 flex flex-col h-40">
                         <div className="flex gap-2 mb-3">
-                          <span className="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">News</span>
-                          <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
+                          <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">{item.sector}</span>
+                          <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">{item.investmentStage}</span>
                         </div>
                         <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
@@ -101,8 +101,8 @@ export default function PortfolioPage() {
                       </div>
                       <div className="mt-3 flex flex-col h-36">
                         <div className="flex gap-2 mb-2">
-                          <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
-                          <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+                          <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">{item.sector}</span>
+                          <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">{item.investmentStage}</span>
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
@@ -132,8 +132,8 @@ export default function PortfolioPage() {
                       </div>
                       <div className="mt-3 flex flex-col h-36">
                         <div className="flex gap-2 mb-2">
-                          <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
-                          <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+                          <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">{item.sector}</span>
+                          <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">{item.investmentStage}</span>
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">

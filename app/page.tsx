@@ -50,7 +50,7 @@ export default function Home() {
     const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     const formatted = sorted.slice(0, 6).map((p) => ({
       id: p.id,
-      title: `${p.title} (${p.sector}, ${p.investmentStage})`,
+      title: p.title,
       date: formatProjectDate(p.createdAt),
       image: p.image,
       sector: p.sector,
