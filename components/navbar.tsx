@@ -158,13 +158,15 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
               {/* Centered logo text shown only in white navbar state (when not transparent and not mobile menu open) */}
               <div
-                className={`${(shouldShowScrolled || forceScrolled) && !mobileMenuOpen ? "block" : "hidden"} pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
+                className={`${(shouldShowScrolled || forceScrolled) && !mobileMenuOpen ? "block" : "hidden"} absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
               >
-                <img
-                  src="/al-falah-logo-black-text.svg"
-                  alt="Al Falah Partners"
-                  className="h-8 md:h-9 lg:h-10 xl:h-11 w-auto"
-                />
+                <Link href="/" aria-label="Home">
+                  <img
+                    src="/al-falah-logo-black-text.svg"
+                    alt="Al Falah Partners"
+                    className="h-8 md:h-9 lg:h-10 xl:h-11 w-auto cursor-pointer"
+                  />
+                </Link>
               </div>
 
             <div className="ml-auto flex items-center space-x-3 md:space-x-4 flex-shrink-0">
