@@ -137,15 +137,15 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
         </header>
       )}
 
-      {/* White header that slides in on scroll */}
-      {!mobileMenuOpen && (
-        <header
-          className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out
-            ${shouldShowScrolled || forceScrolled ? "top-0 translate-y-0 bg-white border-b border-gray-200" :
-              "top-0 -translate-y-full bg-transparent"
-            }
-          }`}
-        >
+      {/* White header that slides in on scroll and after closing mobile menu */}
+      <header
+        className={`fixed left-0 right-0 top-0 z-50 transition-transform transition-opacity duration-500 ease-in-out
+          ${shouldShowScrolled || forceScrolled
+            ? (mobileMenuOpen ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100 bg-white border-b border-gray-200")
+            : "-translate-y-full opacity-0"
+          }
+        `}
+      >
           <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
             <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
               <Link href="/" className="flex items-center shrink-0">
@@ -228,7 +228,6 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           </div>
         </div>
       </header>
-      )}
 
       {mobileMenuOpen && (
         <div className={`fixed inset-0 z-[60] bg-[#1e1a61] transition-all duration-500 ease-in-out transform ${
