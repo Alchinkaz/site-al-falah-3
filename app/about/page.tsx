@@ -41,7 +41,7 @@ export default function AboutPage() {
       {/* Top hero image block within site max-width, with extra top spacing */}
       <section className="bg-white mt-8 sm:mt-10 lg:mt-12">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: "16/9" }}>
+          <div className="relative w-full rounded-2xl overflow-hidden mb-6" style={{ aspectRatio: "16/9" }}>
             <img
               src="/placeholder.svg"
               alt="About cover"
@@ -109,7 +109,6 @@ export default function AboutPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
                     { title: "Oil & Gas", desc: "Reservoirs, Wells, Equipment, Facilities, Marine & Subsea" },
-                    { title: "Mining", desc: "E&P, Processing & Refining, Sales & Distribution Services" },
                     { title: "Power", desc: "Generation, Transportation & distribution, Services" },
                     { title: "Food & Agro", desc: "Production, Food processing, Logistics" },
                     { title: "Industrial & High‑tech", desc: "Construction & materials, Industrial transportation, Electronic & electrical equipment" },
