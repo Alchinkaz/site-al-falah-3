@@ -15,9 +15,10 @@ export default function PortfolioPage() {
 
   useEffect(() => {
     const publishedProjects = getPublishedProjects()
-    const formattedProjects = publishedProjects.map((project) => ({
+    const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    const formattedProjects = sorted.map((project) => ({
       id: project.id,
-      title: project.title,
+      title: `${project.title} — ${project.sector} – ${project.investmentStage}, ${project.investmentYear}`,
       description: project.description,
       sector: project.sector,
       investmentStage: project.investmentStage,

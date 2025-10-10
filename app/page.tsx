@@ -10,6 +10,7 @@ import { getHomepageData, type HomepageData } from "@/lib/homepage-data"
 import { useCounterAnimation } from "@/hooks/use-counter-animation"
 import AnimatedBackground from "@/components/animated-background"
 import Link from "next/link"
+import { getPublishedProjects, formatProjectDate } from "@/lib/portfolio-data"
 
 export default function Home() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -17,6 +18,7 @@ export default function Home() {
   const [homepageData, setHomepageData] = useState<HomepageData | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isImageVisible, setIsImageVisible] = useState(true)
+  const [homeProjects, setHomeProjects] = useState<any[]>([])
 
   const stat1Counter = useCounterAnimation({
     end: homepageData ? Number.parseInt(homepageData.stat1Title?.replace(/[^\d]/g, "") || "0") : 0,
@@ -41,6 +43,20 @@ export default function Home() {
     return () => {
       window.removeEventListener("homepage-data-updated", handleDataUpdate as EventListener)
     }
+  }, [])
+
+  useEffect(() => {
+    const publishedProjects = getPublishedProjects()
+    const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    const formatted = sorted.slice(0, 6).map((p) => ({
+      id: p.id,
+      title: `${p.title} — ${p.sector} – ${p.investmentStage}, ${p.investmentYear}`,
+      date: formatProjectDate(p.createdAt),
+      image: p.image,
+      sector: p.sector,
+      investmentStage: p.investmentStage,
+    }))
+    setHomeProjects(formatted)
   }, [])
 
   const reviews = homepageData?.reviews || []
@@ -157,378 +173,85 @@ export default function Home() {
 
           <div className="hidden lg:block">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-              <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt="FinTech Startup"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-40">
-                  <div className="flex gap-2 mb-3">
-                      <span className="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">News</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
+              {homeProjects.map((item) => (
+                <div key={item.id} className="lg:col-span-1">
+                  <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                    <img
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/fintech-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Global fund backs next‑gen payments platform
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-auto">04.08.2025</p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Healthcare Platform"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-40">
-                  <div className="flex gap-2 mb-3">
-                      <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Healthcare</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
+                  <div className="mt-4 flex flex-col h-40">
+                    <div className="flex gap-2 mb-3">
+                      <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">{item.sector}</span>
+                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">{item.investmentStage}</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                      <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                        {item.title}
+                      </Link>
+                    </h3>
+                    <p className="text-gray-500 text-sm mt-auto">{item.date}</p>
                   </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Telemedicine platform secures new funding
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-auto">02.08.2025</p>
                 </div>
-              </div>
-
-              <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt="AI Analytics"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-40">
-                  <div className="flex gap-2 mb-3">
-                      <span className="bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">AI</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      AI‑driven analytics powering smarter decisions
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-auto">01.08.2025</p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt="E-commerce Solution"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-40">
-                  <div className="flex gap-2 mb-3">
-                      <span className="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">E-commerce</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Modern e‑commerce solutions for digital growth
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-auto">30.07.2025</p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt="SaaS Platform"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-40">
-                  <div className="flex gap-2 mb-3">
-                      <span className="bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full">SaaS</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      SaaS platform for streamlined operations
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-auto">28.07.2025</p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-1">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Tech Startup"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col h-40">
-                  <div className="flex gap-2 mb-3">
-                      <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">Technology</span>
-                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-3xl md:text-2xl lg:text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/logistics-tech-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Next‑generation technology startup innovating at scale
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-auto">26.07.2025</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="hidden md:block lg:hidden">
             <div className="grid grid-cols-2 gap-6 mb-12">
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="FinTech Startup"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-40">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+              {homeProjects.slice(0, 6).map((item) => (
+                <div key={item.id} className="aspect-square">
+                  <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                    <img
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/fintech-platform" className="hover:text-blue-600 transition-colors">
-                      Global fund backs next‑gen payments platform
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">04.08.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Healthcare Platform"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-40">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">Healthcare</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+                  <div className="mt-3 flex flex-col h-40">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">{item.sector}</span>
+                      <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">{item.investmentStage}</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                      <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
+                        {item.title}
+                      </Link>
+                    </h3>
+                    <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
                   </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors">
-                      Telemedicine platform secures new funding
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">02.08.2025</p>
                 </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="AI Analytics"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-40">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-orange-100 text-orange-800 text-sm px-2 py-1 rounded-full">AI</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors">
-                      AI‑driven analytics powering smarter decisions
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">01.08.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="E-commerce Solution"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-40">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full">E-commerce</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors">
-                      Modern e‑commerce solutions for digital growth
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">30.07.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="SaaS Platform"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded-full">SaaS</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors">
-                      SaaS platform for streamlined operations
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">28.07.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Tech Startup"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">Technology</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/logistics-tech-platform" className="hover:text-blue-600 transition-colors">
-                      Next‑generation technology startup innovating at scale
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">26.07.2025</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="md:hidden mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="FinTech Startup"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full">News</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+              {homeProjects.slice(0, 4).map((item) => (
+                <div key={item.id} className="aspect-square">
+                  <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                    <img
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/fintech-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Global fund backs next‑gen payments platform
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">04.08.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Healthcare Platform"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">Healthcare</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
+                  <div className="mt-3 flex flex-col h-36">
+                    <div className="flex gap-2 mb-2">
+                      <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">{item.sector}</span>
+                      <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">{item.investmentStage}</span>
+                    </div>
+                    <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
+                      <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
+                        {item.title}
+                      </Link>
+                    </h3>
+                    <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
                   </div>
-                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/healthtech-telemedicine" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Telemedicine platform secures new funding
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">02.08.2025</p>
                 </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="AI Analytics"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-orange-100 text-orange-800 text-sm px-2 py-1 rounded-full">AI</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/edtech-learning-platform" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      AI‑driven analytics powering smarter decisions
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">01.08.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="E-commerce Solution"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full">E-commerce</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/agritech-supply-chain" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      Modern e‑commerce solutions for digital growth
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">30.07.2025</p>
-                </div>
-              </div>
-              <div className="aspect-square">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                  <img
-                    src="/placeholder.svg"
-                    alt="SaaS Platform"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-3 flex flex-col h-36">
-                  <div className="flex gap-2 mb-2">
-                    <span className="bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded-full">SaaS</span>
-                    <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">Investment</span>
-                  </div>
-                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
-                    <Link href="/portfolio/cleantech-renewable-energy" className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                      SaaS platform for streamlined operations
-                    </Link>
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">28.07.2025</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 

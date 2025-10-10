@@ -6,7 +6,7 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
-import { getProjectWithDetails } from "@/lib/portfolio-data"
+import { getProjectWithDetails, formatProjectDate } from "@/lib/portfolio-data"
 import { useEffect, useState } from "react"
 
 export default function PortfolioDetailPage({ params }: { params: { id: string } }) {
@@ -87,6 +87,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                 height={600}
                 className="w-full h-auto rounded-lg aspect-video object-cover"
               />
+              <div className="mt-3 text-gray-500 text-sm">{formatProjectDate(project.createdAt)}</div>
             </div>
           )}
 
