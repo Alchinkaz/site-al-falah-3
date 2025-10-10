@@ -93,45 +93,52 @@ export default function AboutPage() {
           <div className="space-y-8">
             {[
               {
-                name: "Mr. Nurlan Kussainov",
+                firstName: "Nurlan",
+                lastName: "Kussainov",
                 role: "Managing Partner",
                 desc:
                   "Mr. Nurlan Kussainov has over 20 years of extensive work experience as executive in financial and governmental organizations incl.: Astana International Financial Centre Authority, National Bank of Kazakhstan, Development Bank of Kazakhstan, Center of Marketing and Analytical Research under the Government of Kazakhstan, CNRG Capital, Ministry of Economic Affairs and Budget Planning, etc. Mr. Kussainov holds an MSM degree from the Stanford Graduate School of Business.",
               },
               {
-                name: "Mr. Diyar Medeubekov",
+                firstName: "Diyar",
+                lastName: "Medeubekov",
                 role: "Chief Investment Officer",
                 desc:
                   "Mr. Medeubekov used to manage portfolio companies of the fund. He has extensive experience in mining, agriculture and finance. Prior to joining the fund Mr. Medeubekov served as Director of Project Finance at Development Bank of Kazakhstan. Mr. Medeubekov holds Vanderbilt University Master’s degree in Economics.",
               },
               {
-                name: "Mr. Altay Mamanbayev",
+                firstName: "Altay",
+                lastName: "Mamanbayev",
                 role: "Chief Operating Officer",
                 desc:
                   "Mr. Mamanbayev manages the operations of the fund since November 2008. Previously, he was financial consultant for Eurasia Financial Management Consulting Ltd., an investment company. He held various managerial positions at Panalpina World Transport LLP in Kazakhstan, one of the world’s leading freight-forwarding international corporations. Mr. Mamanbayev is the ACCA member (the Association of Chartered Certified Accountants).",
               },
               {
-                name: "Ms. Azhar Babayeva",
+                firstName: "Azhar",
+                lastName: "Babayeva",
                 role: "Reporting Manager",
                 desc:
                   "Ms. Azhar Babayeva is Reporting Manager and joined the company in October 2013. Prior to joining the team, she gained a 5-year experience as an auditor at Ernst and Young Kazakhstan. She completed her bachelor's and master's degrees from Kazakhstan Institute of Management, Economics and Strategic Research (KIMEP) and is currently enrolled in the ACCA qualification program.",
               },
             ].map((m) => (
-              <div key={m.name} className="rounded-xl border border-gray-200 overflow-hidden">
+              <div key={`${m.firstName}-${m.lastName}`} className="rounded-xl border border-gray-200 overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 divide-y divide-gray-200 lg:divide-y-0 lg:divide-x">
-                  {/* Image card - first on mobile, second on desktop */}
-                  <div className="order-1 lg:order-2">
+                  {/* Image card - first on mobile, left on desktop */}
+                  <div className="order-1 lg:order-1">
                     <div className="aspect-square bg-gray-100">
                       <img
                         src="/placeholder.svg?height=1200&width=1200"
-                        alt={m.name}
+                        alt={`${m.firstName} ${m.lastName}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
-                  {/* Text card - second on mobile, first on desktop */}
-                  <div className="order-2 lg:order-1 p-6">
-                    <h3 className="text-black font-semibold text-2xl mb-1 leading-tight">{m.name}</h3>
+                  {/* Text card - second on mobile, right on desktop */}
+                  <div className="order-2 lg:order-2 p-6">
+                    <h3 className="text-black font-semibold text-3xl md:text-4xl leading-tight mb-2">
+                      <span className="block">{m.firstName}</span>
+                      <span className="block">{m.lastName}</span>
+                    </h3>
                     <p className="text-gray-600 text-base mb-3">{m.role}</p>
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed">{m.desc}</p>
                   </div>
