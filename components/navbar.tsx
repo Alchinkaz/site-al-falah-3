@@ -85,7 +85,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
 
               <div className="ml-auto flex items-center space-x-3 md:space-x-4 flex-shrink-0">
-                <div className="relative block">
+                <div className="relative hidden md:block">
                   <button
                     onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
                     className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white`}
@@ -168,7 +168,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
               </div>
 
             <div className="ml-auto flex items-center space-x-3 md:space-x-4 flex-shrink-0">
-                <div className="relative block">
+                <div className="relative hidden md:block">
                 <button
                   onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
                   className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
