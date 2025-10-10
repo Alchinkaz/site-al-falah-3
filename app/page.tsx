@@ -311,7 +311,7 @@ export default function Home() {
                       Global fund backs next‑gen payments platform
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">04.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">04.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -332,7 +332,7 @@ export default function Home() {
                       Telemedicine platform secures new funding
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">02.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">02.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -353,7 +353,7 @@ export default function Home() {
                       AI‑driven analytics powering smarter decisions
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">01.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">01.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -374,7 +374,7 @@ export default function Home() {
                       Modern e‑commerce solutions for digital growth
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">30.07.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">30.07.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -395,7 +395,7 @@ export default function Home() {
                       SaaS platform for streamlined operations
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">28.07.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">28.07.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -416,7 +416,7 @@ export default function Home() {
                       Next‑generation technology startup innovating at scale
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">26.07.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">26.07.2025</p>
                 </div>
               </div>
             </div>
@@ -442,7 +442,7 @@ export default function Home() {
                       Global fund backs next‑gen payments platform
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">04.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">04.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -463,7 +463,7 @@ export default function Home() {
                       Telemedicine platform secures new funding
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">02.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">02.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -484,7 +484,7 @@ export default function Home() {
                       AI‑driven analytics powering smarter decisions
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">01.08.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">01.08.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -505,7 +505,7 @@ export default function Home() {
                       Modern e‑commerce solutions for digital growth
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">30.07.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">30.07.2025</p>
                 </div>
               </div>
               <div className="aspect-square">
@@ -526,7 +526,7 @@ export default function Home() {
                       SaaS platform for streamlined operations
                     </Link>
                   </h3>
-                  <p className="text-gray-500 text-xs mt-1 md:mt-auto">28.07.2025</p>
+                  <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">28.07.2025</p>
                 </div>
               </div>
             </div>

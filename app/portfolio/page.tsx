@@ -77,7 +77,7 @@ export default function PortfolioPage() {
                           {item.title}
                         </Link>
                         </h3>
-                        <p className="text-gray-500 text-sm mt-1 md:mt-auto">{item.date}</p>
+                        <p className="text-gray-500 text-sm mt-0.5 md:mt-auto">{item.date}</p>
                       </div>
                     </div>
                   ))}
@@ -108,7 +108,7 @@ export default function PortfolioPage() {
                           {item.title}
                         </Link>
                         </h3>
-                        <p className="text-gray-500 text-xs mt-1 md:mt-auto">{item.date}</p>
+                        <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
                       </div>
                     </div>
                   ))}
@@ -139,7 +139,7 @@ export default function PortfolioPage() {
                           {item.title}
                         </Link>
                         </h3>
-                        <p className="text-gray-500 text-xs mt-1 md:mt-auto">{item.date}</p>
+                        <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
                       </div>
                     </div>
                   ))}
