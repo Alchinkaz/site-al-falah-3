@@ -28,6 +28,12 @@ export default function AboutPage() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-12">
             <div className="space-y-5 text-gray-700 text-lg leading-relaxed">
+              <div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">Falah Growth Fund</h3>
+                <div className="rounded-lg border border-gray-200 p-6 bg-gray-50">
+                  <div className="text-3xl font-semibold text-gray-900">450+ deals reviewed</div>
+                </div>
+              </div>
               <p>
                 We make investments in companies across different industries such as energy,
                 mining, agriculture, food production, high‑tech, healthcare and others.
@@ -57,10 +63,20 @@ export default function AboutPage() {
 
             <div className="space-y-6">
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">Falah Growth Fund</h3>
-                <div className="rounded-lg border border-gray-200 p-6 bg-gray-50">
-                  <div className="text-3xl font-semibold text-gray-900">450+ deals reviewed</div>
-                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">Key terms</h3>
+                <ul className="space-y-2 text-gray-700">
+                  {[
+                    ["Size", "USD200m"],
+                    ["GP commitment", "2%"],
+                    ["Investment period", "3y+2"],
+                    ["Term", "10y+3"],
+                    ["Hurdle rate", "8%"],
+                    ["Management fee", "up to 2%"],
+                    ["Carry", "20% with clawback"],
+                  ].map(([k, v]) => (
+                    <li key={k} className="flex justify-between gap-4"><span className="text-gray-500">{k}:</span><span className="text-gray-900 font-medium">{v}</span></li>
+                  ))}
+                </ul>
               </div>
 
               <div>
@@ -85,52 +101,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* How we work */}
-      <section className="py-12 bg-white">
-        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Key terms</h3>
-              <ul className="space-y-2 text-gray-700">
-                {[
-                  ["Size", "USD200m"],
-                  ["GP commitment", "2%"],
-                  ["Investment period", "3y+2"],
-                  ["Term", "10y+3"],
-                  ["Hurdle rate", "8%"],
-                  ["Management fee", "up to 2%"],
-                  ["Carry", "20% with clawback"],
-                ].map(([k, v]) => (
-                  <li key={k} className="flex justify-between gap-4"><span className="text-gray-500">{k}:</span><span className="text-gray-900 font-medium">{v}</span></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Investment strategy</h3>
-              <div className="space-y-3 text-gray-700">
-                <div><span className="font-semibold">Pipeline:</span> Strong and solid</div>
-                <div>
-                  <div className="font-semibold mb-1">Situations</div>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {['Growth','Consolidations','Buyout','Distressed & Restructuring','Brownfields (5y payback)'].map(i => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <div className="font-semibold mb-1">Sectors</div>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {['Oil & Gas, Metals & Mining','Power & Utilities','High‑tech & Telecom','Agriculture & Food processing','Healthcare','Logistics'].map(i => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div><span className="font-semibold">Investment ticket:</span> USD5‑40m</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Team */}
       <section className="py-12 bg-white">
