@@ -62,7 +62,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "#about", label: "About Us" },
+    { href: "/about", label: "About Us" },
     { href: "/portfolio", label: "Portfolio" },
   ]
 
@@ -242,7 +242,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                   return (
                     <a
                       key={href}
-                      href={href}
+                        href={href}
                       onClick={handleMobileMenuToggle}
                       className={`block text-white text-4xl md:text-5xl font-normal transition-all duration-200 font-inter ${
                         isActive 
@@ -255,7 +255,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                   )
                 })}
               </nav>
-            </div>
+              </div>
           </div>
         </div>
       )}
