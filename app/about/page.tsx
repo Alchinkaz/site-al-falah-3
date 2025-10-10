@@ -12,9 +12,9 @@ export default function AboutPage() {
       <Navbar forceScrolled={true} />
       <div className="h-16 sm:h-16 md:h-16 lg:h-20"></div>
 
-      {/* Full-width hero image block */}
-      <section className="bg-white">
-        <div className="w-full mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+      {/* Top hero image block within site max-width, with extra top spacing */}
+      <section className="bg-white mt-4 sm:mt-6">
+        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: "16/9" }}>
             <img
               src="/placeholder.svg"
