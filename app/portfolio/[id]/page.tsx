@@ -65,12 +65,8 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{project.title}</h1>
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-sm font-semibold px-3 py-1 bg-blue-100 text-blue-800 rounded">
-                {project.sector}
-              </span>
-              <span className="text-sm font-semibold px-3 py-1 bg-green-100 text-green-800 rounded">
-                {project.investmentStage}
-              </span>
+              <span className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">{project.sector}</span>
+              <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">{project.investmentStage}</span>
             </div>
             <div className="flex items-center text-sm text-gray-600">
               <TrendingUp className="w-4 h-4 mr-2" />
