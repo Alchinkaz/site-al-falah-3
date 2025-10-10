@@ -235,7 +235,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           {/* Navigation links - aligned to navbar width, left aligned */}
           <div className="flex flex-col h-full justify-center">
             <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-              <nav className="space-y-8">
+              <nav className="space-y-8 w-full">
                 {navItems.map(({ href, label }) => {
                   const isActive = (href === "/" && pathname === "/") || 
                                   (href !== "/" && pathname.startsWith(href))
@@ -244,7 +244,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
                       key={href}
                       href={href}
                       onClick={handleMobileMenuToggle}
-                      className={`block text-white text-4xl md:text-5xl font-normal transition-all duration-200 font-inter ${
+                      className={`block text-white text-4xl md:text-5xl font-normal transition-all duration-200 font-inter w-full text-left ${
                         isActive 
                           ? 'underline decoration-1 underline-offset-4' 
                           : 'hover:underline decoration-1 underline-offset-4'
