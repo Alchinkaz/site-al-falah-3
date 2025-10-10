@@ -3,6 +3,8 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function AboutPage() {
   return (
@@ -89,7 +91,19 @@ export default function AboutPage() {
       {/* Team */}
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <h3 className="text-3xl font-bold text-gray-900 mb-8">Our team</h3>
+          <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
+            <div className="text-left">
+              <h3 className="font-bold text-gray-900" style={{ fontSize: "48px", lineHeight: 1.1 }}>Meet the team</h3>
+            </div>
+            <Link href="/#cta">
+              <Button
+                variant="outline"
+                className="hidden md:block border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white px-8 mt-6"
+              >
+                Get in touch
+              </Button>
+            </Link>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {[
               {
