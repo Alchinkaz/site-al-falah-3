@@ -90,7 +90,7 @@ export default function AboutPage() {
       <section className="py-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-8">Our team</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="space-y-8">
             {[
               {
                 name: "Mr. Nurlan Kussainov",
@@ -117,18 +117,24 @@ export default function AboutPage() {
                   "Ms. Azhar Babayeva is Reporting Manager and joined the company in October 2013. Prior to joining the team, she gained a 5-year experience as an auditor at Ernst and Young Kazakhstan. She completed her bachelor's and master's degrees from Kazakhstan Institute of Management, Economics and Strategic Research (KIMEP) and is currently enrolled in the ACCA qualification program.",
               },
             ].map((m) => (
-              <div key={m.name} className="h-full">
-                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 aspect-square w-full">
-                  <img
-                    src="/placeholder.svg?height=800&width=800"
-                    alt={m.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-black font-semibold text-2xl mb-1 leading-tight">{m.name}</h3>
-                  <p className="text-gray-600 text-base mb-2">{m.role}</p>
-                  <p className="text-gray-700 text-sm md:text-base leading-relaxed">{m.desc}</p>
+              <div key={m.name} className="rounded-xl border border-gray-200 overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 divide-y divide-gray-200 lg:divide-y-0 lg:divide-x">
+                  {/* Image card - first on mobile, second on desktop */}
+                  <div className="order-1 lg:order-2">
+                    <div className="aspect-square bg-gray-100">
+                      <img
+                        src="/placeholder.svg?height=1200&width=1200"
+                        alt={m.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  {/* Text card - second on mobile, first on desktop */}
+                  <div className="order-2 lg:order-1 p-6">
+                    <h3 className="text-black font-semibold text-2xl mb-1 leading-tight">{m.name}</h3>
+                    <p className="text-gray-600 text-base mb-3">{m.role}</p>
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed">{m.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
