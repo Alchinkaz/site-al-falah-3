@@ -74,7 +74,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           className={`fixed left-0 right-0 top-0 ${mobileMenuOpen ? "z-[70]" : "z-10"} transition-all duration-300 ease-in-out bg-transparent`}
         >
           <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-            <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
+            <div className={`relative w-full flex items-center justify-between py-3 md:py-4 px-0 ${mobileMenuOpen ? 'transition-transform duration-500 ease-in-out ' + (mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full') : ''}`}>
               <Link href="/" className="flex items-center shrink-0">
                 <img
                   src="/al-falah-logo-white-img.svg"
