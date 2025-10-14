@@ -28,7 +28,16 @@ export default function Footer() {
           {/* Copyright - centered on desktop, left on mobile */}
           <div className="text-white/80 text-sm text-left md:absolute md:left-1/2 md:-translate-x-1/2">
             <p>© 2025 Al Falah Capital Partners</p>
-            <p>{i18n.footerDevelopedBy[lang]}</p>
+            <p>
+              <a
+                href="https://wa.me/77710798939"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                {i18n.footerDevelopedBy[lang]}
+              </a>
+            </p>
           </div>
         </div>
 

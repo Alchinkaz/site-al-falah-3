@@ -75,9 +75,9 @@ export const i18n = {
   },
   footerNameAltay: { en: "Altay Mamanbayev", ru: "Алтай Маманбаев", kz: "Алтай Маманбаев" },
   footerRoleAltay: {
-    en: "Director & Chief Operating Officer",
-    ru: "Директор и операционный директор (COO)",
-    kz: "Директор және операциялық директор (COO)",
+    en: "Chief Operating Officer",
+    ru: "Исполнительный Директор",
+    kz: "Атқарушы Директор",
   },
   footerDevelopedBy: {
     en: "Developed by Web Alchin",
