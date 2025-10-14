@@ -12,7 +12,7 @@ import AnimatedBackground from "@/components/animated-background"
 import Link from "next/link"
 import { getPublishedProjects, formatProjectDate } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
-import { i18n, readLang } from "@/lib/i18n"
+import { i18n, readLang, portfolioI18n, projectTexts } from "@/lib/i18n"
 
 export default function Home() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -172,10 +172,8 @@ export default function Home() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-center md:text-left">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{i18n.portfolioTitle[lang]}</h2>
-              <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                {i18n.portfolioSubtitle[lang]}
-              </p>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{portfolioI18n.listTitle[lang]}</h2>
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl">{portfolioI18n.listSubtitle[lang]}</p>
             </div>
             <Link href="/portfolio">
               <Button
@@ -200,15 +198,15 @@ export default function Home() {
                 </div>
                   <div className="mt-4 flex flex-col h-40">
                     <div className="flex gap-2 mb-3">
-                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-3 py-1 rounded-full`}>{item.sector}</span>
-                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-3 py-1 rounded-full`}>{item.investmentStage}</span>
+                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.sectorMap[item.sector]?.[lang] || item.sector}</span>
+                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.stageMap[item.investmentStage]?.[lang] || item.investmentStage}</span>
               </div>
                     <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                        {item.title}
+                        {projectTexts[item.id]?.title[lang] || item.title}
                       </Link>
                     </h3>
-                    <p className="text-gray-500 text-sm mt-auto">{item.date}</p>
+                    <p className="text-gray-500 text-sm mt-auto">{new Date(item.date).toLocaleDateString(lang === "ru" ? "ru-RU" : lang === "kz" ? "kk-KZ" : "en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
               </div>
                 </div>
               ))}

@@ -6,19 +6,27 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
-import { getProjectWithDetails, formatProjectDate } from "@/lib/portfolio-data"
+import { getProjectWithDetails } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
 import { useEffect, useState } from "react"
+import { readLang, portfolioI18n, projectTexts } from "@/lib/i18n"
 
 export default function PortfolioDetailPage({ params }: { params: { id: string } }) {
   const [project, setProject] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [lang, setLang] = useState(readLang())
 
   useEffect(() => {
     const projectData = getProjectWithDetails(params.id)
     setProject(projectData)
     setLoading(false)
   }, [params.id])
+
+  useEffect(() => {
+    const handler = (e: any) => setLang(e.detail?.lang || readLang())
+    window.addEventListener("language-changed", handler)
+    return () => window.removeEventListener("language-changed", handler)
+  }, [])
 
   if (loading) {
     return (
@@ -64,14 +72,14 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
       <section className="py-12 bg-white pt-24">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{project.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{projectTexts[project.id]?.title[lang] || project.title}</h1>
             <div className="flex items-center gap-2 mb-4">
-              <span className={`${getSectorBadgeClasses(project.sector)} text-sm px-3 py-1 rounded-full`}>{project.sector}</span>
-              <span className={`${getStageBadgeClasses(project.investmentStage)} text-sm px-3 py-1 rounded-full`}>{project.investmentStage}</span>
+              <span className={`${getSectorBadgeClasses(project.sector)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.sectorMap[project.sector]?.[lang] || project.sector}</span>
+              <span className={`${getStageBadgeClasses(project.investmentStage)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.stageMap[project.investmentStage]?.[lang] || project.investmentStage}</span>
             </div>
             <div className="flex items-center text-sm text-gray-600">
               <TrendingUp className="w-4 h-4 mr-2" />
-              Invested in {project.investmentYear}
+              {lang === "ru" ? "Инвестировано в" : lang === "kz" ? "Инвестиция жылы" : "Invested in"} {project.investmentYear}
             </div>
           </div>
 
@@ -97,7 +105,11 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                     </div>
                   )}
                   {section.text && (
-                    <div className="text-gray-700 leading-relaxed text-lg whitespace-pre-line mb-8">{section.text}</div>
+                    <div className="text-gray-700 leading-relaxed text-lg whitespace-pre-line mb-8">
+                      {(projectTexts[project.id]?.content?.[lang] || [section.text]).map((p, i) => (
+                        <p key={i} className="mb-4 last:mb-0">{p}</p>
+                      ))}
+                    </div>
                   )}
                 </div>
               ))}
@@ -108,7 +120,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
               href="/portfolio"
               className="inline-flex items-center text-[#1e1a61] hover:text-[#16124a] font-semibold transition-colors"
             >
-              ← Back to Portfolio
+              ← {lang === "ru" ? "Назад к портфолио" : lang === "kz" ? "Портфолиоға оралу" : "Back to Portfolio"}
             </Link>
           </div>
         </div>

@@ -236,6 +236,89 @@ export const teamNames: Record<string, { en: string; ru: string; kz: string }> =
   "azhar-babayeva": { en: "Azhar Babayeva", ru: "Ажар Бабаева", kz: "Ажар Бабаева" },
 }
 
+// Portfolio pages i18n
+export const portfolioI18n = {
+  listTitle: { en: "Portfolio", ru: "Портфолио", kz: "Портфолио" },
+  listSubtitle: {
+    en: "Successful investments that helped our portfolio companies scale and grow",
+    ru: "Успешные инвестиции, которые помогли нашим компаниям расти и масштабироваться",
+    kz: "Портфельдік компаниялардың өсуіне көмектескен табысты инвестициялар",
+  },
+  sectorMap: {
+    Agriculture: { en: "Agriculture", ru: "Сельское хозяйство", kz: "Агроөнеркәсіп" },
+    Energy: { en: "Energy", ru: "Энергетика", kz: "Энергетика" },
+    Mining: { en: "Mining", ru: "Добыча", kz: "Тау‑кен" },
+    "Venture capital": { en: "Venture capital", ru: "Венчурный капитал", kz: "Венчурлік капитал" },
+  } as Record<string, { en: string; ru: string; kz: string }>,
+  stageMap: {
+    Turnaround: { en: "Turnaround", ru: "Turnaround", kz: "Turnaround" },
+    Growth: { en: "Growth", ru: "Рост", kz: "Өсу" },
+    LBO: { en: "LBO", ru: "LBO", kz: "LBO" },
+    Greenfield: { en: "Greenfield", ru: "Greenfield", kz: "Greenfield" },
+    Funds: { en: "Funds", ru: "Фонды", kz: "Қорлар" },
+  } as Record<string, { en: string; ru: string; kz: string }>,
+}
+
+export const projectTexts: Record<string, {
+  title: { en: string; ru: string; kz: string }
+  content?: { en: string[]; ru: string[]; kz: string[] }
+}> = {
+  "alsad-kazakhstan-llp": {
+    title: { en: "Alsad Kazakhstan LLP", ru: "Alsad Kazakhstan LLP", kz: "Alsad Kazakhstan LLP" },
+    content: {
+      en: ["Not operating and pre-bankrupt farm has been turned into the market leader in egg production reaching full capacity of 160 millions high quality eggs per year with a 20% market niche in Almaty region."],
+      ru: ["Не работающая предбанкротная птицефабрика была преобразована в лидера рынка: мощность достигла 160 млн качественных яиц в год и 20% доли в Алматинской области."],
+      kz: ["Жұмысы тоқтаған құс фабрикасы нарық көшбасшысына айналды: жылына 160 млн сапалы жұмыртқа және Алматы облысында 20% нарық үлесі."],
+    },
+  },
+  "karaganda-energocenter-llp": {
+    title: { en: "Karaganda Energocenter LLP", ru: "Karaganda Energocenter LLP", kz: "Karaganda Energocenter LLP" },
+    content: {
+      en: ["Investment supported the construction of a new 120MW power unit to cover regional deficit; total installed capacity reached 712MW by 2015."],
+      ru: ["Инвестиции направлены на строительство нового энергоблока мощностью 120 МВт для покрытия регионального дефицита; установленная мощность достигла 712 МВт к 2015 году."],
+      kz: ["Инвестициялар өңірлік тапшылықты жабу үшін 120 МВт жаңа энергия блогын салуға бағытталды; 2015 жылға қарай орнатылған қуат 712 МВт болды."],
+    },
+  },
+  "karaganda-kus-llp": {
+    title: { en: "Karaganda Kus LLP", ru: "Karaganda Kus LLP", kz: "Karaganda Kus LLP" },
+    content: {
+      en: ["Expanded Alsad expertise to Karaganda region with external funding; combined business became the national leader with 300 million eggs capacity."],
+      ru: ["Экспертиза Alsad расширена в Карагандинский регион при поддержке внешнего финансирования; объединённый бизнес стал лидером Казахстана с мощностью 300 млн яиц."],
+      kz: ["Сыртқы қаржыландырумен Қарағанды өңіріне Alsad тәжірибесі кеңейтілді; біріктірілген бизнес жылына 300 млн жұмыртқамен ел көшбасшысына айналды."],
+    },
+  },
+  "ulmus-besshoky-jsc": {
+    title: { en: "Ulmus Besshoky JSC", ru: "Ulmus Besshoky JSC", kz: "Ulmus Besshoky JSC" },
+    content: {
+      en: ["Early‑stage investment for exploration through feasibility study aiming to expand confirmed resources to 1,167K tons of copper."],
+      ru: ["Инвестиции на ранней стадии для разведки до ТЭО с целью нарастить подтверждённые ресурсы до 1 167 тыс. тонн меди."],
+      kz: ["Бастапқы кезеңдегі барлау мен ТЭН‑ге дейінгі инвестиция, мақсаты – расталған қорларды 1 167 мың тонна мысқа дейін ұлғайту."],
+    },
+  },
+  "ai-karaaul-jsc": {
+    title: { en: "Ai Karaaul JSC", ru: "Ai Karaaul JSC", kz: "Ai Karaaul JSC" },
+    content: {
+      en: ["Early‑stage investment for exploration through feasibility study aiming to expand confirmed resources to 180K tons of high‑grade copper."],
+      ru: ["Инвестиции на ранней стадии для разведки до ТЭО с целью нарастить подтверждённые ресурсы до 180 тыс. тонн медной руды высокого качества."],
+      kz: ["Бастапқы кезеңдегі инвестиция барлаудан ТЭН‑ге дейін; мақсат – 180 мың тонна жоғары сапалы мысқа дейін ресурстарды ұлғайту."],
+    },
+  },
+  "elefund-vc-funds": {
+    title: { en: "Elefund VC funds", ru: "Elefund VC funds", kz: "Elefund VC funds" },
+    content: {
+      en: ["Invested across several consecutive VC funds run by world‑class operators and investors building highly profitable businesses."],
+      ru: ["Инвестиции в несколько последовательных венчурных фондов с командой мирового уровня, создающих высокодоходные бизнесы."],
+      kz: ["Әлемдік деңгейдегі команда басқаратын бірқатар венчурлік қорларға инвестиция салынды, жоғары табысты бизнес құруда."],
+    },
+  },
+}
+
+export function formatDateByLang(dateString: string, lang: Lang): string {
+  const date = new Date(dateString)
+  const locale = lang === "ru" ? "ru-RU" : lang === "kz" ? "kk-KZ" : "en-US"
+  return date.toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" })
+}
+
 
 export function readLang(): Lang {
   if (typeof window === "undefined") return defaultLang
