@@ -46,10 +46,8 @@ export default function PortfolioPage() {
       <section className="relative bg-white py-12 mt-12 pt-28 pb-5">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Our Portfolio</h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Discover our portfolio of innovative companies transforming industries across Central Asia
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{portfolioI18n.heroTitle[lang]}</h1>
+            <p className="text-xl text-gray-600 leading-relaxed">{portfolioI18n.heroSubtitle[lang]}</p>
           </div>
         </div>
       </section>
@@ -57,12 +55,7 @@ export default function PortfolioPage() {
       {/* Portfolio Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{portfolioI18n.listTitle[lang]}</h1>
-              <p className="text-base md:text-lg text-gray-600 max-w-2xl">{portfolioI18n.listSubtitle[lang]}</p>
-            </div>
-          </div>
+          {/* Removed duplicated left-aligned header/subtitle */}
           {projectsData.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-600 text-lg">Loading portfolio projects...</p>

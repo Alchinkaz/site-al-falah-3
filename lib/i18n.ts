@@ -238,6 +238,12 @@ export const teamNames: Record<string, { en: string; ru: string; kz: string }> =
 
 // Portfolio pages i18n
 export const portfolioI18n = {
+  heroTitle: { en: "Our Portfolio", ru: "Наше портфолио", kz: "Біздің портфолио" },
+  heroSubtitle: {
+    en: "Discover our portfolio of innovative companies transforming industries across Central Asia",
+    ru: "Ознакомьтесь с портфелем инновационных компаний, меняющих отрасли в Центральной Азии",
+    kz: "Орталық Азиядағы салаларды өзгертетін инновациялық компаниялар портфоліосымен танысыңыз",
+  },
   listTitle: { en: "Portfolio", ru: "Портфолио", kz: "Портфолио" },
   listSubtitle: {
     en: "Successful investments that helped our portfolio companies scale and grow",
