@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { BarChart3, SettingsIcon, LogOut, Menu, X, FileText, Phone, Home } from "lucide-react"
+import { SettingsIcon, LogOut, Menu, X, FileText, Phone, Home, DollarSign } from "lucide-react"
 import { AdminStorage, type User } from "@/lib/admin-storage"
 import Link from "next/link"
 
@@ -23,13 +23,9 @@ export default function AdminLayout({
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Apply dark theme to admin pages except the login page (login should be light)
+  // Use light theme for admin pages (login and dashboard)
   useEffect(() => {
-    if (pathname === "/admin/login") {
-      document.documentElement.classList.remove("dark")
-    } else {
-      document.documentElement.classList.add("dark")
-    }
+    document.documentElement.classList.remove("dark")
   }, [pathname])
 
   useEffect(() => {
@@ -113,14 +109,14 @@ export default function AdminLayout({
   const availableTabs = getAvailableTabs(currentUser!)
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50">
       {/* Mobile menu button */}
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <Button
           variant="outline"
           size="sm"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="bg-card border-border"
+          className="bg-white border border-gray-200"
         >
           {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </Button>
@@ -128,19 +124,13 @@ export default function AdminLayout({
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-card border-r border-border transform transition-transform duration-300 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-border">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
-                <BarChart3 className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <div>
-                <h1 className="font-bold text-foreground">Админ панель</h1>
-                <p className="text-xs text-muted-foreground">Управление сайтом</p>
-              </div>
+          <div className="p-6 border-b border-gray-200">
+            <div className="flex items-center">
+              <img src="/al-falah-logo-black-full.svg" alt="Al Falah Capital Partners" className="h-8 w-auto" />
             </div>
           </div>
 
@@ -157,8 +147,8 @@ export default function AdminLayout({
                     onClick={() => setSidebarOpen(false)}
                     className={`w-full flex items-center gap-3 px-3 py-2 rounded text-left transition-colors ${
                       isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "text-white hover:text-white hover:bg-secondary/30"
+                        ? "bg-gray-100 text-gray-900"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -170,17 +160,17 @@ export default function AdminLayout({
           </nav>
 
           {/* User info and logout */}
-          <div className="p-4 border-t border-border">
+          <div className="p-4 border-t border-gray-200">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Avatar className="h-8 w-8">
-                  <AvatarFallback className="bg-secondary text-secondary-foreground text-sm">
+                  <AvatarFallback className="bg-gray-100 text-gray-700 text-sm">
                     {currentUser?.username.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">{currentUser?.username}</p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm font-medium text-gray-900 truncate">{currentUser?.username}</p>
+                  <p className="text-xs text-gray-500">
                     {currentUser?.role === "admin" ? "Администратор" : "Редактор"}
                   </p>
                 </div>
@@ -189,7 +179,7 @@ export default function AdminLayout({
                 onClick={handleLogout}
                 variant="ghost"
                 size="sm"
-                className="p-2 text-muted-foreground hover:text-white hover:bg-secondary/30"
+                className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100"
               >
                 <LogOut className="h-4 w-4" />
               </Button>
