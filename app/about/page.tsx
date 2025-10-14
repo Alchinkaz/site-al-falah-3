@@ -41,7 +41,7 @@ export default function AboutPage() {
       {/* Top hero image block within site max-width, with slightly reduced top spacing and height */}
       <section className="bg-white mt-8 sm:mt-10 lg:mt-12 xl:mt-14">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="relative w-full rounded-2xl overflow-hidden mb-6" style={{ aspectRatio: "21/9" }}>
+          <div className="relative w-full rounded-2xl overflow-hidden mb-4" style={{ aspectRatio: "21/9" }}>
             <img
               src="/placeholder.svg"
               alt="About cover"
@@ -54,7 +54,7 @@ export default function AboutPage() {
       {/* Removed hero heading & subtitle per request */}
 
       {/* Company Intro */}
-      <section className="py-12 bg-white">
+      <section className="pt-8 pb-12 bg-white">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-12">
             <div className="space-y-5 text-gray-700 text-lg leading-relaxed">
@@ -219,21 +219,44 @@ export default function AboutPage() {
                     />
                     <div className="absolute inset-x-0 bottom-0">
                       <div className="bg-white/95 backdrop-blur-sm px-5 py-4 border-t border-gray-200">
-                        {(() => {
-                          const slug = `${m.firstName} ${m.lastName}`
-                            .toLowerCase()
-                            .replace(/[^a-z\s-]/g, "")
-                            .trim()
-                            .replace(/\s+/g, "-")
-                          return (
-                            <Link href={`/team/${slug}`} className="group inline-block">
-                              <h3 className="text-gray-900 font-semibold text-2xl md:text-2xl leading-tight group-hover:underline">
-                                {m.firstName} {m.lastName}
-                              </h3>
-                            </Link>
-                          )
-                        })()}
-                        <p className="text-gray-500 text-sm mt-1">{m.role}</p>
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            {(() => {
+                              const slug = `${m.firstName} ${m.lastName}`
+                                .toLowerCase()
+                                .replace(/[^a-z\s-]/g, "")
+                                .trim()
+                                .replace(/\s+/g, "-")
+                              return (
+                                <Link href={`/team/${slug}`} className="group inline-block">
+                                  <h3 className="text-gray-900 font-semibold text-2xl md:text-2xl leading-tight group-hover:underline">
+                                    {m.firstName} {m.lastName}
+                                  </h3>
+                                </Link>
+                              )
+                            })()}
+                            <p className="text-gray-500 text-sm mt-1">{m.role}</p>
+                          </div>
+                          {(() => {
+                            const slug = `${m.firstName} ${m.lastName}`
+                              .toLowerCase()
+                              .replace(/[^a-z\s-]/g, "")
+                              .trim()
+                              .replace(/\s+/g, "-")
+                            return (
+                              <Link
+                                href={`/team/${slug}`}
+                                className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#1e1a61] text-[#1e1a61] transition-colors hover:bg-[#1e1a61] hover:text-white"
+                                aria-label={`${m.firstName} ${m.lastName}`}
+                              >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                  <path d="M9 7H17V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </Link>
+                            )
+                          })()}
+                        </div>
                       </div>
                     </div>
                   </div>
