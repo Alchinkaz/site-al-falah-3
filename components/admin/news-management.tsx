@@ -179,7 +179,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           <h1 className="text-3xl font-bold tracking-tight">Управление проектами</h1>
           <p className="text-muted-foreground">Создавайте и редактируйте проекты портфолио</p>
         </div>
-        <Button onClick={handleAddArticle} className="bg-primary hover:bg-primary/90">
+        <Button onClick={handleAddArticle} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
           <Plus className="h-4 w-4 mr-2" />
           Добавить проект
         </Button>

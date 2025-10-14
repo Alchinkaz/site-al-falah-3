@@ -171,18 +171,18 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            {article.id ? "Редактировать новость" : "Добавить новость"}
+            {article.id ? "Редактировать проект" : "Добавить проект"}
           </h1>
           <p className="text-muted-foreground">
-            {article.id ? "Изменить информацию о новости" : "Создать новую новость"}
+            {article.id ? "Изменить информацию о проекте" : "Создать новый проект"}
           </p>
         </div>
         <div className="flex gap-2">
           <Button onClick={onCancel} variant="outline">
             Отмена
           </Button>
-          <Button onClick={handleSave} className="bg-[#365f37] hover:bg-[#2d4f2d]">
-            {article.id ? "Сохранить изменения" : "Создать новость"}
+          <Button onClick={handleSave} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
+            {article.id ? "Сохранить изменения" : "Создать проект"}
           </Button>
         </div>
       </div>
@@ -192,7 +192,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
         <div className="lg:col-span-1 space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Изображения новости</CardTitle>
+              <CardTitle>Изображения проекта</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Main Image (для карточки) */}
@@ -222,7 +222,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                     onChange={(e) => updateLocalData("image", e.target.value)}
                     placeholder="Ссылка на основное изображение для карточки"
                   />
-                  <p className="text-xs text-muted-foreground">Это изображение отображается в списке новостей</p>
+                  <p className="text-xs text-muted-foreground">Это изображение отображается в списке проектов</p>
                 </div>
               </div>
 
@@ -254,7 +254,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                     placeholder="Ссылка на Hero изображение"
                   />
                   <p className="text-xs text-muted-foreground">
-                    Фоновое изображение для Hero секции на странице новости
+                    Фоновое изображение для Hero секции на странице проекта
                   </p>
                 </div>
               </div>
@@ -302,12 +302,12 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <Label htmlFor="title">Заголовок новости *</Label>
+                <Label htmlFor="title">Заголовок проекта *</Label>
                 <Input
                   id="title"
                   value={localData.title || ""}
                   onChange={(e) => updateLocalData("title", e.target.value)}
-                  placeholder="Введите заголовок новости"
+                  placeholder="Введите заголовок проекта"
                 />
               </div>
 
@@ -318,7 +318,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                   value={localData.description || ""}
                   onChange={(e) => updateLocalData("description", e.target.value)}
                   rows={3}
-                  placeholder="Краткое описание новости для списка"
+                  placeholder="Краткое описание проекта для списка"
                 />
               </div>
 
@@ -358,7 +358,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>Содержание новости *</CardTitle>
+              <CardTitle>Содержание проекта *</CardTitle>
                 <Button onClick={addContentSection} size="sm" variant="outline">
                   <Plus className="h-4 w-4 mr-2" />
                   Добавить секцию
@@ -415,7 +415,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="published">Опубликовать новость</Label>
+                  <Label htmlFor="published">Опубликовать проект</Label>
                   <Switch
                     id="published"
                     checked={localData.published || false}
