@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { AdminStorage, type User } from "@/lib/admin-storage"
 import { NewsManagement } from "@/components/admin/news-management"
 
-export default function NewsPage() {
+export default function ProjectsPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 

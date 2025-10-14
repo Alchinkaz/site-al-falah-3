@@ -41,7 +41,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     checkAuth()
   }, [router])
 
-  // Загрузка новостей
+  // Загрузка проектов
   useEffect(() => {
     loadArticles()
   }, [])
@@ -176,25 +176,25 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Управление новостями</h1>
-          <p className="text-muted-foreground">Создавайте и редактируйте новости сайта</p>
+          <h1 className="text-3xl font-bold tracking-tight">Управление проектами</h1>
+          <p className="text-muted-foreground">Создавайте и редактируйте проекты портфолио</p>
         </div>
         <Button onClick={handleAddArticle} className="bg-primary hover:bg-primary/90">
           <Plus className="h-4 w-4 mr-2" />
-          Добавить новость
+          Добавить проект
         </Button>
       </div>
 
-      {/* Список новостей */}
+      {/* Список проектов */}
       <Card className="bg-card border-border">
         <CardHeader>
-          <CardTitle>Новости сайта</CardTitle>
+          <CardTitle>Проекты</CardTitle>
         </CardHeader>
         <CardContent>
           {articles.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>Новостей пока нет</p>
+              <p>Проектов пока нет</p>
             </div>
           ) : (
             <div className="space-y-4">

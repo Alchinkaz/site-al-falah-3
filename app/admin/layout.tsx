@@ -69,10 +69,8 @@ export default function AdminLayout({
 
   const getAvailableTabs = (user: User) => {
     return [
-      { value: "/admin/currency", label: "Курсы валют", icon: DollarSign },
       { value: "/admin/homepage", label: "Главная страница", icon: Home },
-      { value: "/admin/news", label: "Новости", icon: FileText },
-      { value: "/admin/contacts", label: "Контакты", icon: Phone },
+      { value: "/admin/projects", label: "Проекты", icon: FileText },
       { value: "/admin/profile", label: "Профиль", icon: SettingsIcon },
     ]
   }
