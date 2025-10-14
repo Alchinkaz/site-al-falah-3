@@ -269,9 +269,12 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       </header>
 
       {mobileMenuOpen && (
-        <div className={`fixed inset-0 z-[60] bg-[#1e1a61] transition-all duration-500 ease-in-out transform ${
-          mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
-        }`}>
+        <div
+          className={`fixed inset-0 z-[60] transition-all duration-500 ease-in-out transform bg-cover bg-center bg-no-repeat ${
+            mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
+          }`}
+          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+        >
           {/* Navigation links - aligned to navbar width, left aligned */}
           <div className="h-full flex items-center">
             <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 w-full">
