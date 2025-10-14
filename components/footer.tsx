@@ -11,8 +11,23 @@ export default function Footer() {
     return () => window.removeEventListener("language-changed", handler)
   }, [])
 
+  const [ctaLine1, ctaLine2] = i18n.ctaTitle[lang]
+
   return (
-    <footer className="py-12 font-inter" style={{ backgroundColor: "#1e1a61" }}>
+    <footer className="font-inter" style={{ backgroundColor: "#1e1a61" }}>
+      {/* CTA top block kept exactly as before, now inside the footer */}
+      <section className="py-24">
+        <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 text-left">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            {ctaLine1}
+            <br />
+            {ctaLine2}
+          </h2>
+        </div>
+      </section>
+
+      {/* Original footer content */}
+      <div className="py-12">
       <div className="relative max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
         <div className="flex flex-col md:flex-row md:justify-between items-start md:items-end gap-8">
           {/* Contact information - left aligned */}
@@ -47,6 +62,7 @@ export default function Footer() {
           alt="Al Falah Partners"
           className="absolute h-10 w-auto object-contain right-2 sm:right-6 lg:right-8 xl:right-10 2xl:right-12 bottom-0"
         />
+      </div>
       </div>
     </footer>
   )

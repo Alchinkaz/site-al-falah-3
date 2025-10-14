@@ -5,7 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import CTASection from "@/components/cta-section"
 import { getProjectWithDetails } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
 import { useEffect, useState } from "react"
@@ -126,7 +125,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
         </div>
       </section>
 
-      <CTASection />
+      {/* CTA merged into Footer */}
 
       <Footer />
     </div>

@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import CTASection from "@/components/cta-section"
 import { readLang, teamI18n, teamNames } from "@/lib/i18n"
 import { useMemo, useEffect, useState } from "react"
 
@@ -129,7 +128,7 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
         </div>
       </section>
 
-      <CTASection />
+      {/* CTA merged into Footer */}
       <Footer />
     </div>
   )

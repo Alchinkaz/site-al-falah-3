@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import CTASection from "@/components/cta-section"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -264,7 +263,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CTASection />
+      {/* CTA merged into Footer */}
       <Footer />
     </div>
   )

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import CTASection from "@/components/cta-section"
 import { useState, useEffect } from "react"
 import { getHomepageData, type HomepageData } from "@/lib/homepage-data"
 import { useCounterAnimation } from "@/hooks/use-counter-animation"
@@ -345,7 +344,7 @@ export default function Home() {
         </div>
       </section>
 
-        <CTASection />
+        {/* CTA merged into Footer */}
         <Footer />
 
       </div>
