@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { getHomepageData, type HomepageData } from "@/lib/homepage-data"
 import { useCounterAnimation } from "@/hooks/use-counter-animation"
-import { aboutI18n, readLang } from "@/lib/i18n"
+import { aboutI18n, readLang, teamI18n, i18n } from "@/lib/i18n"
 
 export default function AboutPage() {
   const [homepageData, setHomepageData] = useState<HomepageData | null>(null)
@@ -85,7 +85,7 @@ export default function AboutPage() {
                     ["Management fee", aboutI18n.keyTerms["Management fee"][lang]],
                     ["Carry", aboutI18n.keyTerms["Carry"][lang]],
                   ].map(([k, v]) => (
-                    <li key={k} className="flex justify-between gap-4 py-3"><span className="text-gray-500">{k}:</span><span className="text-gray-900 font-medium">{v}</span></li>
+                    <li key={k} className="flex justify-between gap-4 py-3"><span className="text-gray-500">{aboutI18n.keyLabels[k][lang]}:</span><span className="text-gray-900 font-medium">{v}</span></li>
                   ))}
                 </ul>
               </div>
@@ -117,7 +117,7 @@ export default function AboutPage() {
                     <h3 ref={stat1Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
                       {homepageData?.stat1Title?.replace(/\d+/, stat1Counter.count.toString())}
                     </h3>
-                    <p className="text-gray-600">{homepageData?.stat1Subtitle}</p>
+                    <p className="text-gray-600">{i18n.stat1Subtitle[lang]}</p>
                   </div>
                   <div className="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-gray-300"></div>
                   <div className="md:hidden w-full h-px bg-gray-300"></div>
@@ -128,7 +128,7 @@ export default function AboutPage() {
                     <h3 ref={stat2Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
                       {homepageData?.stat2Title?.replace(/\d+/, stat2Counter.count.toString())}
                     </h3>
-                    <p className="text-gray-600">{homepageData?.stat2Subtitle}</p>
+                    <p className="text-gray-600">{i18n.stat2Subtitle[lang]}</p>
                   </div>
                   <div className="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-gray-300"></div>
                   <div className="md:hidden w-full h-px bg-gray-300"></div>
@@ -139,7 +139,7 @@ export default function AboutPage() {
                     <h3 ref={stat3Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
                       {homepageData?.stat3Title?.replace(/\d+/, stat3Counter.count.toString())}
                     </h3>
-                    <p className="text-gray-600">{homepageData?.stat3Subtitle}</p>
+                    <p className="text-gray-600">{i18n.stat3Subtitle[lang]}</p>
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function AboutPage() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-left">
-              <h3 className="font-bold text-gray-900 text-3xl md:text-[48px] md:leading-[1.1]">Meet the team</h3>
+              <h3 className="font-bold text-gray-900 text-3xl md:text-[48px] md:leading-[1.1]">{aboutI18n.teamTitle[lang]}</h3>
             </div>
             {/* Button removed per request */}
           </div>
@@ -216,7 +216,16 @@ export default function AboutPage() {
                                 </Link>
                               )
                             })()}
-                            <p className="text-gray-500 text-sm mt-1">{m.role}</p>
+                            <p className="text-gray-500 text-sm mt-1">
+                              {(() => {
+                                const slug = `${m.firstName} ${m.lastName}`
+                                  .toLowerCase()
+                                  .replace(/[^a-z\s-]/g, "")
+                                  .trim()
+                                  .replace(/\s+/g, "-")
+                                return teamI18n[slug]?.role[lang] || m.role
+                              })()}
+                            </p>
                           </div>
                           {(() => {
                             const slug = `${m.firstName} ${m.lastName}`

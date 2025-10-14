@@ -113,6 +113,15 @@ export const aboutI18n = {
     ],
   },
   keyTermsTitle: { en: "Key terms", ru: "Ключевые условия", kz: "Негізгі шарттар" },
+  keyLabels: {
+    Size: { en: "Size", ru: "Размер", kz: "Өлшемі" },
+    "GP commitment": { en: "GP commitment", ru: "Вклад GP", kz: "GP қатысу үлесі" },
+    "Investment period": { en: "Investment period", ru: "Инвестпериод", kz: "Инвестициялық кезең" },
+    Term: { en: "Term", ru: "Срок", kz: "Мерзім" },
+    "Hurdle rate": { en: "Hurdle rate", ru: "Hurdle rate", kz: "Hurdle rate" },
+    "Management fee": { en: "Management fee", ru: "Комиссия за управление", kz: "Басқару комиссиясы" },
+    Carry: { en: "Carry", ru: "Carry", kz: "Carry" },
+  } as Record<string, { en: string; ru: string; kz: string }>,
   keyTerms: {
     Size: { en: "USD200m", ru: "USD200 млн", kz: "USD200 млн" },
     "GP commitment": { en: "2%", ru: "2%", kz: "2%" },
@@ -201,7 +210,7 @@ export const teamI18n: Record<string, { role: { en: string; ru: string; kz: stri
     },
     bioRight: {
       en: "A fellow of the ACCA and certified auditor, Altay has over twenty years in finance covering governance, taxation, budgeting, audit, reporting and compliance. He has held leadership roles at Al Falah Group and Panalpina.",
-      ru: "ACCA мүшесі және сертификатталған аудитор. Қаржы саласында жиырма жылдан астам тәжірибесі бар: корпоративтік басқару, салық, бюджеттік жоспарлау, аудит, есептілік және комплаенс. Al Falah Group және Panalpina компанияларында басшылық қызметтер атқарды.",
+      ru: "Член ACCA и сертифицированный аудитор, Алтай имеет более 20 лет опыта в финансах: корпоративное управление, налогообложение, бюджетирование, аудит, отчётность и комплаенс. Занимал руководящие должности в Al Falah Group и Panalpina.",
       kz: "ACCA мүшесі және сертификатталған аудитор. Қаржыда 20 жылдан астам тәжірибе: корпоративтік басқару, салық, бюджеттеу, аудит, есептілік және комплаенс. Al Falah Group және Panalpina компанияларында жетекшілік етті.",
     },
   },
