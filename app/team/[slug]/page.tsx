@@ -3,6 +3,7 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
+import { readLang, teamI18n } from "@/lib/i18n"
 import { useMemo } from "react"
 
 interface MemberData {
@@ -70,6 +71,8 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
     return members.find((m) => slugifyMember(m) === params.slug)
   }, [params.slug])
 
+  const lang = readLang()
+
   if (!member) {
     return (
       <div className="min-h-screen bg-white">
@@ -97,7 +100,7 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
                 <br />
                 {member.lastName}
               </h1>
-              <div className="mt-6 uppercase tracking-wide text-xs">{member.role}</div>
+              <div className="mt-6 uppercase tracking-wide text-xs">{teamI18n[params.slug]?.role[lang] ?? member.role}</div>
               {/* Social icons removed per request */}
             </div>
             <div className="rounded-2xl overflow-hidden bg-[#d2efe6]">
@@ -106,8 +109,8 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
           </div>
 
           <div className="grid md:grid-cols-2 gap-10 mt-10 text-gray-700 text-lg leading-relaxed">
-            <p>{member.bioLeft}</p>
-            <p>{member.bioRight}</p>
+            <p>{teamI18n[params.slug]?.bioLeft[lang] ?? member.bioLeft}</p>
+            <p>{teamI18n[params.slug]?.bioRight[lang] ?? member.bioRight}</p>
           </div>
         </div>
       </section>
