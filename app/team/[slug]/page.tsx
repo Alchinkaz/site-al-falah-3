@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
 import { readLang, teamI18n, teamNames } from "@/lib/i18n"
-import { useMemo } from "react"
+import { useMemo, useEffect, useState } from "react"
 
 interface MemberData {
   firstName: string
@@ -71,8 +71,8 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
     return members.find((m) => slugifyMember(m) === params.slug)
   }, [params.slug])
 
-  const [lang, setLang] = React.useState(readLang())
-  React.useEffect(() => {
+  const [lang, setLang] = useState(readLang())
+  useEffect(() => {
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)
     return () => window.removeEventListener("language-changed", handler)
