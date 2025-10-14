@@ -54,6 +54,18 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
     setLanguageDropdownOpen(false)
   }
 
+  // Keep in sync with global language changes dispatched from other components
+  useEffect(() => {
+    const onLangChanged = (e: any) => {
+      const next = e?.detail?.lang
+      if (next && next !== language) setLanguage(next)
+    }
+    if (typeof window !== "undefined") {
+      window.addEventListener("language-changed", onLangChanged)
+      return () => window.removeEventListener("language-changed", onLangChanged)
+    }
+  }, [language])
+
   const handleMobileMenuToggle = () => {
     if (!mobileMenuOpen) {
       setMobileMenuOpen(true)
@@ -81,7 +93,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const navItems = [
     { href: "/", label: language === "ru" ? "Главная" : language === "kz" ? "Басты бет" : "Home" },
     { href: "/about", label: language === "ru" ? "О компании" : language === "kz" ? "Біз туралы" : "About Us" },
-    { href: "/portfolio", label: language === "ru" ? "Портфолио" : "kz" ? "Портфолио" : "Portfolio" },
+    { href: "/portfolio", label: language === "ru" ? "Портфолио" : language === "kz" ? "Портфолио" : "Portfolio" },
   ]
 
   return (
