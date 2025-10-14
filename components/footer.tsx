@@ -18,8 +18,8 @@ export default function Footer() {
           {/* Contact information - left aligned */}
           <div className="flex flex-col gap-1 text-white/80 text-sm">
             <p className="font-medium">{i18n.footerContactUs[lang]}</p>
-            <p>Altay Mamanbayev</p>
-            <p>Director & Chief Operating Officer</p>
+            <p>{i18n.footerNameAltay[lang]}</p>
+            <p>{i18n.footerRoleAltay[lang]}</p>
             <a href="mailto:altay@falahpartners.com" className="hover:text-white transition-colors">
               altay@falahpartners.com
             </a>
@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Copyright - centered on desktop, left on mobile */}
           <div className="text-white/80 text-sm text-left md:absolute md:left-1/2 md:-translate-x-1/2">
             <p>© 2025 Al Falah Capital Partners</p>
-            <p>Developed by Web Alchin</p>
+            <p>{i18n.footerDevelopedBy[lang]}</p>
           </div>
         </div>
 

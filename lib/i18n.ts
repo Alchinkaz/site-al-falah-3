@@ -73,6 +73,17 @@ export const i18n = {
     ru: "Свяжитесь с нами:",
     kz: "Бізбен байланысыңыз:",
   },
+  footerNameAltay: { en: "Altay Mamanbayev", ru: "Алтай Маманбаев", kz: "Алтай Маманбаев" },
+  footerRoleAltay: {
+    en: "Director & Chief Operating Officer",
+    ru: "Директор и операционный директор (COO)",
+    kz: "Директор және операциялық директор (COO)",
+  },
+  footerDevelopedBy: {
+    en: "Developed by Web Alchin",
+    ru: "Разработано Web Alchin",
+    kz: "Web Alchin әзірлеген",
+  },
   navHome: { en: "Home", ru: "Главная", kz: "Басты бет" },
   navAbout: { en: "About Us", ru: "О компании", kz: "Біз туралы" },
   navPortfolio: { en: "Portfolio", ru: "Портфолио", kz: "Портфолио" },
