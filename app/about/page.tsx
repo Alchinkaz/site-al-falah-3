@@ -38,10 +38,10 @@ export default function AboutPage() {
       <Navbar forceScrolled={true} />
       <div className="h-16 sm:h-16 md:h-16 lg:h-20"></div>
 
-      {/* Top hero image block within site max-width, with extra top spacing */}
-      <section className="bg-white mt-12 sm:mt-16 lg:mt-20 xl:mt-24">
+      {/* Top hero image block within site max-width, with slightly reduced top spacing and height */}
+      <section className="bg-white mt-8 sm:mt-10 lg:mt-12 xl:mt-14">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="relative w-full rounded-2xl overflow-hidden mb-6" style={{ aspectRatio: "16/9" }}>
+          <div className="relative w-full rounded-2xl overflow-hidden mb-6" style={{ aspectRatio: "21/9" }}>
             <img
               src="/placeholder.svg"
               alt="About cover"
@@ -176,14 +176,7 @@ export default function AboutPage() {
             <div className="text-left">
               <h3 className="font-bold text-gray-900 text-3xl md:text-[48px] md:leading-[1.1]">Meet the team</h3>
             </div>
-            <Link href="/#cta">
-              <Button
-                variant="outline"
-                className="hidden md:block border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white px-8 mt-6"
-              >
-                Get in touch
-              </Button>
-            </Link>
+            {/* Button removed per request */}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {[
@@ -226,9 +219,20 @@ export default function AboutPage() {
                     />
                     <div className="absolute inset-x-0 bottom-0">
                       <div className="bg-white/95 backdrop-blur-sm px-5 py-4 border-t border-gray-200">
-                        <h3 className="text-gray-900 font-semibold text-2xl md:text-2xl leading-tight">
-                          {m.firstName} {m.lastName}
-                        </h3>
+                        {(() => {
+                          const slug = `${m.firstName} ${m.lastName}`
+                            .toLowerCase()
+                            .replace(/[^a-z\s-]/g, "")
+                            .trim()
+                            .replace(/\s+/g, "-")
+                          return (
+                            <Link href={`/team/${slug}`} className="group inline-block">
+                              <h3 className="text-gray-900 font-semibold text-2xl md:text-2xl leading-tight group-hover:underline">
+                                {m.firstName} {m.lastName}
+                              </h3>
+                            </Link>
+                          )
+                        })()}
                         <p className="text-gray-500 text-sm mt-1">{m.role}</p>
                       </div>
                     </div>
