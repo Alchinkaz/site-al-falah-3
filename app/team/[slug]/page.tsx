@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import CTASection from "@/components/cta-section"
 import { useMemo } from "react"
 
 interface MemberData {
@@ -90,18 +91,14 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
       <section className="py-10">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-[#123131] text-white rounded-2xl p-6 md:p-10">
+            <div className="bg-[#1e1a61] text-white rounded-2xl p-6 md:p-10">
               <h1 className="text-5xl md:text-6xl font-medium leading-tight">
                 {member.firstName}
                 <br />
                 {member.lastName}
               </h1>
               <div className="mt-6 uppercase tracking-wide text-xs">{member.role}</div>
-              <div className="mt-8 flex gap-3 text-white/90">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40">in</span>
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40">tw</span>
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40">tg</span>
-              </div>
+              {/* Social icons removed per request */}
             </div>
             <div className="rounded-2xl overflow-hidden bg-[#d2efe6]">
               <img src={member.photo || "/placeholder.svg"} alt={`${member.firstName} ${member.lastName}`} className="w-full h-full object-cover" />
@@ -115,6 +112,7 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
         </div>
       </section>
 
+      <CTASection />
       <Footer />
     </div>
   )
