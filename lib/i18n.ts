@@ -118,9 +118,9 @@ export const aboutI18n = {
     "GP commitment": { en: "GP commitment", ru: "Вклад GP", kz: "GP қатысу үлесі" },
     "Investment period": { en: "Investment period", ru: "Инвестпериод", kz: "Инвестициялық кезең" },
     Term: { en: "Term", ru: "Срок", kz: "Мерзім" },
-    "Hurdle rate": { en: "Hurdle rate", ru: "Hurdle rate", kz: "Hurdle rate" },
+    "Hurdle rate": { en: "Hurdle rate", ru: "Барьёрная ставка", kz: "Табалдырық мөлшерлемесі" },
     "Management fee": { en: "Management fee", ru: "Комиссия за управление", kz: "Басқару комиссиясы" },
-    Carry: { en: "Carry", ru: "Carry", kz: "Carry" },
+    Carry: { en: "Carry", ru: "Керри (доля прибыли)", kz: "Кэрри (пайда үлесі)" },
   } as Record<string, { en: string; ru: string; kz: string }>,
   keyTerms: {
     Size: { en: "USD200m", ru: "USD200 млн", kz: "USD200 млн" },
@@ -227,6 +227,13 @@ export const teamI18n: Record<string, { role: { en: string; ru: string; kz: stri
       kz: "KIMEP University бакалавриаты мен магистратурасын бітірген, қазір ACCA кәсіби біліктілігін алып жатыр.",
     },
   },
+}
+
+export const teamNames: Record<string, { en: string; ru: string; kz: string }> = {
+  "nurlan-kussainov": { en: "Nurlan Kussainov", ru: "Нурлан Кусаинов", kz: "Нұрлан Құсайынов" },
+  "diyar-medeubekov": { en: "Diyar Medeubekov", ru: "Дияр Медеубеков", kz: "Дияр Медеубеков" },
+  "altay-mamanbayev": { en: "Altay Mamanbayev", ru: "Алтай Маманбаев", kz: "Алтай Маманбаев" },
+  "azhar-babayeva": { en: "Azhar Babayeva", ru: "Азхар Бабаева", kz: "Азхар Бабаєва" },
 }
 
 

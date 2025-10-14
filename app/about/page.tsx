@@ -211,7 +211,14 @@ export default function AboutPage() {
                               return (
                                 <Link href={`/team/${slug}`} className="group inline-block">
                                   <h3 className="text-gray-900 font-semibold text-2xl md:text-2xl leading-tight group-hover:underline">
-                                    {m.firstName} {m.lastName}
+                                    {(() => {
+                                      const slug = `${m.firstName} ${m.lastName}`
+                                        .toLowerCase()
+                                        .replace(/[^a-z\s-]/g, "")
+                                        .trim()
+                                        .replace(/\s+/g, "-")
+                                      return teamNames[slug]?.[lang] || `${m.firstName} ${m.lastName}`
+                                    })()}
                                   </h3>
                                 </Link>
                               )

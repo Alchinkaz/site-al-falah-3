@@ -3,7 +3,7 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CTASection from "@/components/cta-section"
-import { readLang, teamI18n } from "@/lib/i18n"
+import { readLang, teamI18n, teamNames } from "@/lib/i18n"
 import { useMemo } from "react"
 
 interface MemberData {
@@ -71,7 +71,12 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
     return members.find((m) => slugifyMember(m) === params.slug)
   }, [params.slug])
 
-  const lang = readLang()
+  const [lang, setLang] = React.useState(readLang())
+  React.useEffect(() => {
+    const handler = (e: any) => setLang(e.detail?.lang || readLang())
+    window.addEventListener("language-changed", handler)
+    return () => window.removeEventListener("language-changed", handler)
+  }, [])
 
   if (!member) {
     return (
@@ -96,9 +101,18 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-[#1e1a61] text-white rounded-2xl p-6 md:p-10">
               <h1 className="text-5xl md:text-6xl font-medium leading-tight">
-                {member.firstName}
-                <br />
-                {member.lastName}
+                {(() => {
+                  const slug = slugifyMember(member)
+                  const display = teamNames[slug]?.[lang] || `${member.firstName} ${member.lastName}`
+                  const parts = display.split(" ")
+                  return (
+                    <>
+                      {parts[0]}
+                      <br />
+                      {parts.slice(1).join(" ")}
+                    </>
+                  )
+                })()}
               </h1>
               <div className="mt-6 uppercase tracking-wide text-xs">{teamI18n[params.slug]?.role[lang] ?? member.role}</div>
               {/* Social icons removed per request */}
