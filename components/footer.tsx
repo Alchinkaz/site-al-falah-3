@@ -14,7 +14,10 @@ export default function Footer() {
   const [ctaLine1, ctaLine2] = i18n.ctaTitle[lang]
 
   return (
-    <footer className="font-inter" style={{ backgroundColor: "#1e1a61" }}>
+    <footer
+      className="font-inter bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+    >
       {/* CTA top block kept exactly as before, now inside the footer */}
       <section className="py-24">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 text-left">
