@@ -176,7 +176,7 @@ export const aboutI18n = {
 // Team members i18n by slug
 export const teamI18n: Record<string, { role: { en: string; ru: string; kz: string }; bioLeft: { en: string; ru: string; kz: string }; bioRight: { en: string; ru: string; kz: string } }> = {
   "nurlan-kussainov": {
-    role: { en: "Managing Partner", ru: "Управляющий партнёр", kz: "Бас серіктес" },
+    role: { en: "Managing Partner", ru: "Управляющий Партнер", kz: "Басқарушы Серіктес" },
     bioLeft: {
       en: "Nurlan has more than two decades of leadership across Kazakhstan’s financial sector and public institutions. His experience spans the AIFC, the National Bank of Kazakhstan, the Development Bank of Kazakhstan, the Center of Marketing and Analytical Research, CNRG Capital and the Ministry of Economic Affairs and Budget Planning.",
       ru: "Нурлан более двадцати лет возглавлял проекты в финансовом секторе и государственных институтах Казахстана. Его опыт включает АМФЦА, Национальный банк Казахстана, Банк развития Казахстана, Центр маркетинговых и аналитических исследований, CNRG Capital и Министерство экономики и бюджетного планирования.",
@@ -189,7 +189,7 @@ export const teamI18n: Record<string, { role: { en: string; ru: string; kz: stri
     },
   },
   "diyar-medeubekov": {
-    role: { en: "Chief Investment Officer", ru: "Инвестиционный директор", kz: "Инвестициялар жөніндегі директор" },
+    role: { en: "Chief Investment Officer", ru: "Главный Директор по инвестициям", kz: "Инвестициялар жөніндегі Бас Директор" },
     bioLeft: {
       en: "Diyar oversees investment strategy and has managed several of the fund’s portfolio companies. He brings operating and financial experience across mining, agriculture and financial services, and earlier served as Director of Project Finance at the Development Bank of Kazakhstan. He holds a master’s degree in Economics from Vanderbilt University.",
       ru: "Дияр отвечает за инвестиционную стратегию и управлял портфельными компаниями фонда. Имеет операционный и финансовый опыт в горнодобывающем секторе, агро‑проме и финансах. Ранее — директор по проектному финансированию в Банке развития Казахстана. Магистр экономики Vanderbilt University.",
@@ -202,7 +202,7 @@ export const teamI18n: Record<string, { role: { en: string; ru: string; kz: stri
     },
   },
   "altay-mamanbayev": {
-    role: { en: "Chief Operating Officer / Director", ru: "Операционный директор / Директор", kz: "Операциялық директор / Директор" },
+    role: { en: "Chief Operating Officer", ru: "Исполнительный Директор", kz: "Атқарушы Директор" },
     bioLeft: {
       en: "Altay has led the fund’s operations since 2008. Before joining Al Falah, he worked as a financial consultant at Eurasia Financial Management Consulting and held managerial roles at Panalpina World Transport LLP in Kazakhstan.",
       ru: "Алтай руководит операционной деятельностью фонда с 2008 года. До этого работал финансовым консультантом в Eurasia Financial Management Consulting и занимал руководящие позиции в Panalpina World Transport LLP в Казахстане.",
@@ -215,7 +215,7 @@ export const teamI18n: Record<string, { role: { en: string; ru: string; kz: stri
     },
   },
   "azhar-babayeva": {
-    role: { en: "Reporting / Compliance Manager", ru: "Менеджер по отчётности и комплаенсу", kz: "Есеп пен комплаенс менеджері" },
+    role: { en: "Reporting Manager", ru: "Менеджер по отчетности и процессам", kz: "Есеп беру және процесс менеджері" },
     bioLeft: {
       en: "Azhar joined Al Falah in 2013 and today oversees financial reporting and compliance. She has more than fifteen years of experience across finance, audit, tax, budgeting and fund administration, and began her career as an auditor at EY Kazakhstan.",
       ru: "Азхар пришла в Al Falah в 2013 году и сегодня отвечает за финансовую отчётность и комплаенс. Имеет более 15 лет опыта в финансах, аудите, налогах, бюджетировании и администрировании фондов; карьеру начинала аудитором в EY Казахстан.",
@@ -233,7 +233,7 @@ export const teamNames: Record<string, { en: string; ru: string; kz: string }> =
   "nurlan-kussainov": { en: "Nurlan Kussainov", ru: "Нурлан Кусаинов", kz: "Нұрлан Құсайынов" },
   "diyar-medeubekov": { en: "Diyar Medeubekov", ru: "Дияр Медеубеков", kz: "Дияр Медеубеков" },
   "altay-mamanbayev": { en: "Altay Mamanbayev", ru: "Алтай Маманбаев", kz: "Алтай Маманбаев" },
-  "azhar-babayeva": { en: "Azhar Babayeva", ru: "Азхар Бабаева", kz: "Азхар Бабаєва" },
+  "azhar-babayeva": { en: "Azhar Babayeva", ru: "Ажар Бабаева", kz: "Ажар Бабаева" },
 }
 
 

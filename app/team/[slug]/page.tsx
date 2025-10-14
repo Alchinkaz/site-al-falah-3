@@ -39,7 +39,7 @@ const members: MemberData[] = [
   {
     firstName: "Altay",
     lastName: "Mamanbayev",
-    role: "Chief Operating Officer / Director",
+    role: "Chief Operating Officer",
     photo: "/placeholder.svg",
     bioLeft:
       "Altay has led the fund’s operations since 2008. Before joining Al Falah, he worked as a financial consultant at Eurasia Financial Management Consulting and held managerial positions at Panalpina World Transport LLP in Kazakhstan, one of the world’s leading freight‑forwarding corporations.",
@@ -49,7 +49,7 @@ const members: MemberData[] = [
   {
     firstName: "Azhar",
     lastName: "Babayeva",
-    role: "Reporting / Compliance Manager",
+    role: "Reporting Manager",
     photo: "/placeholder.svg",
     bioLeft:
       "Azhar joined Al Falah in October 2013 and today oversees financial reporting and compliance. She has more than fifteen years of experience across finance, audit, tax, budgeting and fund administration, and began her career as an auditor at EY Kazakhstan.",
