@@ -21,9 +21,9 @@ const members: MemberData[] = [
     role: "Managing Partner",
     photo: "/placeholder.svg",
     bioLeft:
-      "Serik founded Elefund in 2015 with the belief that businesses create value by masterfully solving complex problems with a simple toolkit. He began his investing career as a public equities investor applying value investing principles, a framework which later served as a cornerstone to Elefund’s investment approach.",
+      "Nurlan has more than two decades of leadership across Kazakhstan’s financial sector and public institutions. His experience spans the Astana International Financial Centre, the National Bank of Kazakhstan, the Development Bank of Kazakhstan, the Center of Marketing and Analytical Research under the Government of Kazakhstan, CNRG Capital and the Ministry of Economic Affairs and Budget Planning.",
     bioRight:
-      "When he isn’t advising founders or evaluating new deals, Serik enjoys spending time with his family and friends. He also enjoys reading, and hooping. What is the most underrated characteristic of successful founders? Surrounding yourself with capable people, and attacking ideas and products, not each other.",
+      "He holds a master’s degree from the Stanford Graduate School of Business. Nurlan serves on the boards of the Astana International Exchange (a Nasdaq subsidiary) and Beeline Kazakhstan. Previously he was Chairman of the Board of Directors at Alfa‑Bank Kazakhstan, CEO of AIFC and the Development Bank of Kazakhstan, and Deputy Governor of the Central Bank of Kazakhstan.",
   },
   {
     firstName: "Diyar",
@@ -31,29 +31,29 @@ const members: MemberData[] = [
     role: "Chief Investment Officer",
     photo: "/placeholder.svg",
     bioLeft:
-      "Diyar has extensive experience in mining, agriculture and finance. Prior to joining the fund he served as Director of Project Finance at Development Bank of Kazakhstan.",
+      "Diyar oversees investment strategy and has managed several of the fund’s portfolio companies. He brings deep operating and financial experience across mining, agriculture and financial services, and earlier served as Director of Project Finance at the Development Bank of Kazakhstan. He holds a master’s degree in Economics from Vanderbilt University.",
     bioRight:
-      "Diyar enjoys the outdoors and spending time with family. He holds a Master's degree in Economics from Vanderbilt University.",
+      "Alongside his work with the fund, Diyar has founded and scaled technology ventures, including the fintech platforms Pulman.uz in Uzbekistan and Akshamat.kz in Kazakhstan, as well as the AI software company Fantoramma.org. He previously led Alsad.kz as CEO and held roles at the Islamic Development Bank and the Development Bank of Kazakhstan.",
   },
   {
     firstName: "Altay",
     lastName: "Mamanbayev",
-    role: "Chief Operating Officer",
+    role: "Chief Operating Officer / Director",
     photo: "/placeholder.svg",
     bioLeft:
-      "Altay manages the operations of the fund since 2008, previously at Eurasia Financial Management Consulting and Panalpina World Transport LLP.",
+      "Altay has led the fund’s operations since 2008. Before joining Al Falah, he worked as a financial consultant at Eurasia Financial Management Consulting and held managerial positions at Panalpina World Transport LLP in Kazakhstan, one of the world’s leading freight‑forwarding corporations.",
     bioRight:
-      "Altay is an ACCA member and is passionate about operational excellence and systems thinking.",
+      "A fellow of the ACCA and a certified auditor, Altay has over twenty years of experience in finance. His expertise covers corporate governance, taxation, budgeting, audit, reporting and regulatory compliance. He has held leadership roles at Al Falah Group and Panalpina.",
   },
   {
     firstName: "Azhar",
     lastName: "Babayeva",
-    role: "Reporting Manager",
+    role: "Reporting / Compliance Manager",
     photo: "/placeholder.svg",
     bioLeft:
-      "Azhar joined the company in 2013 after 5 years at Ernst & Young. She holds bachelor’s and master’s degrees from KIMEP and is enrolled in the ACCA program.",
+      "Azhar joined Al Falah in October 2013 and today oversees financial reporting and compliance. She has more than fifteen years of experience across finance, audit, tax, budgeting and fund administration, and began her career as an auditor at EY Kazakhstan.",
     bioRight:
-      "Azhar enjoys reading and continuous learning across finance and reporting standards.",
+      "Azhar earned both her bachelor’s and master’s degrees from KIMEP University and is currently pursuing the ACCA professional qualification.",
   },
 ]
 
