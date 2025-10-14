@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { DollarSign } from "lucide-react"
+//
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
