@@ -24,7 +24,12 @@ export interface NewsArticle {
   description: string
   content: string
   image?: string
+  heroImage?: string
   contentImage?: string
+  images?: string[]
+  date?: string
+  author?: string
+  category?: string
   contentSections?: Array<{ title: string; text: string }>
   published: boolean
   show_on_homepage: boolean
