@@ -9,7 +9,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileMenuAnimating, setMobileMenuAnimating] = useState(false)
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
-  const [language, setLanguage] = useState<"kz" | "ru" | "en">("ru")
+  const [language, setLanguage] = useState<"kz" | "ru" | "en">(
+    (typeof window !== "undefined" && (localStorage.getItem("lang") as any)) || "en"
+  )
   const [isScrolled, setIsScrolled] = useState(false)
   const shouldShowScrolled = forceScrolled || isScrolled
   const shouldShowTransparent = mobileMenuOpen && !forceScrolled
@@ -45,6 +47,10 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
 
   const handleLanguageChange = (lang: "kz" | "ru" | "en") => {
     setLanguage(lang)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("lang", lang)
+      window.dispatchEvent(new CustomEvent("language-changed", { detail: { lang } }))
+    }
     setLanguageDropdownOpen(false)
   }
 
@@ -73,9 +79,9 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   }
 
   const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
-    { href: "/portfolio", label: "Portfolio" },
+    { href: "/", label: language === "ru" ? "Главная" : language === "kz" ? "Басты бет" : "Home" },
+    { href: "/about", label: language === "ru" ? "О компании" : language === "kz" ? "Біз туралы" : "About Us" },
+    { href: "/portfolio", label: language === "ru" ? "Портфолио" : "kz" ? "Портфолио" : "Portfolio" },
   ]
 
   return (

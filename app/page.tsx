@@ -12,6 +12,7 @@ import AnimatedBackground from "@/components/animated-background"
 import Link from "next/link"
 import { getPublishedProjects, formatProjectDate } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
+import { i18n, readLang } from "@/lib/i18n"
 
 export default function Home() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -20,6 +21,7 @@ export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isImageVisible, setIsImageVisible] = useState(true)
   const [homeProjects, setHomeProjects] = useState<any[]>([])
+  const [lang, setLang] = useState(readLang())
 
   const stat1Counter = useCounterAnimation({
     end: homepageData ? Number.parseInt(homepageData.stat1Title?.replace(/[^\d]/g, "") || "0") : 0,
@@ -43,6 +45,19 @@ export default function Home() {
 
     return () => {
       window.removeEventListener("homepage-data-updated", handleDataUpdate as EventListener)
+    }
+  }, [])
+
+  // react to language changes from navbar
+  useEffect(() => {
+    const handler = (e: any) => setLang(e.detail?.lang || readLang())
+    if (typeof window !== "undefined") {
+      window.addEventListener("language-changed", handler)
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("language-changed", handler)
+      }
     }
   }, [])
 
@@ -130,7 +145,7 @@ export default function Home() {
                     whiteSpace: "normal",
                   }}
                 >
-                  Capitalizing on Emerging Opportunities
+                  {i18n.heroTitle[lang]}
                 </h1>
 
                 <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
@@ -139,7 +154,7 @@ export default function Home() {
                       className="bg-white hover:bg-gray-100 text-black font-semibold rounded-xl w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
                       style={{ height: "clamp(44px, 6.2vw, 48px)", paddingInline: "clamp(20px, 4.5vw, 40px)", fontSize: "clamp(14px, 1.6vw, 16px)" }}
                     >
-                      View Portfolio
+                      {i18n.heroButton[lang]}
                     </button>
                   </Link>
                 </div>
@@ -157,9 +172,9 @@ export default function Home() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-center md:text-left">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Portfolio</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{i18n.portfolioTitle[lang]}</h2>
               <p className="text-base md:text-lg text-gray-600 max-w-2xl">
-                Successful investments that helped our portfolio companies scale and grow
+                {i18n.portfolioSubtitle[lang]}
               </p>
             </div>
             <Link href="/portfolio">
@@ -167,7 +182,7 @@ export default function Home() {
                 variant="outline"
                 className="hidden md:block border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white px-8 mt-6"
               >
-                View All
+                {i18n.portfolioViewAll[lang]}
               </Button>
             </Link>
           </div>
@@ -176,25 +191,25 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
               {homeProjects.map((item) => (
                 <div key={item.id} className="lg:col-span-1">
-                  <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
-                    <img
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
+                  <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                   <div className="mt-4 flex flex-col h-40">
                     <div className="flex gap-2 mb-3">
                       <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-3 py-1 rounded-full`}>{item.sector}</span>
                       <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-3 py-1 rounded-full`}>{item.investmentStage}</span>
-                    </div>
+              </div>
                     <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                         {item.title}
                       </Link>
                     </h3>
                     <p className="text-gray-500 text-sm mt-auto">{item.date}</p>
-                  </div>
+              </div>
                 </div>
               ))}
             </div>
@@ -204,25 +219,25 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-6 mb-12">
               {homeProjects.slice(0, 6).map((item) => (
                 <div key={item.id} className="aspect-square">
-                  <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                    <img
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                  <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                   <div className="mt-3 flex flex-col h-40">
                     <div className="flex gap-2 mb-2">
                       <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
                       <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
-                    </div>
+              </div>
                     <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
                         {item.title}
                       </Link>
                     </h3>
                     <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
-                  </div>
+              </div>
                 </div>
               ))}
             </div>
@@ -232,25 +247,25 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {homeProjects.slice(0, 4).map((item) => (
                 <div key={item.id} className="aspect-square">
-                  <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
-                    <img
+                <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
+                  <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                   <div className="mt-3 flex flex-col h-36">
                     <div className="flex gap-2 mb-2">
                       <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
                       <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
-                    </div>
+              </div>
                     <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
                         {item.title}
                       </Link>
                     </h3>
                     <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
-                  </div>
+              </div>
                 </div>
               ))}
             </div>
@@ -265,9 +280,9 @@ export default function Home() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-16 items-start">
             <div className="order-2 xl:order-1">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6 xl:mt-0">{homepageData.aboutText}</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6 xl:mt-0">{i18n.aboutTitle[lang]}</h2>
               <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
-                {homepageData.aboutDescription.split("\n").map((paragraph, index) => (
+                {i18n.aboutParagraphs[lang].map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
@@ -300,7 +315,7 @@ export default function Home() {
                     <h3 ref={stat1Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
                       {homepageData.stat1Title.replace(/\d+/, stat1Counter.count.toString())}
                     </h3>
-                    <p className="text-gray-600">{homepageData.stat1Subtitle}</p>
+                    <p className="text-gray-600">{i18n.stat1Subtitle[lang]}</p>
                   </div>
                   <div className="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-gray-300"></div>
                   <div className="md:hidden w-full h-px bg-gray-300"></div>
@@ -311,7 +326,7 @@ export default function Home() {
                     <h3 ref={stat2Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
                       {homepageData.stat2Title.replace(/\d+/, stat2Counter.count.toString())}
                     </h3>
-                    <p className="text-gray-600">{homepageData.stat2Subtitle}</p>
+                    <p className="text-gray-600">{i18n.stat2Subtitle[lang]}</p>
                   </div>
                   <div className="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-gray-300"></div>
                   <div className="md:hidden w-full h-px bg-gray-300"></div>
@@ -322,7 +337,7 @@ export default function Home() {
                     <h3 ref={stat3Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
                       {homepageData.stat3Title.replace(/\d+/, stat3Counter.count.toString())}
                     </h3>
-                    <p className="text-gray-600">{homepageData.stat3Subtitle}</p>
+                    <p className="text-gray-600">{i18n.stat3Subtitle[lang]}</p>
                   </div>
                 </div>
               </div>
