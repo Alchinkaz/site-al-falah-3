@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { getHomepageData, type HomepageData } from "@/lib/homepage-data"
 import { useCounterAnimation } from "@/hooks/use-counter-animation"
-import { aboutI18n, readLang, teamI18n, i18n } from "@/lib/i18n"
+import { aboutI18n, readLang, teamI18n, i18n, teamNames } from "@/lib/i18n"
 
 export default function AboutPage() {
   const [homepageData, setHomepageData] = useState<HomepageData | null>(null)
