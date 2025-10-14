@@ -23,9 +23,14 @@ export default function AdminLayout({
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
+  // Apply dark theme to admin pages except the login page (login should be light)
   useEffect(() => {
-    document.documentElement.classList.add("dark")
-  }, [])
+    if (pathname === "/admin/login") {
+      document.documentElement.classList.remove("dark")
+    } else {
+      document.documentElement.classList.add("dark")
+    }
+  }, [pathname])
 
   useEffect(() => {
     const checkAuth = () => {
