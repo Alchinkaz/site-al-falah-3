@@ -130,7 +130,9 @@ export default function AdminLayout({
           {/* Logo */}
           <div className="p-6 border-b border-gray-200">
             <div className="flex items-center">
-              <img src="/al-falah-logo-black-full.svg" alt="Al Falah Capital Partners" className="h-8 w-auto" />
+              <Link href="/" aria-label="На главную">
+                <img src="/al-falah-logo-black-full.svg" alt="Al Falah Capital Partners" className="h-12 w-auto cursor-pointer" />
+              </Link>
             </div>
           </div>
 
