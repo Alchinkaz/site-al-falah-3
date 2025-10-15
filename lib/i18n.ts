@@ -467,6 +467,20 @@ export const projectTexts: Record<string, { title: { en: string; ru: string; kz:
     ? { ...defaultProjectTexts, ...((storedProjectTexts as any).projectTexts as any) }
     : defaultProjectTexts
 
+// Dynamic per-project sections translations
+const storedProjectSections = getTranslations()
+export const projectSections: Record<string, { en: Array<{ title: string; text: string }>; ru: Array<{ title: string; text: string }>; kz: Array<{ title: string; text: string }> }> =
+  storedProjectSections && (storedProjectSections as any).projectSections
+    ? ((storedProjectSections as any).projectSections as any)
+    : {}
+
+// Dynamic per-project badges labels translations
+const storedProjectBadges = getTranslations()
+export const projectBadgesI18n: Record<string, Array<{ en: string; ru: string; kz: string }>> =
+  storedProjectBadges && (storedProjectBadges as any).projectBadgesI18n
+    ? ((storedProjectBadges as any).projectBadgesI18n as any)
+    : {}
+
 export function formatDateByLang(dateString: string, lang: Lang): string {
   const date = new Date(dateString)
   const locale = lang === "ru" ? "ru-RU" : lang === "kz" ? "kk-KZ" : "en-US"

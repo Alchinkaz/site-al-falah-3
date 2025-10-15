@@ -194,6 +194,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       next.projectBadgesI18n = next.projectBadgesI18n || {}
       next.projectBadgesI18n[cleanedData.id] = badgesI18n
       localStorage.setItem("i18n-translations", JSON.stringify(next))
+      ;(window as any).i18n_translations = next
       window.dispatchEvent(new CustomEvent("i18n-updated", { detail: next }))
     } catch (e) {
       console.error("Failed to persist project i18n", e)
@@ -215,9 +216,11 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
   }
 
   const updateContentSection = (index: number, field: "title" | "text", value: string) => {
-    const newSections = [...localData.contentSections]
-    newSections[index] = { ...newSections[index], [field]: value }
-    updateLocalData("contentSections", newSections)
+    setSectionsI18n((prev) => {
+      const langArr = [...prev[activeLang]]
+      langArr[index] = { ...langArr[index], [field]: value }
+      return { ...prev, [activeLang]: langArr }
+    })
   }
 
   useEffect(() => {

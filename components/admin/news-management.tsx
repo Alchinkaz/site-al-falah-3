@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Plus, Edit3, Trash2, FileText } from "lucide-react"
 import { AdminStorage, type NewsArticle } from "@/lib/admin-storage"
+import { readLang } from "@/lib/i18n"
 import { NewsEditForm } from "./news-edit-form-updated"
 
 interface NewsManagementProps {
@@ -17,6 +18,7 @@ interface NewsManagementProps {
 export function NewsManagement({ currentUser, formatDate }: NewsManagementProps) {
   const router = useRouter()
   const [articles, setArticles] = useState<NewsArticle[]>([])
+  const [lang, setLang] = useState(readLang())
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
 
@@ -44,6 +46,12 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
   // Загрузка проектов
   useEffect(() => {
     loadArticles()
+  }, [])
+
+  useEffect(() => {
+    const handler = (e: any) => setLang(e.detail?.lang || readLang())
+    window.addEventListener("language-changed", handler)
+    return () => window.removeEventListener("language-changed", handler)
   }, [])
 
   const loadArticles = () => {
@@ -335,7 +343,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
                           )}
                           {(article as any).badges?.map((b: any, i: number) => (
                             <span key={i} className="text-xs px-2 py-0.5 rounded-full border" style={{ backgroundColor: `${b.color}20`, color: b.color, borderColor: `${b.color}40` }}>
-                              {b.label}
+                              {(window as any)?.i18n_translations?.projectBadgesI18n?.[article.id]?.[i]?.[lang] || b.label}
                             </span>
                           ))}
                         </div>

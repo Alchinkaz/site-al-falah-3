@@ -8,7 +8,7 @@ import Footer from "@/components/footer"
 import { getProjectWithDetails } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
 import { useEffect, useState } from "react"
-import { readLang, portfolioI18n, projectTexts } from "@/lib/i18n"
+import { readLang, portfolioI18n, projectTexts, projectBadgesI18n, projectSections } from "@/lib/i18n"
 
 export default function PortfolioDetailPage({ params }: { params: { id: string } }) {
   const [project, setProject] = useState<any>(null)
@@ -75,7 +75,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
             <div className="flex items-center gap-2 mb-4 flex-wrap">
               {(project as any).badges?.map((b: any, i: number) => (
                 <span key={i} className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                  {b.label}
+                  {projectBadgesI18n[project.id]?.[i]?.[lang] || b.label}
                 </span>
               ))}
             </div>
@@ -103,12 +103,12 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                 <div key={index} className="prose prose-lg max-w-none">
                   {section.title && (
                     <div className="mb-8">
-                      <h2 className="text-3xl font-bold text-gray-900 mb-6">{section.title}</h2>
+                      <h2 className="text-3xl font-bold text-gray-900 mb-6">{projectSections[project.id]?.[lang]?.[index]?.title || section.title}</h2>
                     </div>
                   )}
                   {section.text && (
                     <div className="text-gray-700 leading-relaxed text-lg whitespace-pre-line mb-8">
-                      {(projectTexts[project.id]?.content?.[lang] || [section.text]).map((p, i) => (
+                      {(projectTexts[project.id]?.content?.[lang] || [projectSections[project.id]?.[lang]?.[index]?.text || section.text]).map((p, i) => (
                         <p key={i} className="mb-4 last:mb-0">{p}</p>
                       ))}
                     </div>
