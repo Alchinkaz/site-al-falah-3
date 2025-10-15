@@ -2,7 +2,22 @@ export type Lang = "en" | "ru" | "kz"
 
 export const defaultLang: Lang = "en"
 
-export const i18n = {
+// Function to get translations from localStorage or default
+function getTranslations() {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem("i18n-translations")
+    if (stored) {
+      try {
+        return JSON.parse(stored)
+      } catch (error) {
+        console.error("Error loading i18n translations from localStorage:", error)
+      }
+    }
+  }
+  return null
+}
+
+const defaultTranslations = {
   heroTitle: {
     en: "Capitalizing on Emerging Opportunities",
     ru: "Используем возможности растущих рынков",
@@ -88,6 +103,12 @@ export const i18n = {
   navAbout: { en: "About Us", ru: "О компании", kz: "Біз туралы" },
   navPortfolio: { en: "Portfolio", ru: "Портфолио", kz: "Портфолио" },
 }
+
+// Create dynamic i18n object that merges stored translations with defaults
+export const i18n = (() => {
+  const stored = getTranslations()
+  return stored ? { ...defaultTranslations, ...stored } : defaultTranslations
+})()
 
 // About page i18n
 export const aboutI18n = {

@@ -40,10 +40,17 @@ export default function Home() {
       setHomepageData(event.detail)
     }
 
+    const handleI18nUpdate = (event: CustomEvent) => {
+      // Reload the page to apply new translations
+      window.location.reload()
+    }
+
     window.addEventListener("homepage-data-updated", handleDataUpdate as EventListener)
+    window.addEventListener("i18n-updated", handleI18nUpdate as EventListener)
 
     return () => {
       window.removeEventListener("homepage-data-updated", handleDataUpdate as EventListener)
+      window.removeEventListener("i18n-updated", handleI18nUpdate as EventListener)
     }
   }, [])
 
