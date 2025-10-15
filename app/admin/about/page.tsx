@@ -26,6 +26,9 @@ export default function AdminAboutPage() {
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
   const [keyTermsRows, setKeyTermsRows] = useState<any[]>(i18n.aboutPageKeyTermsRows || [])
+  const [keyTermsTitle, setKeyTermsTitle] = useState<{ en: string; ru: string; kz: string }>((i18n as any).aboutPageKeyTermsTitle || { en: "Key terms", ru: "Ключевые условия", kz: "Негізгі шарттар" })
+  const [sectorsTitle, setSectorsTitle] = useState<{ en: string; ru: string; kz: string }>((i18n as any).aboutPageSectorsTitle || { en: "Sectors", ru: "Сектора", kz: "Салалар" })
+  const [sectors, setSectors] = useState<any[]>(((i18n as any).aboutPageSectors) || [])
 
   useEffect(() => {
     const data = getHomepageData()
@@ -49,6 +52,9 @@ export default function AdminAboutPage() {
           kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
         },
         aboutPageKeyTermsRows: keyTermsRows,
+        aboutPageKeyTermsTitle: keyTermsTitle,
+        aboutPageSectorsTitle: sectorsTitle,
+        aboutPageSectors: sectors,
       }
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
 
@@ -176,6 +182,15 @@ export default function AdminAboutPage() {
           <CardTitle className="flex items-center gap-2 text-gray-900">Key terms</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div>
+            <Label className="text-gray-900 font-medium">Заголовок Key terms ({currentLang.toUpperCase()})</Label>
+            <Input
+              value={keyTermsTitle[currentLang] || ""}
+              onChange={(e) => setKeyTermsTitle({ ...keyTermsTitle, [currentLang]: e.target.value })}
+              placeholder={currentLang === "en" ? "Key terms" : currentLang === "ru" ? "Ключевые условия" : "Негізгі шарттар"}
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
           {keyTermsRows.map((row, idx) => (
             <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
               <div className="grid grid-cols-1 gap-4">
@@ -230,6 +245,74 @@ export default function AdminAboutPage() {
               className="border-gray-300"
             >
               Добавить строку
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Sectors editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Sectors</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label className="text-gray-900 font-medium">Заголовок Sectors ({currentLang.toUpperCase()})</Label>
+            <Input
+              value={sectorsTitle[currentLang] || ""}
+              onChange={(e) => setSectorsTitle({ ...sectorsTitle, [currentLang]: e.target.value })}
+              placeholder={currentLang === "en" ? "Sectors" : currentLang === "ru" ? "Сектора" : "Салалар"}
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          {sectors.map((item, idx) => (
+            <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <Label className="text-gray-900 font-medium">Title ({currentLang.toUpperCase()})</Label>
+                  <Input
+                    value={(item.title && item.title[currentLang]) || ""}
+                    onChange={(e) => {
+                      const next = [...sectors]
+                      next[idx] = { ...next[idx], title: { ...(next[idx]?.title || {}), [currentLang]: e.target.value } }
+                      setSectors(next)
+                    }}
+                    placeholder={currentLang === "en" ? "Oil & Gas" : currentLang === "ru" ? "Нефть и газ" : "Мұнай‑газ"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Description ({currentLang.toUpperCase()})</Label>
+                  <Textarea
+                    value={(item.desc && item.desc[currentLang]) || ""}
+                    onChange={(e) => {
+                      const next = [...sectors]
+                      next[idx] = { ...next[idx], desc: { ...(next[idx]?.desc || {}), [currentLang]: e.target.value } }
+                      setSectors(next)
+                    }}
+                    rows={3}
+                    placeholder={currentLang === "en" ? "Production, Food processing, Logistics" : currentLang === "ru" ? "Производство, переработка продуктов питания, логистика" : "Өндіріс, азық‑түлік өңдеу, логистика"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <Button
+                  variant="outline"
+                  className="border-red-300 text-red-600 hover:bg-red-50"
+                  onClick={() => setSectors(sectors.filter((_, i) => i !== idx))}
+                >
+                  Удалить
+                </Button>
+              </div>
+            </div>
+          ))}
+          <div>
+            <Button
+              variant="outline"
+              onClick={() => setSectors([...sectors, { title: { en: "", ru: "", kz: "" }, desc: { en: "", ru: "", kz: "" } }])}
+              className="border-gray-300"
+            >
+              Добавить сектор
             </Button>
           </div>
         </CardContent>

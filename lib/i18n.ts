@@ -120,6 +120,45 @@ const defaultTranslations = {
       value: { en: "20% with clawback", ru: "20% с механизмом clawback", kz: "20% (clawback бар)" },
     },
   ],
+  // Editable Key terms title override
+  aboutPageKeyTermsTitle: { en: "Key terms", ru: "Ключевые условия", kz: "Негізгі шарттар" },
+  // Editable Sectors title override
+  aboutPageSectorsTitle: { en: "Sectors", ru: "Сектора", kz: "Салалар" },
+  // Editable Sectors items (title + description)
+  aboutPageSectors: [
+    {
+      title: { en: "Oil & Gas", ru: "Нефть и газ", kz: "Мұнай‑газ" },
+      desc: {
+        en: "Reservoirs, Wells, Equipment, Facilities, Marine & Subsea",
+        ru: "Месторождения, скважины, оборудование, объекты, морская и подводная инфраструктура",
+        kz: "Кен орындары, ұңғылар, жабдық, нысандар, теңіз және су асты инфрақұрылымы",
+      },
+    },
+    {
+      title: { en: "Power", ru: "Электроэнергетика", kz: "Энергетика" },
+      desc: {
+        en: "Generation, Transportation & distribution, Services",
+        ru: "Генерация, транспортировка и распределение, сервис",
+        kz: "Генерация, тасымалдау және тарату, қызметтер",
+      },
+    },
+    {
+      title: { en: "Food & Agro", ru: "Пищепром и агро", kz: "Азық‑түлік және агро" },
+      desc: {
+        en: "Production, Food processing, Logistics",
+        ru: "Производство, переработка продуктов питания, логистика",
+        kz: "Өндіріс, азық‑түлік өңдеу, логистика",
+      },
+    },
+    {
+      title: { en: "Industrial & High‑tech", ru: "Индустрия и высокые технологии", kz: "Индустрия және жоғары технологиялар" },
+      desc: {
+        en: "Construction & materials, Industrial transportation, Electronic & electrical equipment",
+        ru: "Строительство и материалы, промышленный транспорт, электронное и электротехническое оборудование",
+        kz: "Құрылыс және материалдар, өндірістік көлік, электронды және электр жабдықтары",
+      },
+    },
+  ],
   stat1Subtitle: {
     en: "Assets Under Management",
     ru: "Активы под управлением",

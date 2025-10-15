@@ -73,7 +73,7 @@ export default function AboutPage() {
 
             <div className="space-y-6">
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{aboutI18n.keyTermsTitle[lang]}</h3>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{(i18n as any).aboutPageKeyTermsTitle?.[lang] || aboutI18n.keyTermsTitle[lang]}</h3>
                 <ul className="text-gray-700 divide-y divide-gray-200 border-t border-b border-gray-200">
                   {(i18n.aboutPageKeyTermsRows || []).map((row: any, idx: number) => (
                     <li key={idx} className="flex justify-between gap-4 py-3">
@@ -85,10 +85,10 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{aboutI18n.sectorsTitle[lang]}</h3>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{(i18n as any).aboutPageSectorsTitle?.[lang] || aboutI18n.sectorsTitle[lang]}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {aboutI18n.sectors.map((item) => (
-                    <div key={item.key} className="rounded-lg border border-gray-200 p-4">
+                  {((i18n as any).aboutPageSectors || aboutI18n.sectors).map((item: any, idx: number) => (
+                    <div key={item.key || idx} className="rounded-lg border border-gray-200 p-4">
                       <div className="text-lg font-semibold text-gray-900 mb-1">{item.title[lang]}</div>
                       <div className="text-gray-600 text-sm leading-relaxed">{item.desc[lang]}</div>
                     </div>
