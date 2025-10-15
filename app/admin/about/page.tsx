@@ -92,6 +92,9 @@ export default function AdminAboutPage() {
         aboutPageSectors: sectors,
         teamTitle,
         teamPhotos: teamPhotos,
+        // Persist team dictionaries for names/roles/bios
+        teamNames: teamNames,
+        teamI18n: teamI18n,
         // Statistics subtitles (shared with homepage)
         stat1Subtitle: {
           ...i18n.stat1Subtitle,

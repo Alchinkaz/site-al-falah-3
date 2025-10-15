@@ -35,6 +35,13 @@ export default function AboutPage() {
     return () => window.removeEventListener("homepage-data-updated", handleDataUpdate as EventListener)
   }, [])
 
+  // React to i18n updates to immediately reflect Team changes
+  useEffect(() => {
+    const handler = () => setLang(readLang())
+    window.addEventListener("i18n-updated", handler as EventListener)
+    return () => window.removeEventListener("i18n-updated", handler as EventListener)
+  }, [])
+
   useEffect(() => {
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)

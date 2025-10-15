@@ -298,7 +298,7 @@ export const aboutI18n = {
 }
 
 // Team members i18n by slug
-export const teamI18n: Record<string, { role: { en: string; ru: string; kz: string }; bioLeft: { en: string; ru: string; kz: string }; bioRight: { en: string; ru: string; kz: string } }> = {
+const defaultTeamI18n: Record<string, { role: { en: string; ru: string; kz: string }; bioLeft: { en: string; ru: string; kz: string }; bioRight: { en: string; ru: string; kz: string } }> = {
   "nurlan-kussainov": {
     role: { en: "Managing Partner", ru: "Управляющий Партнер", kz: "Басқарушы Серіктес" },
     bioLeft: {
@@ -353,12 +353,24 @@ export const teamI18n: Record<string, { role: { en: string; ru: string; kz: stri
   },
 }
 
-export const teamNames: Record<string, { en: string; ru: string; kz: string }> = {
+const defaultTeamNames: Record<string, { en: string; ru: string; kz: string }> = {
   "nurlan-kussainov": { en: "Nurlan Kussainov", ru: "Нурлан Кусаинов", kz: "Нұрлан Құсайынов" },
   "diyar-medeubekov": { en: "Diyar Medeubekov", ru: "Дияр Медеубеков", kz: "Дияр Медеубеков" },
   "altay-mamanbayev": { en: "Altay Mamanbayev", ru: "Алтай Маманбаев", kz: "Алтай Маманбаев" },
   "azhar-babayeva": { en: "Azhar Babayeva", ru: "Ажар Бабаева", kz: "Ажар Бабаева" },
 }
+
+// Export dynamic team dictionaries that can be overridden via localStorage
+const storedForTeams = getTranslations()
+export const teamI18n: Record<string, { role: { en: string; ru: string; kz: string }; bioLeft: { en: string; ru: string; kz: string }; bioRight: { en: string; ru: string; kz: string } }> =
+  (storedForTeams && (storedForTeams as any).teamI18n)
+    ? { ...defaultTeamI18n, ...((storedForTeams as any).teamI18n as any) }
+    : defaultTeamI18n
+
+export const teamNames: Record<string, { en: string; ru: string; kz: string }> =
+  (storedForTeams && (storedForTeams as any).teamNames)
+    ? { ...defaultTeamNames, ...((storedForTeams as any).teamNames as any) }
+    : defaultTeamNames
 
 // Portfolio pages i18n
 export const portfolioI18n = {

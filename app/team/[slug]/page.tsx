@@ -77,6 +77,13 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
     return () => window.removeEventListener("language-changed", handler)
   }, [])
 
+  // React to i18n updates to immediately reflect Team edits from admin
+  useEffect(() => {
+    const force = () => setLang(readLang())
+    window.addEventListener("i18n-updated", force as EventListener)
+    return () => window.removeEventListener("i18n-updated", force as EventListener)
+  }, [])
+
   if (!member) {
     return (
       <div className="min-h-screen bg-white">
