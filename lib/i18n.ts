@@ -373,7 +373,7 @@ export const teamNames: Record<string, { en: string; ru: string; kz: string }> =
     : defaultTeamNames
 
 // Portfolio pages i18n
-export const portfolioI18n = {
+const defaultPortfolioI18n = {
   heroTitle: { en: "Our Portfolio", ru: "Наше портфолио", kz: "Біздің портфолио" },
   heroSubtitle: {
     en: "Discover our portfolio of innovative companies transforming industries across Central Asia",
@@ -400,6 +400,12 @@ export const portfolioI18n = {
     Funds: { en: "Funds", ru: "Фонды", kz: "Қорлар" },
   } as Record<string, { en: string; ru: string; kz: string }>,
 }
+
+// Export dynamic portfolio i18n that can be overridden via localStorage
+const storedForPortfolio = getTranslations()
+export const portfolioI18n = (storedForPortfolio && (storedForPortfolio as any).portfolioI18n)
+  ? { ...defaultPortfolioI18n, ...((storedForPortfolio as any).portfolioI18n as any) }
+  : defaultPortfolioI18n
 
 export const projectTexts: Record<string, {
   title: { en: string; ru: string; kz: string }
