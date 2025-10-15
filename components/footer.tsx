@@ -1,14 +1,34 @@
 "use client"
 
 import { i18n, readLang } from "@/lib/i18n"
+import { getHomepageData } from "@/lib/homepage-data"
 import { useEffect, useState } from "react"
 
 export default function Footer() {
   const [lang, setLang] = useState(readLang())
+  const [email, setEmail] = useState<string>("")
+  const [copyright, setCopyright] = useState<string>("")
   useEffect(() => {
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)
     return () => window.removeEventListener("language-changed", handler)
+  }, [])
+
+  useEffect(() => {
+    const data = getHomepageData()
+    setEmail(data.footerEmail || "altay@falahpartners.com")
+    ;(function(){
+      // ensure copyright comes from data or fallback
+      const cp = data.footerCopyright || "© 2025 Al Falah Capital Partners"
+      setCopyright(cp)
+    })()
+    const onData = (e: any) => {
+      const d = e.detail || {}
+      setEmail(d.footerEmail || "altay@falahpartners.com")
+      setCopyright(d.footerCopyright || "© 2025 Al Falah Capital Partners")
+    }
+    window.addEventListener("homepage-data-updated", onData)
+    return () => window.removeEventListener("homepage-data-updated", onData)
   }, [])
 
   const [ctaLine1, ctaLine2] = i18n.ctaTitle[lang]
@@ -38,14 +58,14 @@ export default function Footer() {
             <p className="font-medium">{i18n.footerContactUs[lang]}</p>
             <p>{i18n.footerNameAltay[lang]}</p>
             <p>{i18n.footerRoleAltay[lang]}</p>
-            <a href="mailto:altay@falahpartners.com" className="hover:text-white transition-colors">
-              altay@falahpartners.com
+            <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+              {email}
             </a>
           </div>
 
           {/* Copyright - centered on desktop, left on mobile */}
           <div className="text-white/80 text-sm text-left md:absolute md:left-1/2 md:-translate-x-1/2">
-            <p>© 2025 Al Falah Capital Partners</p>
+            <p>{copyright}</p>
             <p>
               <a
                 href="https://wa.me/77710798939"

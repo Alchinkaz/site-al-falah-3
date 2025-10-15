@@ -79,6 +79,10 @@ export interface HomepageData {
   portfolioItems: PortfolioItem[]
 
   tickerTexts?: string[]
+
+  // Footer specific (non-translated)
+  footerEmail?: string
+  footerCopyright?: string
 }
 
 // Default homepage data
@@ -264,6 +268,8 @@ const defaultHomepageData: HomepageData = {
     "Building tomorrow's market leaders",
     "Expert guidance and global networks",
   ],
+  footerEmail: "altay@falahpartners.com",
+  footerCopyright: "© 2025 Al Falah Capital Partners",
 }
 
 const STORAGE_KEY = "homepage-data"
