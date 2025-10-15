@@ -82,37 +82,8 @@ export default function HomepageAdminPage() {
           <h1 className="text-3xl font-bold text-gray-900">Редактирование главной страницы</h1>
           <p className="text-gray-600 mt-2">Управление контентом hero секции</p>
         </div>
-        <Button
-          onClick={handleSave}
-          disabled={isSaving}
-          style={{ backgroundColor: "#16a34a" }}
-          className="hover:opacity-90 text-white"
-        >
-          <Save className="w-4 h-4 mr-2" />
-          {isSaving ? "Сохранение..." : "Сохранить"}
-        </Button>
-      </div>
-
-      {saveMessage && (
-        <div
-          className={`p-4 rounded-lg ${
-            saveMessage.includes("успешно") 
-              ? "bg-green-50 text-green-800 border border-green-200" 
-              : "bg-red-50 text-red-800 border border-red-200"
-          }`}
-        >
-          {saveMessage}
-        </div>
-      )}
-
-      {/* Hero Section Editor */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Hero</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Language Switcher */}
-          <div className="flex gap-2 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-2">
             <Button
               variant={currentLang === "en" ? "default" : "outline"}
               onClick={() => setCurrentLang("en")}
@@ -135,6 +106,36 @@ export default function HomepageAdminPage() {
               Қазақша
             </Button>
           </div>
+          <Button
+            onClick={handleSave}
+            disabled={isSaving}
+            style={{ backgroundColor: "#16a34a" }}
+            className="hover:opacity-90 text-white"
+          >
+            <Save className="w-4 h-4 mr-2" />
+            {isSaving ? "Сохранение..." : "Сохранить"}
+          </Button>
+        </div>
+      </div>
+
+      {saveMessage && (
+        <div
+          className={`p-4 rounded-lg ${
+            saveMessage.includes("успешно") 
+              ? "bg-green-50 text-green-800 border border-green-200" 
+              : "bg-red-50 text-red-800 border border-red-200"
+          }`}
+        >
+          {saveMessage}
+        </div>
+      )}
+
+      {/* Hero Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Hero</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
 
           {/* Current Language Editor */}
           <div className="space-y-6">
