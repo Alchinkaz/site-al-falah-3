@@ -13,39 +13,39 @@ import { getHomepageData, updateHomepageData } from "@/lib/homepage-data"
 export default function HomepageAdminPage() {
   const [currentLang, setCurrentLang] = useState<Lang>("en")
   const [heroTranslations, setHeroTranslations] = useState({
-    en: i18n.heroTitle.en,
-    ru: i18n.heroTitle.ru,
-    kz: i18n.heroTitle.kz,
+    en: i18n.heroTitle?.en || "Capitalizing on Emerging Opportunities",
+    ru: i18n.heroTitle?.ru || "Используем возможности растущих рынков",
+    kz: i18n.heroTitle?.kz || "Өсіп келе жатқан мүмкіндіктерді іске асырамыз",
   })
   const [buttonTranslations, setButtonTranslations] = useState({
-    en: i18n.heroButton.en,
-    ru: i18n.heroButton.ru,
-    kz: i18n.heroButton.kz,
+    en: i18n.heroButton?.en || "View Portfolio",
+    ru: i18n.heroButton?.ru || "Портфолио",
+    kz: i18n.heroButton?.kz || "Портфолио",
   })
   const [portfolioTitleTranslations, setPortfolioTitleTranslations] = useState({
-    en: i18n.portfolioTitle.en,
-    ru: i18n.portfolioTitle.ru,
-    kz: i18n.portfolioTitle.kz,
+    en: i18n.portfolioTitle?.en || "Portfolio",
+    ru: i18n.portfolioTitle?.ru || "Портфолио",
+    kz: i18n.portfolioTitle?.kz || "Портфолио",
   })
   const [portfolioSubtitleTranslations, setPortfolioSubtitleTranslations] = useState({
-    en: i18n.portfolioSubtitle.en,
-    ru: i18n.portfolioSubtitle.ru,
-    kz: i18n.portfolioSubtitle.kz,
+    en: i18n.portfolioSubtitle?.en || "Successful investments that helped our portfolio companies scale and grow",
+    ru: i18n.portfolioSubtitle?.ru || "Успешные инвестиции, которые помогли нашим компаниям расти и масштабироваться",
+    kz: i18n.portfolioSubtitle?.kz || "Біздің портфельдік компаниялардың өсуіне және ауқымын кеңейтуіне көмектескен инвестициялар",
   })
   const [portfolioButtonTranslations, setPortfolioButtonTranslations] = useState({
-    en: i18n.portfolioViewAll.en,
-    ru: i18n.portfolioViewAll.ru,
-    kz: i18n.portfolioViewAll.kz,
+    en: i18n.portfolioViewAll?.en || "View All",
+    ru: i18n.portfolioViewAll?.ru || "Смотреть все",
+    kz: i18n.portfolioViewAll?.kz || "Барлығын көру",
   })
   const [aboutTitleTranslations, setAboutTitleTranslations] = useState({
-    en: i18n.aboutTitle.en,
-    ru: i18n.aboutTitle.ru,
-    kz: i18n.aboutTitle.kz,
+    en: i18n.aboutTitle?.en || "About Us",
+    ru: i18n.aboutTitle?.ru || "О компании",
+    kz: i18n.aboutTitle?.kz || "Біз туралы",
   })
   const [aboutParagraphsTranslations, setAboutParagraphsTranslations] = useState({
-    en: (i18n.aboutParagraphs.en || []).join("\n\n"),
-    ru: (i18n.aboutParagraphs.ru || []).join("\n\n"),
-    kz: (i18n.aboutParagraphs.kz || []).join("\n\n"),
+    en: (i18n.aboutParagraphs?.en || []).join("\n\n"),
+    ru: (i18n.aboutParagraphs?.ru || []).join("\n\n"),
+    kz: (i18n.aboutParagraphs?.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
   // Statistics
@@ -55,38 +55,38 @@ export default function HomepageAdminPage() {
     stat3Title: "",
   })
   const [stat1SubtitleTranslations, setStat1SubtitleTranslations] = useState({
-    en: i18n.stat1Subtitle.en,
-    ru: i18n.stat1Subtitle.ru,
-    kz: i18n.stat1Subtitle.kz,
+    en: i18n.stat1Subtitle?.en || "Assets Under Management",
+    ru: i18n.stat1Subtitle?.ru || "Активы под управлением",
+    kz: i18n.stat1Subtitle?.kz || "Басқарудағы активтер",
   })
   const [stat2SubtitleTranslations, setStat2SubtitleTranslations] = useState({
-    en: i18n.stat2Subtitle.en,
-    ru: i18n.stat2Subtitle.ru,
-    kz: i18n.stat2Subtitle.kz,
+    en: i18n.stat2Subtitle?.en || "Portfolio Companies",
+    ru: i18n.stat2Subtitle?.ru || "Портфельные компании",
+    kz: i18n.stat2Subtitle?.kz || "Портфельдік компаниялар",
   })
   const [stat3SubtitleTranslations, setStat3SubtitleTranslations] = useState({
-    en: i18n.stat3Subtitle.en,
-    ru: i18n.stat3Subtitle.ru,
-    kz: i18n.stat3Subtitle.kz,
+    en: i18n.stat3Subtitle?.en || "Successful Exits",
+    ru: i18n.stat3Subtitle?.ru || "Успешные выходы",
+    kz: i18n.stat3Subtitle?.kz || "Сәтті шығулар",
   })
 
   // Footer
   const [footerEmail, setFooterEmail] = useState("")
   const [footerCopyright, setFooterCopyright] = useState("")
   const [footerContactUsTranslations, setFooterContactUsTranslations] = useState({
-    en: i18n.footerContactUs.en,
-    ru: i18n.footerContactUs.ru,
-    kz: i18n.footerContactUs.kz,
+    en: i18n.footerContactUs?.en || "Contact us:",
+    ru: i18n.footerContactUs?.ru || "Свяжитесь с нами:",
+    kz: i18n.footerContactUs?.kz || "Бізбен байланысыңыз:",
   })
   const [footerNameTranslations, setFooterNameTranslations] = useState({
-    en: i18n.footerNameAltay.en,
-    ru: i18n.footerNameAltay.ru,
-    kz: i18n.footerNameAltay.kz,
+    en: i18n.footerNameAltay?.en || "Altay Mamanbayev",
+    ru: i18n.footerNameAltay?.ru || "Алтай Маманбаев",
+    kz: i18n.footerNameAltay?.kz || "Алтай Маманбаев",
   })
   const [footerRoleTranslations, setFooterRoleTranslations] = useState({
-    en: i18n.footerRoleAltay.en,
-    ru: i18n.footerRoleAltay.ru,
-    kz: i18n.footerRoleAltay.kz,
+    en: i18n.footerRoleAltay?.en || "Chief Operating Officer",
+    ru: i18n.footerRoleAltay?.ru || "Исполнительный Директор",
+    kz: i18n.footerRoleAltay?.kz || "Атқарушы Директор",
   })
   const [ctaLine1Translations, setCtaLine1Translations] = useState({
     en: i18n.ctaTitle.en?.[0] || "",
@@ -359,12 +359,12 @@ export default function HomepageAdminPage() {
                 rows={3}
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
-            </div>
+          </div>
               <div>
               <Label htmlFor="portfolioViewAll" className="text-gray-900 font-medium">
                 Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
                 </Label>
-                <Input
+                      <Input
                 id="portfolioViewAll"
                 value={portfolioButtonTranslations[currentLang]}
                 onChange={(e) =>
@@ -373,7 +373,7 @@ export default function HomepageAdminPage() {
                 placeholder="View All"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
-            </div>
+              </div>
           </div>
         </CardContent>
       </Card>
@@ -384,11 +384,11 @@ export default function HomepageAdminPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-6">
-              <div>
+          <div>
               <Label htmlFor="aboutTitle" className="text-gray-900 font-medium">
                 Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-                </Label>
-                <Input
+            </Label>
+            <Input
                 id="aboutTitle"
                 value={aboutTitleTranslations[currentLang]}
                 onChange={(e) =>
@@ -396,13 +396,13 @@ export default function HomepageAdminPage() {
                 }
                 placeholder="About Us"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
+            />
+          </div>
+          <div>
               <Label htmlFor="aboutParagraphs" className="text-gray-900 font-medium">
                 Текст ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-                </Label>
-                <Textarea
+            </Label>
+            <Textarea
                 id="aboutParagraphs"
                 value={aboutParagraphsTranslations[currentLang]}
                 onChange={(e) =>
@@ -413,11 +413,11 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
               <p className="text-xs text-gray-500 mt-1">Разделяйте абзацы пустой строкой.</p>
-            </div>
-                      <div>
+          </div>
+          <div>
               <Label htmlFor="aboutImage" className="text-gray-900 font-medium">
                 Ссылка на изображение
-                </Label>
+            </Label>
                 <Input
                 id="aboutImage"
                 value={aboutImageUrl}
@@ -571,7 +571,7 @@ export default function HomepageAdminPage() {
                 />
               </div>
             </div>
-            <div>
+              <div>
               <Label className="text-gray-900 font-medium">Copyright</Label>
               <Input
                 value={footerCopyright}
