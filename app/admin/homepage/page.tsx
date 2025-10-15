@@ -21,6 +21,21 @@ export default function HomepageAdminPage() {
     ru: i18n.heroButton.ru,
     kz: i18n.heroButton.kz,
   })
+  const [portfolioTitleTranslations, setPortfolioTitleTranslations] = useState({
+    en: i18n.portfolioTitle.en,
+    ru: i18n.portfolioTitle.ru,
+    kz: i18n.portfolioTitle.kz,
+  })
+  const [portfolioSubtitleTranslations, setPortfolioSubtitleTranslations] = useState({
+    en: i18n.portfolioSubtitle.en,
+    ru: i18n.portfolioSubtitle.ru,
+    kz: i18n.portfolioSubtitle.kz,
+  })
+  const [portfolioButtonTranslations, setPortfolioButtonTranslations] = useState({
+    en: i18n.portfolioViewAll.en,
+    ru: i18n.portfolioViewAll.ru,
+    kz: i18n.portfolioViewAll.kz,
+  })
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
 
@@ -53,6 +68,18 @@ export default function HomepageAdminPage() {
         heroButton: {
           ...i18n.heroButton,
           ...buttonTranslations,
+        },
+        portfolioTitle: {
+          ...i18n.portfolioTitle,
+          ...portfolioTitleTranslations,
+        },
+        portfolioSubtitle: {
+          ...i18n.portfolioSubtitle,
+          ...portfolioSubtitleTranslations,
+        },
+        portfolioViewAll: {
+          ...i18n.portfolioViewAll,
+          ...portfolioButtonTranslations,
         },
       }
       
@@ -161,6 +188,59 @@ export default function HomepageAdminPage() {
                 value={buttonTranslations[currentLang]}
                 onChange={(e) => handleButtonTextChange(currentLang, e.target.value)}
                 placeholder="View Portfolio"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Portfolio Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Portfolio</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="portfolioTitle" className="text-gray-900 font-medium">
+                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Input
+                id="portfolioTitle"
+                value={portfolioTitleTranslations[currentLang]}
+                onChange={(e) =>
+                  setPortfolioTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="Portfolio"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label htmlFor="portfolioSubtitle" className="text-gray-900 font-medium">
+                Подзаголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Textarea
+                id="portfolioSubtitle"
+                value={portfolioSubtitleTranslations[currentLang]}
+                onChange={(e) =>
+                  setPortfolioSubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="Successful investments that helped our portfolio companies scale and grow"
+                rows={3}
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label htmlFor="portfolioViewAll" className="text-gray-900 font-medium">
+                Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Input
+                id="portfolioViewAll"
+                value={portfolioButtonTranslations[currentLang]}
+                onChange={(e) =>
+                  setPortfolioButtonTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="View All"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
