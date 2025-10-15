@@ -25,6 +25,7 @@ export default function AdminAboutPage() {
     kz: (i18n.aboutPageParagraphs?.kz || i18n.aboutParagraphs.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
+  const [keyTermsRows, setKeyTermsRows] = useState<any[]>(i18n.aboutPageKeyTermsRows || [])
 
   useEffect(() => {
     const data = getHomepageData()
@@ -47,6 +48,7 @@ export default function AdminAboutPage() {
           ru: aboutParagraphsTranslations.ru.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
           kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
         },
+        aboutPageKeyTermsRows: keyTermsRows,
       }
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
 

@@ -75,16 +75,11 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4">{aboutI18n.keyTermsTitle[lang]}</h3>
                 <ul className="text-gray-700 divide-y divide-gray-200 border-t border-b border-gray-200">
-                  {[
-                    ["Size", aboutI18n.keyTerms["Size"][lang]],
-                    ["GP commitment", aboutI18n.keyTerms["GP commitment"][lang]],
-                    ["Investment period", aboutI18n.keyTerms["Investment period"][lang]],
-                    ["Term", aboutI18n.keyTerms["Term"][lang]],
-                    ["Hurdle rate", aboutI18n.keyTerms["Hurdle rate"][lang]],
-                    ["Management fee", aboutI18n.keyTerms["Management fee"][lang]],
-                    ["Carry", aboutI18n.keyTerms["Carry"][lang]],
-                  ].map(([k, v]) => (
-                    <li key={k} className="flex justify-between gap-4 py-3"><span className="text-gray-500">{aboutI18n.keyLabels[k][lang]}:</span><span className="text-gray-900 font-medium">{v}</span></li>
+                  {(i18n.aboutPageKeyTermsRows || []).map((row: any, idx: number) => (
+                    <li key={idx} className="flex justify-between gap-4 py-3">
+                      <span className="text-gray-500">{row.label?.[lang] || ""}:</span>
+                      <span className="text-gray-900 font-medium">{row.value?.[lang] || ""}</span>
+                    </li>
                   ))}
                 </ul>
               </div>

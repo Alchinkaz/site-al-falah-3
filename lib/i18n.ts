@@ -89,6 +89,37 @@ const defaultTranslations = {
       "Орталық Азия — жылдам дамып келе жатқан өңір. Біз осы әлеуетке сенеміз және жаңа инвесторлармен бірге келесі өсу толқынын игеруге дайынбыз.",
     ],
   },
+  // About page key terms rows (editable list)
+  aboutPageKeyTermsRows: [
+    {
+      label: { en: "Size", ru: "Размер", kz: "Өлшемі" },
+      value: { en: "USD200m", ru: "USD200 млн", kz: "USD200 млн" },
+    },
+    {
+      label: { en: "GP commitment", ru: "Вклад GP", kz: "GP қатысу үлесі" },
+      value: { en: "2%", ru: "2%", kz: "2%" },
+    },
+    {
+      label: { en: "Investment period", ru: "Инвестпериод", kz: "Инвестициялық кезең" },
+      value: { en: "3y+2", ru: "3 года + 2", kz: "3 жыл + 2" },
+    },
+    {
+      label: { en: "Term", ru: "Срок", kz: "Мерзім" },
+      value: { en: "10y+3", ru: "10 лет + 3", kz: "10 жыл + 3" },
+    },
+    {
+      label: { en: "Hurdle rate", ru: "Барьёрная ставка", kz: "Табалдырық мөлшерлемесі" },
+      value: { en: "8%", ru: "8%", kz: "8%" },
+    },
+    {
+      label: { en: "Management fee", ru: "Комиссия за управление", kz: "Басқару комиссиясы" },
+      value: { en: "up to 2%", ru: "до 2%", kz: "2%-ға дейін" },
+    },
+    {
+      label: { en: "Carry", ru: "Керри (доля прибыли)", kz: "Кэрри (пайда үлесі)" },
+      value: { en: "20% with clawback", ru: "20% с механизмом clawback", kz: "20% (clawback бар)" },
+    },
+  ],
   stat1Subtitle: {
     en: "Assets Under Management",
     ru: "Активы под управлением",
