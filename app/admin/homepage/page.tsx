@@ -89,15 +89,10 @@ export default function HomepageAdminPage() {
         </div>
       )}
 
-      {/* Hero Section Editor */}
+      {/* Title Section Editor */}
       <Card className="bg-white border-gray-200">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">
-            Hero секция - Заголовок
-          </CardTitle>
-          <CardDescription className="text-gray-600">
-            Редактирование заголовка "Capitalizing on Emerging Opportunities" на всех языках
-          </CardDescription>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Заголовок</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Language Switcher */}
@@ -139,33 +134,6 @@ export default function HomepageAdminPage() {
                 rows={3}
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
-            </div>
-
-            {/* Preview */}
-            <div className="bg-gray-50 p-4 rounded-lg border">
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Предварительный просмотр:</h3>
-              <div className="text-2xl font-bold text-gray-900">
-                {heroTranslations[currentLang] || "Введите текст..."}
-              </div>
-            </div>
-          </div>
-
-          {/* All Languages Overview */}
-          <div className="border-t pt-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Все языки:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-medium text-blue-900 mb-2">English</h4>
-                <p className="text-blue-800">{heroTranslations.en}</p>
-              </div>
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h4 className="font-medium text-green-900 mb-2">Русский</h4>
-                <p className="text-green-800">{heroTranslations.ru}</p>
-              </div>
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h4 className="font-medium text-purple-900 mb-2">Қазақша</h4>
-                <p className="text-purple-800">{heroTranslations.kz}</p>
-              </div>
             </div>
           </div>
         </CardContent>
