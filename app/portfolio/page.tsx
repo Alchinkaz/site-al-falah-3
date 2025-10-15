@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 import { getPublishedProjects, formatProjectDate } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
 import { useEffect, useState } from "react"
-import { portfolioI18n, readLang, projectTexts } from "@/lib/i18n"
+import { portfolioI18n, readLang, projectTexts, projectBadgesI18n } from "@/lib/i18n"
 
 export default function PortfolioPage() {
   const [projectsData, setProjectsData] = useState<any[]>([])
@@ -97,7 +97,7 @@ export default function PortfolioPage() {
                         <div className="flex gap-2 mb-3 flex-wrap">
                           {(item.badges || []).map((b: any, i: number) => (
                             <span key={i} className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                              {b.label}
+                              {projectBadgesI18n[item.id]?.[i]?.[lang] || b.label}
                             </span>
                           ))}
                         </div>
@@ -131,13 +131,13 @@ export default function PortfolioPage() {
                         <div className="flex gap-2 mb-2 flex-wrap">
                           {(item.badges || []).map((b: any, i: number) => (
                             <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                              {b.label}
+                              {projectBadgesI18n[item.id]?.[i]?.[lang] || b.label}
                             </span>
                           ))}
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                          {item.title}
+                          {projectTexts[item.id]?.title[lang] || item.title}
                         </Link>
                         </h3>
                         <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>
@@ -165,13 +165,13 @@ export default function PortfolioPage() {
                         <div className="flex gap-2 mb-2 flex-wrap">
                           {(item.badges || []).map((b: any, i: number) => (
                             <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                              {b.label}
+                              {projectBadgesI18n[item.id]?.[i]?.[lang] || b.label}
                             </span>
                           ))}
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
-                          {item.title}
+                          {projectTexts[item.id]?.title[lang] || item.title}
                         </Link>
                         </h3>
                         <p className="text-gray-500 text-xs mt-0.5 md:mt-auto">{item.date}</p>

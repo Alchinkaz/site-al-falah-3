@@ -11,7 +11,7 @@ import AnimatedBackground from "@/components/animated-background"
 import Link from "next/link"
 import { getPublishedProjects, formatProjectDate } from "@/lib/portfolio-data"
 import { getSectorBadgeClasses, getStageBadgeClasses } from "@/lib/badge-styles"
-import { i18n, readLang, portfolioI18n, projectTexts } from "@/lib/i18n"
+import { i18n, readLang, portfolioI18n, projectTexts, projectBadgesI18n } from "@/lib/i18n"
 
 export default function Home() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -225,7 +225,7 @@ export default function Home() {
                     <div className="flex gap-2 mb-3 flex-wrap">
                       {(item.badges || []).map((b: any, i: number) => (
                         <span key={i} className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                          {b.label}
+                          {projectBadgesI18n[item.id]?.[i]?.[lang] || b.label}
                         </span>
                       ))}
               </div>
@@ -256,7 +256,7 @@ export default function Home() {
                     <div className="flex gap-2 mb-2 flex-wrap">
                       {(item.badges || []).map((b: any, i: number) => (
                         <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                          {b.label}
+                          {projectBadgesI18n[item.id]?.[i]?.[lang] || b.label}
                         </span>
                       ))}
               </div>
@@ -287,7 +287,7 @@ export default function Home() {
                     <div className="flex gap-2 mb-2 flex-wrap">
                       {(item.badges || []).map((b: any, i: number) => (
                         <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
-                          {b.label}
+                          {projectBadgesI18n[item.id]?.[i]?.[lang] || b.label}
                         </span>
                       ))}
               </div>
