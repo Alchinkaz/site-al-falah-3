@@ -70,6 +70,35 @@ export default function HomepageAdminPage() {
     kz: i18n.stat3Subtitle.kz,
   })
 
+  // Footer
+  const [footerEmail, setFooterEmail] = useState("")
+  const [footerCopyright, setFooterCopyright] = useState("")
+  const [footerContactUsTranslations, setFooterContactUsTranslations] = useState({
+    en: i18n.footerContactUs.en,
+    ru: i18n.footerContactUs.ru,
+    kz: i18n.footerContactUs.kz,
+  })
+  const [footerNameTranslations, setFooterNameTranslations] = useState({
+    en: i18n.footerNameAltay.en,
+    ru: i18n.footerNameAltay.ru,
+    kz: i18n.footerNameAltay.kz,
+  })
+  const [footerRoleTranslations, setFooterRoleTranslations] = useState({
+    en: i18n.footerRoleAltay.en,
+    ru: i18n.footerRoleAltay.ru,
+    kz: i18n.footerRoleAltay.kz,
+  })
+  const [ctaLine1Translations, setCtaLine1Translations] = useState({
+    en: i18n.ctaTitle.en?.[0] || "",
+    ru: i18n.ctaTitle.ru?.[0] || "",
+    kz: i18n.ctaTitle.kz?.[0] || "",
+  })
+  const [ctaLine2Translations, setCtaLine2Translations] = useState({
+    en: i18n.ctaTitle.en?.[1] || "",
+    ru: i18n.ctaTitle.ru?.[1] || "",
+    kz: i18n.ctaTitle.kz?.[1] || "",
+  })
+
   useEffect(() => {
     const data = getHomepageData()
     if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
@@ -80,6 +109,8 @@ export default function HomepageAdminPage() {
         stat2Title: data.stat2Title || "",
         stat3Title: data.stat3Title || "",
       })
+      setFooterEmail(data.footerEmail || "altay@falahpartners.com")
+      setFooterCopyright(data.footerCopyright || "© 2025 Al Falah Capital Partners")
     }
   }, [])
   const [isSaving, setIsSaving] = useState(false)
@@ -149,6 +180,23 @@ export default function HomepageAdminPage() {
           ...i18n.stat3Subtitle,
           ...stat3SubtitleTranslations,
         },
+        footerContactUs: {
+          ...i18n.footerContactUs,
+          ...footerContactUsTranslations,
+        },
+        footerNameAltay: {
+          ...i18n.footerNameAltay,
+          ...footerNameTranslations,
+        },
+        footerRoleAltay: {
+          ...i18n.footerRoleAltay,
+          ...footerRoleTranslations,
+        },
+        ctaTitle: {
+          en: [ctaLine1Translations.en, ctaLine2Translations.en],
+          ru: [ctaLine1Translations.ru, ctaLine2Translations.ru],
+          kz: [ctaLine1Translations.kz, ctaLine2Translations.kz],
+        },
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
@@ -158,12 +206,19 @@ export default function HomepageAdminPage() {
         stat1Title: statTitles.stat1Title,
         stat2Title: statTitles.stat2Title,
         stat3Title: statTitles.stat3Title,
+        footerEmail,
+        footerCopyright,
       })
       
       // Dispatch event to update the main site
       window.dispatchEvent(
         new CustomEvent("i18n-updated", {
           detail: { translations: updatedI18n },
+        })
+      )
+      window.dispatchEvent(
+        new CustomEvent("homepage-data-updated", {
+          detail: { footerEmail, footerCopyright },
         })
       )
       
@@ -207,16 +262,16 @@ export default function HomepageAdminPage() {
             >
               Қазақша
             </Button>
-          </div>
-          <Button
-            onClick={handleSave}
-            disabled={isSaving}
+        </div>
+        <Button
+          onClick={handleSave}
+          disabled={isSaving}
             style={{ backgroundColor: "#16a34a" }}
             className="hover:opacity-90 text-white"
-          >
-            <Save className="w-4 h-4 mr-2" />
-            {isSaving ? "Сохранение..." : "Сохранить"}
-          </Button>
+        >
+          <Save className="w-4 h-4 mr-2" />
+          {isSaving ? "Сохранение..." : "Сохранить"}
+        </Button>
         </div>
       </div>
 
@@ -241,19 +296,19 @@ export default function HomepageAdminPage() {
 
           {/* Current Language Editor */}
           <div className="space-y-6">
-            <div>
+          <div>
               <Label htmlFor="heroTitle" className="text-gray-900 font-medium">
                 Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
-              <Textarea
-                id="heroTitle"
+            </Label>
+            <Textarea
+              id="heroTitle"
                 value={heroTranslations[currentLang]}
                 onChange={(e) => handleHeroTitleChange(currentLang, e.target.value)}
                 placeholder="Введите заголовок hero секции"
-                rows={3}
+              rows={3}
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
+            />
+          </div>
             <div>
               <Label htmlFor="heroButtonText" className="text-gray-900 font-medium">
                 Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
@@ -269,7 +324,113 @@ export default function HomepageAdminPage() {
           </div>
         </CardContent>
       </Card>
-      {/* Statistics Section Editor */}
+      {/* Portfolio Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Portfolio</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="portfolioTitle" className="text-gray-900 font-medium">
+                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Input
+                id="portfolioTitle"
+                value={portfolioTitleTranslations[currentLang]}
+                onChange={(e) =>
+                  setPortfolioTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="Portfolio"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label htmlFor="portfolioSubtitle" className="text-gray-900 font-medium">
+                Подзаголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+            <Textarea
+                id="portfolioSubtitle"
+                value={portfolioSubtitleTranslations[currentLang]}
+                      onChange={(e) =>
+                  setPortfolioSubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="Successful investments that helped our portfolio companies scale and grow"
+                rows={3}
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+              <div>
+              <Label htmlFor="portfolioViewAll" className="text-gray-900 font-medium">
+                Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+                </Label>
+                <Input
+                id="portfolioViewAll"
+                value={portfolioButtonTranslations[currentLang]}
+                onChange={(e) =>
+                  setPortfolioButtonTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="View All"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* About Us Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">About Us</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-6">
+              <div>
+              <Label htmlFor="aboutTitle" className="text-gray-900 font-medium">
+                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+                </Label>
+                <Input
+                id="aboutTitle"
+                value={aboutTitleTranslations[currentLang]}
+                onChange={(e) =>
+                  setAboutTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="About Us"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+              <Label htmlFor="aboutParagraphs" className="text-gray-900 font-medium">
+                Текст ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+                </Label>
+                <Textarea
+                id="aboutParagraphs"
+                value={aboutParagraphsTranslations[currentLang]}
+                onChange={(e) =>
+                  setAboutParagraphsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder={"We invest across energy, agriculture, industry and technology, partnering with ambitious teams to build durable value.\n\nOur principals have executed dozens of transactions across Central Asia, combining capital with deep operating expertise."}
+                rows={6}
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">Разделяйте абзацы пустой строкой.</p>
+            </div>
+                      <div>
+              <Label htmlFor="aboutImage" className="text-gray-900 font-medium">
+                Ссылка на изображение
+                </Label>
+                <Input
+                id="aboutImage"
+                value={aboutImageUrl}
+                onChange={(e) => setAboutImageUrl(e.target.value)}
+                placeholder="/placeholder.svg"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">Картинка по ссылке будет отображаться в блоке изображения.</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Statistics Section Editor (moved after About Us) */}
       <Card className="bg-white border-gray-200">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-gray-900">Statistics</CardTitle>
@@ -345,108 +506,79 @@ export default function HomepageAdminPage() {
           </div>
         </CardContent>
       </Card>
-      {/* Portfolio Section Editor */}
+      {/* Footer Section Editor */}
       <Card className="bg-white border-gray-200">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Portfolio</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Footer</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-6">
             <div>
-              <Label htmlFor="portfolioTitle" className="text-gray-900 font-medium">
-                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
+              <Label className="text-gray-900 font-medium">CTA — строка 1 ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
               <Input
-                id="portfolioTitle"
-                value={portfolioTitleTranslations[currentLang]}
-                onChange={(e) =>
-                  setPortfolioTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder="Portfolio"
+                value={ctaLine1Translations[currentLang]}
+                onChange={(e) => setCtaLine1Translations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                placeholder="What future are you building?"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div>
-              <Label htmlFor="portfolioSubtitle" className="text-gray-900 font-medium">
-                Подзаголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
-              <Textarea
-                id="portfolioSubtitle"
-                value={portfolioSubtitleTranslations[currentLang]}
-                onChange={(e) =>
-                  setPortfolioSubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder="Successful investments that helped our portfolio companies scale and grow"
-                rows={3}
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <Label htmlFor="portfolioViewAll" className="text-gray-900 font-medium">
-                Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
+              <Label className="text-gray-900 font-medium">CTA — строка 2 ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
               <Input
-                id="portfolioViewAll"
-                value={portfolioButtonTranslations[currentLang]}
-                onChange={(e) =>
-                  setPortfolioButtonTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder="View All"
+                value={ctaLine2Translations[currentLang]}
+                onChange={(e) => setCtaLine2Translations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                placeholder="We'd love to connect."
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
-          </div>
-        </CardContent>
-      </Card>
-      {/* About Us Section Editor */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">About Us</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label className="text-gray-900 font-medium">Метка контактов ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={footerContactUsTranslations[currentLang]}
+                  onChange={(e) => setFooterContactUsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Contact us:"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Email</Label>
+                <Input
+                  value={footerEmail}
+                  onChange={(e) => setFooterEmail(e.target.value)}
+                  placeholder="altay@falahpartners.com"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label className="text-gray-900 font-medium">Имя ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={footerNameTranslations[currentLang]}
+                  onChange={(e) => setFooterNameTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Altay Mamanbayev"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Должность ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={footerRoleTranslations[currentLang]}
+                  onChange={(e) => setFooterRoleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Chief Operating Officer"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
             <div>
-              <Label htmlFor="aboutTitle" className="text-gray-900 font-medium">
-                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
+              <Label className="text-gray-900 font-medium">Copyright</Label>
               <Input
-                id="aboutTitle"
-                value={aboutTitleTranslations[currentLang]}
-                onChange={(e) =>
-                  setAboutTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder="About Us"
+                value={footerCopyright}
+                onChange={(e) => setFooterCopyright(e.target.value)}
+                placeholder="© 2025 Al Falah Capital Partners"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
-            </div>
-            <div>
-              <Label htmlFor="aboutParagraphs" className="text-gray-900 font-medium">
-                Текст ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
-              <Textarea
-                id="aboutParagraphs"
-                value={aboutParagraphsTranslations[currentLang]}
-                onChange={(e) =>
-                  setAboutParagraphsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder={"We invest across energy, agriculture, industry and technology, partnering with ambitious teams to build durable value.\n\nOur principals have executed dozens of transactions across Central Asia, combining capital with deep operating expertise."}
-                rows={6}
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Разделяйте абзацы пустой строкой.</p>
-            </div>
-            <div>
-              <Label htmlFor="aboutImage" className="text-gray-900 font-medium">
-                Ссылка на изображение
-              </Label>
-              <Input
-                id="aboutImage"
-                value={aboutImageUrl}
-                onChange={(e) => setAboutImageUrl(e.target.value)}
-                placeholder="/placeholder.svg"
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Картинка по ссылке будет отображаться в блоке изображения.</p>
             </div>
           </div>
         </CardContent>
