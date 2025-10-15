@@ -16,11 +16,23 @@ export default function HomepageAdminPage() {
     ru: i18n.heroTitle.ru,
     kz: i18n.heroTitle.kz,
   })
+  const [buttonTranslations, setButtonTranslations] = useState({
+    en: i18n.heroButton.en,
+    ru: i18n.heroButton.ru,
+    kz: i18n.heroButton.kz,
+  })
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
 
   const handleHeroTitleChange = (lang: Lang, value: string) => {
     setHeroTranslations((prev) => ({
+      ...prev,
+      [lang]: value,
+    }))
+  }
+
+  const handleButtonTextChange = (lang: Lang, value: string) => {
+    setButtonTranslations((prev) => ({
       ...prev,
       [lang]: value,
     }))
@@ -37,6 +49,10 @@ export default function HomepageAdminPage() {
         heroTitle: {
           ...i18n.heroTitle,
           ...heroTranslations,
+        },
+        heroButton: {
+          ...i18n.heroButton,
+          ...buttonTranslations,
         },
       }
       
@@ -135,6 +151,52 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Button Text Section */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Текст кнопки</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Language Switcher */}
+          <div className="flex gap-2 mb-6">
+            <Button
+              variant={currentLang === "en" ? "default" : "outline"}
+              onClick={() => setCurrentLang("en")}
+              className={currentLang === "en" ? "bg-blue-600 text-white" : ""}
+            >
+              English
+            </Button>
+            <Button
+              variant={currentLang === "ru" ? "default" : "outline"}
+              onClick={() => setCurrentLang("ru")}
+              className={currentLang === "ru" ? "bg-blue-600 text-white" : ""}
+            >
+              Русский
+            </Button>
+            <Button
+              variant={currentLang === "kz" ? "default" : "outline"}
+              onClick={() => setCurrentLang("kz")}
+              className={currentLang === "kz" ? "bg-blue-600 text-white" : ""}
+            >
+              Қазақша
+            </Button>
+          </div>
+
+          <div>
+            <Label htmlFor="heroButtonText" className="text-gray-900 font-medium">
+              Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+            </Label>
+            <Input
+              id="heroButtonText"
+              value={buttonTranslations[currentLang]}
+              onChange={(e) => handleButtonTextChange(currentLang, e.target.value)}
+              placeholder="View Portfolio"
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
           </div>
         </CardContent>
       </Card>
