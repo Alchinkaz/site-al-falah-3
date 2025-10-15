@@ -178,84 +178,36 @@ export default function AdminAboutPage() {
         <CardContent className="space-y-4">
           {keyTermsRows.map((row, idx) => (
             <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <Label className="text-gray-900 font-medium">Label (EN)</Label>
+                  <Label className="text-gray-900 font-medium">Label ({currentLang.toUpperCase()})</Label>
                   <Input
-                    value={row.label?.en || ""}
+                    value={(row.label && row.label[currentLang]) || ""}
                     onChange={(e) => {
                       const next = [...keyTermsRows]
-                      next[idx] = { ...next[idx], label: { ...(next[idx]?.label || {}), en: e.target.value } }
+                      next[idx] = {
+                        ...next[idx],
+                        label: { ...(next[idx]?.label || {}), [currentLang]: e.target.value },
+                      }
                       setKeyTermsRows(next)
                     }}
-                    placeholder="Size"
+                    placeholder={currentLang === "en" ? "Size" : currentLang === "ru" ? "Размер" : "Өлшемі"}
                     className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <Label className="text-gray-900 font-medium">Label (RU)</Label>
+                  <Label className="text-gray-900 font-medium">Value ({currentLang.toUpperCase()})</Label>
                   <Input
-                    value={row.label?.ru || ""}
+                    value={(row.value && row.value[currentLang]) || ""}
                     onChange={(e) => {
                       const next = [...keyTermsRows]
-                      next[idx] = { ...next[idx], label: { ...(next[idx]?.label || {}), ru: e.target.value } }
+                      next[idx] = {
+                        ...next[idx],
+                        value: { ...(next[idx]?.value || {}), [currentLang]: e.target.value },
+                      }
                       setKeyTermsRows(next)
                     }}
-                    placeholder="Размер"
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="text-gray-900 font-medium">Label (KZ)</Label>
-                  <Input
-                    value={row.label?.kz || ""}
-                    onChange={(e) => {
-                      const next = [...keyTermsRows]
-                      next[idx] = { ...next[idx], label: { ...(next[idx]?.label || {}), kz: e.target.value } }
-                      setKeyTermsRows(next)
-                    }}
-                    placeholder="Өлшемі"
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <Label className="text-gray-900 font-medium">Value (EN)</Label>
-                  <Input
-                    value={row.value?.en || ""}
-                    onChange={(e) => {
-                      const next = [...keyTermsRows]
-                      next[idx] = { ...next[idx], value: { ...(next[idx]?.value || {}), en: e.target.value } }
-                      setKeyTermsRows(next)
-                    }}
-                    placeholder="USD200m"
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="text-gray-900 font-medium">Value (RU)</Label>
-                  <Input
-                    value={row.value?.ru || ""}
-                    onChange={(e) => {
-                      const next = [...keyTermsRows]
-                      next[idx] = { ...next[idx], value: { ...(next[idx]?.value || {}), ru: e.target.value } }
-                      setKeyTermsRows(next)
-                    }}
-                    placeholder="USD200 млн"
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="text-gray-900 font-medium">Value (KZ)</Label>
-                  <Input
-                    value={row.value?.kz || ""}
-                    onChange={(e) => {
-                      const next = [...keyTermsRows]
-                      next[idx] = { ...next[idx], value: { ...(next[idx]?.value || {}), kz: e.target.value } }
-                      setKeyTermsRows(next)
-                    }}
-                    placeholder="USD200 млн"
+                    placeholder={currentLang === "en" ? "USD200m" : "USD200 млн"}
                     className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
