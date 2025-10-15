@@ -234,6 +234,225 @@ export default function AdminAboutPage() {
           </div>
         </CardContent>
       </Card>
+      {/* Key terms editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Key terms</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label className="text-gray-900 font-medium">Заголовок Key terms ({currentLang.toUpperCase()})</Label>
+            <Input
+              value={keyTermsTitle[currentLang] || ""}
+              onChange={(e) => setKeyTermsTitle({ ...keyTermsTitle, [currentLang]: e.target.value })}
+              placeholder={currentLang === "en" ? "Key terms" : currentLang === "ru" ? "Ключевые условия" : "Негізгі шарттар"}
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          {keyTermsRows.map((row, idx) => (
+            <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <Label className="text-gray-900 font-medium">Label ({currentLang.toUpperCase()})</Label>
+                  <Input
+                    value={(row.label && row.label[currentLang]) || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = {
+                        ...next[idx],
+                        label: { ...(next[idx]?.label || {}), [currentLang]: e.target.value },
+                      }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder={currentLang === "en" ? "Size" : currentLang === "ru" ? "Размер" : "Өлшемі"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Value ({currentLang.toUpperCase()})</Label>
+                  <Input
+                    value={(row.value && row.value[currentLang]) || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = {
+                        ...next[idx],
+                        value: { ...(next[idx]?.value || {}), [currentLang]: e.target.value },
+                      }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder={currentLang === "en" ? "USD200m" : "USD200 млн"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <Button
+                  variant="outline"
+                  className="border-red-300 text-red-600 hover:bg-red-50"
+                  onClick={() => setKeyTermsRows(keyTermsRows.filter((_, i) => i !== idx))}
+                >
+                  Удалить
+                </Button>
+              </div>
+            </div>
+          ))}
+          <div>
+            <Button
+              variant="outline"
+              onClick={() => setKeyTermsRows([...keyTermsRows, { label: { en: "", ru: "", kz: "" }, value: { en: "", ru: "", kz: "" } }])}
+              className="border-gray-300"
+            >
+              Добавить строку
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Sectors editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Sectors</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label className="text-gray-900 font-medium">Заголовок Sectors ({currentLang.toUpperCase()})</Label>
+            <Input
+              value={sectorsTitle[currentLang] || ""}
+              onChange={(e) => setSectorsTitle({ ...sectorsTitle, [currentLang]: e.target.value })}
+              placeholder={currentLang === "en" ? "Sectors" : currentLang === "ru" ? "Сектора" : "Салалар"}
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          {sectors.map((item, idx) => (
+            <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <Label className="text-gray-900 font-medium">Title ({currentLang.toUpperCase()})</Label>
+                  <Input
+                    value={(item.title && item.title[currentLang]) || ""}
+                    onChange={(e) => {
+                      const next = [...sectors]
+                      next[idx] = { ...next[idx], title: { ...(next[idx]?.title || {}), [currentLang]: e.target.value } }
+                      setSectors(next)
+                    }}
+                    placeholder={currentLang === "en" ? "Oil & Gas" : currentLang === "ru" ? "Нефть и газ" : "Мұнай‑газ"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Description ({currentLang.toUpperCase()})</Label>
+                  <Textarea
+                    value={(item.desc && item.desc[currentLang]) || ""}
+                    onChange={(e) => {
+                      const next = [...sectors]
+                      next[idx] = { ...next[idx], desc: { ...(next[idx]?.desc || {}), [currentLang]: e.target.value } }
+                      setSectors(next)
+                    }}
+                    rows={3}
+                    placeholder={currentLang === "en" ? "Production, Food processing, Logistics" : currentLang === "ру" ? "Производство, переработка продуктов питания, логистика" : "Өндіріс, азық‑түлік өңдеу, логистика"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <Button
+                  variant="outline"
+                  className="border-red-300 text-red-600 hover:bg-red-50"
+                  onClick={() => setSectors(sectors.filter((_, i) => i !== idx))}
+                >
+                  Удалить
+                </Button>
+              </div>
+            </div>
+          ))}
+          <div>
+            <Button
+              variant="outline"
+              onClick={() => setSectors([...sectors, { title: { en: "", ru: "", kz: "" }, desc: { en: "", ru: "", kz: "" } }])}
+              className="border-gray-300"
+            >
+              Добавить сектор
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Statistics Section Editor (same as homepage) */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Statistics</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Stat 1 */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="stat1Title" className="text-gray-900 font-medium">Значение</Label>
+                <Input
+                  id="stat1Title"
+                  value={statTitles.stat1Title}
+                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat1Title: e.target.value }))}
+                  placeholder="$50M+"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={stat1SubtitleTranslations[currentLang]}
+                  onChange={(e) => setStat1SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Assets Under Management"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            {/* Stat 2 */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="stat2Title" className="text-gray-900 font-medium">Значение</Label>
+                <Input
+                  id="stat2Title"
+                  value={statTitles.stat2Title}
+                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat2Title: e.target.value }))}
+                  placeholder="35+"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={stat2SubtitleTranslations[currentLang]}
+                  onChange={(e) => setStat2SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Portfolio Companies"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            {/* Stat 3 */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="stat3Title" className="text-gray-900 font-medium">Значение</Label>
+                <Input
+                  id="stat3Title"
+                  value={statTitles.stat3Title}
+                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat3Title: e.target.value }))}
+                  placeholder="10+"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={stat3SubtitleTranslations[currentLang]}
+                  onChange={(e) => setStat3SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Successful Exits"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Team editor */}
       <Card className="bg-white border-gray-200">
         <CardHeader>
@@ -326,223 +545,6 @@ export default function AdminAboutPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </CardContent>
-      </Card>
-      {/* Key terms editor */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Key terms</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <Label className="text-gray-900 font-medium">Заголовок Key terms ({currentLang.toUpperCase()})</Label>
-            <Input
-              value={keyTermsTitle[currentLang] || ""}
-              onChange={(e) => setKeyTermsTitle({ ...keyTermsTitle, [currentLang]: e.target.value })}
-              placeholder={currentLang === "en" ? "Key terms" : currentLang === "ru" ? "Ключевые условия" : "Негізгі шарттар"}
-              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-          {keyTermsRows.map((row, idx) => (
-            <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
-              <div className="grid grid-cols-1 gap-4">
-                <div>
-                  <Label className="text-gray-900 font-medium">Label ({currentLang.toUpperCase()})</Label>
-                  <Input
-                    value={(row.label && row.label[currentLang]) || ""}
-                    onChange={(e) => {
-                      const next = [...keyTermsRows]
-                      next[idx] = {
-                        ...next[idx],
-                        label: { ...(next[idx]?.label || {}), [currentLang]: e.target.value },
-                      }
-                      setKeyTermsRows(next)
-                    }}
-                    placeholder={currentLang === "en" ? "Size" : currentLang === "ru" ? "Размер" : "Өлшемі"}
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="text-gray-900 font-medium">Value ({currentLang.toUpperCase()})</Label>
-                  <Input
-                    value={(row.value && row.value[currentLang]) || ""}
-                    onChange={(e) => {
-                      const next = [...keyTermsRows]
-                      next[idx] = {
-                        ...next[idx],
-                        value: { ...(next[idx]?.value || {}), [currentLang]: e.target.value },
-                      }
-                      setKeyTermsRows(next)
-                    }}
-                    placeholder={currentLang === "en" ? "USD200m" : "USD200 млн"}
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-              <div className="flex justify-end">
-                <Button
-                  variant="outline"
-                  className="border-red-300 text-red-600 hover:bg-red-50"
-                  onClick={() => setKeyTermsRows(keyTermsRows.filter((_, i) => i !== idx))}
-                >
-                  Удалить
-                </Button>
-              </div>
-            </div>
-          ))}
-          <div>
-            <Button
-              variant="outline"
-              onClick={() => setKeyTermsRows([...keyTermsRows, { label: { en: "", ru: "", kz: "" }, value: { en: "", ru: "", kz: "" } }])}
-              className="border-gray-300"
-            >
-              Добавить строку
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-      {/* Statistics Section Editor (same as homepage) */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Statistics</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Stat 1 */}
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="stat1Title" className="text-gray-900 font-medium">Значение</Label>
-                <Input
-                  id="stat1Title"
-                  value={statTitles.stat1Title}
-                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat1Title: e.target.value }))}
-                  placeholder="$50M+"
-                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-                <Input
-                  value={stat1SubtitleTranslations[currentLang]}
-                  onChange={(e) => setStat1SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
-                  placeholder="Assets Under Management"
-                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-            {/* Stat 2 */}
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="stat2Title" className="text-gray-900 font-medium">Значение</Label>
-                <Input
-                  id="stat2Title"
-                  value={statTitles.stat2Title}
-                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat2Title: e.target.value }))}
-                  placeholder="35+"
-                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-                <Input
-                  value={stat2SubtitleTranslations[currentLang]}
-                  onChange={(e) => setStat2SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
-                  placeholder="Portfolio Companies"
-                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-            {/* Stat 3 */}
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="stat3Title" className="text-gray-900 font-medium">Значение</Label>
-                <Input
-                  id="stat3Title"
-                  value={statTitles.stat3Title}
-                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat3Title: e.target.value }))}
-                  placeholder="10+"
-                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-                <Input
-                  value={stat3SubtitleTranslations[currentLang]}
-                  onChange={(e) => setStat3SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
-                  placeholder="Successful Exits"
-                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      {/* Sectors editor */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Sectors</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <Label className="text-gray-900 font-medium">Заголовок Sectors ({currentLang.toUpperCase()})</Label>
-            <Input
-              value={sectorsTitle[currentLang] || ""}
-              onChange={(e) => setSectorsTitle({ ...sectorsTitle, [currentLang]: e.target.value })}
-              placeholder={currentLang === "en" ? "Sectors" : currentLang === "ru" ? "Сектора" : "Салалар"}
-              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-          {sectors.map((item, idx) => (
-            <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
-              <div className="grid grid-cols-1 gap-4">
-                <div>
-                  <Label className="text-gray-900 font-medium">Title ({currentLang.toUpperCase()})</Label>
-                  <Input
-                    value={(item.title && item.title[currentLang]) || ""}
-                    onChange={(e) => {
-                      const next = [...sectors]
-                      next[idx] = { ...next[idx], title: { ...(next[idx]?.title || {}), [currentLang]: e.target.value } }
-                      setSectors(next)
-                    }}
-                    placeholder={currentLang === "en" ? "Oil & Gas" : currentLang === "ru" ? "Нефть и газ" : "Мұнай‑газ"}
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="text-gray-900 font-medium">Description ({currentLang.toUpperCase()})</Label>
-                  <Textarea
-                    value={(item.desc && item.desc[currentLang]) || ""}
-                    onChange={(e) => {
-                      const next = [...sectors]
-                      next[idx] = { ...next[idx], desc: { ...(next[idx]?.desc || {}), [currentLang]: e.target.value } }
-                      setSectors(next)
-                    }}
-                    rows={3}
-                    placeholder={currentLang === "en" ? "Production, Food processing, Logistics" : currentLang === "ru" ? "Производство, переработка продуктов питания, логистика" : "Өндіріс, азық‑түлік өңдеу, логистика"}
-                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-              <div className="flex justify-end">
-                <Button
-                  variant="outline"
-                  className="border-red-300 text-red-600 hover:bg-red-50"
-                  onClick={() => setSectors(sectors.filter((_, i) => i !== idx))}
-                >
-                  Удалить
-                </Button>
-              </div>
-            </div>
-          ))}
-          <div>
-            <Button
-              variant="outline"
-              onClick={() => setSectors([...sectors, { title: { en: "", ru: "", kz: "" }, desc: { en: "", ru: "", kz: "" } }])}
-              className="border-gray-300"
-            >
-              Добавить сектор
-            </Button>
           </div>
         </CardContent>
       </Card>
