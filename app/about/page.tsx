@@ -149,7 +149,7 @@ export default function AboutPage() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between lg:flex-row lg:items-end lg:justify-between">
             <div className="text-left">
-              <h3 className="font-bold text-gray-900 text-3xl md:text-[48px] md:leading-[1.1]">{aboutI18n.teamTitle[lang]}</h3>
+              <h3 className="font-bold text-gray-900 text-3xl md:text-[48px] md:leading-[1.1]">{(i18n as any).teamTitle?.[lang] || aboutI18n.teamTitle[lang]}</h3>
             </div>
             {/* Button removed per request */}
           </div>
@@ -188,7 +188,14 @@ export default function AboutPage() {
                 <div className="rounded-xl overflow-hidden border border-gray-200">
                   <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
                     <img
-                      src="/placeholder.svg"
+                      src={(i18n as any).teamPhotos?.[(() => {
+                        const slug = `${m.firstName} ${m.lastName}`
+                          .toLowerCase()
+                          .replace(/[^a-z\s-]/g, "")
+                          .trim()
+                          .replace(/\s+/g, "-")
+                        return slug
+                      })()] || "/placeholder.svg"}
                       alt={`${m.firstName} ${m.lastName}`}
                       className="w-full h-full object-cover"
                     />

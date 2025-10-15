@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Save } from "lucide-react"
-import { i18n, type Lang } from "@/lib/i18n"
+import { i18n, type Lang, teamI18n, teamNames } from "@/lib/i18n"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -29,6 +29,9 @@ export default function AdminAboutPage() {
   const [keyTermsTitle, setKeyTermsTitle] = useState<{ en: string; ru: string; kz: string }>((i18n as any).aboutPageKeyTermsTitle || { en: "Key terms", ru: "Ключевые условия", kz: "Негізгі шарттар" })
   const [sectorsTitle, setSectorsTitle] = useState<{ en: string; ru: string; kz: string }>((i18n as any).aboutPageSectorsTitle || { en: "Sectors", ru: "Сектора", kz: "Салалар" })
   const [sectors, setSectors] = useState<any[]>(((i18n as any).aboutPageSectors) || [])
+  // Team editor state
+  const [teamTitle, setTeamTitle] = useState<{ en: string; ru: string; kz: string }>(i18n.teamTitle)
+  const [teamPhotos, setTeamPhotos] = useState<Record<string, string>>(((i18n as any).teamPhotos) || {})
   // Statistics (same as homepage)
   const [statTitles, setStatTitles] = useState<{ stat1Title: string; stat2Title: string; stat3Title: string }>({
     stat1Title: "",
@@ -83,6 +86,8 @@ export default function AdminAboutPage() {
         aboutPageKeyTermsTitle: keyTermsTitle,
         aboutPageSectorsTitle: sectorsTitle,
         aboutPageSectors: sectors,
+        teamTitle,
+        teamPhotos: teamPhotos,
         // Statistics subtitles (shared with homepage)
         stat1Subtitle: {
           ...i18n.stat1Subtitle,
@@ -219,6 +224,101 @@ export default function AdminAboutPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Team editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Team</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <Label className="text-gray-900 font-medium">Заголовок Team ({currentLang.toUpperCase()})</Label>
+            <Input
+              value={teamTitle[currentLang] || ""}
+              onChange={(e) => setTeamTitle({ ...teamTitle, [currentLang]: e.target.value })}
+              placeholder={currentLang === "en" ? "Meet the team" : currentLang === "ru" ? "Команда" : "Команда"}
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {Object.keys(teamNames).map((slug) => (
+              <div key={slug} className="border border-gray-200 rounded-lg p-4 space-y-3">
+                <div>
+                  <Label className="text-gray-900 font-medium">Имя ({currentLang.toUpperCase()})</Label>
+                  <Input
+                    value={(teamNames as any)[slug]?.[currentLang] || ""}
+                    onChange={(e) => {
+                      ;(teamNames as any)[slug] = {
+                        ...(teamNames as any)[slug],
+                        [currentLang]: e.target.value,
+                      }
+                      // force rerender by touching local state (title)
+                      setTeamTitle({ ...teamTitle })
+                    }}
+                    placeholder={currentLang === "en" ? "Full name" : currentLang === "ru" ? "Имя и фамилия" : "Аты-жөні"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Должность ({currentLang.toUpperCase()})</Label>
+                  <Input
+                    value={(teamI18n as any)[slug]?.role?.[currentLang] || ""}
+                    onChange={(e) => {
+                      ;(teamI18n as any)[slug] = {
+                        ...(teamI18n as any)[slug],
+                        role: { ...((teamI18n as any)[slug]?.role || {}), [currentLang]: e.target.value },
+                      }
+                      setTeamTitle({ ...teamTitle })
+                    }}
+                    placeholder={currentLang === "en" ? "Role" : currentLang === "ru" ? "Должность" : "Лауазым"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Фото (URL)</Label>
+                  <Input
+                    value={teamPhotos[slug] || ""}
+                    onChange={(e) => setTeamPhotos({ ...teamPhotos, [slug]: e.target.value })}
+                    placeholder="/placeholder.svg"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Био — абзац 1 ({currentLang.toUpperCase()})</Label>
+                  <Textarea
+                    value={(teamI18n as any)[slug]?.bioLeft?.[currentLang] || ""}
+                    onChange={(e) => {
+                      ;(teamI18n as any)[slug] = {
+                        ...(teamI18n as any)[slug],
+                        bioLeft: { ...((teamI18n as any)[slug]?.bioLeft || {}), [currentLang]: e.target.value },
+                      }
+                      setTeamTitle({ ...teamTitle })
+                    }}
+                    rows={4}
+                    placeholder={currentLang === "en" ? "First paragraph" : currentLang === "ru" ? "Первый абзац" : "Бірінші абзац"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Био — абзац 2 ({currentLang.toUpperCase()})</Label>
+                  <Textarea
+                    value={(teamI18n as any)[slug]?.bioRight?.[currentLang] || ""}
+                    onChange={(e) => {
+                      ;(teamI18n as any)[slug] = {
+                        ...(teamI18n as any)[slug],
+                        bioRight: { ...((teamI18n as any)[slug]?.bioRight || {}), [currentLang]: e.target.value },
+                      }
+                      setTeamTitle({ ...teamTitle })
+                    }}
+                    rows={4}
+                    placeholder={currentLang === "en" ? "Second paragraph" : currentLang === "ru" ? "Второй абзац" : "Екінші абзац"}
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>

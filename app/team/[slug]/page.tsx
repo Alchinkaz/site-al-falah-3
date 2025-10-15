@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { readLang, teamI18n, teamNames } from "@/lib/i18n"
+import { i18n, readLang, teamI18n, teamNames } from "@/lib/i18n"
 import { useMemo, useEffect, useState } from "react"
 
 interface MemberData {
@@ -117,7 +117,7 @@ export default function TeamMemberPage({ params }: { params: { slug: string } })
               {/* Social icons removed per request */}
             </div>
             <div className="rounded-2xl overflow-hidden bg-[#d2efe6]">
-              <img src={member.photo || "/placeholder.svg"} alt={`${member.firstName} ${member.lastName}`} className="w-full h-full object-cover" />
+              <img src={(i18n as any).teamPhotos?.[params.slug] || member.photo || "/placeholder.svg"} alt={`${member.firstName} ${member.lastName}`} className="w-full h-full object-cover" />
             </div>
           </div>
 

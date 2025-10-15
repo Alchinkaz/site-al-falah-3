@@ -288,6 +288,13 @@ export const aboutI18n = {
     },
   ],
   teamTitle: { en: "Meet the team", ru: "Команда", kz: "Команда" },
+  // Team photos by slug (used on cards and member pages)
+  teamPhotos: {
+    "nurlan-kussainov": "/placeholder.svg",
+    "diyar-medeubekov": "/placeholder.svg",
+    "altay-mamanbayev": "/placeholder.svg",
+    "azhar-babayeva": "/placeholder.svg",
+  } as Record<string, string>,
 }
 
 // Team members i18n by slug
