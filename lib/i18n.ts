@@ -407,7 +407,7 @@ export const portfolioI18n = (storedForPortfolio && (storedForPortfolio as any).
   ? { ...defaultPortfolioI18n, ...((storedForPortfolio as any).portfolioI18n as any) }
   : defaultPortfolioI18n
 
-export const projectTexts: Record<string, {
+const defaultProjectTexts: Record<string, {
   title: { en: string; ru: string; kz: string }
   content?: { en: string[]; ru: string[]; kz: string[] }
 }> = {
@@ -460,6 +460,12 @@ export const projectTexts: Record<string, {
     },
   },
 }
+
+const storedProjectTexts = getTranslations()
+export const projectTexts: Record<string, { title: { en: string; ru: string; kz: string }; content?: { en: string[]; ru: string[]; kz: string[] } }> =
+  storedProjectTexts && (storedProjectTexts as any).projectTexts
+    ? { ...defaultProjectTexts, ...((storedProjectTexts as any).projectTexts as any) }
+    : defaultProjectTexts
 
 export function formatDateByLang(dateString: string, lang: Lang): string {
   const date = new Date(dateString)

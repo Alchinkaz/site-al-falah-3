@@ -19,6 +19,14 @@ interface NewsEditFormProps {
 
 export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
   const router = useRouter()
+  const [activeLang, setActiveLang] = useState<"en" | "ru" | "kz">(() => {
+    try {
+      const v = localStorage.getItem("lang") as any
+      return v === "ru" || v === "kz" ? v : "en"
+    } catch {
+      return "en"
+    }
+  })
   const [localData, setLocalData] = useState(() => {
     console.log("=== NewsEditForm: Initial article data ===")
     console.log("Article:", article)
@@ -41,6 +49,52 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
 
     console.log("Initial localData:", initialData)
     return initialData
+  })
+
+  // i18n states for title, badges labels, and content sections
+  const [titleI18n, setTitleI18n] = useState<{ en: string; ru: string; kz: string }>(() => {
+    try {
+      const stored = localStorage.getItem("i18n-translations")
+      const parsed = stored ? JSON.parse(stored) : null
+      const existing = parsed?.projectTexts?.[article.id]?.title
+      return existing || { en: article.title || "", ru: article.title || "", kz: article.title || "" }
+    } catch {
+      return { en: article.title || "", ru: article.title || "", kz: article.title || "" }
+    }
+  })
+
+  const [badgesI18n, setBadgesI18n] = useState<Array<{ en: string; ru: string; kz: string }>>(() => {
+    try {
+      const stored = localStorage.getItem("i18n-translations")
+      const parsed = stored ? JSON.parse(stored) : null
+      const existing = parsed?.projectBadgesI18n?.[article.id]
+      const baseLen = (article as any).badges?.length || 0
+      const initial = Array.isArray(existing) ? existing.slice(0, baseLen) : []
+      while (initial.length < baseLen) initial.push({ en: "", ru: "", kz: "" })
+      return initial
+    } catch {
+      return []
+    }
+  })
+
+  const [sectionsI18n, setSectionsI18n] = useState<{ en: Array<{ title: string; text: string }>; ru: Array<{ title: string; text: string }>; kz: Array<{ title: string; text: string }> }>(() => {
+    try {
+      const stored = localStorage.getItem("i18n-translations")
+      const parsed = stored ? JSON.parse(stored) : null
+      const existing = parsed?.projectSections?.[article.id]
+      const base = (article.contentSections || []) as Array<{ title: string; text: string }>
+      const make = (lang: "en" | "ru" | "kz") => {
+        const arr: Array<{ title: string; text: string }> = existing?.[lang] || []
+        const out = arr.slice(0, base.length)
+        while (out.length < base.length) out.push({ title: "", text: "" })
+        return out
+      }
+      return { en: make("en"), ru: make("ru"), kz: make("kz") }
+    } catch {
+      const base = (article.contentSections || []) as Array<{ title: string; text: string }>
+      const empty = base.map(() => ({ title: "", text: "" }))
+      return { en: empty, ru: empty, kz: empty }
+    }
   })
 
   // Проверка авторизации
@@ -125,6 +179,26 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
     }
 
     console.log("Cleaned data for save:", cleanedData)
+    // Persist i18n translations for this project
+    try {
+      const stored = localStorage.getItem("i18n-translations")
+      const parsed = stored ? JSON.parse(stored) : {}
+      const next = { ...parsed }
+      next.projectTexts = next.projectTexts || {}
+      next.projectTexts[cleanedData.id] = {
+        ...(next.projectTexts[cleanedData.id] || {}),
+        title: titleI18n,
+      }
+      next.projectSections = next.projectSections || {}
+      next.projectSections[cleanedData.id] = sectionsI18n
+      next.projectBadgesI18n = next.projectBadgesI18n || {}
+      next.projectBadgesI18n[cleanedData.id] = badgesI18n
+      localStorage.setItem("i18n-translations", JSON.stringify(next))
+      window.dispatchEvent(new CustomEvent("i18n-updated", { detail: next }))
+    } catch (e) {
+      console.error("Failed to persist project i18n", e)
+    }
+
     onSave(cleanedData)
   }
 
@@ -153,7 +227,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header + language switch */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
@@ -163,7 +237,18 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             {article.id ? "Изменить информацию о проекте" : "Создать новый проект"}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <div className="flex gap-1 mr-2">
+            {(["en", "ru", "kz"] as const).map((lng) => (
+              <button
+                key={lng}
+                onClick={() => setActiveLang(lng)}
+                className={`px-2 py-1 rounded border ${activeLang === lng ? "bg-slate-900 text-white" : "bg-white"}`}
+              >
+                {lng.toUpperCase()}
+              </button>
+            ))}
+          </div>
           <Button onClick={onCancel} variant="outline">
             Отмена
           </Button>
@@ -255,11 +340,11 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <Label htmlFor="title">Заголовок проекта *</Label>
+                <Label htmlFor="title">Заголовок проекта ({activeLang.toUpperCase()}) *</Label>
                 <Input
                   id="title"
-                  value={localData.title || ""}
-                  onChange={(e) => updateLocalData("title", e.target.value)}
+                  value={titleI18n[activeLang] || ""}
+                  onChange={(e) => setTitleI18n((prev) => ({ ...prev, [activeLang]: e.target.value }))}
                   placeholder="Введите заголовок проекта"
                 />
               </div>
@@ -292,13 +377,16 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                         aria-label="Цвет бейджа"
                       />
                       <Input
-                        value={badge.label || ""}
+                        value={badgesI18n[index]?.[activeLang] || ""}
                         onChange={(e) => {
-                          const next = [...(localData.badges || [])]
-                          next[index] = { ...next[index], label: e.target.value }
-                          updateLocalData("badges", next)
+                          setBadgesI18n((prev) => {
+                            const next = [...prev]
+                            next[index] = next[index] || { en: "", ru: "", kz: "" }
+                            next[index] = { ...next[index], [activeLang]: e.target.value }
+                            return next
+                          })
                         }}
-                        placeholder="Название бейджа"
+                        placeholder={`Название бейджа (${activeLang.toUpperCase()})`}
                       />
                       <Button
                         variant="outline"
@@ -315,7 +403,10 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => updateLocalData("badges", [...(localData.badges || []), { label: "", color: "#1e1a61" }])}
+                    onClick={() => {
+                      updateLocalData("badges", [...(localData.badges || []), { color: "#1e1a61" }])
+                      setBadgesI18n((prev) => [...prev, { en: "", ru: "", kz: "" }])
+                    }}
                   >
                     <Plus className="h-4 w-4 mr-2" /> Добавить бейдж
                   </Button>
@@ -354,17 +445,17 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                     </div>
                     <div className="space-y-4">
                       <div>
-                        <Label>Заголовок</Label>
+                        <Label>Заголовок ({activeLang.toUpperCase()})</Label>
                         <Input
-                          value={section.title}
+                          value={sectionsI18n[activeLang]?.[index]?.title || ""}
                           onChange={(e) => updateContentSection(index, "title", e.target.value)}
                           placeholder="Заголовок секции"
                         />
                       </div>
                       <div>
-                        <Label>Текстовое описание</Label>
+                        <Label>Текстовое описание ({activeLang.toUpperCase()})</Label>
                         <Textarea
-                          value={section.text}
+                          value={sectionsI18n[activeLang]?.[index]?.text || ""}
                           onChange={(e) => updateContentSection(index, "text", e.target.value)}
                           placeholder="Текст секции"
                           rows={4}
