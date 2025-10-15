@@ -70,6 +70,7 @@ export default function AdminLayout({
   const getAvailableTabs = (user: User) => {
     return [
       { value: "/admin/homepage", label: "Главная страница", icon: Home },
+      { value: "/admin/about", label: "О компании", icon: FileText },
       { value: "/admin/projects", label: "Проекты", icon: FileText },
       { value: "/admin/profile", label: "Профиль", icon: SettingsIcon },
     ]
