@@ -70,11 +70,14 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
 
       <section className="py-12 bg-white pt-24">
         <div className="max-w-[22rem] sm:max-w-md md:max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="mb-12">
+            <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{projectTexts[project.id]?.title[lang] || project.title}</h1>
-            <div className="flex items-center gap-2 mb-4">
-              <span className={`${getSectorBadgeClasses(project.sector)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.sectorMap[project.sector]?.[lang] || project.sector}</span>
-              <span className={`${getStageBadgeClasses(project.investmentStage)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.stageMap[project.investmentStage]?.[lang] || project.investmentStage}</span>
+            <div className="flex items-center gap-2 mb-4 flex-wrap">
+              {(project as any).badges?.map((b: any, i: number) => (
+                <span key={i} className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                  {b.label}
+                </span>
+              ))}
             </div>
             <div className="flex items-center text-sm text-gray-600">
               <TrendingUp className="w-4 h-4 mr-2" />

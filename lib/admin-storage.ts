@@ -24,15 +24,10 @@ export interface NewsArticle {
   description: string
   content: string
   image?: string
-  heroImage?: string
   contentImage?: string
   images?: string[]
-  date?: string
-  author?: string
-  category?: string
   // Portfolio specific fields
-  sector?: string
-  investmentStage?: string
+  badges?: Array<{ label: string; color: string }>
   investmentYear?: number
   contentSections?: Array<{ title: string; text: string }>
   published: boolean

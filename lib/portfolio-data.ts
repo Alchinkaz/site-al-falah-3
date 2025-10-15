@@ -2,12 +2,12 @@ export interface PortfolioProject {
   id: string
   title: string
   description: string
-  sector: string
-  investmentStage: string
+  badges?: Array<{ label: string; color: string }>
   investmentYear: number
   image: string
   contentImage?: string
   published: boolean
+  show_on_homepage?: boolean
   createdAt: string
   contentSections?: {
     title?: string
@@ -25,12 +25,12 @@ function mapNewsToPortfolioProjects(): PortfolioProject[] {
       id: n.id,
       title: n.title,
       description: n.description,
-      sector: (n as any).sector || "",
-      investmentStage: (n as any).investmentStage || "",
+      badges: (n as any).badges || [],
       investmentYear: (n as any).investmentYear || new Date(n.createdAt).getFullYear(),
       image: n.image || "",
       contentImage: (n as any).contentImage || n.image || "",
       published: n.published,
+      show_on_homepage: n.show_on_homepage,
       createdAt: n.createdAt,
       contentSections: (n as any).contentSections || (n.content ? [{ text: n.content }] : []),
     }))

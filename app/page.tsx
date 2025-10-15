@@ -69,29 +69,30 @@ export default function Home() {
 
   useEffect(() => {
     const publishedProjects = getPublishedProjects()
-    const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    const formatted = sorted.slice(0, 6).map((p) => ({
+    const filtered = publishedProjects.filter((p: any) => p.show_on_homepage)
+    const sorted = [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    const formatted = sorted.slice(0, 6).map((p: any) => ({
       id: p.id,
       title: p.title,
       date: formatProjectDate(p.createdAt),
       image: p.image,
-      sector: p.sector,
-      investmentStage: p.investmentStage,
+      badges: p.badges || [],
+      investmentYear: p.investmentYear,
     }))
     setHomeProjects(formatted)
   }, [])
 
   useEffect(() => {
     const reloadProjects = () => {
-      const published = getPublishedProjects()
+      const published = getPublishedProjects().filter((p: any) => p.show_on_homepage)
       const sorted = [...published].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      const formatted = sorted.slice(0, 6).map((p) => ({
+      const formatted = sorted.slice(0, 6).map((p: any) => ({
         id: p.id,
         title: p.title,
         date: formatProjectDate(p.createdAt),
         image: p.image,
-        sector: p.sector,
-        investmentStage: p.investmentStage,
+        badges: p.badges || [],
+        investmentYear: p.investmentYear,
       }))
       setHomeProjects(formatted)
     }
@@ -211,7 +212,7 @@ export default function Home() {
 
           <div className="hidden lg:block">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-              {homeProjects.map((item) => (
+              {homeProjects.map((item: any) => (
                 <div key={item.id} className="lg:col-span-1">
                 <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-80">
                   <img
@@ -221,9 +222,12 @@ export default function Home() {
                   />
                 </div>
                   <div className="mt-4 flex flex-col h-40">
-                    <div className="flex gap-2 mb-3">
-                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.sectorMap[item.sector]?.[lang] || item.sector}</span>
-                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.stageMap[item.investmentStage]?.[lang] || item.investmentStage}</span>
+                    <div className="flex gap-2 mb-3 flex-wrap">
+                      {(item.badges || []).map((b: any, i: number) => (
+                        <span key={i} className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                          {b.label}
+                        </span>
+                      ))}
               </div>
                     <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
@@ -239,7 +243,7 @@ export default function Home() {
 
           <div className="hidden md:block lg:hidden">
             <div className="grid grid-cols-2 gap-6 mb-12">
-              {homeProjects.slice(0, 6).map((item) => (
+              {homeProjects.slice(0, 6).map((item: any) => (
                 <div key={item.id} className="aspect-square">
                 <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
                   <img
@@ -249,9 +253,12 @@ export default function Home() {
                   />
                 </div>
                   <div className="mt-3 flex flex-col h-40">
-                    <div className="flex gap-2 mb-2">
-                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
-                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
+                    <div className="flex gap-2 mb-2 flex-wrap">
+                      {(item.badges || []).map((b: any, i: number) => (
+                        <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                          {b.label}
+                        </span>
+                      ))}
               </div>
                     <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors">
@@ -267,7 +274,7 @@ export default function Home() {
 
           <div className="md:hidden mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {homeProjects.slice(0, 4).map((item) => (
+              {homeProjects.slice(0, 4).map((item: any) => (
                 <div key={item.id} className="aspect-square">
                 <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200 h-full">
                   <img
@@ -277,9 +284,12 @@ export default function Home() {
                   />
                 </div>
                   <div className="mt-3 flex flex-col h-36">
-                    <div className="flex gap-2 mb-2">
-                      <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
-                      <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
+                    <div className="flex gap-2 mb-2 flex-wrap">
+                      {(item.badges || []).map((b: any, i: number) => (
+                        <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                          {b.label}
+                        </span>
+                      ))}
               </div>
                     <h3 className="text-black font-semibold text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                       <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">

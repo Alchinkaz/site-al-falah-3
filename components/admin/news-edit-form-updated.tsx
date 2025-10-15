@@ -30,21 +30,10 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       title: article.title || "",
       description: article.description || "",
       content: article.content || "",
-      date:
-        article.date ||
-        new Date().toLocaleDateString("ru-RU", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-      author: article.author || "Right Select Team",
-      category: article.category || "",
       image: article.image || "",
-      heroImage: article.heroImage || "",
       contentImage: article.contentImage || "",
       images: article.images || [],
-      sector: (article as any).sector || "Agriculture",
-      investmentStage: (article as any).investmentStage || "Growth",
+      badges: (article as any).badges || [],
       investmentYear: (article as any).investmentYear || new Date().getFullYear(),
       published: article.published || false,
       show_on_homepage: article.show_on_homepage || false,
@@ -97,13 +86,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       errors.push("Заголовок обязателен")
     }
 
-    if (!localData.description?.trim()) {
-      errors.push("Описание обязательно")
-    }
-
-    if (!localData.date?.trim()) {
-      errors.push("Дата обязательна")
-    }
+    // Description optional for projects editor
 
     // Проверяем, что хотя бы одна секция контента заполнена
     const hasValidContent = localData.contentSections.some((section) => section.title?.trim() || section.text?.trim())
@@ -229,39 +212,6 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                 </div>
               </div>
 
-              {/* Hero Image */}
-              <div>
-                <Label className="text-sm font-medium mb-2 block">Hero изображение (фон заголовка)</Label>
-                <div className="space-y-3">
-                  <div className="aspect-video bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden">
-                    {localData.heroImage ? (
-                      <img
-                        src={localData.heroImage || "/placeholder.svg"}
-                        alt="Hero изображение"
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.style.display = "none"
-                          target.nextElementSibling?.classList.remove("hidden")
-                        }}
-                      />
-                    ) : null}
-                    <div className="text-center text-slate-500 hidden">
-                      <FileText className="h-8 w-8 mx-auto mb-2" />
-                      <p className="text-sm">Предварительный просмотр</p>
-                    </div>
-                  </div>
-                  <Input
-                    value={localData.heroImage || ""}
-                    onChange={(e) => updateLocalData("heroImage", e.target.value)}
-                    placeholder="Ссылка на Hero изображение"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Фоновое изображение для Hero секции на странице проекта
-                  </p>
-                </div>
-              </div>
-
               {/* Content Image */}
               <div>
                 <Label className="text-sm font-medium mb-2 block">Изображение контента</Label>
@@ -315,72 +265,61 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="description">Краткое описание *</Label>
-                <Textarea
-                  id="description"
-                  value={localData.description || ""}
-                  onChange={(e) => updateLocalData("description", e.target.value)}
-                  rows={3}
-                  placeholder="Краткое описание проекта для списка"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="date">Дата публикации *</Label>
+                <Label>Год</Label>
                 <Input
-                  id="date"
-                  value={localData.date || ""}
-                  onChange={(e) => updateLocalData("date", e.target.value)}
-                  placeholder="15 декабря 2024"
+                  type="number"
+                  value={localData.investmentYear || new Date().getFullYear()}
+                  onChange={(e) => updateLocalData("investmentYear", Number(e.target.value))}
+                  placeholder="2017"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <Label>Сектор</Label>
-                  <Input
-                    value={localData.sector || ""}
-                    onChange={(e) => updateLocalData("sector", e.target.value)}
-                    placeholder="Agriculture"
-                  />
+              {/* Badges manager */}
+              <div className="space-y-3">
+                <Label>Бейджи проекта</Label>
+                <div className="space-y-3">
+                  {(localData.badges || []).map((badge: any, index: number) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <input
+                        type="color"
+                        value={badge.color || "#1e1a61"}
+                        onChange={(e) => {
+                          const next = [...(localData.badges || [])]
+                          next[index] = { ...next[index], color: e.target.value }
+                          updateLocalData("badges", next)
+                        }}
+                        className="h-10 w-12 rounded-md border"
+                        aria-label="Цвет бейджа"
+                      />
+                      <Input
+                        value={badge.label || ""}
+                        onChange={(e) => {
+                          const next = [...(localData.badges || [])]
+                          next[index] = { ...next[index], label: e.target.value }
+                          updateLocalData("badges", next)
+                        }}
+                        placeholder="Название бейджа"
+                      />
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          const next = (localData.badges || []).filter((_: any, i: number) => i !== index)
+                          updateLocalData("badges", next)
+                        }}
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => updateLocalData("badges", [...(localData.badges || []), { label: "", color: "#1e1a61" }])}
+                  >
+                    <Plus className="h-4 w-4 mr-2" /> Добавить бейдж
+                  </Button>
                 </div>
-                <div>
-                  <Label>Стадия</Label>
-                  <Input
-                    value={localData.investmentStage || ""}
-                    onChange={(e) => updateLocalData("investmentStage", e.target.value)}
-                    placeholder="Growth"
-                  />
-                </div>
-                <div>
-                  <Label>Год</Label>
-                  <Input
-                    type="number"
-                    value={localData.investmentYear || new Date().getFullYear()}
-                    onChange={(e) => updateLocalData("investmentYear", Number(e.target.value))}
-                    placeholder="2017"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="author">Автор</Label>
-                <Input
-                  id="author"
-                  value={localData.author || ""}
-                  onChange={(e) => updateLocalData("author", e.target.value)}
-                  placeholder="Right Select Team"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="category">Категория</Label>
-                <Input
-                  id="category"
-                  value={localData.category || ""}
-                  onChange={(e) => updateLocalData("category", e.target.value)}
-                  placeholder="Новости компании"
-                />
               </div>
             </CardContent>
           </Card>

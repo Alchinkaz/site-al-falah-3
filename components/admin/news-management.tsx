@@ -51,6 +51,126 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     setArticles(articlesData)
   }
 
+  // Seed 6 default projects if none exist
+  useEffect(() => {
+    const existing = AdminStorage.getNewsArticles()
+    if (existing.length === 0) {
+      const now = new Date().toISOString()
+      const seed = [
+        {
+          id: "proj-1",
+          title: "Alsad Kazakhstan",
+          description: "Premium food production company",
+          content: "Alsad Kazakhstan is a leading food production company...",
+          image: "/images/portfolio/alsad.jpg",
+          contentImage: "/images/portfolio/alsad-hero.jpg",
+          badges: [
+            { label: "Agriculture", color: "#065f46" },
+            { label: "Growth", color: "#1e40af" },
+          ],
+          investmentYear: 2017,
+          contentSections: [{ title: "Overview", text: "Company overview and impact..." }],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "proj-2",
+          title: "Karaganda Energocenter",
+          description: "Regional energy provider",
+          content: "Karaganda Energocenter operates major energy assets...",
+          image: "/images/portfolio/karaganda.jpg",
+          contentImage: "/images/portfolio/karaganda-hero.jpg",
+          badges: [
+            { label: "Energy", color: "#b45309" },
+            { label: "Infrastructure", color: "#6b21a8" },
+          ],
+          investmentYear: 2012,
+          contentSections: [{ title: "Modernization", text: "Upgrades and efficiencies..." }],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "proj-3",
+          title: "Ulmus Besshoky",
+          description: "Agricultural enterprise",
+          content: "Ulmus Besshoky develops sustainable agriculture...",
+          image: "/images/portfolio/ulmus.jpg",
+          contentImage: "/images/portfolio/ulmus-hero.jpg",
+          badges: [
+            { label: "Agriculture", color: "#047857" },
+            { label: "Operations", color: "#7c3aed" },
+          ],
+          investmentYear: 2015,
+          contentSections: [{ title: "Production", text: "Yield growth and quality..." }],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "proj-4",
+          title: "Ai Karaaul",
+          description: "Industrial venture",
+          content: "Ai Karaaul focuses on industrial innovation...",
+          image: "/images/portfolio/aikaraaul.jpg",
+          contentImage: "/images/portfolio/aikaraaul-hero.jpg",
+          badges: [
+            { label: "Industry", color: "#1f2937" },
+            { label: "Scale-up", color: "#1d4ed8" },
+          ],
+          investmentYear: 2018,
+          contentSections: [{ title: "Expansion", text: "Capacity and logistics..." }],
+          published: true,
+          show_on_homepage: false,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "proj-5",
+          title: "Karaganda Kus",
+          description: "Poultry production",
+          content: "Karaganda Kus is a poultry producer...",
+          image: "/images/portfolio/kus.jpg",
+          contentImage: "/images/portfolio/kus-hero.jpg",
+          badges: [
+            { label: "Food", color: "#16a34a" },
+            { label: "Operations", color: "#6d28d9" },
+          ],
+          investmentYear: 2019,
+          contentSections: [{ title: "Operations", text: "Improved efficiency..." }],
+          published: true,
+          show_on_homepage: false,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "proj-6",
+          title: "Elefund VC Portfolio",
+          description: "Technology investments",
+          content: "Investments in Robinhood, Soul of Nomad, and others...",
+          image: "/images/portfolio/elefund.jpg",
+          contentImage: "/images/portfolio/elefund-hero.jpg",
+          badges: [
+            { label: "Technology", color: "#0ea5e9" },
+            { label: "Venture", color: "#d97706" },
+          ],
+          investmentYear: 2020,
+          contentSections: [{ title: "Investments", text: "Key highlights and outcomes..." }],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+      ] as any
+      AdminStorage.setNewsArticles(seed as any)
+      setArticles(seed as any)
+    }
+  }, [])
+
   const handleAddArticle = () => {
     const newArticle: NewsArticle = {
       id: Date.now().toString(),
@@ -63,17 +183,8 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       // Добавляем дополнительные поля для совместимости с формой
-      date: new Date().toLocaleDateString("ru-RU", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
-      author: "Right Select Team",
-      category: "",
-      sector: "Agriculture",
-      investmentStage: "Growth",
+      badges: [],
       investmentYear: new Date().getFullYear(),
-      heroImage: "",
       contentImage: "",
       images: [],
       contentSections: [{ title: "", text: "" }],
@@ -87,24 +198,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     // Дополняем статью полями для совместимости с формой
     const extendedArticle = {
       ...article,
-      date: article.createdAt
-        ? new Date(article.createdAt).toLocaleDateString("ru-RU", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        : new Date().toLocaleDateString("ru-RU", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }),
-      author: (article as any).author || "Right Select Team",
-      category: (article as any).category || "",
-      heroImage: (article as any).heroImage || "",
       contentImage: (article as any).contentImage || "",
       images: (article as any).images || [],
-      sector: (article as any).sector || "Agriculture",
-      investmentStage: (article as any).investmentStage || "Growth",
+      badges: (article as any).badges || [],
       investmentYear: (article as any).investmentYear || new Date().getFullYear(),
       contentSections: (article as any).contentSections || [{ title: "", text: article.content || "" }],
     }
@@ -125,8 +221,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           description: articleData.description,
           content: articleData.content,
           image: articleData.image,
-          sector: articleData.sector,
-          investmentStage: articleData.investmentStage,
+          badges: articleData.badges || [],
           investmentYear: Number(articleData.investmentYear) || new Date().getFullYear(),
           contentImage: articleData.contentImage,
           contentSections: articleData.contentSections,
@@ -145,8 +240,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           description: articleData.description,
           content: articleData.content,
           image: articleData.image,
-          sector: articleData.sector,
-          investmentStage: articleData.investmentStage,
+          badges: articleData.badges || [],
           investmentYear: Number(articleData.investmentYear) || new Date().getFullYear(),
           contentImage: articleData.contentImage,
           contentSections: articleData.contentSections,
@@ -239,6 +333,11 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
                               На главной
                             </Badge>
                           )}
+                          {(article as any).badges?.map((b: any, i: number) => (
+                            <span key={i} className="text-xs px-2 py-0.5 rounded-full border" style={{ backgroundColor: `${b.color}20`, color: b.color, borderColor: `${b.color}40` }}>
+                              {b.label}
+                            </span>
+                          ))}
                         </div>
                         <p className="text-xs text-muted-foreground">
                           Создано: {formatDate(article.createdAt)}

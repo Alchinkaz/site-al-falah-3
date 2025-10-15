@@ -18,12 +18,11 @@ export default function PortfolioPage() {
   useEffect(() => {
     const publishedProjects = getPublishedProjects()
     const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    const formattedProjects = sorted.map((project) => ({
+    const formattedProjects = sorted.map((project: any) => ({
       id: project.id,
       title: project.title,
       description: project.description,
-      sector: project.sector,
-      investmentStage: project.investmentStage,
+      badges: project.badges || [],
       investmentYear: project.investmentYear,
       date: formatProjectDate(project.createdAt),
       image: project.image,
@@ -35,12 +34,11 @@ export default function PortfolioPage() {
     const reload = () => {
       const publishedProjects = getPublishedProjects()
       const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      const formattedProjects = sorted.map((project) => ({
+      const formattedProjects = sorted.map((project: any) => ({
         id: project.id,
         title: project.title,
         description: project.description,
-        sector: project.sector,
-        investmentStage: project.investmentStage,
+        badges: project.badges || [],
         investmentYear: project.investmentYear,
         date: formatProjectDate(project.createdAt),
         image: project.image,
@@ -96,9 +94,12 @@ export default function PortfolioPage() {
                         />
                       </div>
                       <div className="mt-4 flex flex-col h-40">
-                        <div className="flex gap-2 mb-3">
-                          <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.sectorMap[item.sector]?.[lang] || item.sector}</span>
-                          <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-3 py-1 rounded-full`}>{portfolioI18n.stageMap[item.investmentStage]?.[lang] || item.investmentStage}</span>
+                        <div className="flex gap-2 mb-3 flex-wrap">
+                          {(item.badges || []).map((b: any, i: number) => (
+                            <span key={i} className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                              {b.label}
+                            </span>
+                          ))}
                         </div>
                         <h3 className="text-black font-semibold text-2xl mb-2 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
@@ -127,9 +128,12 @@ export default function PortfolioPage() {
                         />
                       </div>
                       <div className="mt-3 flex flex-col h-36">
-                        <div className="flex gap-2 mb-2">
-                          <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
-                          <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
+                        <div className="flex gap-2 mb-2 flex-wrap">
+                          {(item.badges || []).map((b: any, i: number) => (
+                            <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                              {b.label}
+                            </span>
+                          ))}
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
@@ -158,9 +162,12 @@ export default function PortfolioPage() {
                         />
                       </div>
                       <div className="mt-3 flex flex-col h-36">
-                        <div className="flex gap-2 mb-2">
-                          <span className={`${getSectorBadgeClasses(item.sector)} text-sm px-2 py-1 rounded-full`}>{item.sector}</span>
-                          <span className={`${getStageBadgeClasses(item.investmentStage)} text-sm px-2 py-1 rounded-full`}>{item.investmentStage}</span>
+                        <div className="flex gap-2 mb-2 flex-wrap">
+                          {(item.badges || []).map((b: any, i: number) => (
+                            <span key={i} className="text-sm px-2 py-1 rounded-full" style={{ backgroundColor: `${b.color}20`, color: b.color, border: `1px solid ${b.color}40` }}>
+                              {b.label}
+                            </span>
+                          ))}
                         </div>
                         <h3 className="text-black font-semibold text-2xl md:text-2xl mb-1 leading-tight line-clamp-2 overflow-hidden flex-grow">
                           <Link href={`/portfolio/${item.id}`} className="hover:text-blue-600 transition-colors block line-clamp-2 overflow-hidden">
