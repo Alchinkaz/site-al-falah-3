@@ -48,10 +48,39 @@ export default function HomepageAdminPage() {
     kz: (i18n.aboutParagraphs.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
+  // Statistics
+  const [statTitles, setStatTitles] = useState<{ stat1Title: string; stat2Title: string; stat3Title: string }>({
+    stat1Title: "",
+    stat2Title: "",
+    stat3Title: "",
+  })
+  const [stat1SubtitleTranslations, setStat1SubtitleTranslations] = useState({
+    en: i18n.stat1Subtitle.en,
+    ru: i18n.stat1Subtitle.ru,
+    kz: i18n.stat1Subtitle.kz,
+  })
+  const [stat2SubtitleTranslations, setStat2SubtitleTranslations] = useState({
+    en: i18n.stat2Subtitle.en,
+    ru: i18n.stat2Subtitle.ru,
+    kz: i18n.stat2Subtitle.kz,
+  })
+  const [stat3SubtitleTranslations, setStat3SubtitleTranslations] = useState({
+    en: i18n.stat3Subtitle.en,
+    ru: i18n.stat3Subtitle.ru,
+    kz: i18n.stat3Subtitle.kz,
+  })
 
   useEffect(() => {
     const data = getHomepageData()
     if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
+    // Initialize statistics titles from homepage data
+    if (data) {
+      setStatTitles({
+        stat1Title: data.stat1Title || "",
+        stat2Title: data.stat2Title || "",
+        stat3Title: data.stat3Title || "",
+      })
+    }
   }, [])
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
@@ -107,11 +136,29 @@ export default function HomepageAdminPage() {
           ru: aboutParagraphsTranslations.ru.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
           kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
         },
+        // Statistics subtitles
+        stat1Subtitle: {
+          ...i18n.stat1Subtitle,
+          ...stat1SubtitleTranslations,
+        },
+        stat2Subtitle: {
+          ...i18n.stat2Subtitle,
+          ...stat2SubtitleTranslations,
+        },
+        stat3Subtitle: {
+          ...i18n.stat3Subtitle,
+          ...stat3SubtitleTranslations,
+        },
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
-      // Save About image into homepage data
-      updateHomepageData({ aboutImage: aboutImageUrl })
+      // Save About image and statistics numbers into homepage data
+      updateHomepageData({
+        aboutImage: aboutImageUrl,
+        stat1Title: statTitles.stat1Title,
+        stat2Title: statTitles.stat2Title,
+        stat3Title: statTitles.stat3Title,
+      })
       
       // Dispatch event to update the main site
       window.dispatchEvent(
@@ -218,6 +265,82 @@ export default function HomepageAdminPage() {
                 placeholder="View Portfolio"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Statistics Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Statistics</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Stat 1 */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="stat1Title" className="text-gray-900 font-medium">Значение</Label>
+                <Input
+                  id="stat1Title"
+                  value={statTitles.stat1Title}
+                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat1Title: e.target.value }))}
+                  placeholder="$50M+"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={stat1SubtitleTranslations[currentLang]}
+                  onChange={(e) => setStat1SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Assets Under Management"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            {/* Stat 2 */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="stat2Title" className="text-gray-900 font-medium">Значение</Label>
+                <Input
+                  id="stat2Title"
+                  value={statTitles.stat2Title}
+                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat2Title: e.target.value }))}
+                  placeholder="25+"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={stat2SubtitleTranslations[currentLang]}
+                  onChange={(e) => setStat2SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Portfolio Companies"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            {/* Stat 3 */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="stat3Title" className="text-gray-900 font-medium">Значение</Label>
+                <Input
+                  id="stat3Title"
+                  value={statTitles.stat3Title}
+                  onChange={(e) => setStatTitles((prev) => ({ ...prev, stat3Title: e.target.value }))}
+                  placeholder="15+"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <Label className="text-gray-900 font-medium">Подпись ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                  value={stat3SubtitleTranslations[currentLang]}
+                  onChange={(e) => setStat3SubtitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
+                  placeholder="Successful Exits"
+                  className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
             </div>
           </div>
         </CardContent>
