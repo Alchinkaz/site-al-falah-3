@@ -25,13 +25,17 @@ export default function AdminAboutPage() {
     kz: (i18n.aboutPageParagraphs?.kz || i18n.aboutParagraphs?.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
-  const [keyTermsRows, setKeyTermsRows] = useState<any[]>(i18n.aboutPageKeyTermsRows || [])
+  const [keyTermsRows, setKeyTermsRows] = useState<any[]>(Array.isArray((i18n as any).aboutPageKeyTermsRows) ? (i18n as any).aboutPageKeyTermsRows : [])
   const [keyTermsTitle, setKeyTermsTitle] = useState<{ en: string; ru: string; kz: string }>((i18n as any).aboutPageKeyTermsTitle || { en: "Key terms", ru: "Ключевые условия", kz: "Негізгі шарттар" })
   const [sectorsTitle, setSectorsTitle] = useState<{ en: string; ru: string; kz: string }>((i18n as any).aboutPageSectorsTitle || { en: "Sectors", ru: "Сектора", kz: "Салалар" })
-  const [sectors, setSectors] = useState<any[]>(((i18n as any).aboutPageSectors) || [])
+  const [sectors, setSectors] = useState<any[]>(Array.isArray((i18n as any).aboutPageSectors) ? (i18n as any).aboutPageSectors : [])
   // Team editor state
-  const [teamTitle, setTeamTitle] = useState<{ en: string; ru: string; kz: string }>(i18n.teamTitle)
-  const [teamPhotos, setTeamPhotos] = useState<Record<string, string>>(((i18n as any).teamPhotos) || {})
+  const [teamTitle, setTeamTitle] = useState<{ en: string; ru: string; kz: string }>(
+    (i18n as any).teamTitle || { en: "Meet the team", ru: "Команда", kz: "Команда" }
+  )
+  const [teamPhotos, setTeamPhotos] = useState<Record<string, string>>(
+    (i18n as any).teamPhotos && typeof (i18n as any).teamPhotos === "object" ? (i18n as any).teamPhotos : {}
+  )
   // Statistics (same as homepage)
   const [statTitles, setStatTitles] = useState<{ stat1Title: string; stat2Title: string; stat3Title: string }>({
     stat1Title: "",
