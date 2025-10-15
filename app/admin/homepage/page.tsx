@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Save } from "lucide-react"
 import { i18n, type Lang } from "@/lib/i18n"
+import { getHomepageData, updateHomepageData } from "@/lib/homepage-data"
 
 export default function HomepageAdminPage() {
   const [currentLang, setCurrentLang] = useState<Lang>("en")
@@ -36,6 +37,22 @@ export default function HomepageAdminPage() {
     ru: i18n.portfolioViewAll.ru,
     kz: i18n.portfolioViewAll.kz,
   })
+  const [aboutTitleTranslations, setAboutTitleTranslations] = useState({
+    en: i18n.aboutTitle.en,
+    ru: i18n.aboutTitle.ru,
+    kz: i18n.aboutTitle.kz,
+  })
+  const [aboutParagraphsTranslations, setAboutParagraphsTranslations] = useState({
+    en: (i18n.aboutParagraphs.en || []).join("\n\n"),
+    ru: (i18n.aboutParagraphs.ru || []).join("\n\n"),
+    kz: (i18n.aboutParagraphs.kz || []).join("\n\n"),
+  })
+  const [aboutImageUrl, setAboutImageUrl] = useState("")
+
+  useEffect(() => {
+    const data = getHomepageData()
+    if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
+  }, [])
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
 
@@ -81,9 +98,20 @@ export default function HomepageAdminPage() {
           ...i18n.portfolioViewAll,
           ...portfolioButtonTranslations,
         },
+        aboutTitle: {
+          ...i18n.aboutTitle,
+          ...aboutTitleTranslations,
+        },
+        aboutParagraphs: {
+          en: aboutParagraphsTranslations.en.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          ru: aboutParagraphsTranslations.ru.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+        },
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
+      // Save About image into homepage data
+      updateHomepageData({ aboutImage: aboutImageUrl })
       
       // Dispatch event to update the main site
       window.dispatchEvent(
@@ -190,6 +218,59 @@ export default function HomepageAdminPage() {
                 placeholder="View Portfolio"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* About Us Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">About Us</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="aboutTitle" className="text-gray-900 font-medium">
+                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Input
+                id="aboutTitle"
+                value={aboutTitleTranslations[currentLang]}
+                onChange={(e) =>
+                  setAboutTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="About Us"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label htmlFor="aboutParagraphs" className="text-gray-900 font-medium">
+                Текст ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Textarea
+                id="aboutParagraphs"
+                value={aboutParagraphsTranslations[currentLang]}
+                onChange={(e) =>
+                  setAboutParagraphsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder={"We invest across energy, agriculture, industry and technology, partnering with ambitious teams to build durable value.\n\nOur principals have executed dozens of transactions across Central Asia, combining capital with deep operating expertise."}
+                rows={6}
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">Разделяйте абзацы пустой строкой.</p>
+            </div>
+            <div>
+              <Label htmlFor="aboutImage" className="text-gray-900 font-medium">
+                Ссылка на изображение
+              </Label>
+              <Input
+                id="aboutImage"
+                value={aboutImageUrl}
+                onChange={(e) => setAboutImageUrl(e.target.value)}
+                placeholder="/placeholder.svg"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">Картинка по ссылке будет отображаться в блоке изображения.</p>
             </div>
           </div>
         </CardContent>
