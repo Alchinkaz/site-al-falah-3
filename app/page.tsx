@@ -81,6 +81,24 @@ export default function Home() {
     setHomeProjects(formatted)
   }, [])
 
+  useEffect(() => {
+    const reloadProjects = () => {
+      const published = getPublishedProjects()
+      const sorted = [...published].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      const formatted = sorted.slice(0, 6).map((p) => ({
+        id: p.id,
+        title: p.title,
+        date: formatProjectDate(p.createdAt),
+        image: p.image,
+        sector: p.sector,
+        investmentStage: p.investmentStage,
+      }))
+      setHomeProjects(formatted)
+    }
+    window.addEventListener("projects-updated", reloadProjects as EventListener)
+    return () => window.removeEventListener("projects-updated", reloadProjects as EventListener)
+  }, [])
+
   const reviews = homepageData?.reviews || []
 
   useEffect(() => {

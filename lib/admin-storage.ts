@@ -30,6 +30,10 @@ export interface NewsArticle {
   date?: string
   author?: string
   category?: string
+  // Portfolio specific fields
+  sector?: string
+  investmentStage?: string
+  investmentYear?: number
   contentSections?: Array<{ title: string; text: string }>
   published: boolean
   show_on_homepage: boolean
@@ -172,6 +176,7 @@ export class AdminStorage {
         return
       }
       localStorage.setItem("admin_news", JSON.stringify(articles))
+      window.dispatchEvent(new CustomEvent("projects-updated", { detail: { timestamp: Date.now() } }))
     } catch (error) {
       console.error("Error setting news articles:", error)
     }

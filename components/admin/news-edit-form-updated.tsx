@@ -43,6 +43,9 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       heroImage: article.heroImage || "",
       contentImage: article.contentImage || "",
       images: article.images || [],
+      sector: (article as any).sector || "Agriculture",
+      investmentStage: (article as any).investmentStage || "Growth",
+      investmentYear: (article as any).investmentYear || new Date().getFullYear(),
       published: article.published || false,
       show_on_homepage: article.show_on_homepage || false,
     }
@@ -330,6 +333,34 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                   onChange={(e) => updateLocalData("date", e.target.value)}
                   placeholder="15 декабря 2024"
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <Label>Сектор</Label>
+                  <Input
+                    value={localData.sector || ""}
+                    onChange={(e) => updateLocalData("sector", e.target.value)}
+                    placeholder="Agriculture"
+                  />
+                </div>
+                <div>
+                  <Label>Стадия</Label>
+                  <Input
+                    value={localData.investmentStage || ""}
+                    onChange={(e) => updateLocalData("investmentStage", e.target.value)}
+                    placeholder="Growth"
+                  />
+                </div>
+                <div>
+                  <Label>Год</Label>
+                  <Input
+                    type="number"
+                    value={localData.investmentYear || new Date().getFullYear()}
+                    onChange={(e) => updateLocalData("investmentYear", Number(e.target.value))}
+                    placeholder="2017"
+                  />
+                </div>
               </div>
 
               <div>

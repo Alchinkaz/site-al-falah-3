@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Plus, Edit3, Trash2, FileText } from "lucide-react"
 import { AdminStorage, type NewsArticle } from "@/lib/admin-storage"
-import { NewsEditForm } from "./news-edit-form"
+import { NewsEditForm } from "./news-edit-form-updated"
 
 interface NewsManagementProps {
   currentUser: any
@@ -70,6 +70,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
       }),
       author: "Right Select Team",
       category: "",
+      sector: "Agriculture",
+      investmentStage: "Growth",
+      investmentYear: new Date().getFullYear(),
       heroImage: "",
       contentImage: "",
       images: [],
@@ -100,6 +103,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
       heroImage: (article as any).heroImage || "",
       contentImage: (article as any).contentImage || "",
       images: (article as any).images || [],
+      sector: (article as any).sector || "Agriculture",
+      investmentStage: (article as any).investmentStage || "Growth",
+      investmentYear: (article as any).investmentYear || new Date().getFullYear(),
       contentSections: (article as any).contentSections || [{ title: "", text: article.content || "" }],
     }
 
@@ -119,6 +125,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           description: articleData.description,
           content: articleData.content,
           image: articleData.image,
+          sector: articleData.sector,
+          investmentStage: articleData.investmentStage,
+          investmentYear: Number(articleData.investmentYear) || new Date().getFullYear(),
           contentImage: articleData.contentImage,
           contentSections: articleData.contentSections,
           published: articleData.published,
@@ -136,6 +145,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           description: articleData.description,
           content: articleData.content,
           image: articleData.image,
+          sector: articleData.sector,
+          investmentStage: articleData.investmentStage,
+          investmentYear: Number(articleData.investmentYear) || new Date().getFullYear(),
           contentImage: articleData.contentImage,
           contentSections: articleData.contentSections,
           published: articleData.published,

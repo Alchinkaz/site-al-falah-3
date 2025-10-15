@@ -32,6 +32,26 @@ export default function PortfolioPage() {
   }, [])
 
   useEffect(() => {
+    const reload = () => {
+      const publishedProjects = getPublishedProjects()
+      const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      const formattedProjects = sorted.map((project) => ({
+        id: project.id,
+        title: project.title,
+        description: project.description,
+        sector: project.sector,
+        investmentStage: project.investmentStage,
+        investmentYear: project.investmentYear,
+        date: formatProjectDate(project.createdAt),
+        image: project.image,
+      }))
+      setProjectsData(formattedProjects)
+    }
+    window.addEventListener("projects-updated", reload as EventListener)
+    return () => window.removeEventListener("projects-updated", reload as EventListener)
+  }, [])
+
+  useEffect(() => {
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)
     return () => window.removeEventListener("language-changed", handler)
