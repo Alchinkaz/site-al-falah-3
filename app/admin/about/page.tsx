@@ -15,14 +15,14 @@ export default function AdminAboutPage() {
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
   const [aboutTitleTranslations, setAboutTitleTranslations] = useState({
-    en: i18n.aboutTitle.en,
-    ru: i18n.aboutTitle.ru,
-    kz: i18n.aboutTitle.kz,
+    en: i18n.aboutPageTitle?.en || i18n.aboutTitle.en,
+    ru: i18n.aboutPageTitle?.ru || i18n.aboutTitle.ru,
+    kz: i18n.aboutPageTitle?.kz || i18n.aboutTitle.kz,
   })
   const [aboutParagraphsTranslations, setAboutParagraphsTranslations] = useState({
-    en: (i18n.aboutParagraphs.en || []).join("\n\n"),
-    ru: (i18n.aboutParagraphs.ru || []).join("\n\n"),
-    kz: (i18n.aboutParagraphs.kz || []).join("\n\n"),
+    en: (i18n.aboutPageParagraphs?.en || i18n.aboutParagraphs.en || []).join("\n\n"),
+    ru: (i18n.aboutPageParagraphs?.ru || i18n.aboutParagraphs.ru || []).join("\n\n"),
+    kz: (i18n.aboutPageParagraphs?.kz || i18n.aboutParagraphs.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
 
@@ -37,11 +37,12 @@ export default function AdminAboutPage() {
     try {
       const updatedI18n = {
         ...i18n,
-        aboutTitle: {
-          ...i18n.aboutTitle,
-          ...aboutTitleTranslations,
+        aboutPageTitle: {
+          en: aboutTitleTranslations.en,
+          ru: aboutTitleTranslations.ru,
+          kz: aboutTitleTranslations.kz,
         },
-        aboutParagraphs: {
+        aboutPageParagraphs: {
           en: aboutParagraphsTranslations.en.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
           ru: aboutParagraphsTranslations.ru.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
           kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),

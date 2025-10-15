@@ -65,8 +65,8 @@ export default function AboutPage() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="grid xl:grid-cols-2 gap-12">
             <div className="space-y-5 text-gray-700 text-lg leading-relaxed">
-              <h3 className="text-3xl font-semibold text-gray-900 mb-2">{aboutI18n.title[lang]}</h3>
-              {aboutI18n.paragraphs[lang].map((p, idx) => (
+              <h3 className="text-3xl font-semibold text-gray-900 mb-2">{i18n.aboutPageTitle[lang] || aboutI18n.title[lang]}</h3>
+              {(i18n.aboutPageParagraphs?.[lang] || aboutI18n.paragraphs[lang]).map((p: string, idx: number) => (
                 <p key={idx}>{p}</p>
               ))}
             </div>

@@ -63,6 +63,32 @@ const defaultTranslations = {
       "Біздің серіктестер Орталық Азияда ондаған мәміле жүзеге асырып, капиталды терең операциялық тәжірибемен ұштастырады.",
     ],
   },
+  // About page (dedicated) — separate from homepage About teaser
+  aboutPageTitle: {
+    en: "About Us",
+    ru: "О компании",
+    kz: "Біз туралы",
+  },
+  aboutPageParagraphs: {
+    en: [
+      "We make investments in companies across energy, mining, agriculture, food production, high‑tech, healthcare and other sectors.",
+      "Leveraging deep regional expertise and a strong network, we are raising the Falah Growth Fund II, a USD200 million private equity fund focused on emerging opportunities and long‑term value creation.",
+      "Al Falah Capital Partners is headquartered in Almaty. Since 2008, our principals have invested in or acquired dozens of companies including Karaganda Energocenter, Ulmus Besshoky, Alsad Kazakhstan, Ai Karaaul, Karaganda Kus, Elefund VC funds, Robinhood Inc., Soul of Nomad Inc. and others.",
+      "Central Asia is a rapidly growing region with exceptional entrepreneurs. We remain focused on its potential and are ready to partner with new investors to capture the next wave of growth.",
+    ],
+    ru: [
+      "Мы инвестируем в компании из сфер энергетики, добычи, сельского хозяйства, производства продуктов питания, высоких технологий, здравоохранения и других отраслей.",
+      "Опираясь на глубокую региональную экспертизу и сильную сеть партнёров, мы формируем Falah Growth Fund II — частный фонд объёмом 200 млн долларов США, нацеленный на новые возможности и создание долгосрочной стоимости.",
+      "Штаб‑квартира Al Falah Capital Partners находится в Алматы. С 2008 года наши партнёры инвестировали или приобрели десятки компаний, среди которых Karaganda Energocenter, Ulmus Besshoky, Alsad Kazakhstan, Ai Karaaul, Karaganda Kus, фонды Elefund VC, Robinhood Inc., Soul of Nomad Inc. и другие.",
+      "Центральная Азия — быстрорастущий регион с талантливыми предпринимателями. Мы сосредоточены на его потенциале и готовы вместе с новыми инвесторами использовать следующую волну роста.",
+    ],
+    kz: [
+      "Біз энергетика, тау‑кен өндірісі, ауыл шаруашылығы, тамақ өндірісі, жоғары технологиялар, денсаулық сақтау және басқа салалардағы компанияларға инвестиция саламыз.",
+      "Аймақтық тәжірибеміз бен әріптестер желісіне сүйене отырып, біз құны 200 млн АҚШ долларына тең Falah Growth Fund II жеке капитал қорын құрып жатырмыз. Қордың мақсаты — жаңа мүмкіндіктерді пайдалану және ұзақ мерзімді құн қалыптастыру.",
+      "Al Falah Capital Partners Алматыда орналасқан. 2008 жылдан бері серіктестеріміз ондаған компанияға инвестиция салып, сатып алды: Karaganda Energocenter, Ulmus Besshoky, Alsad Kazakhstan, Ai Karaaul, Karaganda Kus, Elefund VC қорлары, Robinhood Inc., Soul of Nomad Inc. және басқалары.",
+      "Орталық Азия — жылдам дамып келе жатқан өңір. Біз осы әлеуетке сенеміз және жаңа инвесторлармен бірге келесі өсу толқынын игеруге дайынбыз.",
+    ],
+  },
   stat1Subtitle: {
     en: "Assets Under Management",
     ru: "Активы под управлением",
