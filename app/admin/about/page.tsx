@@ -170,6 +170,118 @@ export default function AdminAboutPage() {
           </div>
         </CardContent>
       </Card>
+      {/* Key terms editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Key terms</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {keyTermsRows.map((row, idx) => (
+            <div key={idx} className="border border-gray-200 rounded-lg p-4 space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <Label className="text-gray-900 font-medium">Label (EN)</Label>
+                  <Input
+                    value={row.label?.en || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = { ...next[idx], label: { ...(next[idx]?.label || {}), en: e.target.value } }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder="Size"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Label (RU)</Label>
+                  <Input
+                    value={row.label?.ru || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = { ...next[idx], label: { ...(next[idx]?.label || {}), ru: e.target.value } }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder="Размер"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Label (KZ)</Label>
+                  <Input
+                    value={row.label?.kz || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = { ...next[idx], label: { ...(next[idx]?.label || {}), kz: e.target.value } }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder="Өлшемі"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <Label className="text-gray-900 font-medium">Value (EN)</Label>
+                  <Input
+                    value={row.value?.en || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = { ...next[idx], value: { ...(next[idx]?.value || {}), en: e.target.value } }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder="USD200m"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Value (RU)</Label>
+                  <Input
+                    value={row.value?.ru || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = { ...next[idx], value: { ...(next[idx]?.value || {}), ru: e.target.value } }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder="USD200 млн"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <Label className="text-gray-900 font-medium">Value (KZ)</Label>
+                  <Input
+                    value={row.value?.kz || ""}
+                    onChange={(e) => {
+                      const next = [...keyTermsRows]
+                      next[idx] = { ...next[idx], value: { ...(next[idx]?.value || {}), kz: e.target.value } }
+                      setKeyTermsRows(next)
+                    }}
+                    placeholder="USD200 млн"
+                    className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <Button
+                  variant="outline"
+                  className="border-red-300 text-red-600 hover:bg-red-50"
+                  onClick={() => setKeyTermsRows(keyTermsRows.filter((_, i) => i !== idx))}
+                >
+                  Удалить
+                </Button>
+              </div>
+            </div>
+          ))}
+          <div>
+            <Button
+              variant="outline"
+              onClick={() => setKeyTermsRows([...keyTermsRows, { label: { en: "", ru: "", kz: "" }, value: { en: "", ru: "", kz: "" } }])}
+              className="border-gray-300"
+            >
+              Добавить строку
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
