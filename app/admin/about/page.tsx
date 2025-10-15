@@ -68,8 +68,8 @@ export default function AdminAboutPage() {
     <div className="space-y-6 text-gray-900">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Редактирование главной страницы</h1>
-          <p className="text-gray-600 mt-2">Управление контентом hero секции (About Us)</p>
+          <h1 className="text-3xl font-bold text-gray-900">Редактирование страницы «О компании»</h1>
+          <p className="text-gray-600 mt-2">Управление контентом страницы «О компании»</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex gap-2">

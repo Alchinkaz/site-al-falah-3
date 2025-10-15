@@ -50,7 +50,7 @@ export default function AboutPage() {
         <div className="max-w-[22rem] sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
           <div className="relative w-full rounded-2xl overflow-hidden mb-4" style={{ aspectRatio: "21/9" }}>
             <img
-              src="/placeholder.svg"
+              src={homepageData?.aboutImage || "/placeholder.svg"}
               alt="About cover"
               className="w-full h-full object-cover"
             />
