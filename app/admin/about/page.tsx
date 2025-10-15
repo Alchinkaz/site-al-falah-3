@@ -15,14 +15,14 @@ export default function AdminAboutPage() {
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
   const [aboutTitleTranslations, setAboutTitleTranslations] = useState({
-    en: i18n.aboutPageTitle?.en || i18n.aboutTitle.en,
-    ru: i18n.aboutPageTitle?.ru || i18n.aboutTitle.ru,
-    kz: i18n.aboutPageTitle?.kz || i18n.aboutTitle.kz,
+    en: i18n.aboutPageTitle?.en || i18n.aboutTitle?.en || "About Us",
+    ru: i18n.aboutPageTitle?.ru || i18n.aboutTitle?.ru || "О компании",
+    kz: i18n.aboutPageTitle?.kz || i18n.aboutTitle?.kz || "Біз туралы",
   })
   const [aboutParagraphsTranslations, setAboutParagraphsTranslations] = useState({
-    en: (i18n.aboutPageParagraphs?.en || i18n.aboutParagraphs.en || []).join("\n\n"),
-    ru: (i18n.aboutPageParagraphs?.ru || i18n.aboutParagraphs.ru || []).join("\n\n"),
-    kz: (i18n.aboutPageParagraphs?.kz || i18n.aboutParagraphs.kz || []).join("\n\n"),
+    en: (i18n.aboutPageParagraphs?.en || i18n.aboutParagraphs?.en || []).join("\n\n"),
+    ru: (i18n.aboutPageParagraphs?.ru || i18n.aboutParagraphs?.ru || []).join("\n\n"),
+    kz: (i18n.aboutPageParagraphs?.kz || i18n.aboutParagraphs?.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
   const [keyTermsRows, setKeyTermsRows] = useState<any[]>(i18n.aboutPageKeyTermsRows || [])
@@ -39,19 +39,19 @@ export default function AdminAboutPage() {
     stat3Title: "",
   })
   const [stat1SubtitleTranslations, setStat1SubtitleTranslations] = useState({
-    en: i18n.stat1Subtitle.en,
-    ru: i18n.stat1Subtitle.ru,
-    kz: i18n.stat1Subtitle.kz,
+    en: i18n.stat1Subtitle?.en || "Assets Under Management",
+    ru: i18n.stat1Subtitle?.ru || "Активы под управлением",
+    kz: i18n.stat1Subtitle?.kz || "Басқарудағы активтер",
   })
   const [stat2SubtitleTranslations, setStat2SubtitleTranslations] = useState({
-    en: i18n.stat2Subtitle.en,
-    ru: i18n.stat2Subtitle.ru,
-    kz: i18n.stat2Subtitle.kz,
+    en: i18n.stat2Subtitle?.en || "Portfolio Companies",
+    ru: i18n.stat2Subtitle?.ru || "Портфельные компании",
+    kz: i18n.stat2Subtitle?.kz || "Портфельдік компаниялар",
   })
   const [stat3SubtitleTranslations, setStat3SubtitleTranslations] = useState({
-    en: i18n.stat3Subtitle.en,
-    ru: i18n.stat3Subtitle.ru,
-    kz: i18n.stat3Subtitle.kz,
+    en: i18n.stat3Subtitle?.en || "Successful Exits",
+    ru: i18n.stat3Subtitle?.ru || "Успешные выходы",
+    kz: i18n.stat3Subtitle?.kz || "Сәтті шығулар",
   })
 
   useEffect(() => {
