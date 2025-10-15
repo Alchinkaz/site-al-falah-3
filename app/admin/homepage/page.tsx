@@ -222,59 +222,6 @@ export default function HomepageAdminPage() {
           </div>
         </CardContent>
       </Card>
-      {/* About Us Section Editor */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">About Us</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-6">
-            <div>
-              <Label htmlFor="aboutTitle" className="text-gray-900 font-medium">
-                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
-              <Input
-                id="aboutTitle"
-                value={aboutTitleTranslations[currentLang]}
-                onChange={(e) =>
-                  setAboutTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder="About Us"
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <Label htmlFor="aboutParagraphs" className="text-gray-900 font-medium">
-                Текст ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
-              </Label>
-              <Textarea
-                id="aboutParagraphs"
-                value={aboutParagraphsTranslations[currentLang]}
-                onChange={(e) =>
-                  setAboutParagraphsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
-                }
-                placeholder={"We invest across energy, agriculture, industry and technology, partnering with ambitious teams to build durable value.\n\nOur principals have executed dozens of transactions across Central Asia, combining capital with deep operating expertise."}
-                rows={6}
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Разделяйте абзацы пустой строкой.</p>
-            </div>
-            <div>
-              <Label htmlFor="aboutImage" className="text-gray-900 font-medium">
-                Ссылка на изображение
-              </Label>
-              <Input
-                id="aboutImage"
-                value={aboutImageUrl}
-                onChange={(e) => setAboutImageUrl(e.target.value)}
-                placeholder="/placeholder.svg"
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Картинка по ссылке будет отображаться в блоке изображения.</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
       {/* Portfolio Section Editor */}
       <Card className="bg-white border-gray-200">
         <CardHeader>
@@ -324,6 +271,59 @@ export default function HomepageAdminPage() {
                 placeholder="View All"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* About Us Section Editor */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">About Us</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="aboutTitle" className="text-gray-900 font-medium">
+                Заголовок ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Input
+                id="aboutTitle"
+                value={aboutTitleTranslations[currentLang]}
+                onChange={(e) =>
+                  setAboutTitleTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder="About Us"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label htmlFor="aboutParagraphs" className="text-gray-900 font-medium">
+                Текст ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
+              </Label>
+              <Textarea
+                id="aboutParagraphs"
+                value={aboutParagraphsTranslations[currentLang]}
+                onChange={(e) =>
+                  setAboutParagraphsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))
+                }
+                placeholder={"We invest across energy, agriculture, industry and technology, partnering with ambitious teams to build durable value.\n\nOur principals have executed dozens of transactions across Central Asia, combining capital with deep operating expertise."}
+                rows={6}
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">Разделяйте абзацы пустой строкой.</p>
+            </div>
+            <div>
+              <Label htmlFor="aboutImage" className="text-gray-900 font-medium">
+                Ссылка на изображение
+              </Label>
+              <Input
+                id="aboutImage"
+                value={aboutImageUrl}
+                onChange={(e) => setAboutImageUrl(e.target.value)}
+                placeholder="/placeholder.svg"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">Картинка по ссылке будет отображаться в блоке изображения.</p>
             </div>
           </div>
         </CardContent>
