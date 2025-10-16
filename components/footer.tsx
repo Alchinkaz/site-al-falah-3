@@ -8,6 +8,7 @@ export default function Footer() {
   const [lang, setLang] = useState(readLang())
   const [email, setEmail] = useState<string>("")
   const [copyright, setCopyright] = useState<string>("")
+  const [footerBg, setFooterBg] = useState<string>("/hero-bg.jpg")
   useEffect(() => {
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)
@@ -17,6 +18,7 @@ export default function Footer() {
   useEffect(() => {
     const data = getHomepageData()
     setEmail(data.footerEmail || "altay@falahpartners.com")
+    if (data.footerBg) setFooterBg(data.footerBg)
     ;(function(){
       // ensure copyright comes from data or fallback
       const cp = data.footerCopyright || "© 2025 Al Falah Capital Partners"
@@ -26,6 +28,7 @@ export default function Footer() {
       const d = e.detail || {}
       setEmail(d.footerEmail || "altay@falahpartners.com")
       setCopyright(d.footerCopyright || "© 2025 Al Falah Capital Partners")
+      if (d.footerBg) setFooterBg(d.footerBg)
     }
     window.addEventListener("homepage-data-updated", onData)
     return () => window.removeEventListener("homepage-data-updated", onData)
@@ -36,7 +39,7 @@ export default function Footer() {
   return (
     <footer
       className="font-inter bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+      style={{ backgroundImage: `url('${footerBg || "/hero-bg.jpg"}')` }}
     >
       {/* CTA top block kept exactly as before, now inside the footer */}
       <section className="py-24">

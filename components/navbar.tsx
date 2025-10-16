@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { X, Globe, Menu } from "lucide-react"
+import { getHomepageData } from "@/lib/homepage-data"
 
 export default function Navbar({ forceScrolled = false }: { forceScrolled?: boolean } = {}) {
   const pathname = usePathname()
@@ -273,7 +274,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           className={`fixed inset-0 z-[60] transition-all duration-500 ease-in-out transform bg-cover bg-center bg-no-repeat ${
             mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
           }`}
-          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+          style={{ backgroundImage: `url('${(typeof window !== 'undefined' ? (getHomepageData().mobileMenuBg || getHomepageData().heroImage || '/hero-bg.jpg') : '/hero-bg.jpg')}')` }}
         >
           {/* Navigation links - aligned to navbar width, left aligned */}
           <div className="h-full flex items-center">
