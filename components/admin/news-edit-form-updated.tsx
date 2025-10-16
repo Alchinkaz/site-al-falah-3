@@ -246,6 +246,31 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
     return () => window.removeEventListener("admin-set-project-lang", handler as EventListener)
   }, [])
 
+  // Ensure badgesI18n stays in sync with localData.badges length and prefill labels
+  useEffect(() => {
+    const baseLen = (localData.badges || []).length
+    setBadgesI18n((prev) => {
+      const next = [...prev]
+      // Extend to match badges length
+      while (next.length < baseLen) next.push({ en: "", ru: "", kz: "" })
+      // Trim extra translations
+      if (next.length > baseLen) next.length = baseLen
+      // Prefill empty entries with current badge label as fallback
+      for (let i = 0; i < baseLen; i++) {
+        const label = (localData.badges?.[i]?.label || "") as string
+        next[i] = {
+          en: next[i]?.en ?? "",
+          ru: next[i]?.ru ?? "",
+          kz: next[i]?.kz ?? "",
+        }
+        if (!next[i].en && label) next[i].en = label
+        if (!next[i].ru && label) next[i].ru = label
+        if (!next[i].kz && label) next[i].kz = label
+      }
+      return next
+    })
+  }, [localData.badges])
+
   return (
     <div className="space-y-6">
       {/* Header + language switch */}

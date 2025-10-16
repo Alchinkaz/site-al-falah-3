@@ -465,6 +465,117 @@ export class AdminStorage {
         return
       }
       localStorage.setItem("admin_news", JSON.stringify(articles))
+      // Backfill missing RU/KZ translations for any existing projects without overwriting user data
+      try {
+        const stored = localStorage.getItem("i18n-translations")
+        const parsed = stored ? JSON.parse(stored) : {}
+        const next = { ...parsed }
+        next.projectTexts = next.projectTexts || {}
+        next.projectBadgesI18n = next.projectBadgesI18n || {}
+        next.projectSections = next.projectSections || {}
+
+        const ensure = (id: string, enTitle: string, ruTitle: string, kzTitle: string, badges: Array<{ en: string; ru: string; kz: string }>, enText: string, ruText: string, kzText: string) => {
+          next.projectTexts[id] = next.projectTexts[id] || {}
+          next.projectTexts[id].title = next.projectTexts[id].title || { en: enTitle, ru: ruTitle, kz: kzTitle }
+          const existingBadges = Array.isArray(next.projectBadgesI18n[id]) ? next.projectBadgesI18n[id] : []
+          const mergedBadges = [...existingBadges]
+          for (let i = 0; i < badges.length; i++) {
+            mergedBadges[i] = mergedBadges[i] || badges[i]
+          }
+          next.projectBadgesI18n[id] = mergedBadges
+          next.projectSections[id] = next.projectSections[id] || {
+            en: [{ title: "Overview", text: enText }],
+            ru: [{ title: "Обзор", text: ruText }],
+            kz: [{ title: "Шолу", text: kzText }],
+          }
+        }
+
+        // Only backfill if defaults exist
+        const byId: Record<string, NewsArticle> = {}
+        for (const a of articles) byId[a.id] = a
+        if (byId["p1"]) ensure(
+          "p1",
+          "Alsad Kazakhstan LLP",
+          "Алсад Казахстан ТОО",
+          "Alsad Kazakhstan ЖШС",
+          [
+            { en: "Agriculture", ru: "Сельское хозяйство", kz: "Ауыл шаруашылығы" },
+            { en: "Turnaround", ru: "Оздоровление", kz: "Беті қайтару" },
+          ],
+          byId["p1"].contentSections?.[0]?.text || "",
+          "Неработающая ферма на грани банкротства была превращена в лидера рынка по производству яиц с мощностью 160 млн качественных яиц в год и долей 20% в Алматинском регионе.",
+          "Банкроттық алдында тұрған ферма жылына 160 млн сапалы жұмыртқа шығаратын нарық көшбасшысына айналды, Алматы өңірінде 20% үлеске жетті."
+        )
+        if (byId["p2"]) ensure(
+          "p2",
+          "Karaganda Energocenter LLP",
+          "Караганда Энергоцентр ТОО",
+          "Қарағанды Энергоцентр ЖШС",
+          [
+            { en: "Energy", ru: "Энергетика", kz: "Энергетика" },
+            { en: "Growth", ru: "Рост", kz: "Өсу" },
+          ],
+          byId["p2"].contentSections?.[0]?.text || "",
+          "Инвестиции направлены на расширение через строительство нового энергоблока 120 МВт для покрытия дефицита мощности, установленная мощность достигла 712 МВт к концу 2015 года.",
+          "Инвестициялар қуат тапшылығын жабу үшін 120 МВт энергоблок салу арқылы кеңейтуге бағытталды, 2015 жылдың соңына қарай орнатылған қуат 712 МВт-қа жетті."
+        )
+        if (byId["p3"]) ensure(
+          "p3",
+          "Karaganda Kus LLP",
+          "Караганда Кус ТОО",
+          "Қарағанды Құс ЖШС",
+          [
+            { en: "Agriculture", ru: "Сельское хозяйство", kz: "Ауыл шаруашылығы" },
+            { en: "LBO", ru: "LBO", kz: "LBO" },
+          ],
+          byId["p3"].contentSections?.[0]?.text || "",
+          "Дальнейшая экспансия экспертизы Alsad в Карагандинский регион с привлечением внешнего финансирования. Объединённый бизнес по производству яиц стал лидером рынка Казахстана с мощностью 300 млн яиц.",
+          "Сыртқы қаржыландыру арқылы Alsad тәжірибесін Қарағанды өңіріне кеңейту. Біріккен жұмыртқа өндірісі 300 млн жұмыртқа қуатымен Қазақстан нарығының көшбасшысы болды."
+        )
+        if (byId["p4"]) ensure(
+          "p4",
+          "Ulmus Besshoky JSC",
+          "Улмус Бешёкы АО",
+          "Ulmus Besshoky АҚ",
+          [
+            { en: "Mining", ru: "Добыча", kz: "Кен өндіру" },
+            { en: "Greenfield", ru: "Гринфилд", kz: "Гринфилд" },
+          ],
+          byId["p4"].contentSections?.[0]?.text || "",
+          "Ранняя стадия: от разведки до ТЭО с целью увеличения подтверждённых ресурсов, достигнутых на уровне 1 167 тыс. тонн меди.",
+          "Ерте кезең: барлау жұмыстарынан ТЭН-ге дейін, 1 167 мың тонна мыс қоры расталды."
+        )
+        if (byId["p5"]) ensure(
+          "p5",
+          "Ai Karaaul JSC",
+          "Ай Карааул АО",
+          "Ай Қарааул АҚ",
+          [
+            { en: "Mining", ru: "Добыча", kz: "Кен өндіру" },
+            { en: "Greenfield", ru: "Гринфилд", kz: "Гринфилд" },
+          ],
+          byId["p5"].contentSections?.[0]?.text || "",
+          "Ранняя стадия: от разведки до ТЭО с целью увеличения подтверждённых ресурсов, достигнутых на уровне 180 тыс. тонн высокосортной меди.",
+          "Ерте кезең: барлау жұмыстарынан ТЭН-ге дейін, 180 мың тонна жоғары сапалы мыс қоры расталды."
+        )
+        if (byId["p6"]) ensure(
+          "p6",
+          "Elefund VC funds",
+          "Elefund венчурные фонды",
+          "Elefund венчур қорлары",
+          [
+            { en: "Venture Capital", ru: "Венчурный капитал", kz: "Венчурлық капитал" },
+            { en: "Funds", ru: "Фонды", kz: "Қорлар" },
+          ],
+          byId["p6"].contentSections?.[0]?.text || "",
+          "Инвестиции в несколько последовательных венчурных фондов с командой мирового уровня, строящих высокодоходные компании с реальным воздействием.",
+          "Әлемдік деңгейдегі командасы бар бірнеше венчурлық қорға инвестициялар, жоғары табысты компаниялар құру арқылы әсер етеді."
+        )
+
+        localStorage.setItem("i18n-translations", JSON.stringify(next))
+        ;(window as any).i18n_translations = next
+        window.dispatchEvent(new CustomEvent("i18n-updated", { detail: next }))
+      } catch {}
       window.dispatchEvent(new CustomEvent("projects-updated", { detail: { timestamp: Date.now() } }))
     } catch (error) {
       console.error("Error setting news articles:", error)
