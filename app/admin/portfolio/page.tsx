@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,6 +14,7 @@ export default function AdminPortfolioPage() {
   const [currentLang, setCurrentLang] = useState<Lang>("en")
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
+  const [isEditing, setIsEditing] = useState(false)
 
   const [titleTranslations, setTitleTranslations] = useState({
     en: portfolioI18n.heroTitle?.en || "Our Portfolio",
@@ -25,6 +26,13 @@ export default function AdminPortfolioPage() {
     ru: portfolioI18n.heroSubtitle?.ru || "Ознакомьтесь с портфелем инновационных компаний, меняющих отрасли в Центральной Азии",
     kz: portfolioI18n.heroSubtitle?.kz || "Орталық Азиядағы салаларды өзгертетін инновациялық компаниялар портфоліосымен танысыңыз",
   })
+
+  // Track editor open/close to show top Cancel only during editing
+  useEffect(() => {
+    const handler = (e: any) => setIsEditing(!!e?.detail?.editing)
+    window.addEventListener("admin-editing-project", handler as EventListener)
+    return () => window.removeEventListener("admin-editing-project", handler as EventListener)
+  }, [])
 
   const handleSave = async () => {
     setIsSaving(true)
@@ -104,13 +112,15 @@ export default function AdminPortfolioPage() {
               Қазақша
             </Button>
           </div>
-          <Button
-            onClick={() => window.dispatchEvent(new Event("admin-cancel-edit"))}
-            variant="outline"
-            className="border-gray-300 text-gray-700 hidden md:inline-flex"
-          >
-            Отмена
-          </Button>
+          {isEditing && (
+            <Button
+              onClick={() => window.dispatchEvent(new Event("admin-cancel-edit"))}
+              variant="outline"
+              className="border-gray-300 text-gray-700 hidden md:inline-flex"
+            >
+              Отмена
+            </Button>
+          )}
           <Button
             onClick={() => window.dispatchEvent(new Event("admin-add-project"))}
             style={{ backgroundColor: "#16a34a" }}
