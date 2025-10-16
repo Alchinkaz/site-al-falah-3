@@ -336,6 +336,53 @@ export default function HomepageAdminPage() {
         </div>
       )}
 
+      {/* Navbar Mobile Menu Section */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Navbar Mobile Menu</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+              <Label className="text-gray-900 font-medium">Home ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                value={mobileMenuTranslations.home[currentLang]}
+                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, home: { ...prev.home, [currentLang]: e.target.value } }))}
+                placeholder="Home"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+              <Label className="text-gray-900 font-medium">About Us ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                value={mobileMenuTranslations.about[currentLang]}
+                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, about: { ...prev.about, [currentLang]: e.target.value } }))}
+                placeholder="About Us"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+              <Label className="text-gray-900 font-medium">Portfolio ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+                <Input
+                value={mobileMenuTranslations.portfolio[currentLang]}
+                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, portfolio: { ...prev.portfolio, [currentLang]: e.target.value } }))}
+                placeholder="Portfolio"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+          </div>
+              <div>
+            <Label className="text-gray-900 font-medium">Фон мобильного меню (ссылка на изображение)</Label>
+                <Input
+              value={mobileMenuBgUrl}
+              onChange={(e) => setMobileMenuBgUrl(e.target.value)}
+              placeholder="/placeholder.svg"
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Hero Section Editor */}
       <Card className="bg-white border-gray-200">
         <CardHeader>
@@ -652,52 +699,7 @@ export default function HomepageAdminPage() {
         </CardContent>
       </Card>
 
-      {/* Navbar Mobile Menu Section */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Navbar Mobile Menu</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-              <Label className="text-gray-900 font-medium">Home ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-                <Input
-                value={mobileMenuTranslations.home[currentLang]}
-                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, home: { ...prev.home, [currentLang]: e.target.value } }))}
-                placeholder="Home"
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-              <Label className="text-gray-900 font-medium">About Us ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-                <Input
-                value={mobileMenuTranslations.about[currentLang]}
-                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, about: { ...prev.about, [currentLang]: e.target.value } }))}
-                placeholder="About Us"
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-              <Label className="text-gray-900 font-medium">Portfolio ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-                <Input
-                value={mobileMenuTranslations.portfolio[currentLang]}
-                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, portfolio: { ...prev.portfolio, [currentLang]: e.target.value } }))}
-                placeholder="Portfolio"
-                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-          </div>
-              <div>
-            <Label className="text-gray-900 font-medium">Фон мобильного меню (ссылка на изображение)</Label>
-                <Input
-              value={mobileMenuBgUrl}
-              onChange={(e) => setMobileMenuBgUrl(e.target.value)}
-              placeholder="/placeholder.svg"
-              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-        </CardContent>
-      </Card>
+      
     </div>
   )
 }

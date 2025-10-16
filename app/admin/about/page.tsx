@@ -74,6 +74,13 @@ export default function AdminAboutPage() {
     setIsSaving(true)
     setSaveMessage("")
     try {
+      const normalizeUrl = (val: string) => {
+        const v = (val || "").trim()
+        if (!v) return ""
+        if (/^https?:\/\//i.test(v)) return v
+        if (/^data:image\//i.test(v)) return v
+        return v.startsWith("/") ? v : `/${v}`
+      }
       const updatedI18n = {
         ...i18n,
         aboutPageTitle: {
@@ -112,14 +119,14 @@ export default function AdminAboutPage() {
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
 
       updateHomepageData({
-        aboutImage: aboutImageUrl,
+        aboutImage: normalizeUrl(aboutImageUrl) || undefined,
         stat1Title: statTitles.stat1Title,
         stat2Title: statTitles.stat2Title,
         stat3Title: statTitles.stat3Title,
       })
 
       window.dispatchEvent(new CustomEvent("i18n-updated", { detail: { translations: updatedI18n } }))
-      window.dispatchEvent(new CustomEvent("homepage-data-updated", { detail: { aboutImage: aboutImageUrl } }))
+      window.dispatchEvent(new CustomEvent("homepage-data-updated", { detail: { aboutImage: normalizeUrl(aboutImageUrl) || undefined } }))
 
       setSaveMessage("Сохранено")
       setTimeout(() => setSaveMessage(""), 2000)

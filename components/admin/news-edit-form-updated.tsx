@@ -187,8 +187,18 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
 
     const nonEmptySections = baseSections.filter((section) => section.title?.trim() || section.text?.trim())
 
+    const normalizeUrl = (val: string) => {
+      const v = (val || "").trim()
+      if (!v) return ""
+      if (/^https?:\/\//i.test(v)) return v
+      if (/^data:image\//i.test(v)) return v
+      return v.startsWith("/") ? v : `/${v}`
+    }
+
     const cleanedData = {
       ...localData,
+      image: normalizeUrl(localData.image) || undefined,
+      contentImage: normalizeUrl(localData.contentImage) || undefined,
       contentSections: nonEmptySections,
       content:
         nonEmptySections
