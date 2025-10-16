@@ -150,7 +150,7 @@ export default function HomepageAdminPage() {
 
   const handleButtonTextChange = (lang: Lang, value: string) => {
     setButtonTranslations((prev) => ({
-      ...prev,
+        ...prev,
       [lang]: value,
     }))
   }
@@ -160,6 +160,14 @@ export default function HomepageAdminPage() {
     setSaveMessage("")
 
     try {
+      const normalizeUrl = (val: string) => {
+        const v = (val || "").trim()
+        if (!v) return ""
+        if (/^https?:\/\//i.test(v)) return v
+        if (/^data:image\//i.test(v)) return v
+        return v.startsWith("/") ? v : `/${v}`
+      }
+
       // Update i18n translations in localStorage
       const updatedI18n = {
         ...i18n,
@@ -238,12 +246,12 @@ export default function HomepageAdminPage() {
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
-      // Save About image and statistics numbers into homepage data
+      // Save About image and statistics numbers into homepage data (normalize URLs to allow local public paths)
       updateHomepageData({
-        aboutImage: aboutImageUrl,
-        heroImage: heroBgUrl || undefined,
-        footerBg: footerBgUrl || undefined,
-        mobileMenuBg: mobileMenuBgUrl || undefined,
+        aboutImage: normalizeUrl(aboutImageUrl) || undefined,
+        heroImage: normalizeUrl(heroBgUrl) || undefined,
+        footerBg: normalizeUrl(footerBgUrl) || undefined,
+        mobileMenuBg: normalizeUrl(mobileMenuBgUrl) || undefined,
         stat1Title: statTitles.stat1Title,
         stat2Title: statTitles.stat2Title,
         stat3Title: statTitles.stat3Title,
@@ -350,7 +358,7 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
-            <div>
+          <div>
               <Label htmlFor="heroButtonText" className="text-gray-900 font-medium">
                 Текст кнопки ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})
               </Label>
@@ -362,7 +370,7 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
-          </div>
+            </div>
           <div>
             <Label htmlFor="heroBg" className="text-gray-900 font-medium">Фон Hero (ссылка на изображение)</Label>
             <Input
@@ -424,7 +432,7 @@ export default function HomepageAdminPage() {
                 placeholder="View All"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
-              </div>
+                    </div>
           </div>
         </CardContent>
       </Card>
@@ -573,46 +581,46 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
-            <div>
+                    <div>
               <Label className="text-gray-900 font-medium">CTA — строка 1 ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
               <Input
                 value={ctaLine1Translations[currentLang]}
                 onChange={(e) => setCtaLine1Translations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
                 placeholder="What future are you building?"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
+                      />
+                    </div>
+                    <div>
               <Label className="text-gray-900 font-medium">CTA — строка 2 ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
               <Input
                 value={ctaLine2Translations[currentLang]}
                 onChange={(e) => setCtaLine2Translations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
                 placeholder="We'd love to connect."
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
+                      />
+                    </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
+                  <div>
                 <Label className="text-gray-900 font-medium">Метка контактов ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
                 <Input
                   value={footerContactUsTranslations[currentLang]}
                   onChange={(e) => setFooterContactUsTranslations((prev) => ({ ...prev, [currentLang]: e.target.value }))}
                   placeholder="Contact us:"
                   className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
+                    />
+                  </div>
+                  <div>
                 <Label className="text-gray-900 font-medium">Email</Label>
                 <Input
                   value={footerEmail}
                   onChange={(e) => setFooterEmail(e.target.value)}
                   placeholder="altay@falahpartners.com"
                   className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-            </div>
+                    />
+                  </div>
+                  </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
+                <div>
                 <Label className="text-gray-900 font-medium">Имя ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
                 <Input
                   value={footerNameTranslations[currentLang]}
@@ -631,15 +639,15 @@ export default function HomepageAdminPage() {
                 />
               </div>
             </div>
-              <div>
+                      <div>
               <Label className="text-gray-900 font-medium">Copyright</Label>
-              <Input
+                <Input
                 value={footerCopyright}
                 onChange={(e) => setFooterCopyright(e.target.value)}
                 placeholder="© 2025 Al Falah Capital Partners"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
+                />
+              </div>
           </div>
         </CardContent>
       </Card>
@@ -651,37 +659,37 @@ export default function HomepageAdminPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
+              <div>
               <Label className="text-gray-900 font-medium">Home ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-              <Input
+                <Input
                 value={mobileMenuTranslations.home[currentLang]}
                 onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, home: { ...prev.home, [currentLang]: e.target.value } }))}
                 placeholder="Home"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
+                />
+              </div>
+              <div>
               <Label className="text-gray-900 font-medium">About Us ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-              <Input
+                <Input
                 value={mobileMenuTranslations.about[currentLang]}
                 onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, about: { ...prev.about, [currentLang]: e.target.value } }))}
                 placeholder="About Us"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div>
+                />
+              </div>
+              <div>
               <Label className="text-gray-900 font-medium">Portfolio ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
-              <Input
+                <Input
                 value={mobileMenuTranslations.portfolio[currentLang]}
                 onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, portfolio: { ...prev.portfolio, [currentLang]: e.target.value } }))}
                 placeholder="Portfolio"
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
+                />
+              </div>
           </div>
-          <div>
+              <div>
             <Label className="text-gray-900 font-medium">Фон мобильного меню (ссылка на изображение)</Label>
-            <Input
+                <Input
               value={mobileMenuBgUrl}
               onChange={(e) => setMobileMenuBgUrl(e.target.value)}
               placeholder="/placeholder.svg"
