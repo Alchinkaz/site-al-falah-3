@@ -143,8 +143,13 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
 
     // Description optional for projects editor
 
-    // Проверяем, что хотя бы одна секция контента заполнена
-    const hasValidContent = localData.contentSections.some((section) => section.title?.trim() || section.text?.trim())
+    // Проверяем, что хотя бы одна секция контента заполнена (по переводам)
+    const candidates = [
+      ...(sectionsI18n.en || []),
+      ...(sectionsI18n.ru || []),
+      ...(sectionsI18n.kz || []),
+    ]
+    const hasValidContent = candidates.some((section) => section?.title?.trim() || section?.text?.trim())
 
     if (!hasValidContent) {
       errors.push("Необходимо заполнить хотя бы одну секцию контента")
@@ -165,14 +170,28 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
       return
     }
 
-    // Очищаем пустые секции контента
+    // Построим базовый массив секций из переводов, чтобы карта секций сохранялась и рендерилась
+    const baseSections = (() => {
+      const en = sectionsI18n.en || []
+      const ru = sectionsI18n.ru || []
+      const kz = sectionsI18n.kz || []
+      const len = Math.max(en.length, ru.length, kz.length)
+      const out: Array<{ title: string; text: string }> = []
+      for (let i = 0; i < len; i++) {
+        const t = en[i]?.title || ru[i]?.title || kz[i]?.title || ""
+        const x = en[i]?.text || ru[i]?.text || kz[i]?.text || ""
+        out.push({ title: t, text: x })
+      }
+      return out
+    })()
+
+    const nonEmptySections = baseSections.filter((section) => section.title?.trim() || section.text?.trim())
+
     const cleanedData = {
       ...localData,
-      contentSections: localData.contentSections.filter((section) => section.title?.trim() || section.text?.trim()),
-      // Убеждаемся, что content заполнен на основе contentSections
+      contentSections: nonEmptySections,
       content:
-        localData.contentSections
-          .filter((section) => section.title?.trim() || section.text?.trim())
+        nonEmptySections
           .map((section) => `${section.title}\n\n${section.text}`)
           .join("\n\n---\n\n") ||
         localData.content ||
@@ -225,12 +244,22 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
   const addContentSection = () => {
     const newSections = [...localData.contentSections, { title: "", text: "" }]
     updateLocalData("contentSections", newSections)
+    setSectionsI18n((prev) => ({
+      en: [...(prev.en || []), { title: "", text: "" }],
+      ru: [...(prev.ru || []), { title: "", text: "" }],
+      kz: [...(prev.kz || []), { title: "", text: "" }],
+    }))
   }
 
   const removeContentSection = (index: number) => {
     if (localData.contentSections.length > 1) {
       const newSections = localData.contentSections.filter((_, i) => i !== index)
       updateLocalData("contentSections", newSections)
+      setSectionsI18n((prev) => ({
+        en: (prev.en || []).filter((_, i) => i !== index),
+        ru: (prev.ru || []).filter((_, i) => i !== index),
+        kz: (prev.kz || []).filter((_, i) => i !== index),
+      }))
     }
   }
 
@@ -240,6 +269,16 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
       langArr[index] = { ...langArr[index], [field]: value }
       return { ...prev, [activeLang]: langArr }
     })
+    // Держим базовый массив в синхронизации, чтобы длина и примерные значения сохранялись
+    updateLocalData(
+      "contentSections",
+      (() => {
+        const copy = [...localData.contentSections]
+        while (copy.length <= index) copy.push({ title: "", text: "" })
+        copy[index] = { ...copy[index], [field]: value }
+        return copy
+      })()
+    )
   }
 
   useEffect(() => {
