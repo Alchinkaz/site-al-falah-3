@@ -247,24 +247,24 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
               onClick={() => setActiveLang("en")}
               className={activeLang === "en" ? "bg-blue-600 text-white" : ""}
             >
-              English
+              EN
             </Button>
             <Button
               variant={activeLang === "ru" ? "default" : "outline"}
               onClick={() => setActiveLang("ru")}
               className={activeLang === "ru" ? "bg-blue-600 text-white" : ""}
             >
-              Русский
+              RU
             </Button>
             <Button
               variant={activeLang === "kz" ? "default" : "outline"}
               onClick={() => setActiveLang("kz")}
               className={activeLang === "kz" ? "bg-blue-600 text-white" : ""}
             >
-              Қазақша
+              KZ
             </Button>
           </div>
-          <Button onClick={onCancel} variant="outline">
+          <Button onClick={onCancel} variant="outline" className="border-gray-300 text-gray-700">
             Отмена
           </Button>
           <Button onClick={handleSave} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
