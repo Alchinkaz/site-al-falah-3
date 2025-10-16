@@ -210,7 +210,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
       images: (article as any).images || [],
       badges: (article as any).badges || [],
       investmentYear: (article as any).investmentYear || new Date().getFullYear(),
-      contentSections: (article as any).contentSections || [{ title: "", text: article.content || "" }],
+      contentSections: (article as any).contentSections || [{ title: "", text: article.content || article.description || "" }],
     }
 
     setEditingArticle(extendedArticle as any)
@@ -235,7 +235,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           contentSections: articleData.contentSections,
           published: articleData.published,
           show_on_homepage: articleData.show_on_homepage,
-          createdAt: new Date().toISOString(),
+          createdAt: articleData.createdAt || new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         }
 
@@ -254,6 +254,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
           contentSections: articleData.contentSections,
           published: articleData.published,
           show_on_homepage: articleData.show_on_homepage,
+          createdAt: articleData.createdAt,
         }
 
         AdminStorage.updateNewsArticle(articleData.id, updates)

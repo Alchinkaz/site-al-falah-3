@@ -188,7 +188,7 @@ export class AdminStorage {
           ],
           published: true,
           show_on_homepage: true,
-          createdAt: now,
+          createdAt: new Date(Date.UTC(2012, 0, 1)).toISOString(),
           updatedAt: now,
         },
         {
@@ -214,7 +214,7 @@ export class AdminStorage {
           ],
           published: true,
           show_on_homepage: true,
-          createdAt: now,
+          createdAt: new Date(Date.UTC(2012, 0, 1)).toISOString(),
           updatedAt: now,
         },
         {
@@ -240,7 +240,7 @@ export class AdminStorage {
           ],
           published: true,
           show_on_homepage: true,
-          createdAt: now,
+          createdAt: new Date(Date.UTC(2017, 0, 1)).toISOString(),
           updatedAt: now,
         },
         {
@@ -266,7 +266,7 @@ export class AdminStorage {
           ],
           published: true,
           show_on_homepage: false,
-          createdAt: now,
+          createdAt: new Date(Date.UTC(2015, 0, 1)).toISOString(),
           updatedAt: now,
         },
         {
@@ -292,7 +292,7 @@ export class AdminStorage {
           ],
           published: true,
           show_on_homepage: false,
-          createdAt: now,
+          createdAt: new Date(Date.UTC(2008, 0, 1)).toISOString(),
           updatedAt: now,
         },
         {
@@ -318,7 +318,7 @@ export class AdminStorage {
           ],
           published: true,
           show_on_homepage: true,
-          createdAt: now,
+          createdAt: new Date(Date.UTC(2017, 0, 1)).toISOString(),
           updatedAt: now,
         },
       ]

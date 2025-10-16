@@ -86,14 +86,14 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       const make = (lang: "en" | "ru" | "kz") => {
         const arr: Array<{ title: string; text: string }> = existing?.[lang] || []
         const out = arr.slice(0, base.length)
-        while (out.length < base.length) out.push({ title: "", text: "" })
+        while (out.length < base.length) out.push({ title: base[out.length]?.title || "", text: base[out.length]?.text || "" })
         return out
       }
       return { en: make("en"), ru: make("ru"), kz: make("kz") }
     } catch {
       const base = (article.contentSections || []) as Array<{ title: string; text: string }>
-      const empty = base.map(() => ({ title: "", text: "" }))
-      return { en: empty, ru: empty, kz: empty }
+      const filled = base.map((s) => ({ title: s.title || "", text: s.text || "" }))
+      return { en: filled, ru: filled, kz: filled }
     }
   })
 
@@ -353,12 +353,25 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
               </div>
 
               <div>
-                <Label>Год</Label>
+                <Label>Год инвестирования</Label>
                 <Input
                   type="number"
                   value={localData.investmentYear || new Date().getFullYear()}
                   onChange={(e) => updateLocalData("investmentYear", Number(e.target.value))}
                   placeholder="2017"
+                />
+              </div>
+
+              <div>
+                <Label>Дата публикации</Label>
+                <Input
+                  type="date"
+                  value={(localData.createdAt ? new Date(localData.createdAt) : new Date()).toISOString().slice(0, 10)}
+                  onChange={(e) => {
+                    const v = e.target.value
+                    const iso = v ? new Date(v + "T00:00:00.000Z").toISOString() : new Date().toISOString()
+                    updateLocalData("createdAt", iso)
+                  }}
                 />
               </div>
 
@@ -380,7 +393,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                         aria-label="Цвет бейджа"
                       />
                 <Input
-                        value={badgesI18n[index]?.[activeLang] || ""}
+                        value={badgesI18n[index]?.[activeLang] || (localData.badges?.[index]?.label || "")}
                         onChange={(e) => {
                           setBadgesI18n((prev) => {
                             const next = [...prev]
