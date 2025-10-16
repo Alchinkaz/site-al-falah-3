@@ -323,6 +323,134 @@ export class AdminStorage {
         },
       ]
 
+      // Seed i18n translations for default projects (titles, badges, sections)
+      try {
+        const stored = localStorage.getItem("i18n-translations")
+        const parsed = stored ? JSON.parse(stored) : {}
+        const next = { ...parsed }
+        next.projectTexts = next.projectTexts || {}
+        next.projectBadgesI18n = next.projectBadgesI18n || {}
+        next.projectSections = next.projectSections || {}
+
+        // p1 Alsad Kazakhstan LLP
+        next.projectTexts["p1"] = {
+          ...(next.projectTexts["p1"] || {}),
+          title: {
+            en: "Alsad Kazakhstan LLP",
+            ru: "Алсад Казахстан ТОО",
+            kz: "Alsad Kazakhstan ЖШС",
+          },
+        }
+        next.projectBadgesI18n["p1"] = [
+          { en: "Agriculture", ru: "Сельское хозяйство", kz: "Ауыл шаруашылығы" },
+          { en: "Turnaround", ru: "Оздоровление", kz: "Беті қайтару" },
+        ]
+        next.projectSections["p1"] = {
+          en: [{ title: "Overview", text: defaults[0].contentSections?.[0].text || "" }],
+          ru: [{ title: "Обзор", text: "Неработающая ферма на грани банкротства была превращена в лидера рынка по производству яиц с мощностью 160 млн качественных яиц в год и долей 20% в Алматинском регионе." }],
+          kz: [{ title: "Шолу", text: "Банкроттық алдында тұрған жұмыс істемейтін ферма жылына 160 млн сапалы жұмыртқа өндіретін нарық көшбасшысына айналды, Алматы өңірінде 20% үлеске жетті." }],
+        }
+
+        // p2 Karaganda Energocenter LLP
+        next.projectTexts["p2"] = {
+          ...(next.projectTexts["p2"] || {}),
+          title: {
+            en: "Karaganda Energocenter LLP",
+            ru: "Караганда Энергоцентр ТОО",
+            kz: "Қарағанды Энергоцентр ЖШС",
+          },
+        }
+        next.projectBadgesI18n["p2"] = [
+          { en: "Energy", ru: "Энергетика", kz: "Энергетика" },
+          { en: "Growth", ru: "Рост", kz: "Өсу" },
+        ]
+        next.projectSections["p2"] = {
+          en: [{ title: "Overview", text: defaults[1].contentSections?.[0].text || "" }],
+          ru: [{ title: "Обзор", text: "Инвестиции направлены на расширение через строительство нового энергоблока 120 МВт для покрытия дефицита мощности, установленная мощность достигла 712 МВт к концу 2015 года." }],
+          kz: [{ title: "Шолу", text: "Инвестициялар қуат тапшылығын жабу үшін 120 МВт жаңа энергоблок салу арқылы кеңейтуге бағытталды, 2015 жылдың соңына қарай орнатылған қуат 712 МВт-қа жетті." }],
+        }
+
+        // p3 Karaganda Kus LLP
+        next.projectTexts["p3"] = {
+          ...(next.projectTexts["p3"] || {}),
+          title: {
+            en: "Karaganda Kus LLP",
+            ru: "Караганда Кус ТОО",
+            kz: "Қарағанды Құс ЖШС",
+          },
+        }
+        next.projectBadgesI18n["p3"] = [
+          { en: "Agriculture", ru: "Сельское хозяйство", kz: "Ауыл шаруашылығы" },
+          { en: "LBO", ru: "LBO", kz: "LBO" },
+        ]
+        next.projectSections["p3"] = {
+          en: [{ title: "Overview", text: defaults[2].contentSections?.[0].text || "" }],
+          ru: [{ title: "Обзор", text: "Дальнейшая экспансия экспертизы Alsad в Карагандинский регион с привлечением внешнего финансирования. Объединённый бизнес по производству яиц стал лидером рынка Казахстана с мощностью 300 млн яиц." }],
+          kz: [{ title: "Шолу", text: "Сыртқы қаржыландыру тарту арқылы Alsad тәжірибесін Қарағанды өңіріне кеңейту. Біріккен жұмыртқа өндірісі 300 млн жұмыртқа қуатымен Қазақстан нарығының көшбасшысы болды." }],
+        }
+
+        // p4 Ulmus Besshoky JSC
+        next.projectTexts["p4"] = {
+          ...(next.projectTexts["p4"] || {}),
+          title: {
+            en: "Ulmus Besshoky JSC",
+            ru: "Улмус Бешёкы АО",
+            kz: "Ulmus Besshoky АҚ",
+          },
+        }
+        next.projectBadgesI18n["p4"] = [
+          { en: "Mining", ru: "Добыча", kz: "Кен өндіру" },
+          { en: "Greenfield", ru: "Гринфилд", kz: "Гринфилд" },
+        ]
+        next.projectSections["p4"] = {
+          en: [{ title: "Overview", text: defaults[3].contentSections?.[0].text || "" }],
+          ru: [{ title: "Обзор", text: "Ранняя стадия: от разведки до ТЭО с целью увеличения подтверждённых ресурсов, достигнутых на уровне 1 167 тыс. тонн меди." }],
+          kz: [{ title: "Шолу", text: "Ерте кезең: барлау жұмыстарынан ТЭН-ге дейін, 1 167 мың тонна мыс қоры расталды." }],
+        }
+
+        // p5 Ai Karaaul JSC
+        next.projectTexts["p5"] = {
+          ...(next.projectTexts["p5"] || {}),
+          title: {
+            en: "Ai Karaaul JSC",
+            ru: "Ай Карааул АО",
+            kz: "Ай Қарааул АҚ",
+          },
+        }
+        next.projectBadgesI18n["p5"] = [
+          { en: "Mining", ru: "Добыча", kz: "Кен өндіру" },
+          { en: "Greenfield", ru: "Гринфилд", kz: "Гринфилд" },
+        ]
+        next.projectSections["p5"] = {
+          en: [{ title: "Overview", text: defaults[4].contentSections?.[0].text || "" }],
+          ru: [{ title: "Обзор", text: "Ранняя стадия: от разведки до ТЭО с целью увеличения подтверждённых ресурсов, достигнутых на уровне 180 тыс. тонн высокосортной меди." }],
+          kz: [{ title: "Шолу", text: "Ерте кезең: барлау жұмыстарынан ТЭН-ге дейін, 180 мың тонна жоғары сапалы мыс қоры расталды." }],
+        }
+
+        // p6 Elefund VC funds
+        next.projectTexts["p6"] = {
+          ...(next.projectTexts["p6"] || {}),
+          title: {
+            en: "Elefund VC funds",
+            ru: "Elefund венчурные фонды",
+            kz: "Elefund венчур қорлары",
+          },
+        }
+        next.projectBadgesI18n["p6"] = [
+          { en: "Venture Capital", ru: "Венчурный капитал", kz: "Венчурлық капитал" },
+          { en: "Funds", ru: "Фонды", kz: "Қорлар" },
+        ]
+        next.projectSections["p6"] = {
+          en: [{ title: "Overview", text: defaults[5].contentSections?.[0].text || "" }],
+          ru: [{ title: "Обзор", text: "Инвестиции в несколько последовательных венчурных фондов с командой мирового уровня, строящих высокодоходные компании с реальным воздействием." }],
+          kz: [{ title: "Шолу", text: "Әлемдік деңгейдегі командасы бар бірнеше венчурлық қорға инвестициялар, жоғары табысты компаниялар құру арқылы әсер етеді." }],
+        }
+
+        localStorage.setItem("i18n-translations", JSON.stringify(next))
+        ;(window as any).i18n_translations = next
+        window.dispatchEvent(new CustomEvent("i18n-updated", { detail: next }))
+      } catch {}
+
       this.setNewsArticles(defaults)
       return defaults
     } catch (error) {

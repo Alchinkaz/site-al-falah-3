@@ -434,6 +434,7 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
                         onClick={() => {
                           const next = (localData.badges || []).filter((_: any, i: number) => i !== index)
                           updateLocalData("badges", next)
+                          setBadgesI18n((prev) => prev.filter((_, i) => i !== index))
                         }}
                         className="text-red-600 hover:text-red-700 hover:bg-red-50"
                       >
