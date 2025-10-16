@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, Edit3, Trash2, FileText } from "lucide-react"
 import { AdminStorage, type NewsArticle } from "@/lib/admin-storage"
-import { readLang } from "@/lib/i18n"
+import { readLang, projectBadgesI18n, projectSections, projectTexts } from "@/lib/i18n"
 import { NewsEditForm } from "./news-edit-form-updated"
 
 interface NewsManagementProps {
@@ -65,6 +65,16 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)
     return () => window.removeEventListener("language-changed", handler)
+  }, [])
+
+  // React to admin header language toggles
+  useEffect(() => {
+    const handler = (e: any) => {
+      const l = e?.detail?.lang
+      if (l === "en" || l === "ru" || l === "kz") setLang(l)
+    }
+    window.addEventListener("admin-set-project-lang", handler as EventListener)
+    return () => window.removeEventListener("admin-set-project-lang", handler as EventListener)
   }, [])
 
   const loadArticles = () => {
@@ -342,8 +352,10 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
                         </div>
                       )}
                       <div className="flex-1">
-                        <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{article.description}</p>
+                        <h3 className="font-semibold text-lg mb-2">{projectTexts[article.id]?.title[lang] || article.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                          {projectSections[article.id]?.[lang]?.[0]?.text || article.description}
+                        </p>
                         <div className="flex flex-wrap gap-2 mb-2">
                           <span
                             className={`text-xs px-2 py-1 rounded-full font-medium border ${
@@ -361,7 +373,7 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
                           )}
                           {(article as any).badges?.map((b: any, i: number) => (
                             <span key={i} className="text-xs px-2 py-0.5 rounded-full border" style={{ backgroundColor: `${b.color}20`, color: b.color, borderColor: `${b.color}40` }}>
-                              {(window as any)?.i18n_translations?.projectBadgesI18n?.[article.id]?.[i]?.[lang] || b.label}
+                              {projectBadgesI18n[article.id]?.[i]?.[lang] || b.label}
                             </span>
                           ))}
                         </div>
