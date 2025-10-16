@@ -232,14 +232,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
     <div className="space-y-6">
       {/* Header + language switch */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            {article.id ? "Редактировать проект" : "Добавить проект"}
-          </h1>
-          <p className="text-gray-600">
-            {article.id ? "Изменить информацию о проекте" : "Создать новый проект"}
-          </p>
-        </div>
+        <div />
         <div className="flex gap-2 items-center">
           <div className="flex gap-2 mr-2">
             <Button
