@@ -193,7 +193,18 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
       next.projectSections = next.projectSections || {}
       next.projectSections[cleanedData.id] = sectionsI18n
       next.projectBadgesI18n = next.projectBadgesI18n || {}
-      next.projectBadgesI18n[cleanedData.id] = badgesI18n
+      // keep array length aligned with badges, and fall back to current labels when empty
+      const alignedBadges = [...badgesI18n]
+      while (alignedBadges.length < (cleanedData.badges || []).length) alignedBadges.push({ en: "", ru: "", kz: "" })
+      if (alignedBadges.length > (cleanedData.badges || []).length) alignedBadges.length = (cleanedData.badges || []).length
+      for (let i = 0; i < (cleanedData.badges || []).length; i++) {
+        const label = cleanedData.badges?.[i]?.label || ""
+        alignedBadges[i] = alignedBadges[i] || { en: "", ru: "", kz: "" }
+        if (!alignedBadges[i].en && label) alignedBadges[i].en = label
+        if (!alignedBadges[i].ru && label) alignedBadges[i].ru = label
+        if (!alignedBadges[i].kz && label) alignedBadges[i].kz = label
+      }
+      next.projectBadgesI18n[cleanedData.id] = alignedBadges
       localStorage.setItem("i18n-translations", JSON.stringify(next))
       ;(window as any).i18n_translations = next
       window.dispatchEvent(new CustomEvent("i18n-updated", { detail: next }))
@@ -275,7 +286,7 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
     <div className="space-y-6">
       {/* Header + language switch */}
       {hideHeader ? null : (
-        <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
           <div />
           <div className="flex gap-2 items-center">
             <div className="flex gap-2 mr-2">
@@ -300,15 +311,15 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
               >
                 Қазақша
               </Button>
-            </div>
+        </div>
             <Button onClick={onCancel} variant="outline" className="border-gray-300 text-gray-700">
-              Отмена
-            </Button>
+            Отмена
+          </Button>
             <Button onClick={handleSave} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
               {article.id ? "Сохранить изменения" : "Создать проект"}
-            </Button>
-          </div>
+          </Button>
         </div>
+      </div>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -427,7 +438,9 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
 
               {/* Badges manager */}
               <div className="space-y-3">
-                <Label>Бейджи проекта</Label>
+                <Label>
+                  Бейджи проекта <span className="ml-2 text-xs text-muted-foreground">({activeLang.toUpperCase()})</span>
+                </Label>
                 <div className="space-y-3">
                   {(localData.badges || []).map((badge: any, index: number) => (
                     <div key={index} className="flex items-center gap-2">
@@ -442,6 +455,10 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
                         className="h-10 w-12 rounded-md border"
                         aria-label="Цвет бейджа"
                       />
+                      <div className="flex-1 flex items-center gap-2">
+                        <span className="text-xs px-2 py-1 rounded border bg-gray-50 text-gray-600 border-gray-200">
+                          {activeLang.toUpperCase()}
+                        </span>
                 <Input
                         value={badgesI18n[index]?.[activeLang] || (localData.badges?.[index]?.label || "")}
                         onChange={(e) => {
@@ -454,6 +471,7 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
                         }}
                         placeholder={`Название бейджа (${activeLang.toUpperCase()})`}
                       />
+                      </div>
                       <Button
                         variant="outline"
                         onClick={() => {
