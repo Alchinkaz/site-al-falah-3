@@ -96,8 +96,8 @@ const defaultHomepageData: HomepageData = {
     "We partner with visionary entrepreneurs and groundbreaking startups to build the future. From seed to scale, we provide capital, expertise, and networks to transform ideas into market leaders.",
   heroButtonText: "View Portfolio",
   heroButtonLink: "https://wa.me/77053333082",
-  heroImage: "/money-bills-background.jpg",
-  mobileMenuBg: "/placeholder.svg",
+  heroImage: "/hero-bg.jpg",
+  mobileMenuBg: "/hero-bg.jpg",
 
   aboutImage: "/placeholder.svg",
   aboutText: "Building Tomorrow's Success Stories Today",
@@ -275,7 +275,7 @@ const defaultHomepageData: HomepageData = {
   ],
   footerEmail: "altay@falahpartners.com",
   footerCopyright: "© 2025 Al Falah Capital Partners",
-  footerBg: "/placeholder.svg",
+  footerBg: "/hero-bg.jpg",
 }
 
 const STORAGE_KEY = "homepage-data"
