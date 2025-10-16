@@ -129,7 +129,13 @@ export default function AdminPortfolioPage() {
             + Добавить проект
           </Button>
           <Button
-            onClick={handleSave}
+            onClick={() => {
+              if (isEditing) {
+                window.dispatchEvent(new Event("admin-save-project"))
+              } else {
+                handleSave()
+              }
+            }}
             disabled={isSaving}
             style={{ backgroundColor: "#16a34a" }}
             className="hover:opacity-90 text-white"

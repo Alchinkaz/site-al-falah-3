@@ -204,6 +204,13 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
     onSave(cleanedData)
   }
 
+  // Allow parent header Save button to trigger project save as well
+  useEffect(() => {
+    const handler = () => handleSave()
+    window.addEventListener("admin-save-project", handler as EventListener)
+    return () => window.removeEventListener("admin-save-project", handler as EventListener)
+  }, [localData, titleI18n, sectionsI18n, badgesI18n])
+
   const addContentSection = () => {
     const newSections = [...localData.contentSections, { title: "", text: "" }]
     updateLocalData("contentSections", newSections)
