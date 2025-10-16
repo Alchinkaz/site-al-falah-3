@@ -379,7 +379,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                         className="h-10 w-12 rounded-md border"
                         aria-label="Цвет бейджа"
                       />
-                      <Input
+                <Input
                         value={badgesI18n[index]?.[activeLang] || ""}
                         onChange={(e) => {
                           setBadgesI18n((prev) => {
@@ -413,7 +413,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                   >
                     <Plus className="h-4 w-4 mr-2" /> Добавить бейдж
                   </Button>
-                </div>
+              </div>
               </div>
             </CardContent>
           </Card>

@@ -158,7 +158,173 @@ export class AdminStorage {
         return []
       }
       const articles = localStorage.getItem("admin_news")
-      return articles ? JSON.parse(articles) : []
+      if (articles) {
+        return JSON.parse(articles)
+      }
+
+      // Seed 6 default projects if none exist
+      const now = new Date().toISOString()
+      const defaults: NewsArticle[] = [
+        {
+          id: "p1",
+          title: "Alsad Kazakhstan LLP",
+          description:
+            "Not operating and pre-bankrupt farm has been turned into the market leader in egg production reaching full capacity of 160 millions high quality eggs per year with a 20% market niche in Almaty region.",
+          content:
+            "Not operating and pre-bankrupt farm has been turned into the market leader in egg production reaching full capacity of 160 millions high quality eggs per year with a 20% market niche in Almaty region.",
+          image: "",
+          contentImage: "",
+          badges: [
+            { label: "Agriculture", color: "#16a34a" },
+            { label: "Turnaround", color: "#ea580c" },
+          ],
+          investmentYear: 2012,
+          contentSections: [
+            {
+              title: "Overview",
+              text:
+                "Not operating and pre-bankrupt farm has been turned into the market leader in egg production reaching full capacity of 160 millions high quality eggs per year with a 20% market niche in Almaty region.",
+            },
+          ],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "p2",
+          title: "Karaganda Energocenter LLP",
+          description:
+            "Investment has been used to support expansion program through the construction of new 120MW energy block to cover regional power deficit, total installed capacity has reached 712MW by the end of 2015.",
+          content:
+            "Investment has been used to support expansion program through the construction of new 120MW energy block to cover regional power deficit, total installed capacity has reached 712MW by the end of 2015.",
+          image: "",
+          contentImage: "",
+          badges: [
+            { label: "Energy", color: "#0ea5e9" },
+            { label: "Growth", color: "#7c3aed" },
+          ],
+          investmentYear: 2012,
+          contentSections: [
+            {
+              title: "Overview",
+              text:
+                "Investment has been used to support expansion program through the construction of new 120MW energy block to cover regional power deficit, total installed capacity has reached 712MW by the end of 2015.",
+            },
+          ],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "p3",
+          title: "Karaganda Kus LLP",
+          description:
+            "Further expansion of Alsad expertise to Karaganda region by attracting external funding and combined egg production business became the market leader in Kazakhstan with 300 million eggs capacity.",
+          content:
+            "Further expansion of Alsad expertise to Karaganda region by attracting external funding and combined egg production business became the market leader in Kazakhstan with 300 million eggs capacity.",
+          image: "",
+          contentImage: "",
+          badges: [
+            { label: "Agriculture", color: "#16a34a" },
+            { label: "LBO", color: "#dc2626" },
+          ],
+          investmentYear: 2017,
+          contentSections: [
+            {
+              title: "Overview",
+              text:
+                "Further expansion of Alsad expertise to Karaganda region by attracting external funding and combined egg production business became the market leader in Kazakhstan with 300 million eggs capacity.",
+            },
+          ],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "p4",
+          title: "Ulmus Besshoky JSC",
+          description:
+            "Early stage investment to conduct initial exploration to feasibility study with aim to expand confirmed resources that has been reached to 1,167K tons of copper",
+          content:
+            "Early stage investment to conduct initial exploration to feasibility study with aim to expand confirmed resources that has been reached to 1,167K tons of copper",
+          image: "",
+          contentImage: "",
+          badges: [
+            { label: "Mining", color: "#6b7280" },
+            { label: "Greenfield", color: "#059669" },
+          ],
+          investmentYear: 2015,
+          contentSections: [
+            {
+              title: "Overview",
+              text:
+                "Early stage investment to conduct initial exploration to feasibility study with aim to expand confirmed resources that has been reached to 1,167K tons of copper",
+            },
+          ],
+          published: true,
+          show_on_homepage: false,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "p5",
+          title: "Ai Karaaul JSC",
+          description:
+            "Early stage investment to conduct initial exploration to feasibility study with aim to expand confirmed resources that has been reached to 180K tons of high grade copper",
+          content:
+            "Early stage investment to conduct initial exploration to feasibility study with aim to expand confirmed resources that has been reached to 180K tons of high grade copper",
+          image: "",
+          contentImage: "",
+          badges: [
+            { label: "Mining", color: "#6b7280" },
+            { label: "Greenfield", color: "#059669" },
+          ],
+          investmentYear: 2008,
+          contentSections: [
+            {
+              title: "Overview",
+              text:
+                "Early stage investment to conduct initial exploration to feasibility study with aim to expand confirmed resources that has been reached to 180K tons of high grade copper",
+            },
+          ],
+          published: true,
+          show_on_homepage: false,
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "p6",
+          title: "Elefund VC funds",
+          description:
+            "Investments were made in several consecutive VC funds that has a management team of world class operators and investors who strive for excellence and impact by building a new world of highly profitable businesses",
+          content:
+            "Investments were made in several consecutive VC funds that has a management team of world class operators and investors who strive for excellence and impact by building a new world of highly profitable businesses",
+          image: "",
+          contentImage: "",
+          badges: [
+            { label: "Venture Capital", color: "#2563eb" },
+            { label: "Funds", color: "#9333ea" },
+          ],
+          investmentYear: 2017,
+          contentSections: [
+            {
+              title: "Overview",
+              text:
+                "Investments were made in several consecutive VC funds that has a management team of world class operators and investors who strive for excellence and impact by building a new world of highly profitable businesses",
+            },
+          ],
+          published: true,
+          show_on_homepage: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+      ]
+
+      this.setNewsArticles(defaults)
+      return defaults
     } catch (error) {
       console.error("Error getting news articles:", error)
       return []
