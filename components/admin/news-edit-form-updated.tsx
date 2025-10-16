@@ -245,23 +245,23 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             <Button
               variant={activeLang === "en" ? "default" : "outline"}
               onClick={() => setActiveLang("en")}
-              className={activeLang === "en" ? "bg-blue-600 text-white" : ""}
+              className={`${activeLang === "en" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
             >
-              EN
+              English
             </Button>
             <Button
               variant={activeLang === "ru" ? "default" : "outline"}
               onClick={() => setActiveLang("ru")}
-              className={activeLang === "ru" ? "bg-blue-600 text-white" : ""}
+              className={`${activeLang === "ru" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
             >
-              RU
+              Русский
             </Button>
             <Button
               variant={activeLang === "kz" ? "default" : "outline"}
               onClick={() => setActiveLang("kz")}
-              className={activeLang === "kz" ? "bg-blue-600 text-white" : ""}
+              className={`${activeLang === "kz" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
             >
-              KZ
+              Қазақша
             </Button>
           </div>
           <Button onClick={onCancel} variant="outline" className="border-gray-300 text-gray-700">
