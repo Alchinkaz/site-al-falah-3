@@ -48,6 +48,28 @@ export default function HomepageAdminPage() {
     kz: (i18n.aboutParagraphs?.kz || []).join("\n\n"),
   })
   const [aboutImageUrl, setAboutImageUrl] = useState("")
+  const [heroBgUrl, setHeroBgUrl] = useState("")
+  const [footerBgUrl, setFooterBgUrl] = useState("")
+  const [mobileMenuBgUrl, setMobileMenuBgUrl] = useState("")
+
+  // Navbar Mobile Menu translations
+  const [mobileMenuTranslations, setMobileMenuTranslations] = useState({
+    home: {
+      en: i18n.navHome?.en || "Home",
+      ru: i18n.navHome?.ru || "Главная",
+      kz: i18n.navHome?.kz || "Басты бет",
+    },
+    about: {
+      en: i18n.navAbout?.en || "About Us",
+      ru: i18n.navAbout?.ru || "О компании",
+      kz: i18n.navAbout?.kz || "Біз туралы",
+    },
+    portfolio: {
+      en: i18n.navPortfolio?.en || "Portfolio",
+      ru: i18n.navPortfolio?.ru || "Портфолио",
+      kz: i18n.navPortfolio?.kz || "Портфолио",
+    },
+  })
   // Statistics
   const [statTitles, setStatTitles] = useState<{ stat1Title: string; stat2Title: string; stat3Title: string }>({
     stat1Title: "",
@@ -102,6 +124,9 @@ export default function HomepageAdminPage() {
   useEffect(() => {
     const data = getHomepageData()
     if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
+    if (data?.heroImage) setHeroBgUrl(data.heroImage)
+    if (data?.footerBg) setFooterBgUrl(data.footerBg)
+    if (data?.mobileMenuBg) setMobileMenuBgUrl(data.mobileMenuBg)
     // Initialize statistics titles from homepage data
     if (data) {
       setStatTitles({
@@ -138,6 +163,19 @@ export default function HomepageAdminPage() {
       // Update i18n translations in localStorage
       const updatedI18n = {
         ...i18n,
+        // Navbar Mobile Menu
+        navHome: {
+          ...(i18n as any).navHome,
+          ...mobileMenuTranslations.home,
+        },
+        navAbout: {
+          ...(i18n as any).navAbout,
+          ...mobileMenuTranslations.about,
+        },
+        navPortfolio: {
+          ...(i18n as any).navPortfolio,
+          ...mobileMenuTranslations.portfolio,
+        },
         heroTitle: {
           ...i18n.heroTitle,
           ...heroTranslations,
@@ -203,6 +241,9 @@ export default function HomepageAdminPage() {
       // Save About image and statistics numbers into homepage data
       updateHomepageData({
         aboutImage: aboutImageUrl,
+        heroImage: heroBgUrl || undefined,
+        footerBg: footerBgUrl || undefined,
+        mobileMenuBg: mobileMenuBgUrl || undefined,
         stat1Title: statTitles.stat1Title,
         stat2Title: statTitles.stat2Title,
         stat3Title: statTitles.stat3Title,
@@ -321,6 +362,16 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
+          </div>
+          <div>
+            <Label htmlFor="heroBg" className="text-gray-900 font-medium">Фон Hero (ссылка на изображение)</Label>
+            <Input
+              id="heroBg"
+              value={heroBgUrl}
+              onChange={(e) => setHeroBgUrl(e.target.value)}
+              placeholder="/money-bills-background.jpg"
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
           </div>
         </CardContent>
       </Card>
@@ -514,6 +565,15 @@ export default function HomepageAdminPage() {
         <CardContent className="space-y-6">
           <div className="space-y-6">
             <div>
+              <Label className="text-gray-900 font-medium">Фон Footer (ссылка на изображение)</Label>
+              <Input
+                value={footerBgUrl}
+                onChange={(e) => setFooterBgUrl(e.target.value)}
+                placeholder="/placeholder.svg"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
               <Label className="text-gray-900 font-medium">CTA — строка 1 ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
               <Input
                 value={ctaLine1Translations[currentLang]}
@@ -580,6 +640,53 @@ export default function HomepageAdminPage() {
                 className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Navbar Mobile Menu Section */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Navbar Mobile Menu</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <Label className="text-gray-900 font-medium">Home ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+              <Input
+                value={mobileMenuTranslations.home[currentLang]}
+                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, home: { ...prev.home, [currentLang]: e.target.value } }))}
+                placeholder="Home"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label className="text-gray-900 font-medium">About Us ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+              <Input
+                value={mobileMenuTranslations.about[currentLang]}
+                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, about: { ...prev.about, [currentLang]: e.target.value } }))}
+                placeholder="About Us"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <Label className="text-gray-900 font-medium">Portfolio ({currentLang === "en" ? "English" : currentLang === "ru" ? "Русский" : "Қазақша"})</Label>
+              <Input
+                value={mobileMenuTranslations.portfolio[currentLang]}
+                onChange={(e) => setMobileMenuTranslations((prev: any) => ({ ...prev, portfolio: { ...prev.portfolio, [currentLang]: e.target.value } }))}
+                placeholder="Portfolio"
+                className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+          <div>
+            <Label className="text-gray-900 font-medium">Фон мобильного меню (ссылка на изображение)</Label>
+            <Input
+              value={mobileMenuBgUrl}
+              onChange={(e) => setMobileMenuBgUrl(e.target.value)}
+              placeholder="/placeholder.svg"
+              className="bg-gray-50 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
           </div>
         </CardContent>
       </Card>

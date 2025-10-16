@@ -48,6 +48,8 @@ export interface HomepageData {
   heroButtonText: string
   heroButtonLink: string
   heroImage: string
+  // Optional background for mobile navbar menu
+  mobileMenuBg?: string
 
   // About Company Section
   aboutImage: string
@@ -83,6 +85,8 @@ export interface HomepageData {
   // Footer specific (non-translated)
   footerEmail?: string
   footerCopyright?: string
+  // Optional footer background image
+  footerBg?: string
 }
 
 // Default homepage data
@@ -93,6 +97,7 @@ const defaultHomepageData: HomepageData = {
   heroButtonText: "View Portfolio",
   heroButtonLink: "https://wa.me/77053333082",
   heroImage: "/money-bills-background.jpg",
+  mobileMenuBg: "/placeholder.svg",
 
   aboutImage: "/placeholder.svg",
   aboutText: "Building Tomorrow's Success Stories Today",
@@ -270,6 +275,7 @@ const defaultHomepageData: HomepageData = {
   ],
   footerEmail: "altay@falahpartners.com",
   footerCopyright: "© 2025 Al Falah Capital Partners",
+  footerBg: "/placeholder.svg",
 }
 
 const STORAGE_KEY = "homepage-data"
