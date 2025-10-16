@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Save } from "lucide-react"
 import { i18n, portfolioI18n, type Lang } from "@/lib/i18n"
+import { NewsManagement } from "@/components/admin/news-management"
 
 export default function AdminPortfolioPage() {
   const [currentLang, setCurrentLang] = useState<Lang>("en")
@@ -56,6 +57,20 @@ export default function AdminPortfolioPage() {
       setTimeout(() => setSaveMessage(""), 2000)
     } finally {
       setIsSaving(false)
+    }
+  }
+
+  const formatDate = (dateString: string) => {
+    try {
+      return new Date(dateString).toLocaleString("ru-RU", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    } catch {
+      return dateString
     }
   }
 
@@ -147,6 +162,16 @@ export default function AdminPortfolioPage() {
               />
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Projects management merged here */}
+      <Card className="bg-white border-gray-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-gray-900">Проекты портфолио</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <NewsManagement currentUser={null as any} formatDate={formatDate} />
         </CardContent>
       </Card>
     </div>
