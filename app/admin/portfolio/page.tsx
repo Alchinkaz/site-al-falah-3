@@ -92,21 +92,36 @@ export default function AdminPortfolioPage() {
           <div className="flex gap-2">
             <Button
               variant={currentLang === "en" ? "default" : "outline"}
-              onClick={() => setCurrentLang("en")}
+              onClick={() => {
+                setCurrentLang("en")
+                try {
+                  window.dispatchEvent(new CustomEvent("admin-set-project-lang", { detail: { lang: "en" } }))
+                } catch {}
+              }}
               className={currentLang === "en" ? "bg-blue-600 text-white" : ""}
             >
               English
             </Button>
             <Button
               variant={currentLang === "ru" ? "default" : "outline"}
-              onClick={() => setCurrentLang("ru")}
+              onClick={() => {
+                setCurrentLang("ru")
+                try {
+                  window.dispatchEvent(new CustomEvent("admin-set-project-lang", { detail: { lang: "ru" } }))
+                } catch {}
+              }}
               className={currentLang === "ru" ? "bg-blue-600 text-white" : ""}
             >
               Русский
             </Button>
             <Button
               variant={currentLang === "kz" ? "default" : "outline"}
-              onClick={() => setCurrentLang("kz")}
+              onClick={() => {
+                setCurrentLang("kz")
+                try {
+                  window.dispatchEvent(new CustomEvent("admin-set-project-lang", { detail: { lang: "kz" } }))
+                } catch {}
+              }}
               className={currentLang === "kz" ? "bg-blue-600 text-white" : ""}
             >
               Қазақша

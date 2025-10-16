@@ -236,6 +236,16 @@ export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEdit
     console.log("Current localData:", localData)
   }, [localData])
 
+  // Sync editor active language with header toggles
+  useEffect(() => {
+    const handler = (e: any) => {
+      const l = e?.detail?.lang
+      if (l === "en" || l === "ru" || l === "kz") setActiveLang(l)
+    }
+    window.addEventListener("admin-set-project-lang", handler as EventListener)
+    return () => window.removeEventListener("admin-set-project-lang", handler as EventListener)
+  }, [])
+
   return (
     <div className="space-y-6">
       {/* Header + language switch */}
