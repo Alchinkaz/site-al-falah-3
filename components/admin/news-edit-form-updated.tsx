@@ -15,9 +15,10 @@ interface NewsEditFormProps {
   article: NewsArticle
   onSave: (article: NewsArticle) => void
   onCancel: () => void
+  hideHeader?: boolean
 }
 
-export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
+export function NewsEditForm({ article, onSave, onCancel, hideHeader }: NewsEditFormProps) {
   const router = useRouter()
   const [activeLang, setActiveLang] = useState<"en" | "ru" | "kz">(() => {
     try {
@@ -231,40 +232,42 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
   return (
     <div className="space-y-6">
       {/* Header + language switch */}
-      <div className="flex items-center justify-between">
-        <div />
-        <div className="flex gap-2 items-center">
-          <div className="flex gap-2 mr-2">
-            <Button
-              variant={activeLang === "en" ? "default" : "outline"}
-              onClick={() => setActiveLang("en")}
-              className={`${activeLang === "en" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
-            >
-              English
+      {hideHeader ? null : (
+        <div className="flex items-center justify-between">
+          <div />
+          <div className="flex gap-2 items-center">
+            <div className="flex gap-2 mr-2">
+              <Button
+                variant={activeLang === "en" ? "default" : "outline"}
+                onClick={() => setActiveLang("en")}
+                className={`${activeLang === "en" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
+              >
+                English
+              </Button>
+              <Button
+                variant={activeLang === "ru" ? "default" : "outline"}
+                onClick={() => setActiveLang("ru")}
+                className={`${activeLang === "ru" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
+              >
+                Русский
+              </Button>
+              <Button
+                variant={activeLang === "kz" ? "default" : "outline"}
+                onClick={() => setActiveLang("kz")}
+                className={`${activeLang === "kz" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
+              >
+                Қазақша
+              </Button>
+            </div>
+            <Button onClick={onCancel} variant="outline" className="border-gray-300 text-gray-700">
+              Отмена
             </Button>
-            <Button
-              variant={activeLang === "ru" ? "default" : "outline"}
-              onClick={() => setActiveLang("ru")}
-              className={`${activeLang === "ru" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
-            >
-              Русский
-            </Button>
-            <Button
-              variant={activeLang === "kz" ? "default" : "outline"}
-              onClick={() => setActiveLang("kz")}
-              className={`${activeLang === "kz" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"}`}
-            >
-              Қазақша
+            <Button onClick={handleSave} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
+              {article.id ? "Сохранить изменения" : "Создать проект"}
             </Button>
           </div>
-          <Button onClick={onCancel} variant="outline" className="border-gray-300 text-gray-700">
-            Отмена
-          </Button>
-          <Button onClick={handleSave} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
-            {article.id ? "Сохранить изменения" : "Создать проект"}
-          </Button>
         </div>
-      </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column - Images */}

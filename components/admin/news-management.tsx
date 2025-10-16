@@ -47,6 +47,13 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     loadArticles()
   }, [])
 
+  // Parent-driven cancel of edit mode and edit state reporting
+  useEffect(() => {
+    const cancelHandler = () => handleCancel()
+    window.addEventListener("admin-cancel-edit", cancelHandler as EventListener)
+    return () => window.removeEventListener("admin-cancel-edit", cancelHandler as EventListener)
+  }, [])
+
   // Allow external button to trigger "Add project" from parent header
   useEffect(() => {
     const handler = () => handleAddArticle()
@@ -206,6 +213,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
 
     setEditingArticle(newArticle)
     setShowAddForm(true)
+    try {
+      window.dispatchEvent(new CustomEvent("admin-editing-project", { detail: { editing: true } }))
+    } catch {}
   }
 
   const handleEditArticle = (article: NewsArticle) => {
@@ -221,6 +231,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
 
     setEditingArticle(extendedArticle as any)
     setShowAddForm(false)
+    try {
+      window.dispatchEvent(new CustomEvent("admin-editing-project", { detail: { editing: true } }))
+    } catch {}
   }
 
   const handleSaveArticle = (articleData: any) => {
@@ -270,6 +283,9 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
       loadArticles()
       setEditingArticle(null)
       setShowAddForm(false)
+      try {
+        window.dispatchEvent(new CustomEvent("admin-editing-project", { detail: { editing: false } }))
+      } catch {}
     } catch (error) {
       console.error("[v0] Error saving article:", error)
       alert("Ошибка при сохранении статьи")
@@ -286,18 +302,21 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
   const handleCancel = () => {
     setEditingArticle(null)
     setShowAddForm(false)
+    try {
+      window.dispatchEvent(new CustomEvent("admin-editing-project", { detail: { editing: false } }))
+    } catch {}
   }
 
   // Если показываем форму редактирования
   if (editingArticle) {
-    return <NewsEditForm article={editingArticle} onSave={handleSaveArticle} onCancel={handleCancel} />
+    return <NewsEditForm article={editingArticle} onSave={handleSaveArticle} onCancel={handleCancel} hideHeader />
   }
 
   return (
     <div className="space-y-6">
       {/* Список проектов */}
       <Card className="bg-card border-border">
-        <CardContent>
+        <CardContent className="pt-4">
           {articles.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />

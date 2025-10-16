@@ -105,6 +105,13 @@ export default function AdminPortfolioPage() {
             </Button>
           </div>
           <Button
+            onClick={() => window.dispatchEvent(new Event("admin-cancel-edit"))}
+            variant="outline"
+            className="border-gray-300 text-gray-700 hidden md:inline-flex"
+          >
+            Отмена
+          </Button>
+          <Button
             onClick={() => window.dispatchEvent(new Event("admin-add-project"))}
             style={{ backgroundColor: "#16a34a" }}
             className="hover:opacity-90"
