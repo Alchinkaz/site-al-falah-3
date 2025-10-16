@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Plus, Edit3, Trash2, FileText } from "lucide-react"
 import { AdminStorage, type NewsArticle } from "@/lib/admin-storage"
 import { readLang } from "@/lib/i18n"
@@ -291,8 +290,8 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Управление проектами</h1>
-          <p className="text-muted-foreground">Создавайте и редактируйте проекты портфолио</p>
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Управление проектами</h1>
+          <p className="text-gray-600">Создавайте и редактируйте проекты портфолио</p>
         </div>
         <Button onClick={handleAddArticle} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
           <Plus className="h-4 w-4 mr-2" />
@@ -334,13 +333,19 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
                         <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
                         <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{article.description}</p>
                         <div className="flex flex-wrap gap-2 mb-2">
-                          <Badge variant={article.published ? "default" : "secondary"}>
+                          <span
+                            className={`text-xs px-2 py-1 rounded-full font-medium border ${
+                              article.published
+                                ? "bg-green-600 text-white border-green-600"
+                                : "bg-gray-100 text-gray-700 border-gray-300"
+                            }`}
+                          >
                             {article.published ? "Опубликовано" : "Черновик"}
-                          </Badge>
+                          </span>
                           {article.show_on_homepage && (
-                            <Badge variant="outline" className="bg-accent/10 text-accent border-accent/20">
+                            <span className="text-xs px-2 py-1 rounded-full font-medium border bg-blue-50 text-blue-700 border-blue-200">
                               На главной
-                            </Badge>
+                            </span>
                           )}
                           {(article as any).badges?.map((b: any, i: number) => (
                             <span key={i} className="text-xs px-2 py-0.5 rounded-full border" style={{ backgroundColor: `${b.color}20`, color: b.color, borderColor: `${b.color}40` }}>

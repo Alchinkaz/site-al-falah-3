@@ -233,10 +233,10 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       {/* Header + language switch */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
             {article.id ? "Редактировать проект" : "Добавить проект"}
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-gray-600">
             {article.id ? "Изменить информацию о проекте" : "Создать новый проект"}
           </p>
         </div>
@@ -246,7 +246,11 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
               <button
                 key={lng}
                 onClick={() => setActiveLang(lng)}
-                className={`px-2 py-1 rounded border ${activeLang === lng ? "bg-slate-900 text-white" : "bg-white"}`}
+                className={`px-3 py-1.5 rounded-md border text-sm font-medium transition-colors ${
+                  activeLang === lng
+                    ? "bg-slate-900 text-white border-slate-900"
+                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                }`}
               >
                 {lng.toUpperCase()}
               </button>
