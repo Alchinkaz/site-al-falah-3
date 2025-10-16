@@ -47,6 +47,13 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     loadArticles()
   }, [])
 
+  // Allow external button to trigger "Add project" from parent header
+  useEffect(() => {
+    const handler = () => handleAddArticle()
+    window.addEventListener("admin-add-project", handler as EventListener)
+    return () => window.removeEventListener("admin-add-project", handler as EventListener)
+  }, [])
+
   useEffect(() => {
     const handler = (e: any) => setLang(e.detail?.lang || readLang())
     window.addEventListener("language-changed", handler)
@@ -288,18 +295,8 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-end">
-        <Button onClick={handleAddArticle} style={{ backgroundColor: "#16a34a" }} className="hover:opacity-90">
-          <Plus className="h-4 w-4 mr-2" />
-          Добавить проект
-        </Button>
-      </div>
-
       {/* Список проектов */}
       <Card className="bg-card border-border">
-        <CardHeader>
-          <CardTitle>Проекты</CardTitle>
-        </CardHeader>
         <CardContent>
           {articles.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">

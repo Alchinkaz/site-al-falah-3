@@ -77,9 +77,8 @@ export default function AdminPortfolioPage() {
   return (
     <div className="space-y-6 text-gray-900">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Редактирование страницы «Портфолио»</h1>
-          <p className="text-gray-600 mt-2">Управление контентом страницы «Портфолио»</p>
+        <div className="flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-gray-900">Проекты портфолио</h1>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex gap-2">
@@ -105,6 +104,13 @@ export default function AdminPortfolioPage() {
               Қазақша
             </Button>
           </div>
+          <Button
+            onClick={() => window.dispatchEvent(new Event("admin-add-project"))}
+            style={{ backgroundColor: "#16a34a" }}
+            className="hover:opacity-90"
+          >
+            + Добавить проект
+          </Button>
           <Button
             onClick={handleSave}
             disabled={isSaving}
@@ -166,14 +172,7 @@ export default function AdminPortfolioPage() {
       </Card>
 
       {/* Projects management merged here */}
-      <Card className="bg-white border-gray-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900">Проекты портфолио</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <NewsManagement currentUser={null as any} formatDate={formatDate} />
-        </CardContent>
-      </Card>
+      <NewsManagement currentUser={null as any} formatDate={formatDate} />
     </div>
   )
 }
