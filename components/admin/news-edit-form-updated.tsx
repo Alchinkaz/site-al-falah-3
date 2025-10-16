@@ -241,20 +241,28 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
           </p>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="flex gap-1 mr-2">
-            {(["en", "ru", "kz"] as const).map((lng) => (
-              <button
-                key={lng}
-                onClick={() => setActiveLang(lng)}
-                className={`px-3 py-1.5 rounded-md border text-sm font-medium transition-colors ${
-                  activeLang === lng
-                    ? "bg-slate-900 text-white border-slate-900"
-                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                }`}
-              >
-                {lng.toUpperCase()}
-              </button>
-            ))}
+          <div className="flex gap-2 mr-2">
+            <Button
+              variant={activeLang === "en" ? "default" : "outline"}
+              onClick={() => setActiveLang("en")}
+              className={activeLang === "en" ? "bg-blue-600 text-white" : ""}
+            >
+              English
+            </Button>
+            <Button
+              variant={activeLang === "ru" ? "default" : "outline"}
+              onClick={() => setActiveLang("ru")}
+              className={activeLang === "ru" ? "bg-blue-600 text-white" : ""}
+            >
+              Русский
+            </Button>
+            <Button
+              variant={activeLang === "kz" ? "default" : "outline"}
+              onClick={() => setActiveLang("kz")}
+              className={activeLang === "kz" ? "bg-blue-600 text-white" : ""}
+            >
+              Қазақша
+            </Button>
           </div>
           <Button onClick={onCancel} variant="outline">
             Отмена
