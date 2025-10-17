@@ -23,13 +23,13 @@ export default function Home() {
   const [lang, setLang] = useState(readLang())
 
   const stat1Counter = useCounterAnimation({
-    end: homepageData ? Number.parseInt(homepageData.stat1Title?.replace(/[^\d]/g, "") || "0") : 0,
+    end: homepageData?.stat1Title ? Number.parseInt(homepageData.stat1Title.replace(/[^\d]/g, "") || "0") : 0,
   })
   const stat2Counter = useCounterAnimation({
-    end: homepageData ? Number.parseInt(homepageData.stat2Title?.replace(/[^\d]/g, "") || "0") : 0,
+    end: homepageData?.stat2Title ? Number.parseInt(homepageData.stat2Title.replace(/[^\d]/g, "") || "0") : 0,
   })
   const stat3Counter = useCounterAnimation({
-    end: homepageData ? Number.parseInt(homepageData.stat3Title?.replace(/[^\d]/g, "") || "0") : 0,
+    end: homepageData?.stat3Title ? Number.parseInt(homepageData.stat3Title.replace(/[^\d]/g, "") || "0") : 0,
   })
 
   useEffect(() => {

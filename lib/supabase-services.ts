@@ -14,6 +14,39 @@ type TeamTranslation = Database['public']['Tables']['team_translations']['Row']
 export class UserService {
   static async authenticate(username: string, password: string): Promise<User | null> {
     try {
+      // First, check if we have any users, if not, create default admin
+      const { data: users, error: usersError } = await supabase
+        .from('users')
+        .select('*')
+        .limit(1)
+
+      if (usersError || !users || users.length === 0) {
+        // Create default admin user
+        const { data: newUser, error: createError } = await supabase
+          .from('users')
+          .insert({
+            id: '1',
+            username: 'admin',
+            password_hash: 'admin123',
+            role: 'admin',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          })
+          .select()
+          .single()
+
+        if (createError) {
+          console.error('Error creating default user:', createError)
+          return null
+        }
+
+        // If we just created the user and it matches the login attempt
+        if (newUser.username === username && newUser.password_hash === password) {
+          return newUser
+        }
+      }
+
+      // Try to authenticate
       const { data, error } = await supabase
         .from('users')
         .select('*')

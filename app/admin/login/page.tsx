@@ -10,6 +10,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { User, Eye, EyeOff, Lock } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { AdminStorage } from "@/lib/admin-storage"
+import { StorageAdapter } from "@/lib/storage-adapter"
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
@@ -25,15 +26,12 @@ export default function LoginPage() {
     setError("")
 
     try {
-      const users = AdminStorage.getUsers()
-      const user = users.find((u) => u.username === username)
+      // Use StorageAdapter for authentication
+      const user = await StorageAdapter.authenticate(username, password)
 
-      if (user && user.password === password) {
-        // Обновляем время последнего входа
-        AdminStorage.updateUser(user.id, { lastLogin: new Date().toISOString() })
-
+      if (user) {
         // Сохраняем данные пользователя в localStorage для сессии
-        AdminStorage.setCurrentUser(user)
+        await AdminStorage.setCurrentUser(user)
 
         router.push("/admin")
       } else {

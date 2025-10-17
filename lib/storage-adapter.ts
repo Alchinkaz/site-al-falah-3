@@ -88,7 +88,12 @@ export class StorageAdapter {
     await this.initialize()
     
     if (this.useSupabase) {
-      return await ProjectService.getAllProjects()
+      try {
+        return await ProjectService.getAllProjects()
+      } catch (error) {
+        console.error('Error getting projects from Supabase, falling back to localStorage:', error)
+        return this.getAllProjectsLocal()
+      }
     } else {
       // Fallback to localStorage
       return this.getAllProjectsLocal()
