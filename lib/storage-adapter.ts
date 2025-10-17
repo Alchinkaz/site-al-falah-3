@@ -147,6 +147,17 @@ export class StorageAdapter {
     }
   }
 
+  static async updateUser(id: string, updates: any) {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      return await UserService.updateUser(id, updates)
+    } else {
+      // Fallback to localStorage
+      return this.updateUserLocal(id, updates)
+    }
+  }
+
   // Project methods
   static async getAllProjects() {
     await this.initialize()
@@ -399,6 +410,19 @@ export class StorageAdapter {
 
     const users = JSON.parse(usersData)
     return users.find((u: any) => u.id === id) || null
+  }
+
+  private static updateUserLocal(id: string, updates: any) {
+    const usersData = localStorage.getItem('admin-users')
+    if (!usersData) return null
+
+    const users = JSON.parse(usersData)
+    const index = users.findIndex((u: any) => u.id === id)
+    if (index === -1) return null
+
+    users[index] = { ...users[index], ...updates, updated_at: new Date().toISOString() }
+    localStorage.setItem('admin-users', JSON.stringify(users))
+    return users[index]
   }
 
   private static getAllProjectsLocal() {

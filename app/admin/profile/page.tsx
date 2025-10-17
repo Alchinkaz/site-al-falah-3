@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { AdminStorage, type User } from "@/lib/admin-storage"
+import { StorageAdapter } from "@/lib/storage-adapter"
+import type { User } from "@/lib/admin-storage"
 import { Eye, EyeOff } from "lucide-react"
 
 export default function ProfilePage() {
@@ -30,9 +31,9 @@ export default function ProfilePage() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    const loadUser = () => {
+    const loadUser = async () => {
       try {
-        const user = AdminStorage.getCurrentUser()
+        const user = await StorageAdapter.getCurrentUser()
         setCurrentUser(user)
       } catch (error) {
         console.error("Error loading user:", error)
@@ -52,7 +53,8 @@ export default function ProfilePage() {
     if (!currentUser) return
 
     // Validate current password
-    if (passwordData.currentPassword !== currentUser.password) {
+    const currentPassword = currentUser.password_hash || currentUser.password
+    if (passwordData.currentPassword !== currentPassword) {
       setError("Неверный текущий пароль")
       return
     }
@@ -70,14 +72,15 @@ export default function ProfilePage() {
     }
 
     try {
-      // Update password
-      const updatedUser = AdminStorage.updateUser(currentUser.id, {
-        password: passwordData.newPassword,
+      // Update password using StorageAdapter
+      const updatedUser = await StorageAdapter.updateUser(currentUser.id, {
+        password_hash: passwordData.newPassword,
+        password: passwordData.newPassword, // For backward compatibility
       })
 
       if (updatedUser) {
         setCurrentUser(updatedUser)
-        AdminStorage.setCurrentUser(updatedUser)
+        await StorageAdapter.setCurrentUser(updatedUser)
         setMessage("Пароль успешно изменен")
         setPasswordData({
           currentPassword: "",
@@ -87,6 +90,7 @@ export default function ProfilePage() {
         setIsChangingPassword(false)
       }
     } catch (error) {
+      console.error("Password change error:", error)
       setError("Ошибка при изменении пароля")
     }
   }
