@@ -176,7 +176,7 @@ export default function HomepageAdminPage() {
         return v.startsWith("/") ? v : `/${v}`
       }
 
-      // Update i18n translations in localStorage
+      // Update i18n translations in localStorage (kept for live preview) and persist to Supabase via server API
       const updatedI18n = {
         ...i18n,
         // Navbar Mobile Menu
@@ -254,8 +254,8 @@ export default function HomepageAdminPage() {
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
-      // Save About image and statistics numbers into homepage data (normalize URLs to allow local public paths)
-      updateHomepageData({
+      // Save About image and statistics numbers into homepage data via Supabase
+      await updateHomepageData({
         aboutImage: normalizeUrl(aboutImageUrl) || undefined,
         heroImage: normalizeUrl(heroBgUrl) || undefined,
         footerBg: normalizeUrl(footerBgUrl) || undefined,
@@ -273,11 +273,8 @@ export default function HomepageAdminPage() {
           detail: { translations: updatedI18n },
         })
       )
-      window.dispatchEvent(
-        new CustomEvent("homepage-data-updated", {
-          detail: { footerEmail, footerCopyright },
-        })
-      )
+      // Ask site to re-fetch homepage data from Supabase instead of relying on payload
+      window.dispatchEvent(new CustomEvent("homepage-data-updated"))
       
       setSaveMessage("Переводы успешно сохранены!")
       setTimeout(() => setSaveMessage(""), 3000)

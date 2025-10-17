@@ -4,10 +4,13 @@ export interface HomepageData {
   heroImage: string
   mobileMenuBg: string
   footerBg: string
+  aboutImage?: string
   // Statistic titles displayed with animated numbers (strings like "$50M+", "25+", "15+")
   stat1Title?: string
   stat2Title?: string
   stat3Title?: string
+  footerEmail?: string
+  footerCopyright?: string
   heroTitle: string
   heroSubtitle: string
   aboutText: string
@@ -24,9 +27,12 @@ const defaultHomepageData: HomepageData = {
   heroImage: "/hero-bg.jpg",
   mobileMenuBg: "/hero-bg.jpg",
   footerBg: "/hero-bg.jpg",
+  aboutImage: "/placeholder.svg",
   stat1Title: "$50M+",
   stat2Title: "25+",
   stat3Title: "15+",
+  footerEmail: "altay@falahpartners.com",
+  footerCopyright: "© 2025 Al Falah Capital Partners",
   heroTitle: "Empowering Innovation Through Strategic Venture Investment",
   heroSubtitle: "We partner with visionary entrepreneurs and groundbreaking startups to build the future.",
   aboutText: "Building Tomorrow's Success Stories Today",
@@ -60,10 +66,13 @@ export async function getHomepageData(): Promise<HomepageData> {
     heroImage: (config as any)?.hero?.image ?? defaultHomepageData.heroImage,
     mobileMenuBg: (config as any)?.mobile_menu_bg?.image ?? defaultHomepageData.mobileMenuBg,
     footerBg: (config as any)?.footer_bg?.image ?? defaultHomepageData.footerBg,
+    aboutImage: (config as any)?.aboutImage ?? defaultHomepageData.aboutImage,
     // Prefer dedicated keys from homepage_config, fall back to statistics object, then defaults
     stat1Title: (config as any)?.stat1Title ?? statisticsFromObject.stat1Title ?? defaultHomepageData.stat1Title,
     stat2Title: (config as any)?.stat2Title ?? statisticsFromObject.stat2Title ?? defaultHomepageData.stat2Title,
     stat3Title: (config as any)?.stat3Title ?? statisticsFromObject.stat3Title ?? defaultHomepageData.stat3Title,
+    footerEmail: (config as any)?.footerEmail ?? defaultHomepageData.footerEmail,
+    footerCopyright: (config as any)?.footerCopyright ?? defaultHomepageData.footerCopyright,
     heroTitle: defaultHomepageData.heroTitle,
     heroSubtitle: defaultHomepageData.heroSubtitle,
     aboutText: defaultHomepageData.aboutText,
