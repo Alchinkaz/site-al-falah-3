@@ -78,8 +78,13 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
   }, [])
 
   const loadArticles = () => {
-    const articlesData = AdminStorage.getNewsArticles()
-    setArticles(articlesData)
+    try {
+      const articlesData = AdminStorage.getNewsArticles()
+      setArticles(Array.isArray(articlesData) ? articlesData : [])
+    } catch (e) {
+      console.error('Failed to load projects:', e)
+      setArticles([])
+    }
   }
 
   // Seed 6 default projects if none exist

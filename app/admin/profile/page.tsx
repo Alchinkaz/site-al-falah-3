@@ -78,10 +78,19 @@ export default function ProfilePage() {
     }
 
     try {
-      // 2) Обновляем пароль напрямую в Supabase
-      const updatedUser = await StorageAdapter.updateUserInSupabaseByUsername(currentUser.username, {
-        password_hash: passwordData.newPassword,
+      // 2) Обновляем пароль через серверный API с service role ключом
+      const res = await fetch('/api/admin/update-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: currentUser.username, newPassword: passwordData.newPassword })
       })
+      const json = await res.json()
+      if (!res.ok || !json.ok) {
+        setError(json?.error || 'Не удалось обновить пароль в базе данных')
+        return
+      }
+
+      const updatedUser = json.user
 
       if (!updatedUser) {
         setError("Не удалось обновить пароль в базе данных")
