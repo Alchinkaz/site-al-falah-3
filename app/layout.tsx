@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import { inter, rubik, daysOne } from "@/styles/fonts"
+import ClientTranslationsLoader from "@/components/translations-loader"
 
 export const metadata: Metadata = {
   title: "Al Falah Partners - Venture Capital Investment Firm",
@@ -39,6 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${rubik.variable} ${daysOne.variable} py-0 mb-0 bg-background`}>
       <body className="font-sans bg-gray-900 text-white">
+        {/* Load translations from Supabase at app start */}
+        {/* @ts-expect-error Client component in layout */}
+        <ClientTranslationsLoader />
         {children}
       </body>
     </html>
