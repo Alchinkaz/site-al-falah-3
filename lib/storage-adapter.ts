@@ -151,7 +151,16 @@ export class StorageAdapter {
     await this.initialize()
     
     if (this.useSupabase) {
-      return await UserService.updateUser(id, updates)
+      try {
+        const updated = await UserService.updateUser(id, updates)
+        if (updated) return updated
+        // If Supabase update failed (e.g., RLS with anon key), fall back to local update
+        console.warn('Supabase updateUser returned null, falling back to local update')
+        return this.updateUserLocal(id, updates)
+      } catch (e) {
+        console.error('Supabase updateUser error, falling back to local update:', e)
+        return this.updateUserLocal(id, updates)
+      }
     } else {
       // Fallback to localStorage
       return this.updateUserLocal(id, updates)
