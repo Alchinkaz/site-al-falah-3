@@ -114,6 +114,30 @@ export class UserService {
       return null
     }
   }
+
+  static async updateUserByUsername(username: string, updates: any): Promise<User | null> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .update({
+          ...updates,
+          updated_at: new Date().toISOString()
+        })
+        .eq('username', username)
+        .select()
+        .single()
+
+      if (error) {
+        console.error('Update user by username error:', error)
+        return null
+      }
+      
+      return data
+    } catch (error) {
+      console.error('Update user by username error:', error)
+      return null
+    }
+  }
 }
 
 // Project Management

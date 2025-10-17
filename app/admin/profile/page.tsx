@@ -79,7 +79,7 @@ export default function ProfilePage() {
 
     try {
       // 2) Обновляем пароль напрямую в Supabase
-      const updatedUser = await StorageAdapter.updateUserInSupabase(currentUser.id, {
+      const updatedUser = await StorageAdapter.updateUserInSupabaseByUsername(currentUser.username, {
         password_hash: passwordData.newPassword,
       })
 

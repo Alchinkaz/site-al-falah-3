@@ -173,6 +173,11 @@ export class StorageAdapter {
     return await UserService.updateUser(id, updates)
   }
 
+  static async updateUserInSupabaseByUsername(username: string, updates: any) {
+    await this.initialize()
+    return await UserService.updateUserByUsername(username, updates)
+  }
+
   // Project methods
   static async getAllProjects() {
     await this.initialize()
