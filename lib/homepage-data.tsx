@@ -62,21 +62,23 @@ export async function getHomepageData(): Promise<HomepageData> {
   })()
 
   return {
-    ...defaultHomepageData,
+          ...defaultHomepageData,
     heroImage: (config as any)?.hero?.image ?? defaultHomepageData.heroImage,
     mobileMenuBg: (config as any)?.mobile_menu_bg?.image ?? defaultHomepageData.mobileMenuBg,
     footerBg: (config as any)?.footer_bg?.image ?? defaultHomepageData.footerBg,
-    aboutImage: (config as any)?.aboutImage ?? defaultHomepageData.aboutImage,
+    // about image stored as object { image }
+    aboutImage: (config as any)?.about?.image ?? (config as any)?.aboutImage ?? defaultHomepageData.aboutImage,
     // Prefer dedicated keys from homepage_config, fall back to statistics object, then defaults
     stat1Title: (config as any)?.stat1Title ?? statisticsFromObject.stat1Title ?? defaultHomepageData.stat1Title,
     stat2Title: (config as any)?.stat2Title ?? statisticsFromObject.stat2Title ?? defaultHomepageData.stat2Title,
     stat3Title: (config as any)?.stat3Title ?? statisticsFromObject.stat3Title ?? defaultHomepageData.stat3Title,
-    footerEmail: (config as any)?.footerEmail ?? defaultHomepageData.footerEmail,
-    footerCopyright: (config as any)?.footerCopyright ?? defaultHomepageData.footerCopyright,
-    heroTitle: defaultHomepageData.heroTitle,
-    heroSubtitle: defaultHomepageData.heroSubtitle,
-    aboutText: defaultHomepageData.aboutText,
-    aboutDescription: defaultHomepageData.aboutDescription,
+    // footer as single object
+    footerEmail: (config as any)?.footer?.email ?? (config as any)?.footerEmail ?? defaultHomepageData.footerEmail,
+    footerCopyright: (config as any)?.footer?.copyright ?? (config as any)?.footerCopyright ?? defaultHomepageData.footerCopyright,
+          heroTitle: defaultHomepageData.heroTitle,
+          heroSubtitle: defaultHomepageData.heroSubtitle,
+          aboutText: defaultHomepageData.aboutText,
+          aboutDescription: defaultHomepageData.aboutDescription,
     faqItems: Array.isArray((config as any)?.faq_items) ? (config as any).faq_items : defaultHomepageData.faqItems,
     reviews: Array.isArray((config as any)?.reviews) ? (config as any).reviews : defaultHomepageData.reviews,
     currencyRates: Array.isArray((config as any)?.currency_rates) ? (config as any).currency_rates : defaultHomepageData.currencyRates,

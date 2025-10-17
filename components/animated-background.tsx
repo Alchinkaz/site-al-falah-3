@@ -18,9 +18,11 @@ export default function AnimatedBackground() {
 
     loadData()
 
-    const onUpdate = (e: any) => {
-      const d = e.detail || {}
-      if (d.heroImage) setBg(d.heroImage)
+    const onUpdate = async () => {
+      try {
+        const fresh = await getHomepageData()
+        setBg(fresh?.heroImage || "/hero-bg.jpg")
+      } catch {}
     }
     window.addEventListener("homepage-data-updated", onUpdate)
     return () => window.removeEventListener("homepage-data-updated", onUpdate)

@@ -16,6 +16,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
   const [isScrolled, setIsScrolled] = useState(false)
   const shouldShowScrolled = forceScrolled || isScrolled
   const shouldShowTransparent = mobileMenuOpen && !forceScrolled
+  const [menuBg, setMenuBg] = useState<string>("/hero-bg.jpg")
 
   // Controls re-entry animation of the transparent navbar on hero after menu closes
   const [transparentPhase, setTransparentPhase] = useState<"idle" | "pre" | "in">("idle")
@@ -26,6 +27,32 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
       setIsScrolled(true)
     }
   }, [forceScrolled])
+
+  // Load homepage images for mobile menu background
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await getHomepageData()
+        setMenuBg(data?.mobileMenuBg || data?.heroImage || "/hero-bg.jpg")
+      } catch {}
+    }
+    load()
+
+    const handleUpdate = async () => {
+      try {
+        const fresh = await getHomepageData()
+        setMenuBg(fresh?.mobileMenuBg || fresh?.heroImage || "/hero-bg.jpg")
+      } catch {}
+    }
+    if (typeof window !== "undefined") {
+      window.addEventListener("homepage-data-updated", handleUpdate as EventListener)
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("homepage-data-updated", handleUpdate as EventListener)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (forceScrolled) return // Don't listen to scroll if forced
@@ -274,7 +301,7 @@ export default function Navbar({ forceScrolled = false }: { forceScrolled?: bool
           className={`fixed inset-0 z-[60] transition-all duration-500 ease-in-out transform bg-cover bg-center bg-no-repeat ${
             mobileMenuAnimating ? 'translate-y-0' : '-translate-y-full'
           }`}
-          style={{ backgroundImage: `url('${(typeof window !== 'undefined' ? (getHomepageData().mobileMenuBg || getHomepageData().heroImage || '/hero-bg.jpg') : '/hero-bg.jpg')}')` }}
+          style={{ backgroundImage: `url('${menuBg}')` }}
         >
           {/* Navigation links - aligned to navbar width, left aligned */}
           <div className="h-full flex items-center">
