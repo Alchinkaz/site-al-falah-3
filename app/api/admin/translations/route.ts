@@ -38,10 +38,26 @@ export async function POST(request: Request) {
 
     for (const [key, val] of Object.entries(updates as Record<string, any>)) {
       if (val && typeof val === 'object' && !Array.isArray(val)) {
-        // Object with language keys
+        // Case A: direct language object { en, ru, kz }
+        let matchedDirect = false
         for (const lang of langs) {
           if (Object.prototype.hasOwnProperty.call(val, lang)) {
+            matchedDirect = true
             await upsertTranslation(key, lang, (val as any)[lang])
+          }
+        }
+
+        if (!matchedDirect) {
+          // Case B: nested map like { heroTitle: { en,ru,kz }, heroSubtitle: { ... } }
+          for (const [childKey, childVal] of Object.entries(val as Record<string, any>)) {
+            if (childVal && typeof childVal === 'object' && !Array.isArray(childVal)) {
+              for (const lang of langs) {
+                if (Object.prototype.hasOwnProperty.call(childVal, lang)) {
+                  const compositeKey = `${key}.${childKey}`
+                  await upsertTranslation(compositeKey, lang, (childVal as any)[lang])
+                }
+              }
+            }
           }
         }
       } else {
