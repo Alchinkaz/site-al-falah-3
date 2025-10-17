@@ -48,6 +48,17 @@ export class StorageAdapter {
   }
 
   // User methods
+  static async authenticate(username: string, password: string) {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      return await UserService.authenticate(username, password)
+    } else {
+      // Fallback to localStorage
+      return this.authenticateLocal(username, password)
+    }
+  }
+
   static async getAllUsers() {
     await this.initialize()
     
@@ -80,6 +91,59 @@ export class StorageAdapter {
     } else {
       // Fallback to localStorage
       return this.getUserByIdLocal(id)
+    }
+  }
+
+  static async setCurrentUser(user: any) {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      // Store in sessionStorage for now
+      sessionStorage.setItem('current-user', JSON.stringify(user))
+      return true
+    } else {
+      // Fallback to localStorage
+      localStorage.setItem('current-user', JSON.stringify(user))
+      return true
+    }
+  }
+
+  static async getCurrentUser() {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      const userData = sessionStorage.getItem('current-user')
+      return userData ? JSON.parse(userData) : null
+    } else {
+      // Fallback to localStorage
+      const userData = localStorage.getItem('current-user')
+      return userData ? JSON.parse(userData) : null
+    }
+  }
+
+  static async logout() {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      sessionStorage.removeItem('current-user')
+      return true
+    } else {
+      // Fallback to localStorage
+      localStorage.removeItem('current-user')
+      return true
+    }
+  }
+
+  static async isAuthenticated() {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      const userData = sessionStorage.getItem('current-user')
+      return !!userData
+    } else {
+      // Fallback to localStorage
+      const userData = localStorage.getItem('current-user')
+      return !!userData
     }
   }
 
@@ -166,6 +230,36 @@ export class StorageAdapter {
     }
   }
 
+  // News/Project methods (for backward compatibility)
+  static async addNewsArticle(article: any) {
+    return await this.createProject(article)
+  }
+
+  static async updateNewsArticle(id: string, updates: any) {
+    return await this.updateProject(id, updates)
+  }
+
+  static async deleteNewsArticle(id: string) {
+    return await this.deleteProject(id)
+  }
+
+  static async getNewsArticles() {
+    return await this.getAllProjects()
+  }
+
+  static async setNewsArticles(articles: any[]) {
+    await this.initialize()
+    
+    if (this.useSupabase) {
+      // This would need to be implemented in ProjectService
+      return true
+    } else {
+      // Fallback to localStorage
+      localStorage.setItem('news-articles', JSON.stringify(articles))
+      return true
+    }
+  }
+
   // Translation methods
   static async getTranslations() {
     await this.initialize()
@@ -223,14 +317,14 @@ export class StorageAdapter {
     }
   }
 
-  static async updateHomepageData(key: string, value: any) {
+  static async updateHomepageData(updates: any) {
     await this.initialize()
     
     if (this.useSupabase) {
-      return await HomepageService.updateHomepageData(key, value)
+      return await HomepageService.updateHomepageData(updates)
     } else {
       // Fallback to localStorage
-      return this.updateHomepageDataLocal(key, value)
+      return this.updateHomepageDataLocal(updates)
     }
   }
 
@@ -405,10 +499,10 @@ export class StorageAdapter {
     return homepageData ? JSON.parse(homepageData) : {}
   }
 
-  private static updateHomepageDataLocal(key: string, value: any) {
+  private static updateHomepageDataLocal(updates: any) {
     const data = this.getHomepageDataLocal()
-    data[key] = value
-    localStorage.setItem('homepage-data', JSON.stringify(data))
+    const updatedData = { ...data, ...updates }
+    localStorage.setItem('homepage-data', JSON.stringify(updatedData))
     return true
   }
 
