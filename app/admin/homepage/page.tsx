@@ -254,18 +254,26 @@ export default function HomepageAdminPage() {
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
-      // Save About image and statistics numbers into homepage data via Supabase
-      await updateHomepageData({
-        aboutImage: normalizeUrl(aboutImageUrl) || undefined,
-        heroImage: normalizeUrl(heroBgUrl) || undefined,
-        footerBg: normalizeUrl(footerBgUrl) || undefined,
-        mobileMenuBg: normalizeUrl(mobileMenuBgUrl) || undefined,
-        stat1Title: statTitles.stat1Title,
-        stat2Title: statTitles.stat2Title,
-        stat3Title: statTitles.stat3Title,
-        footerEmail,
-        footerCopyright,
+      // Save About image and statistics numbers into homepage data via server API (service role)
+      const homepageSave = await fetch('/api/admin/homepage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          aboutImage: normalizeUrl(aboutImageUrl) || null,
+          heroImage: normalizeUrl(heroBgUrl) || null,
+          footerBg: normalizeUrl(footerBgUrl) || null,
+          mobileMenuBg: normalizeUrl(mobileMenuBgUrl) || null,
+          stat1Title: statTitles.stat1Title || null,
+          stat2Title: statTitles.stat2Title || null,
+          stat3Title: statTitles.stat3Title || null,
+          footerEmail: footerEmail || null,
+          footerCopyright: footerCopyright || null,
+        })
       })
+      if (!homepageSave.ok) {
+        const err = await homepageSave.json().catch(() => ({}))
+        throw new Error(err?.error || 'Failed to save homepage config')
+      }
       
       // Dispatch event to update the main site
       window.dispatchEvent(
@@ -276,7 +284,7 @@ export default function HomepageAdminPage() {
       // Ask site to re-fetch homepage data from Supabase instead of relying on payload
       window.dispatchEvent(new CustomEvent("homepage-data-updated"))
       
-      setSaveMessage("Переводы успешно сохранены!")
+      setSaveMessage("Данные успешно сохранены!")
       setTimeout(() => setSaveMessage(""), 3000)
     } catch (error) {
       setSaveMessage("Ошибка при сохранении переводов")
