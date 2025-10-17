@@ -1,0 +1,377 @@
+import { supabase } from './supabase'
+import type { Database } from './supabase'
+
+// Types
+type User = Database['public']['Tables']['users']['Row']
+type Project = Database['public']['Tables']['projects']['Row']
+type HomepageConfig = Database['public']['Tables']['homepage_config']['Row']
+type Translation = Database['public']['Tables']['translations']['Row']
+type ProjectTranslation = Database['public']['Tables']['project_translations']['Row']
+type TeamMember = Database['public']['Tables']['team_members']['Row']
+type TeamTranslation = Database['public']['Tables']['team_translations']['Row']
+
+// User Management
+export class UserService {
+  static async authenticate(username: string, password: string): Promise<User | null> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('username', username)
+        .single()
+
+      if (error || !data) return null
+
+      // Simple password check (in production, use proper hashing)
+      if (data.password_hash !== password) return null
+
+      // Update last login
+      await supabase
+        .from('users')
+        .update({ last_login: new Date().toISOString() })
+        .eq('id', data.id)
+
+      return data
+    } catch (error) {
+      console.error('Authentication error:', error)
+      return null
+    }
+  }
+
+  static async getUserById(id: string): Promise<User | null> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+      return error ? null : data
+    } catch (error) {
+      console.error('Get user error:', error)
+      return null
+    }
+  }
+}
+
+// Project Management
+export class ProjectService {
+  static async getAllProjects(): Promise<Project[]> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      return error ? [] : data || []
+    } catch (error) {
+      console.error('Get projects error:', error)
+      return []
+    }
+  }
+
+  static async getProjectById(id: string): Promise<Project | null> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+      return error ? null : data
+    } catch (error) {
+      console.error('Get project error:', error)
+      return null
+    }
+  }
+
+  static async getPublishedProjects(): Promise<Project[]> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false })
+
+      return error ? [] : data || []
+    } catch (error) {
+      console.error('Get published projects error:', error)
+      return []
+    }
+  }
+
+  static async getHomepageProjects(): Promise<Project[]> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('published', true)
+        .eq('show_on_homepage', true)
+        .order('created_at', { ascending: false })
+
+      return error ? [] : data || []
+    } catch (error) {
+      console.error('Get homepage projects error:', error)
+      return []
+    }
+  }
+
+  static async createProject(project: Database['public']['Tables']['projects']['Insert']): Promise<Project | null> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .insert(project)
+        .select()
+        .single()
+
+      return error ? null : data
+    } catch (error) {
+      console.error('Create project error:', error)
+      return null
+    }
+  }
+
+  static async updateProject(id: string, updates: Database['public']['Tables']['projects']['Update']): Promise<Project | null> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .update({ ...updates, updated_at: new Date().toISOString() })
+        .eq('id', id)
+        .select()
+        .single()
+
+      return error ? null : data
+    } catch (error) {
+      console.error('Update project error:', error)
+      return null
+    }
+  }
+
+  static async deleteProject(id: string): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', id)
+
+      return !error
+    } catch (error) {
+      console.error('Delete project error:', error)
+      return false
+    }
+  }
+}
+
+// Translation Management
+export class TranslationService {
+  static async getTranslations(): Promise<Record<string, any>> {
+    try {
+      const { data, error } = await supabase
+        .from('translations')
+        .select('*')
+
+      if (error || !data) return {}
+
+      const translations: Record<string, any> = {}
+      data.forEach(translation => {
+        if (!translations[translation.key]) {
+          translations[translation.key] = {}
+        }
+        translations[translation.key][translation.language] = translation.value
+      })
+
+      return translations
+    } catch (error) {
+      console.error('Get translations error:', error)
+      return {}
+    }
+  }
+
+  static async updateTranslation(key: string, language: 'en' | 'ru' | 'kz', value: any): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('translations')
+        .upsert({
+          key,
+          language,
+          value,
+          updated_at: new Date().toISOString()
+        })
+
+      return !error
+    } catch (error) {
+      console.error('Update translation error:', error)
+      return false
+    }
+  }
+
+  static async getProjectTranslations(projectId: string): Promise<Record<string, any>> {
+    try {
+      const { data, error } = await supabase
+        .from('project_translations')
+        .select('*')
+        .eq('project_id', projectId)
+
+      if (error || !data) return {}
+
+      const translations: Record<string, any> = {}
+      data.forEach(translation => {
+        if (!translations[translation.translation_type]) {
+          translations[translation.translation_type] = {}
+        }
+        translations[translation.translation_type][translation.language] = translation.value
+      })
+
+      return translations
+    } catch (error) {
+      console.error('Get project translations error:', error)
+      return {}
+    }
+  }
+
+  static async updateProjectTranslation(
+    projectId: string, 
+    type: 'title' | 'badges' | 'sections', 
+    language: 'en' | 'ru' | 'kz', 
+    value: any
+  ): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('project_translations')
+        .upsert({
+          project_id: projectId,
+          translation_type: type,
+          language,
+          value,
+          updated_at: new Date().toISOString()
+        })
+
+      return !error
+    } catch (error) {
+      console.error('Update project translation error:', error)
+      return false
+    }
+  }
+}
+
+// Homepage Configuration
+export class HomepageService {
+  static async getHomepageData(): Promise<Record<string, any>> {
+    try {
+      const { data, error } = await supabase
+        .from('homepage_config')
+        .select('*')
+
+      if (error || !data) return {}
+
+      const config: Record<string, any> = {}
+      data.forEach(item => {
+        config[item.key] = item.value
+      })
+
+      return config
+    } catch (error) {
+      console.error('Get homepage data error:', error)
+      return {}
+    }
+  }
+
+  static async updateHomepageData(key: string, value: any): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('homepage_config')
+        .upsert({
+          key,
+          value,
+          updated_at: new Date().toISOString()
+        })
+
+      return !error
+    } catch (error) {
+      console.error('Update homepage data error:', error)
+      return false
+    }
+  }
+}
+
+// Team Management
+export class TeamService {
+  static async getTeamMembers(): Promise<TeamMember[]> {
+    try {
+      const { data, error } = await supabase
+        .from('team_members')
+        .select('*')
+        .order('created_at', { ascending: true })
+
+      return error ? [] : data || []
+    } catch (error) {
+      console.error('Get team members error:', error)
+      return []
+    }
+  }
+
+  static async updateTeamMemberPhoto(slug: string, photo: string): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('team_members')
+        .upsert({
+          slug,
+          photo,
+          updated_at: new Date().toISOString()
+        })
+
+      return !error
+    } catch (error) {
+      console.error('Update team member photo error:', error)
+      return false
+    }
+  }
+
+  static async getTeamTranslations(slug: string): Promise<Record<string, any>> {
+    try {
+      const { data, error } = await supabase
+        .from('team_translations')
+        .select('*')
+        .eq('team_member_slug', slug)
+
+      if (error || !data) return {}
+
+      const translations: Record<string, any> = {}
+      data.forEach(translation => {
+        if (!translations[translation.translation_type]) {
+          translations[translation.translation_type] = {}
+        }
+        translations[translation.translation_type][translation.language] = translation.value
+      })
+
+      return translations
+    } catch (error) {
+      console.error('Get team translations error:', error)
+      return {}
+    }
+  }
+
+  static async updateTeamTranslation(
+    slug: string,
+    type: 'name' | 'role' | 'bio_left' | 'bio_right',
+    language: 'en' | 'ru' | 'kz',
+    value: string
+  ): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('team_translations')
+        .upsert({
+          team_member_slug: slug,
+          translation_type: type,
+          language,
+          value,
+          updated_at: new Date().toISOString()
+        })
+
+      return !error
+    } catch (error) {
+      console.error('Update team translation error:', error)
+      return false
+    }
+  }
+}

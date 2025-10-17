@@ -1,10 +1,4 @@
-export interface Review {
-  id: string
-  name: string
-  text: string
-  rating: number
-  date: string
-}
+import { StorageAdapter } from './storage-adapter'
 
 export interface ImageGalleryItem {
   id: string
@@ -311,8 +305,31 @@ if (typeof window !== "undefined") {
   }
 }
 
-export function getHomepageData(): HomepageData {
-  // Always check localStorage for latest data
+export async function getHomepageData(): Promise<HomepageData> {
+  try {
+    // Try Supabase first
+    const supabaseData = await StorageAdapter.getHomepageData()
+    if (Object.keys(supabaseData).length > 0) {
+      return {
+        ...defaultHomepageData,
+        ...supabaseData,
+        // Override with new venture investing content
+        heroTitle: defaultHomepageData.heroTitle,
+        heroSubtitle: defaultHomepageData.heroSubtitle,
+        aboutText: defaultHomepageData.aboutText,
+        aboutDescription: defaultHomepageData.aboutDescription,
+        faqItems: defaultHomepageData.faqItems,
+        reviews: defaultHomepageData.reviews,
+        currencyRates: defaultHomepageData.currencyRates,
+        tickerTexts: defaultHomepageData.tickerTexts,
+        portfolioItems: defaultHomepageData.portfolioItems,
+      }
+    }
+  } catch (error) {
+    console.error("Error loading homepage data from Supabase:", error)
+  }
+
+  // Fallback to localStorage
   if (typeof window !== "undefined") {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
@@ -340,11 +357,20 @@ export function getHomepageData(): HomepageData {
   return { ...homepageData }
 }
 
-export function updateHomepageData(data: Partial<HomepageData>): HomepageData {
+export async function updateHomepageData(data: Partial<HomepageData>): Promise<HomepageData> {
   console.log("[v0] Updating homepage data:", data)
   homepageData = { ...homepageData, ...data }
 
-  // Save to localStorage
+  try {
+    // Try Supabase first
+    for (const [key, value] of Object.entries(data)) {
+      await StorageAdapter.updateHomepageData(key, value)
+    }
+  } catch (error) {
+    console.error("Error updating homepage data in Supabase:", error)
+  }
+
+  // Save to localStorage as backup
   if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(homepageData))
     console.log("[v0] Data saved to localStorage")

@@ -1,3 +1,5 @@
+import { StorageAdapter } from './storage-adapter'
+
 export interface PortfolioProject {
   id: string
   title: string
@@ -15,33 +17,32 @@ export interface PortfolioProject {
   }[]
 }
 
-import { AdminStorage } from "@/lib/admin-storage"
-
-function mapNewsToPortfolioProjects(): PortfolioProject[] {
-  const news = AdminStorage.getNewsArticles()
+async function mapNewsToPortfolioProjects(): Promise<PortfolioProject[]> {
+  const news = await StorageAdapter.getAllProjects()
   return news
     .filter((n) => n.published)
     .map((n) => ({
       id: n.id,
       title: n.title,
-      description: n.description,
-      badges: (n as any).badges || [],
-      investmentYear: (n as any).investmentYear || new Date(n.createdAt).getFullYear(),
+      description: n.description || "",
+      badges: n.badges || [],
+      investmentYear: n.investment_year || new Date(n.created_at).getFullYear(),
       image: n.image || "",
-      contentImage: (n as any).contentImage || n.image || "",
+      contentImage: n.content_image || n.image || "",
       published: n.published,
       show_on_homepage: n.show_on_homepage,
-      createdAt: n.createdAt,
-      contentSections: (n as any).contentSections || (n.content ? [{ text: n.content }] : []),
+      createdAt: n.created_at,
+      contentSections: n.content_sections || (n.content ? [{ text: n.content }] : []),
     }))
 }
 
-export function getPublishedProjects(): PortfolioProject[] {
-  return mapNewsToPortfolioProjects()
+export async function getPublishedProjects(): Promise<PortfolioProject[]> {
+  return await mapNewsToPortfolioProjects()
 }
 
-export function getProjectWithDetails(id: string): PortfolioProject | null {
-  return mapNewsToPortfolioProjects().find((project) => project.id === id) || null
+export async function getProjectWithDetails(id: string): Promise<PortfolioProject | null> {
+  const projects = await mapNewsToPortfolioProjects()
+  return projects.find((project) => project.id === id) || null
 }
 
 export function formatProjectDate(dateString: string): string {
