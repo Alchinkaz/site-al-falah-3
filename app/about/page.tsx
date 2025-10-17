@@ -35,8 +35,13 @@ export default function AboutPage() {
 
     loadData()
 
-    const handleDataUpdate = (event: CustomEvent) => {
-      setHomepageData(event.detail)
+    const handleDataUpdate = async () => {
+      try {
+        const fresh = await getHomepageData()
+        setHomepageData(fresh)
+      } catch (e) {
+        // keep previous state
+      }
     }
 
     window.addEventListener("homepage-data-updated", handleDataUpdate as EventListener)

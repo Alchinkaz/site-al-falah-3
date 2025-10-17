@@ -44,8 +44,13 @@ export default function Home() {
 
     loadHomepageData()
 
-    const handleDataUpdate = (event: CustomEvent) => {
-      setHomepageData(event.detail)
+    const handleDataUpdate = async () => {
+      try {
+        const fresh = await getHomepageData()
+        setHomepageData(fresh)
+      } catch (e) {
+        // keep previous data on fetch error
+      }
     }
 
     const handleI18nUpdate = (event: CustomEvent) => {
