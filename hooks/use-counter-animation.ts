@@ -43,6 +43,16 @@ export function useCounterAnimation({ end, duration = 2000, startOnView = true }
 
     if (elementRef.current) {
       observer.observe(elementRef.current)
+      // If element is already in view when data arrives, trigger immediately
+      try {
+        const rect = elementRef.current.getBoundingClientRect()
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+        const inView = rect.top < viewportHeight * 0.9 && rect.bottom > 0
+        if (inView && !hasAnimated) {
+          setIsVisible(true)
+          animateCount()
+        }
+      } catch {}
     }
 
     return () => observer.disconnect()
