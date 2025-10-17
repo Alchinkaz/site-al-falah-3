@@ -33,8 +33,16 @@ export default function Home() {
   })
 
   useEffect(() => {
-    const data = getHomepageData()
-    setHomepageData(data)
+    const loadHomepageData = async () => {
+      try {
+        const data = await getHomepageData()
+        setHomepageData(data)
+      } catch (error) {
+        console.error('Error loading homepage data:', error)
+      }
+    }
+
+    loadHomepageData()
 
     const handleDataUpdate = (event: CustomEvent) => {
       setHomepageData(event.detail)
@@ -68,33 +76,47 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    const publishedProjects = getPublishedProjects()
-    const filtered = publishedProjects.filter((p: any) => p.show_on_homepage)
-    const sorted = [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    const formatted = sorted.slice(0, 6).map((p: any) => ({
-      id: p.id,
-      title: p.title,
-      date: formatProjectDate(p.createdAt),
-      image: p.image,
-      badges: p.badges || [],
-      investmentYear: p.investmentYear,
-    }))
-    setHomeProjects(formatted)
+    const loadProjects = async () => {
+      try {
+        const publishedProjects = await getPublishedProjects()
+        const filtered = publishedProjects.filter((p: any) => p.show_on_homepage)
+        const sorted = [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        const formatted = sorted.slice(0, 6).map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          date: formatProjectDate(p.createdAt),
+          image: p.image,
+          badges: p.badges || [],
+          investmentYear: p.investmentYear,
+        }))
+        setHomeProjects(formatted)
+      } catch (error) {
+        console.error('Error loading projects:', error)
+        setHomeProjects([])
+      }
+    }
+    
+    loadProjects()
   }, [])
 
   useEffect(() => {
-    const reloadProjects = () => {
-      const published = getPublishedProjects().filter((p: any) => p.show_on_homepage)
-      const sorted = [...published].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      const formatted = sorted.slice(0, 6).map((p: any) => ({
-        id: p.id,
-        title: p.title,
-        date: formatProjectDate(p.createdAt),
-        image: p.image,
-        badges: p.badges || [],
-        investmentYear: p.investmentYear,
-      }))
-      setHomeProjects(formatted)
+    const reloadProjects = async () => {
+      try {
+        const published = await getPublishedProjects()
+        const filtered = published.filter((p: any) => p.show_on_homepage)
+        const sorted = [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        const formatted = sorted.slice(0, 6).map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          date: formatProjectDate(p.createdAt),
+          image: p.image,
+          badges: p.badges || [],
+          investmentYear: p.investmentYear,
+        }))
+        setHomeProjects(formatted)
+      } catch (error) {
+        console.error('Error reloading projects:', error)
+      }
     }
     window.addEventListener("projects-updated", reloadProjects as EventListener)
     return () => window.removeEventListener("projects-updated", reloadProjects as EventListener)

@@ -7,8 +7,16 @@ export default function AnimatedBackground() {
   const [bg, setBg] = useState<string>("/hero-bg.jpg")
 
   useEffect(() => {
-    const data = getHomepageData()
-    if (data?.heroImage) setBg(data.heroImage)
+    const loadData = async () => {
+      try {
+        const data = await getHomepageData()
+        if (data?.heroImage) setBg(data.heroImage)
+      } catch (error) {
+        console.error('Error loading homepage data:', error)
+      }
+    }
+
+    loadData()
 
     const onUpdate = (e: any) => {
       const d = e.detail || {}

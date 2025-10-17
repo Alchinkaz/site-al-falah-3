@@ -122,21 +122,29 @@ export default function HomepageAdminPage() {
   })
 
   useEffect(() => {
-    const data = getHomepageData()
-    if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
-    if (data?.heroImage) setHeroBgUrl(data.heroImage)
-    if (data?.footerBg) setFooterBgUrl(data.footerBg)
-    if (data?.mobileMenuBg) setMobileMenuBgUrl(data.mobileMenuBg)
-    // Initialize statistics titles from homepage data
-    if (data) {
-      setStatTitles({
-        stat1Title: data.stat1Title || "",
-        stat2Title: data.stat2Title || "",
-        stat3Title: data.stat3Title || "",
-      })
-      setFooterEmail(data.footerEmail || "altay@falahpartners.com")
-      setFooterCopyright(data.footerCopyright || "© 2025 Al Falah Capital Partners")
+    const loadData = async () => {
+      try {
+        const data = await getHomepageData()
+        if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
+        if (data?.heroImage) setHeroBgUrl(data.heroImage)
+        if (data?.footerBg) setFooterBgUrl(data.footerBg)
+        if (data?.mobileMenuBg) setMobileMenuBgUrl(data.mobileMenuBg)
+        // Initialize statistics titles from homepage data
+        if (data) {
+          setStatTitles({
+            stat1Title: data.stat1Title || "",
+            stat2Title: data.stat2Title || "",
+            stat3Title: data.stat3Title || "",
+          })
+          setFooterEmail(data.footerEmail || "altay@falahpartners.com")
+          setFooterCopyright(data.footerCopyright || "© 2025 Al Falah Capital Partners")
+        }
+      } catch (error) {
+        console.error('Error loading homepage data:', error)
+      }
     }
+    
+    loadData()
   }, [])
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")

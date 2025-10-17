@@ -16,9 +16,19 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
   const [lang, setLang] = useState(readLang())
 
   useEffect(() => {
-    const projectData = getProjectWithDetails(params.id)
-    setProject(projectData)
-    setLoading(false)
+    const loadProject = async () => {
+      try {
+        const projectData = await getProjectWithDetails(params.id)
+        setProject(projectData)
+      } catch (error) {
+        console.error('Error loading project:', error)
+        setProject(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadProject()
   }, [params.id])
 
   useEffect(() => {

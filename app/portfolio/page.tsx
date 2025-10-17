@@ -16,34 +16,47 @@ export default function PortfolioPage() {
   const [lang, setLang] = useState(readLang())
 
   useEffect(() => {
-    const publishedProjects = getPublishedProjects()
-    const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    const formattedProjects = sorted.map((project: any) => ({
-      id: project.id,
-      title: project.title,
-      description: project.description,
-      badges: project.badges || [],
-      investmentYear: project.investmentYear,
-      date: formatProjectDate(project.createdAt),
-      image: project.image,
-    }))
-    setProjectsData(formattedProjects)
+    const loadProjects = async () => {
+      try {
+        const publishedProjects = await getPublishedProjects()
+        const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        const formattedProjects = sorted.map((project: any) => ({
+          id: project.id,
+          title: project.title,
+          description: project.description,
+          badges: project.badges || [],
+          investmentYear: project.investmentYear,
+          date: formatProjectDate(project.createdAt),
+          image: project.image,
+        }))
+        setProjectsData(formattedProjects)
+      } catch (error) {
+        console.error('Error loading projects:', error)
+        setProjectsData([])
+      }
+    }
+    
+    loadProjects()
   }, [])
 
   useEffect(() => {
-    const reload = () => {
-      const publishedProjects = getPublishedProjects()
-      const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      const formattedProjects = sorted.map((project: any) => ({
-        id: project.id,
-        title: project.title,
-        description: project.description,
-        badges: project.badges || [],
-        investmentYear: project.investmentYear,
-        date: formatProjectDate(project.createdAt),
-        image: project.image,
-      }))
-      setProjectsData(formattedProjects)
+    const reload = async () => {
+      try {
+        const publishedProjects = await getPublishedProjects()
+        const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        const formattedProjects = sorted.map((project: any) => ({
+          id: project.id,
+          title: project.title,
+          description: project.description,
+          badges: project.badges || [],
+          investmentYear: project.investmentYear,
+          date: formatProjectDate(project.createdAt),
+          image: project.image,
+        }))
+        setProjectsData(formattedProjects)
+      } catch (error) {
+        console.error('Error reloading projects:', error)
+      }
     }
     window.addEventListener("projects-updated", reload as EventListener)
     return () => window.removeEventListener("projects-updated", reload as EventListener)
