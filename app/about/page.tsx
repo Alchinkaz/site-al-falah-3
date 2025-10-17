@@ -124,7 +124,7 @@ export default function AboutPage() {
                 <div className="text-left relative">
                   <div className="px-4 py-6">
                     <h3 ref={stat1Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
-                      {homepageData?.stat1Title?.replace(/\d+/, stat1Counter.count.toString())}
+                      {homepageData?.stat1Title?.replace(/\d+/, stat1Counter.count.toString()) || "0"}
                     </h3>
                     <p className="text-gray-600">{i18n.stat1Subtitle[lang]}</p>
                   </div>
@@ -135,7 +135,7 @@ export default function AboutPage() {
                 <div className="text-left relative">
                   <div className="px-4 py-6">
                     <h3 ref={stat2Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
-                      {homepageData?.stat2Title?.replace(/\d+/, stat2Counter.count.toString())}
+                      {homepageData?.stat2Title?.replace(/\d+/, stat2Counter.count.toString()) || "0"}
                     </h3>
                     <p className="text-gray-600">{i18n.stat2Subtitle[lang]}</p>
                   </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
                 <div className="text-left relative">
                   <div className="px-4 py-6">
                     <h3 ref={stat3Counter.elementRef} className="text-3xl font-semibold text-gray-900 mb-2">
-                      {homepageData?.stat3Title?.replace(/\d+/, stat3Counter.count.toString())}
+                      {homepageData?.stat3Title?.replace(/\d+/, stat3Counter.count.toString()) || "0"}
                     </h3>
                     <p className="text-gray-600">{i18n.stat3Subtitle[lang]}</p>
                   </div>
