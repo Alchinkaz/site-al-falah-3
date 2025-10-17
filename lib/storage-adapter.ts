@@ -167,6 +167,12 @@ export class StorageAdapter {
     }
   }
 
+  // Force update in Supabase only (no local fallback). Useful when caller requires DB persistence.
+  static async updateUserInSupabase(id: string, updates: any) {
+    await this.initialize()
+    return await UserService.updateUser(id, updates)
+  }
+
   // Project methods
   static async getAllProjects() {
     await this.initialize()

@@ -72,8 +72,8 @@ export default function ProfilePage() {
     }
 
     try {
-      // Update password using StorageAdapter
-      const updatedUser = await StorageAdapter.updateUser(currentUser.id, {
+      // Update password in Supabase (hard requirement per user)
+      const updatedUser = await StorageAdapter.updateUserInSupabase(currentUser.id, {
         password_hash: passwordData.newPassword,
         password: passwordData.newPassword, // For backward compatibility
       })
