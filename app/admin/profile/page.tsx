@@ -52,10 +52,16 @@ export default function ProfilePage() {
 
     if (!currentUser) return
 
-    // Validate current password
-    const currentPassword = currentUser.password_hash || currentUser.password
-    if (passwordData.currentPassword !== currentPassword) {
-      setError("Неверный текущий пароль")
+    // 1) Проверяем текущий пароль через Supabase (без localStorage)
+    try {
+      const authUser = await StorageAdapter.authenticate(currentUser.username, passwordData.currentPassword)
+      if (!authUser) {
+        setError("Неверный текущий пароль")
+        return
+      }
+    } catch (authErr) {
+      console.error("Auth check failed:", authErr)
+      setError("Ошибка проверки текущего пароля")
       return
     }
 
@@ -72,23 +78,26 @@ export default function ProfilePage() {
     }
 
     try {
-      // Update password in Supabase (hard requirement per user)
+      // 2) Обновляем пароль напрямую в Supabase
       const updatedUser = await StorageAdapter.updateUserInSupabase(currentUser.id, {
         password_hash: passwordData.newPassword,
-        password: passwordData.newPassword, // For backward compatibility
       })
 
-      if (updatedUser) {
-        setCurrentUser(updatedUser)
-        await StorageAdapter.setCurrentUser(updatedUser)
-        setMessage("Пароль успешно изменен")
-        setPasswordData({
-          currentPassword: "",
-          newPassword: "",
-          confirmPassword: "",
-        })
-        setIsChangingPassword(false)
+      if (!updatedUser) {
+        setError("Не удалось обновить пароль в базе данных")
+        return
       }
+
+      // 3) Обновляем локальный state и сообщаем пользователю
+      setCurrentUser(updatedUser)
+      await StorageAdapter.setCurrentUser(updatedUser)
+      setMessage("Пароль успешно изменен")
+      setPasswordData({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      })
+      setIsChangingPassword(false)
     } catch (error) {
       console.error("Password change error:", error)
       setError("Ошибка при изменении пароля")
