@@ -254,6 +254,16 @@ export default function HomepageAdminPage() {
       }
       
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
+      // Persist translations to Supabase
+      const translationsSave = await fetch('/api/admin/translations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ updates: updatedI18n })
+      })
+      if (!translationsSave.ok) {
+        const err = await translationsSave.json().catch(() => ({}))
+        throw new Error(err?.error || 'Failed to save translations')
+      }
       // Save About image and statistics numbers into homepage data via server API (service role)
       const homepageSave = await fetch('/api/admin/homepage', {
         method: 'POST',

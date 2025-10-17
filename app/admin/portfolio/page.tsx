@@ -55,6 +55,16 @@ export default function AdminPortfolioPage() {
         },
       }
       localStorage.setItem("i18n-translations", JSON.stringify(updatedI18n))
+      // Persist portfolio translations to Supabase
+      const translationsSave = await fetch('/api/admin/translations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ updates: updatedI18n })
+      })
+      if (!translationsSave.ok) {
+        const err = await translationsSave.json().catch(() => ({}))
+        throw new Error(err?.error || 'Failed to save portfolio translations')
+      }
 
       window.dispatchEvent(new CustomEvent("i18n-updated", { detail: { translations: updatedI18n } }))
 
