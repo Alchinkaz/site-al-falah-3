@@ -166,7 +166,7 @@ export default function AdminLayout({
               <div className="flex items-center gap-3">
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="bg-gray-100 text-gray-700 text-sm">
-                    {currentUser?.username.charAt(0).toUpperCase()}
+                    {currentUser?.username?.charAt(0)?.toUpperCase() || 'A'}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">

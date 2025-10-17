@@ -151,14 +151,14 @@ export default function HomepageAdminPage() {
 
   const handleHeroTitleChange = (lang: Lang, value: string) => {
     setHeroTranslations((prev) => ({
-      ...prev,
+        ...prev,
       [lang]: value,
-    }))
+      }))
   }
 
   const handleButtonTextChange = (lang: Lang, value: string) => {
     setButtonTranslations((prev) => ({
-        ...prev,
+      ...prev,
       [lang]: value,
     }))
   }
@@ -217,9 +217,9 @@ export default function HomepageAdminPage() {
           ...aboutTitleTranslations,
         },
         aboutParagraphs: {
-          en: aboutParagraphsTranslations.en.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
-          ru: aboutParagraphsTranslations.ru.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
-          kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          en: (aboutParagraphsTranslations.en || "").split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          ru: (aboutParagraphsTranslations.ru || "").split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          kz: (aboutParagraphsTranslations.kz || "").split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
         },
         // Statistics subtitles
         stat1Subtitle: {

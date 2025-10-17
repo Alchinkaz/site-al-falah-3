@@ -136,7 +136,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4 mb-6">
             <Avatar className="h-16 w-16">
               <AvatarFallback className="bg-primary/10 text-primary text-xl">
-                {currentUser?.username.charAt(0).toUpperCase()}
+                {currentUser?.username?.charAt(0)?.toUpperCase() || 'A'}
               </AvatarFallback>
             </Avatar>
             <div>

@@ -97,9 +97,9 @@ export default function AdminAboutPage() {
           kz: aboutTitleTranslations.kz,
         },
         aboutPageParagraphs: {
-          en: aboutParagraphsTranslations.en.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
-          ru: aboutParagraphsTranslations.ru.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
-          kz: aboutParagraphsTranslations.kz.split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          en: (aboutParagraphsTranslations.en || "").split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          ru: (aboutParagraphsTranslations.ru || "").split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
+          kz: (aboutParagraphsTranslations.kz || "").split(/\n\n+/).map((s) => s.trim()).filter(Boolean),
         },
         aboutPageKeyTermsRows: keyTermsRows,
         aboutPageKeyTermsTitle: keyTermsTitle,
