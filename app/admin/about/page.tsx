@@ -59,15 +59,23 @@ export default function AdminAboutPage() {
   })
 
   useEffect(() => {
-    const data = getHomepageData()
-    if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
-    if (data) {
-      setStatTitles({
-        stat1Title: data.stat1Title || "",
-        stat2Title: data.stat2Title || "",
-        stat3Title: data.stat3Title || "",
-      })
+    const loadData = async () => {
+      try {
+        const data = await getHomepageData()
+        if (data?.aboutImage) setAboutImageUrl(data.aboutImage)
+        if (data) {
+          setStatTitles({
+            stat1Title: data.stat1Title || "",
+            stat2Title: data.stat2Title || "",
+            stat3Title: data.stat3Title || "",
+          })
+        }
+      } catch (error) {
+        console.error('Error loading homepage data:', error)
+      }
     }
+    
+    loadData()
   }, [])
 
   const handleSave = async () => {

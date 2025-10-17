@@ -79,7 +79,12 @@ export class UserService {
         .eq('id', id)
         .single()
 
-      return error ? null : data
+      if (error) {
+        console.error('Get user error:', error)
+        return null
+      }
+      
+      return data
     } catch (error) {
       console.error('Get user error:', error)
       return null
