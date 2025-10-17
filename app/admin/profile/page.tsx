@@ -9,9 +9,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { StorageAdapter } from "@/lib/storage-adapter"
-import type { User } from "@/lib/admin-storage"
 import { Eye, EyeOff } from "lucide-react"
+
+type User = {
+	id: string
+	username: string
+	role?: string
+	last_login?: string | null
+}
 
 export default function ProfilePage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
@@ -33,8 +38,9 @@ export default function ProfilePage() {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const user = await StorageAdapter.getCurrentUser()
-        setCurrentUser(user)
+        const res = await fetch('/api/admin/me', { cache: 'no-store' })
+        const data = await res.json()
+        setCurrentUser(data?.user || null)
       } catch (error) {
         console.error("Error loading user:", error)
       } finally {
@@ -52,19 +58,6 @@ export default function ProfilePage() {
 
     if (!currentUser) return
 
-    // 1) Проверяем текущий пароль через Supabase (без localStorage)
-    try {
-      const authUser = await StorageAdapter.authenticate(currentUser.username, passwordData.currentPassword)
-      if (!authUser) {
-        setError("Неверный текущий пароль")
-        return
-      }
-    } catch (authErr) {
-      console.error("Auth check failed:", authErr)
-      setError("Ошибка проверки текущего пароля")
-      return
-    }
-
     // Validate new password
     if (passwordData.newPassword.length < 6) {
       setError("Новый пароль должен содержать минимум 6 символов")
@@ -78,34 +71,31 @@ export default function ProfilePage() {
     }
 
     try {
-      // 2) Обновляем пароль через серверный API с service role ключом
+      // Verify current password by trying to login
+      const authRes = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: currentUser.username, password: passwordData.currentPassword })
+      })
+      if (!authRes.ok) {
+        setError("Неверный текущий пароль")
+        return
+      }
+
+      // Update password via service role API
       const res = await fetch('/api/admin/update-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: currentUser.username, newPassword: passwordData.newPassword })
       })
       const json = await res.json()
-      if (!res.ok || !json.ok) {
+      if (!res.ok) {
         setError(json?.error || 'Не удалось обновить пароль в базе данных')
         return
       }
 
-      const updatedUser = json.user
-
-      if (!updatedUser) {
-        setError("Не удалось обновить пароль в базе данных")
-        return
-      }
-
-      // 3) Обновляем локальный state и сообщаем пользователю
-      setCurrentUser(updatedUser)
-      await StorageAdapter.setCurrentUser(updatedUser)
       setMessage("Пароль успешно изменен")
-      setPasswordData({
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      })
+      setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" })
       setIsChangingPassword(false)
     } catch (error) {
       console.error("Password change error:", error)
@@ -113,8 +103,9 @@ export default function ProfilePage() {
     }
   }
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString?: string | null) => {
     try {
+      if (!dateString) return "Дата не указана"
       const date = new Date(dateString)
       if (isNaN(date.getTime())) {
         return "Дата не указана"
@@ -165,7 +156,7 @@ export default function ProfilePage() {
               <h3 className="text-lg font-semibold text-foreground">{currentUser?.username}</h3>
               <p className="text-muted-foreground">Администратор</p>
               <p className="text-sm text-muted-foreground">
-                Последний вход: {currentUser?.lastLogin ? formatDate(currentUser.lastLogin) : "Никогда"}
+                Последний вход: {formatDate(currentUser?.last_login)}
               </p>
             </div>
           </div>

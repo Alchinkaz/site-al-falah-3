@@ -3,15 +3,33 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Plus, Edit3, Trash2, FileText } from "lucide-react"
-import { AdminStorage, type NewsArticle } from "@/lib/admin-storage"
 import { readLang, projectBadgesI18n, projectSections, projectTexts } from "@/lib/i18n"
 import { NewsEditForm } from "./news-edit-form-updated"
+import { ProjectService } from "@/lib/supabase-services"
 
 interface NewsManagementProps {
   currentUser: any
   formatDate: (dateString: string) => string
+}
+
+type ProjectRow = any
+
+type NewsArticle = {
+  id: string
+  title: string
+  description?: string
+  content?: string
+  image?: string
+  contentImage?: string
+  badges?: Array<{ label: string; color: string }>
+  investmentYear?: number
+  contentSections?: { title?: string; text: string }[]
+  published: boolean
+  show_on_homepage?: boolean
+  createdAt: string
+  updatedAt?: string
 }
 
 export function NewsManagement({ currentUser, formatDate }: NewsManagementProps) {
@@ -20,27 +38,6 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
   const [lang, setLang] = useState(readLang())
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
-
-  // Проверка авторизации
-  useEffect(() => {
-    const checkAuth = () => {
-      try {
-        const token = localStorage.getItem("admin_token")
-        const userData = localStorage.getItem("current_user")
-
-        if (!token || token !== "authenticated" || !userData) {
-          router.push("/admin/login")
-          return
-        }
-      } catch (error) {
-        console.error("Error checking auth:", error)
-        router.push("/admin/login")
-        return
-      }
-    }
-
-    checkAuth()
-  }, [router])
 
   // Загрузка проектов
   useEffect(() => {
@@ -77,155 +74,49 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     return () => window.removeEventListener("admin-set-project-lang", handler as EventListener)
   }, [])
 
-  const loadArticles = () => {
+  const mapProject = (n: ProjectRow): NewsArticle => ({
+    id: n.id,
+    title: n.title,
+    description: n.description || "",
+    content: n.content || "",
+    image: n.image || "",
+    contentImage: n.content_image || n.image || "",
+    badges: n.badges || [],
+    investmentYear: n.investment_year || (n.created_at ? new Date(n.created_at).getFullYear() : undefined),
+    contentSections: n.content_sections || (n.content ? [{ text: n.content }] : []),
+    published: !!n.published,
+    show_on_homepage: !!n.show_on_homepage,
+    createdAt: n.created_at,
+    updatedAt: n.updated_at,
+  })
+
+  const loadArticles = async () => {
     try {
-      const articlesData = AdminStorage.getNewsArticles()
-      setArticles(Array.isArray(articlesData) ? articlesData : [])
+      const list = await ProjectService.getAllProjects()
+      setArticles((list || []).map(mapProject))
     } catch (e) {
       console.error('Failed to load projects:', e)
       setArticles([])
     }
   }
 
-  // Seed 6 default projects if none exist
-  useEffect(() => {
-    const existing = AdminStorage.getNewsArticles()
-    if (existing.length === 0) {
-      const now = new Date().toISOString()
-      const seed = [
-        {
-          id: "proj-1",
-          title: "Alsad Kazakhstan",
-          description: "Premium food production company",
-          content: "Alsad Kazakhstan is a leading food production company...",
-          image: "/images/portfolio/alsad.jpg",
-          contentImage: "/images/portfolio/alsad-hero.jpg",
-          badges: [
-            { label: "Agriculture", color: "#065f46" },
-            { label: "Growth", color: "#1e40af" },
-          ],
-          investmentYear: 2017,
-          contentSections: [{ title: "Overview", text: "Company overview and impact..." }],
-          published: true,
-          show_on_homepage: true,
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          id: "proj-2",
-          title: "Karaganda Energocenter",
-          description: "Regional energy provider",
-          content: "Karaganda Energocenter operates major energy assets...",
-          image: "/images/portfolio/karaganda.jpg",
-          contentImage: "/images/portfolio/karaganda-hero.jpg",
-          badges: [
-            { label: "Energy", color: "#b45309" },
-            { label: "Infrastructure", color: "#6b21a8" },
-          ],
-          investmentYear: 2012,
-          contentSections: [{ title: "Modernization", text: "Upgrades and efficiencies..." }],
-          published: true,
-          show_on_homepage: true,
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          id: "proj-3",
-          title: "Ulmus Besshoky",
-          description: "Agricultural enterprise",
-          content: "Ulmus Besshoky develops sustainable agriculture...",
-          image: "/images/portfolio/ulmus.jpg",
-          contentImage: "/images/portfolio/ulmus-hero.jpg",
-          badges: [
-            { label: "Agriculture", color: "#047857" },
-            { label: "Operations", color: "#7c3aed" },
-          ],
-          investmentYear: 2015,
-          contentSections: [{ title: "Production", text: "Yield growth and quality..." }],
-          published: true,
-          show_on_homepage: true,
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          id: "proj-4",
-          title: "Ai Karaaul",
-          description: "Industrial venture",
-          content: "Ai Karaaul focuses on industrial innovation...",
-          image: "/images/portfolio/aikaraaul.jpg",
-          contentImage: "/images/portfolio/aikaraaul-hero.jpg",
-          badges: [
-            { label: "Industry", color: "#1f2937" },
-            { label: "Scale-up", color: "#1d4ed8" },
-          ],
-          investmentYear: 2018,
-          contentSections: [{ title: "Expansion", text: "Capacity and logistics..." }],
-          published: true,
-          show_on_homepage: false,
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          id: "proj-5",
-          title: "Karaganda Kus",
-          description: "Poultry production",
-          content: "Karaganda Kus is a poultry producer...",
-          image: "/images/portfolio/kus.jpg",
-          contentImage: "/images/portfolio/kus-hero.jpg",
-          badges: [
-            { label: "Food", color: "#16a34a" },
-            { label: "Operations", color: "#6d28d9" },
-          ],
-          investmentYear: 2019,
-          contentSections: [{ title: "Operations", text: "Improved efficiency..." }],
-          published: true,
-          show_on_homepage: false,
-          createdAt: now,
-          updatedAt: now,
-        },
-        {
-          id: "proj-6",
-          title: "Elefund VC Portfolio",
-          description: "Technology investments",
-          content: "Investments in Robinhood, Soul of Nomad, and others...",
-          image: "/images/portfolio/elefund.jpg",
-          contentImage: "/images/portfolio/elefund-hero.jpg",
-          badges: [
-            { label: "Technology", color: "#0ea5e9" },
-            { label: "Venture", color: "#d97706" },
-          ],
-          investmentYear: 2020,
-          contentSections: [{ title: "Investments", text: "Key highlights and outcomes..." }],
-          published: true,
-          show_on_homepage: true,
-          createdAt: now,
-          updatedAt: now,
-        },
-      ] as any
-      AdminStorage.setNewsArticles(seed as any)
-      setArticles(seed as any)
-    }
-  }, [])
-
   const handleAddArticle = () => {
+    const now = new Date().toISOString()
     const newArticle: NewsArticle = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       title: "",
       description: "",
       content: "",
       image: "",
       published: false,
       show_on_homepage: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      // Добавляем дополнительные поля для совместимости с формой
+      createdAt: now,
+      updatedAt: now,
       badges: [],
       investmentYear: new Date().getFullYear(),
       contentImage: "",
-      images: [],
       contentSections: [{ title: "", text: "" }],
-    } as any
-
+    }
     setEditingArticle(newArticle)
     setShowAddForm(true)
     try {
@@ -234,7 +125,6 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
   }
 
   const handleEditArticle = (article: NewsArticle) => {
-    // Дополняем статью полями для совместимости с формой
     const extendedArticle = {
       ...article,
       contentImage: (article as any).contentImage || "",
@@ -251,66 +141,60 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     } catch {}
   }
 
-  const handleSaveArticle = (articleData: any) => {
-    console.log("[v0] Saving article:", articleData)
-
+  const handleSaveArticle = async (articleData: any) => {
     try {
       if (showAddForm) {
-        // Создание новой статьи
-        const newArticle: NewsArticle = {
+        // Create
+        const insertPayload: any = {
           id: articleData.id,
           title: articleData.title,
           description: articleData.description,
           content: articleData.content,
           image: articleData.image,
+          content_image: articleData.contentImage,
           badges: articleData.badges || [],
-          investmentYear: Number(articleData.investmentYear) || new Date().getFullYear(),
-          contentImage: articleData.contentImage,
-          contentSections: articleData.contentSections,
+          investment_year: Number(articleData.investmentYear) || new Date().getFullYear(),
+          content_sections: articleData.contentSections,
           published: articleData.published,
           show_on_homepage: articleData.show_on_homepage,
-          createdAt: articleData.createdAt || new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          created_at: articleData.createdAt || new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         }
-
-        AdminStorage.addNewsArticle(newArticle)
-        console.log("[v0] Article added successfully")
+        await ProjectService.createProject(insertPayload)
       } else {
-        // Обновление существующей статьи
-        const updates: Partial<NewsArticle> = {
+        // Update
+        const updates: any = {
           title: articleData.title,
           description: articleData.description,
           content: articleData.content,
           image: articleData.image,
+          content_image: articleData.contentImage,
           badges: articleData.badges || [],
-          investmentYear: Number(articleData.investmentYear) || new Date().getFullYear(),
-          contentImage: articleData.contentImage,
-          contentSections: articleData.contentSections,
+          investment_year: Number(articleData.investmentYear) || new Date().getFullYear(),
+          content_sections: articleData.contentSections,
           published: articleData.published,
           show_on_homepage: articleData.show_on_homepage,
-          createdAt: articleData.createdAt,
+          updated_at: new Date().toISOString(),
         }
-
-        AdminStorage.updateNewsArticle(articleData.id, updates)
-        console.log("[v0] Article updated successfully")
+        await ProjectService.updateProject(articleData.id, updates)
       }
 
-      loadArticles()
+      await loadArticles()
       setEditingArticle(null)
       setShowAddForm(false)
       try {
         window.dispatchEvent(new CustomEvent("admin-editing-project", { detail: { editing: false } }))
       } catch {}
     } catch (error) {
-      console.error("[v0] Error saving article:", error)
+      console.error("Error saving article:", error)
       alert("Ошибка при сохранении статьи")
     }
   }
 
-  const handleDeleteArticle = (id: string) => {
+  const handleDeleteArticle = async (id: string) => {
     if (confirm("Вы уверены, что хотите удалить эту новость?")) {
-      AdminStorage.deleteNewsArticle(id)
-      loadArticles()
+      await ProjectService.deleteProject(id)
+      await loadArticles()
     }
   }
 
@@ -322,13 +206,19 @@ export function NewsManagement({ currentUser, formatDate }: NewsManagementProps)
     } catch {}
   }
 
-  // Если показываем форму редактирования
   if (editingArticle) {
-    return <NewsEditForm article={editingArticle} onSave={handleSaveArticle} onCancel={handleCancel} hideHeader />
+    return <NewsEditForm article={editingArticle as any} onSave={handleSaveArticle} onCancel={handleCancel} hideHeader />
   }
 
   return (
     <div className="space-y-6">
+      {/* Header actions */}
+      <div className="flex justify-end">
+        <Button onClick={handleAddArticle} size="sm">
+          <Plus className="h-4 w-4 mr-2" /> Добавить проект
+        </Button>
+      </div>
+
       {/* Список проектов */}
       <Card className="bg-card border-border">
         <CardContent className="pt-4">

@@ -9,8 +9,6 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { User, Eye, EyeOff, Lock } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { AdminStorage } from "@/lib/admin-storage"
-import { StorageAdapter } from "@/lib/storage-adapter"
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
@@ -26,16 +24,17 @@ export default function LoginPage() {
     setError("")
 
     try {
-      // Use StorageAdapter for authentication
-      const user = await StorageAdapter.authenticate(username, password)
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      })
 
-      if (user) {
-        // Сохраняем данные пользователя в localStorage для сессии
-        await AdminStorage.setCurrentUser(user)
-
-        router.push("/admin")
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setError(data?.error || "Неверный логин или пароль")
       } else {
-        setError("Неверный логин или пароль")
+        router.push("/admin")
       }
     } catch (error) {
       console.error("Login error:", error)

@@ -7,9 +7,10 @@ import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { SettingsIcon, LogOut, Menu, X, FileText, Phone, Home, DollarSign } from "lucide-react"
-import { AdminStorage, type User } from "@/lib/admin-storage"
+import { SettingsIcon, LogOut, Menu, X, FileText, Home } from "lucide-react"
 import Link from "next/link"
+
+type User = { id: string; username: string; role?: string }
 
 export default function AdminLayout({
   children,
@@ -29,17 +30,13 @@ export default function AdminLayout({
   }, [pathname])
 
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       try {
-        if (AdminStorage.isAuthenticated()) {
-          const user = AdminStorage.getCurrentUser()
-          if (user) {
-            setCurrentUser(user)
-            setIsAuthenticated(true)
-          } else {
-            router.push("/admin/login")
-            return
-          }
+        const res = await fetch('/api/admin/me', { cache: 'no-store' })
+        const data = await res.json()
+        if (data?.user) {
+          setCurrentUser(data.user)
+          setIsAuthenticated(true)
         } else {
           router.push("/admin/login")
           return
@@ -62,9 +59,12 @@ export default function AdminLayout({
     checkAuth()
   }, [router, pathname])
 
-  const handleLogout = () => {
-    AdminStorage.logout()
-    router.push("/admin/login")
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' })
+    } finally {
+      router.push("/admin/login")
+    }
   }
 
   const getAvailableTabs = (user: User) => {
@@ -115,7 +115,7 @@ export default function AdminLayout({
           variant="outline"
           size="sm"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="bg-white border border-gray-200"
+          className="bg.white border border-gray-200"
         >
           {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </Button>
@@ -170,7 +170,7 @@ export default function AdminLayout({
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{currentUser?.username}</p>
+                  <p className="text.sm font-medium text-gray-900 truncate">{currentUser?.username}</p>
                   <p className="text-xs text-gray-500">
                     {currentUser?.role === "admin" ? "Администратор" : "Редактор"}
                   </p>

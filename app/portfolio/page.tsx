@@ -45,15 +45,15 @@ export default function PortfolioPage() {
         const publishedProjects = await getPublishedProjects()
         const sorted = [...publishedProjects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         const formattedProjects = sorted.map((project: any) => ({
-          id: project.id,
-          title: project.title,
-          description: project.description,
+      id: project.id,
+      title: project.title,
+      description: project.description,
           badges: project.badges || [],
-          investmentYear: project.investmentYear,
-          date: formatProjectDate(project.createdAt),
-          image: project.image,
-        }))
-        setProjectsData(formattedProjects)
+      investmentYear: project.investmentYear,
+      date: formatProjectDate(project.createdAt),
+      image: project.image,
+    }))
+    setProjectsData(formattedProjects)
       } catch (error) {
         console.error('Error reloading projects:', error)
       }

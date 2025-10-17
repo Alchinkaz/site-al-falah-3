@@ -9,7 +9,25 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import type { NewsArticle } from "@/lib/admin-storage"
+
+// Local type to avoid dependency on removed admin-storage
+type NewsArticle = {
+	id: string
+	title: string
+	description: string
+	content: string
+	image?: string
+	contentImage?: string
+	images?: string[]
+	badges?: Array<{ label: string; color: string }>
+	investmentYear?: number
+	contentSections?: Array<{ title: string; text: string }>
+	published: boolean
+	show_on_homepage: boolean
+	date?: string
+	createdAt?: string
+	updatedAt?: string
+}
 
 interface NewsEditFormProps {
   article: NewsArticle
@@ -31,7 +49,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       description: article.description || "",
       content: article.content || "",
       date:
-        article.date ||
+        (article as any).date ||
         new Date().toLocaleDateString("ru-RU", {
           year: "numeric",
           month: "long",
@@ -71,10 +89,10 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
 
   const updateLocalData = (field: string, value: any) => {
     console.log(`=== NewsEditForm: Updating field ${field} ===`)
-    console.log("Old value:", localData[field])
+    console.log("Old value:", (localData as any)[field])
     console.log("New value:", value)
 
-    setLocalData((prev) => {
+    setLocalData((prev: any) => {
       const newData = { ...prev, [field]: value }
       console.log("Updated localData:", newData)
       return newData
@@ -85,7 +103,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
     console.log("=== NewsEditForm: Validating data ===")
     console.log("Current localData:", localData)
 
-    const errors = []
+    const errors: string[] = []
 
     if (!localData.title?.trim()) {
       errors.push("Заголовок обязателен")
@@ -95,12 +113,12 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       errors.push("Описание обязательно")
     }
 
-    if (!localData.date?.trim()) {
+    if (!(localData as any).date?.trim()) {
       errors.push("Дата обязательна")
     }
 
     // Проверяем, что хотя бы одна секция контента заполнена
-    const hasValidContent = localData.contentSections.some((section) => section.title?.trim() || section.text?.trim())
+    const hasValidContent = (localData.contentSections || []).some((section: any) => section.title?.trim() || section.text?.trim())
 
     if (!hasValidContent) {
       errors.push("Необходимо заполнить хотя бы одну секцию контента")
@@ -124,35 +142,35 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
     // Очищаем пустые секции контента
     const cleanedData = {
       ...localData,
-      contentSections: localData.contentSections.filter((section) => section.title?.trim() || section.text?.trim()),
+      contentSections: (localData.contentSections || []).filter((section: any) => section.title?.trim() || section.text?.trim()),
       // Убеждаемся, что content заполнен на основе contentSections
       content:
-        localData.contentSections
-          .filter((section) => section.title?.trim() || section.text?.trim())
-          .map((section) => `${section.title}\n\n${section.text}`)
+        (localData.contentSections || [])
+          .filter((section: any) => section.title?.trim() || section.text?.trim())
+          .map((section: any) => `${section.title}\n\n${section.text}`)
           .join("\n\n---\n\n") ||
         localData.content ||
         "",
-    }
+    } as NewsArticle
 
     console.log("Cleaned data for save:", cleanedData)
     onSave(cleanedData)
   }
 
   const addContentSection = () => {
-    const newSections = [...localData.contentSections, { title: "", text: "" }]
+    const newSections = [...(localData.contentSections || []), { title: "", text: "" }]
     updateLocalData("contentSections", newSections)
   }
 
   const removeContentSection = (index: number) => {
-    if (localData.contentSections.length > 1) {
-      const newSections = localData.contentSections.filter((_, i) => i !== index)
+    if ((localData.contentSections || []).length > 1) {
+      const newSections = (localData.contentSections || []).filter((_: any, i: number) => i !== index)
       updateLocalData("contentSections", newSections)
     }
   }
 
   const updateContentSection = (index: number, field: "title" | "text", value: string) => {
-    const newSections = [...localData.contentSections]
+    const newSections = [...(localData.contentSections || [])]
     newSections[index] = { ...newSections[index], [field]: value }
     updateLocalData("contentSections", newSections)
   }
@@ -168,10 +186,10 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            {article.id ? "Редактировать новость" : "Добавить новость"}
+            {localData.id ? "Редактировать новость" : "Добавить новость"}
           </h1>
           <p className="text-muted-foreground">
-            {article.id ? "Изменить информацию о новости" : "Создать новую новость"}
+            {localData.id ? "Изменить информацию о новости" : "Создать новую новость"}
           </p>
         </div>
         <div className="flex gap-2">
@@ -179,7 +197,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             Отмена
           </Button>
           <Button onClick={handleSave} className="bg-[#365f37] hover:bg-[#2d4f2d]">
-            {article.id ? "Сохранить изменения" : "Создать новость"}
+            {localData.id ? "Сохранить изменения" : "Создать новость"}
           </Button>
         </div>
       </div>
@@ -290,7 +308,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                 <Label htmlFor="date">Дата публикации *</Label>
                 <Input
                   id="date"
-                  value={localData.date || ""}
+                  value={(localData as any).date || ""}
                   onChange={(e) => updateLocalData("date", e.target.value)}
                   placeholder="15 декабря 2024"
                 />
@@ -311,11 +329,11 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                {localData.contentSections.map((section, index) => (
+                {(localData.contentSections || []).map((section: any, index: number) => (
                   <div key={index} className="border rounded-lg p-4">
                     <div className="flex items-center justify-between mb-4">
                       <h4 className="text-sm font-medium">Секция {index + 1}</h4>
-                      {localData.contentSections.length > 1 && (
+                      {(localData.contentSections || []).length > 1 && (
                         <Button
                           onClick={() => removeContentSection(index)}
                           size="sm"
@@ -362,7 +380,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                   <Label htmlFor="published">Опубликовать новость</Label>
                   <Switch
                     id="published"
-                    checked={localData.published || false}
+                    checked={!!localData.published}
                     onCheckedChange={(checked) => updateLocalData("published", checked)}
                   />
                 </div>
@@ -370,7 +388,7 @@ export function NewsEditForm({ article, onSave, onCancel }: NewsEditFormProps) {
                   <Label htmlFor="show_on_homepage">Показать на главной</Label>
                   <Switch
                     id="show_on_homepage"
-                    checked={localData.show_on_homepage || false}
+                    checked={!!localData.show_on_homepage}
                     onCheckedChange={(checked) => updateLocalData("show_on_homepage", checked)}
                   />
                 </div>

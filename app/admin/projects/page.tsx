@@ -1,18 +1,20 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdminStorage, type User } from "@/lib/admin-storage"
 import { NewsManagement } from "@/components/admin/news-management"
+
+type User = { id: string; username: string; role?: string }
 
 export default function ProjectsPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const loadUser = () => {
+    const loadUser = async () => {
       try {
-        const user = AdminStorage.getCurrentUser()
-        setCurrentUser(user)
+        const res = await fetch('/api/admin/me', { cache: 'no-store' })
+        const data = await res.json()
+        setCurrentUser(data?.user || null)
       } catch (error) {
         console.error("Error loading user:", error)
       } finally {

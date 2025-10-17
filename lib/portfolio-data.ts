@@ -1,4 +1,4 @@
-import { StorageAdapter } from './storage-adapter'
+import { ProjectService } from './supabase-services'
 
 export interface PortfolioProject {
   id: string
@@ -17,11 +17,11 @@ export interface PortfolioProject {
   }[]
 }
 
-async function mapNewsToPortfolioProjects(): Promise<PortfolioProject[]> {
-  const news = await StorageAdapter.getAllProjects()
-  return news
-    .filter((n) => n.published)
-    .map((n) => ({
+async function mapProjects(): Promise<PortfolioProject[]> {
+  const projects = await ProjectService.getAllProjects()
+  return projects
+    .filter((n: any) => n.published)
+    .map((n: any) => ({
       id: n.id,
       title: n.title,
       description: n.description || "",
@@ -37,11 +37,11 @@ async function mapNewsToPortfolioProjects(): Promise<PortfolioProject[]> {
 }
 
 export async function getPublishedProjects(): Promise<PortfolioProject[]> {
-  return await mapNewsToPortfolioProjects()
+  return await mapProjects()
 }
 
 export async function getProjectWithDetails(id: string): Promise<PortfolioProject | null> {
-  const projects = await mapNewsToPortfolioProjects()
+  const projects = await mapProjects()
   return projects.find((project) => project.id === id) || null
 }
 

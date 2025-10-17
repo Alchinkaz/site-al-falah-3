@@ -9,7 +9,26 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import type { NewsArticle } from "@/lib/admin-storage"
+
+// Local type to replace legacy AdminStorage.NewsArticle
+export type NewsArticle = {
+  id: string
+  title: string
+  description?: string
+  content?: string
+  image?: string
+  contentImage?: string
+  images?: string[]
+  badges?: Array<{ label: string; color: string }>
+  investmentYear?: number
+  contentSections?: Array<{ title: string; text: string }>
+  published: boolean
+  show_on_homepage?: boolean
+  createdAt: string
+  updatedAt?: string
+}
+
+type CompatNewsArticle = NewsArticle
 
 interface NewsEditFormProps {
   article: NewsArticle

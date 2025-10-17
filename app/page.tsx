@@ -36,7 +36,7 @@ export default function Home() {
     const loadHomepageData = async () => {
       try {
         const data = await getHomepageData()
-        setHomepageData(data)
+    setHomepageData(data)
       } catch (error) {
         console.error('Error loading homepage data:', error)
       }
