@@ -288,10 +288,17 @@ export default function Navbar({
               className={`${(shouldShowScrolled || forceScrolled) && !mobileMenuOpen ? "block" : "hidden"} absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`}
             >
               <Link href="/" aria-label="Home">
+                {/* Mobile/Tablet: keep existing short text logo */}
                 <img
                   src="/al-falah-logo-black-text.svg"
                   alt="Al Falah Partners"
-                  className="h-8 md:h-9 lg:h-10 xl:h-11 w-auto cursor-pointer"
+                  className="block md:hidden h-8 w-auto cursor-pointer"
+                />
+                {/* Desktop: use full black text logo */}
+                <img
+                  src="/al-falah-logo-black-text-full.svg"
+                  alt="Al Falah Partners"
+                  className="hidden md:block h-9 lg:h-10 xl:h-11 w-auto cursor-pointer"
                 />
               </Link>
             </div>
