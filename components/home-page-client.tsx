@@ -393,14 +393,14 @@ export default function HomePageClient({
               <div className="order-2 xl:order-1">
                 <h2 className="text-4xl font-bold text-gray-900 mb-6 xl:mt-0">{t.aboutTitle[lang]}</h2>
                 <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
-                  {(Array.isArray(t.aboutPageParagraphs?.[lang])
-                    ? t.aboutPageParagraphs[lang]
-                    : Array.isArray(t.aboutParagraphs?.[lang])
-                      ? t.aboutParagraphs[lang]
-                      : Array.isArray(i18n.aboutPageParagraphs?.[lang])
-                        ? i18n.aboutPageParagraphs[lang]
-                        : Array.isArray(i18n.aboutParagraphs?.[lang])
-                          ? i18n.aboutParagraphs[lang]
+                  {(Array.isArray(t.aboutParagraphs?.[lang])
+                    ? t.aboutParagraphs[lang]
+                    : Array.isArray(t.aboutPageParagraphs?.[lang])
+                      ? t.aboutPageParagraphs[lang]
+                      : Array.isArray(i18n.aboutParagraphs?.[lang])
+                        ? i18n.aboutParagraphs[lang]
+                        : Array.isArray(i18n.aboutPageParagraphs?.[lang])
+                          ? i18n.aboutPageParagraphs[lang]
                           : []
                   ).map((paragraph: string, index: number) => (
                     <p key={index}>{paragraph}</p>
