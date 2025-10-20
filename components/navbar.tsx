@@ -202,7 +202,7 @@ export default function Navbar({
             >
             <Link href="/" className="flex items-center shrink-0">
               <img
-                src="/al-falah-logo-black-img.svg"
+                src="/al-falah-logo-white-img.svg"
                 alt="Al Falah Partners"
                 className="block h-10 md:h-10 lg:h-12 xl:h-12 2xl:h-12 w-auto shrink-0 object-contain"
               />
@@ -277,7 +277,7 @@ export default function Navbar({
           <div className="relative w-full flex items-center justify-between py-3 md:py-4 px-0">
             <Link href="/" className="flex items-center shrink-0">
               <img
-                src="/al-falah-logo-white-img.svg"
+                src="/al-falah-logo-black-img.svg"
                 alt="Al Falah Partners"
                 className="block h-10 md:h-10 lg:h-12 xl:h-12 2xl:h-12 w-auto shrink-0 object-contain"
               />
@@ -289,7 +289,7 @@ export default function Navbar({
             >
               <Link href="/" aria-label="Home">
                 <img
-                  src="/al-falah-logo-black-img.svg"
+                  src="/al-falah-logo-black-text.svg"
                   alt="Al Falah Partners"
                   className="h-8 md:h-9 lg:h-10 xl:h-11 w-auto cursor-pointer"
                 />
