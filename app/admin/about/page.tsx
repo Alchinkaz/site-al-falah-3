@@ -101,13 +101,25 @@ export default function AdminAboutPage() {
               kz: (paragraphs.kz || []).join("\n\n"),
             })
           }
-          if (translations.aboutPageKeyTermsRows && Array.isArray(translations.aboutPageKeyTermsRows)) {
-            setKeyTermsRows(translations.aboutPageKeyTermsRows)
+          if (translations.aboutPageKeyTermsRows) {
+            const rows = translations.aboutPageKeyTermsRows
+            if (Array.isArray(rows)) {
+              setKeyTermsRows(rows)
+            } else if (rows?.en && Array.isArray(rows.en)) {
+              // Fallback when API returns language-object shape
+              setKeyTermsRows(rows.en)
+            }
           }
           if (translations.aboutPageKeyTermsTitle) setKeyTermsTitle(translations.aboutPageKeyTermsTitle)
           if (translations.aboutPageSectorsTitle) setSectorsTitle(translations.aboutPageSectorsTitle)
-          if (translations.aboutPageSectors && Array.isArray(translations.aboutPageSectors)) {
-            setSectors(translations.aboutPageSectors)
+          if (translations.aboutPageSectors) {
+            const sect = translations.aboutPageSectors
+            if (Array.isArray(sect)) {
+              setSectors(sect)
+            } else if (sect?.en && Array.isArray(sect.en)) {
+              // Fallback when API returns language-object shape
+              setSectors(sect.en)
+            }
           }
           if (translations.teamTitle) setTeamTitle(translations.teamTitle)
           if (translations.stat1Subtitle) setStat1SubtitleTranslations(translations.stat1Subtitle)
