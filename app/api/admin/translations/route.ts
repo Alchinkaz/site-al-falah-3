@@ -55,7 +55,13 @@ export async function POST(request: Request) {
     }
 
     console.log("[v0] All translations saved successfully")
-    return NextResponse.json({ ok: true })
+    return NextResponse.json({ ok: true }, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    })
   } catch (e: any) {
     console.error("[v0] Translations API error:", e)
     return NextResponse.json({ error: e?.message || "Internal server error" }, { status: 500 })

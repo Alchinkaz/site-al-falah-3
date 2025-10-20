@@ -3,6 +3,8 @@ import { getAllTeamMembers } from "@/lib/team-data"
 import { supabase } from "@/lib/supabase"
 import AboutPageClient from "@/components/about-page-client"
 
+export const revalidate = 0
+
 function processTranslations(data: any[]) {
   console.log("[v0] Processing translations on server:", data?.length, "rows")
 

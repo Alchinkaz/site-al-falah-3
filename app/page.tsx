@@ -6,6 +6,8 @@ import { Suspense } from "react"
 import HomePageClient from "@/components/home-page-client"
 import { TranslationService } from "@/lib/supabase-services"
 
+export const revalidate = 0
+
 async function getServerData() {
   try {
     // Fetch all data in parallel on the server
