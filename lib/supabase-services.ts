@@ -273,7 +273,18 @@ export class TranslationService {
         if (!translations[translation.key]) {
           translations[translation.key] = {}
         }
-        translations[translation.key][translation.language] = translation.value
+        let value: any = translation.value
+        if (typeof value === "string") {
+          const startsLikeJson = value.startsWith("[") || value.startsWith("{")
+          if (startsLikeJson) {
+            try {
+              value = JSON.parse(value)
+            } catch {
+              // keep original string if JSON.parse fails
+            }
+          }
+        }
+        translations[translation.key][translation.language] = value
       })
 
       return translations
