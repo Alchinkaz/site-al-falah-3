@@ -72,15 +72,8 @@ export async function GET() {
         return { language: entry.language, value: parsedValue }
       })
 
-      const firstValue = parsedEntries[0]?.value
-      const allSameArray =
-        Array.isArray(firstValue) && parsedEntries.every((e) => JSON.stringify(e.value) === JSON.stringify(firstValue))
-
-      if (allSameArray) {
-        // If all languages have the same array, store it directly (not as language object)
-        translations[key] = firstValue
-        console.log(`[v0] Loaded array for key ${key}:`, firstValue.length, "items")
-      } else if (key.includes(".")) {
+      // Always create language objects for array values to preserve language-specific data
+      if (key.includes(".")) {
         // Nested key like "portfolioI18n.heroTitle"
         const parts = key.split(".")
         let current = translations
@@ -100,11 +93,12 @@ export async function GET() {
           current[finalKey][entry.language] = entry.value
         })
       } else {
-        // Simple key like "heroTitle"
+        // Simple key like "heroTitle" or "aboutParagraphs"
         translations[key] = {}
         parsedEntries.forEach((entry) => {
           translations[key][entry.language] = entry.value
         })
+        console.log(`[v0] Loaded language object for key ${key}:`, Object.keys(translations[key]))
       }
     }
 
