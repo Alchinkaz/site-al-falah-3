@@ -48,7 +48,7 @@ export default function HomePageClient({
   useEffect(() => {
     const loadTranslations = async () => {
       try {
-        const response = await fetch("/api/admin/translations/get")
+        const response = await fetch("/api/admin/translations/get", { cache: "no-store" })
         if (response.ok) {
           const data = await response.json()
           setTranslations(data.translations || data)
@@ -73,7 +73,7 @@ export default function HomePageClient({
     const handleDataUpdate = async () => {
       try {
         const { getHomepageData } = await import("@/lib/homepage-data")
-        const fresh = await getHomepageData()
+        const fresh = await getHomepageData(true)
         setHomepageData(fresh)
       } catch (e) {
         // keep previous data on fetch error

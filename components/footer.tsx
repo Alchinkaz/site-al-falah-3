@@ -23,7 +23,7 @@ export default function Footer({ homepageData: initialHomepageData }: { homepage
   useEffect(() => {
     const loadTranslations = async () => {
       try {
-        const response = await fetch("/api/admin/translations/get")
+        const response = await fetch("/api/admin/translations/get", { cache: "no-store" })
         if (response.ok) {
           const data = await response.json()
           setTranslations(data.translations)
@@ -36,7 +36,7 @@ export default function Footer({ homepageData: initialHomepageData }: { homepage
 
     const handleI18nUpdate = async () => {
       try {
-        const response = await fetch("/api/admin/translations/get")
+        const response = await fetch("/api/admin/translations/get", { cache: "no-store" })
         if (response.ok) {
           const data = await response.json()
           setTranslations(data.translations)
@@ -58,7 +58,7 @@ export default function Footer({ homepageData: initialHomepageData }: { homepage
 
     const loadData = async () => {
       try {
-        const data = await getHomepageData()
+        const data = await getHomepageData(true)
         setEmail(data.footerEmail || "altay@falahpartners.com")
         setCopyright(data.footerCopyright || "© 2025 Al Falah Capital Partners")
         if (data.footerBg) setFooterBg(data.footerBg)
@@ -70,7 +70,7 @@ export default function Footer({ homepageData: initialHomepageData }: { homepage
 
     const onData = async (e: any) => {
       try {
-        const d = await getHomepageData()
+        const d = await getHomepageData(true)
         setEmail(d.footerEmail || "altay@falahpartners.com")
         setCopyright(d.footerCopyright || "© 2025 Al Falah Capital Partners")
         if (d.footerBg) setFooterBg(d.footerBg)

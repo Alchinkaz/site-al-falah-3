@@ -106,7 +106,13 @@ export async function GET() {
       "[v0] Returning translations with portfolioI18n:",
       JSON.stringify(translations.portfolioI18n || {}).substring(0, 200),
     )
-    return NextResponse.json({ translations })
+    return NextResponse.json({ translations }, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    })
   } catch (e: any) {
     console.error("[v0] Translations GET API error:", e)
     return NextResponse.json({ error: e?.message || "Internal server error" }, { status: 500 })

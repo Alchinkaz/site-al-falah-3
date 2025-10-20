@@ -38,7 +38,7 @@ export default function Navbar({
   useEffect(() => {
     const loadTranslations = async () => {
       try {
-        const response = await fetch("/api/admin/translations/get")
+        const response = await fetch("/api/admin/translations/get", { cache: "no-store" })
         if (response.ok) {
           const data = await response.json()
           setTranslations(data.translations)
@@ -51,7 +51,7 @@ export default function Navbar({
 
     const handleI18nUpdate = async () => {
       try {
-        const response = await fetch("/api/admin/translations/get")
+        const response = await fetch("/api/admin/translations/get", { cache: "no-store" })
         if (response.ok) {
           const data = await response.json()
           setTranslations(data.translations)
@@ -73,7 +73,7 @@ export default function Navbar({
 
     const load = async () => {
       try {
-        const data = await getHomepageData()
+        const data = await getHomepageData(true)
         setMenuBg(data?.mobileMenuBg || data?.heroImage || "/hero-bg.jpg")
       } catch {}
     }
@@ -81,7 +81,7 @@ export default function Navbar({
 
     const handleUpdate = async () => {
       try {
-        const fresh = await getHomepageData()
+        const fresh = await getHomepageData(true)
         setMenuBg(fresh?.mobileMenuBg || fresh?.heroImage || "/hero-bg.jpg")
       } catch {}
     }

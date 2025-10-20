@@ -51,7 +51,13 @@ export async function GET() {
     }
 
     console.log("[v0] Loaded config keys:", Object.keys(config))
-    return NextResponse.json(config)
+    return NextResponse.json(config, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    })
   } catch (e: any) {
     console.error("[v0] GET /api/admin/config error:", e)
     return NextResponse.json({ error: e?.message || "Internal error" }, { status: 500 })
